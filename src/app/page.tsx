@@ -1,11 +1,13 @@
 import ImagePreview from "@/component/ImagePreview";
 import PopularBrand from "@/component/PopularBrand";
+import WeeklyDeals from "@/component/WeeklyDeals";
 
 export default function Home() {
   return (
     <div>
         <ImagePreview/>
         <PopularBrand/>
+        <WeeklyDeals/>
     </div>
   );
 }
