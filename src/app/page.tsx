@@ -1,6 +1,7 @@
 import ImagePreview from "@/component/ImagePreview";
 import PopularBrand from "@/component/PopularBrand";
 import WeeklyDeals from "@/component/WeeklyDeals";
+import GlassCardsGallary from "@/component/GlassCardsGallary";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         <ImagePreview/>
         <PopularBrand/>
         <WeeklyDeals/>
+        <GlassCardsGallary/>
     </div>
   );
 }

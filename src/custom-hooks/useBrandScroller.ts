@@ -19,7 +19,7 @@ const useBrandScroller = (parentRef: any) => {
         parentElement.scrollLeft + parentElement.clientWidth + 1 ===
         parentElement.scrollWidth
       ) {
-        parentElement.scrollLeft = 0; // Reset the scroll position to the beginning
+        parentElement.scrollLeft = 0;
       }
     };
 
