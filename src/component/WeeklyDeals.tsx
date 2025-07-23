@@ -8,7 +8,7 @@ const WeeklyDeals:FC = () => {
     return (
         <div style={{
         background: 'linear-gradient(to right, #04030B, #0E113A, #355AC0)',
-      }} className='h-[147px] w-full '>
+      }} className='h-[150px] w-full '>
            <div className='w-[95%] mx-auto h-full flex items-center justify-between'>
                  <Image width={366} height={68} src={weeklyDeals} alt='weekly deals'/>
                  <div>

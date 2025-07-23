@@ -17,7 +17,7 @@ const HorizontalBrandScroll:FC = () => {
                 <div
                     onMouseEnter={() => setPause(true)}
                     onMouseLeave={() => setPause(false)}
-                    className="w-[90%] overflow-y-hidden overflow-x-hidden mx-auto" ref={scrollRef}>
+                    className="w-[1250px] overflow-y-hidden overflow-x-hidden mx-auto" ref={scrollRef}>
                     <div className="w-[5000px] h-[200px] flex items-center justify-between">
                         {brands.map((item: Brand, index:number) => (
                             <Image src={item.elements} key={index} alt='User' className="w-[120px] h-auto m-[10px]" />

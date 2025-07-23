@@ -1,34 +1,22 @@
 "use client"
 import useWeeklyDealTimer from '@/custom-hooks/useWeeklyDealTimer';
 import React, { FC } from 'react';
+import CountdownCircle from './CountdownCircle';
 
 const DealsTimer:FC = () => {
     const {timeLeft} = useWeeklyDealTimer();
-    
+    const { days,hours, minutes, seconds} = timeLeft
     return (
-         <div className="flex flex-col items-end text-sm">
-        <span className="text-xs mb-2">Hurry Up!! Offer ends in</span>
-        <div className="flex gap-4">
-          {[
-            { value: timeLeft.hours, label: 'hrs' },
-            { value: timeLeft.minutes, label: 'mins' },
-            { value: timeLeft.seconds, label: 'secs' },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="w-16 h-16 flex flex-col items-center justify-center rounded-full border-2 border-white relative"
-            >
-              {/* Top orange ring */}
-              <div className="absolute inset-0 rounded-full border-t-2 border-orange-500" />
-              <div className="z-10 text-lg font-semibold">
-                {String(item.value).padStart(2, '0')}
-              </div>
-              <div className="z-10 text-[10px] mt-1">{item.label}</div>
-            </div>
-          ))}
+    <div className="flex flex-col items-end text-sm">
+      <span className="text-xs mb-2 text-white mx-auto">Hurry Up!! Offer ends in</span>
+      <div className="flex gap-6">
+          <CountdownCircle value={days} max={7} label="days" />
+          <CountdownCircle value={hours} max={24} label="hrs" />
+          <CountdownCircle value={minutes} max={60} label="mins" />
+          <CountdownCircle value={seconds} max={60} label="secs" />
         </div>
-      </div>
-    );
+    </div>
+  );
 };
 
 export default DealsTimer;
