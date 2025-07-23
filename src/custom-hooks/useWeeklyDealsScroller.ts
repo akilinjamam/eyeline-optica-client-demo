@@ -24,32 +24,6 @@ const useWeeklyDealsScroller = (parentRef: any) => {
     }
   };
 
-  // const [pause, setPause] = useState<boolean>(false);
-  // useEffect(() => {
-  //   const parentElement = parentRef.current;
-
-  //   const scrollHandler = () => {
-  //     if (pause) {
-  //       parentElement.scrollLeft += 0;
-  //     } else {
-  //       parentElement.scrollLeft += 1;
-  //     }
-
-  //     if (
-  //       parentElement.scrollLeft + parentElement.clientWidth + 1 ===
-  //       parentElement.scrollWidth
-  //     ) {
-  //       parentElement.scrollLeft = 0;
-  //     }
-  //   };
-
-  //   const interval = setInterval(scrollHandler, 10);
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [pause, parentRef]);
-
   return { parentRef, handleNavigation };
 };
 
