@@ -12,3 +12,8 @@ export interface GlassCardProps {
   tag?: string;
   colorCount: number;
 }
+
+export interface TLatestCollectionsData {
+  image: StaticImageData;
+  type: string;
+}
