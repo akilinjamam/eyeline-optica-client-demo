@@ -20,13 +20,13 @@ const GlassCard:React.FC<GlassCardProps> = ({image, title, model, price, tag, co
         Colour
       </span>
 
-      <div className=" mb-3 w-[150px] ">
+      <div className=" mb-3 w-[140px] flex items-center justify-center">
         <Image
           src={image}
           alt={title}
           width={120}
           height={60}
-          className="object-contain mx-auto"
+          className="object-contain block  "
         />
       </div>
 

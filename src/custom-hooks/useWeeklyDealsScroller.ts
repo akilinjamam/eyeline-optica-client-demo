@@ -17,10 +17,8 @@ const useWeeklyDealsScroller = (parentRef: any) => {
     }
     if (value === "right") {
       if (parentElement.scrollLeft > 0) {
-        parentElement.scrollLeft = 0;
-        return;
+        parentElement.scrollLeft -= 200;
       }
-      parentElement.scrollLeft -= 200;
     }
   };
 

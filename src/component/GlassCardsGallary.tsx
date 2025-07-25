@@ -14,7 +14,7 @@ const GlassCardsGallary:FC = () => {
     return (
         <div className='flex items-center justify-around w-[1200px] mx-auto gap-5'>
             <Image className='cursor-pointer' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
-            <div ref={parentRef} className='w-[2600px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth'>
+            <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2'>
                 {
                     glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCard colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
                 }
