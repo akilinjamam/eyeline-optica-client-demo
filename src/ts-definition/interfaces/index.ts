@@ -17,3 +17,15 @@ export interface TLatestCollectionsData {
   image: StaticImageData;
   type: string;
 }
+
+export interface ILenseData {
+  badge?: string;
+  image: StaticImageData;
+  name?: string;
+  brand?: string;
+  usageInfo?: string;
+  price?: number;
+  originalPrice?: number;
+  discountPercentage?: number;
+  discountLabel?: string;
+}

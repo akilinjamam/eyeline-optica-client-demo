@@ -4,6 +4,9 @@ import WeeklyDeals from "@/component/WeeklyDeals";
 import GlassCardsGallary from "@/component/GlassCardsGallary";
 import LatestCollections from "@/component/LatestCollections";
 import BookAppointment from "@/component/BookAppointment";
+import NewArrivals from "@/component/NewArrival";
+import BestSelling from "@/component/BestSelling";
+import ContactLense from "@/component/ContactLense";
 
 export default function Home() {
   return (
@@ -14,6 +17,9 @@ export default function Home() {
         <GlassCardsGallary/>
         <LatestCollections/>
         <BookAppointment/>
+        <NewArrivals/>
+        <BestSelling/>
+        <ContactLense/>
     </div>
   );
 }
