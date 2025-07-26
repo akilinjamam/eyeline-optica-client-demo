@@ -13,7 +13,7 @@ const Tab:FC = () => {
         {id: 9, name: 'ABOUT US'}
     ]
     return (
-        <div className='w-full px-6 py-4 bg-blue-100'>
+        <div className='w-full px-6 py-4 bg-blue-50'>
             <div className='max-w-7xl mx-auto flex items-center justify-between gap-2'>
                 {
                 elements.map((element) => (

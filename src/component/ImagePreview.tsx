@@ -47,7 +47,7 @@ type Element = {
         
     ]
     return (
-        <div className='w-full px-6 py-4 bg-blue-100 flex items-center justify-center'>
+        <div className='w-full px-6 py-4  flex items-center justify-center'>
             {
                 elements.map((element:Element) => (
                     <div key={element.id} className=' mb-4 bg-white w-[180px] h-[150px] p-2 mx-4'>

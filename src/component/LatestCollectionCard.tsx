@@ -6,9 +6,10 @@ const LatestCollectionCard:React.FC<TLatestCollectionsData> = ({image, type}) =>
     return (
         <div className='w-full'>
             <div className='flex items-center justify-center'>
-                <Image width={200} src={image} alt='latest-collection'/>
+                <Image width={150} src={image} alt='latest-collection'/>
             </div>
             <p className='text-center font-bold'>{type}</p>
+            <br />
             <button className='w-[70%] block mx-auto mt-2 py-2 text-white font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer'>Explore</button>
         </div>
     );
