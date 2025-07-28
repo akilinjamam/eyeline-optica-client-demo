@@ -11,6 +11,8 @@ import FindYourPerfectGlass from "@/component/FindYourPerfectGlass";
 import MensSunglass from "@/component/MensSunglass";
 import WomenSunglass from "@/component/WomenSunglass";
 import Kidsglass from "@/component/KidsGlasses";
+import ShopByFrameShape from "@/component/ShopByFrameShape";
+import TopFooter from "@/component/TopFooter";
 
 export default function Home() {
   return (
@@ -28,6 +30,8 @@ export default function Home() {
         <MensSunglass/>
         <WomenSunglass/>
         <Kidsglass/>
+        <ShopByFrameShape/>
+        <TopFooter/>
     </div>
   );
 }
