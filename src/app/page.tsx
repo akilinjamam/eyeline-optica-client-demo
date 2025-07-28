@@ -7,6 +7,10 @@ import BookAppointment from "@/component/BookAppointment";
 import NewArrivals from "@/component/NewArrival";
 import BestSelling from "@/component/BestSelling";
 import ContactLense from "@/component/ContactLense";
+import FindYourPerfectGlass from "@/component/FindYourPerfectGlass";
+import MensSunglass from "@/component/MensSunglass";
+import WomenSunglass from "@/component/WomenSunglass";
+import Kidsglass from "@/component/KidsGlasses";
 
 export default function Home() {
   return (
@@ -20,6 +24,10 @@ export default function Home() {
         <NewArrivals/>
         <BestSelling/>
         <ContactLense/>
+        <FindYourPerfectGlass/>
+        <MensSunglass/>
+        <WomenSunglass/>
+        <Kidsglass/>
     </div>
   );
 }

@@ -8,19 +8,16 @@ import arrowRights from '../../public/images/arrow-right.png'
 import Image from 'next/image';
 import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
 import {ArrowRight} from 'lucide-react'
+import Title from './Title';
 
 const NewArrivals:FC = () => {
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
     return (
         <div className='w-full mt-8'>
-            <div  className="w-[90%] flex items-center gap-4 mx-auto">
-                <hr className="flex-grow border-t border-gray-300" />
-                    <p className="whitespace-nowrap text-[36px] font-medium">New Arrival</p>
-                <hr className="flex-grow border-t border-gray-300" />
-            </div>
+            <Title value='NEW ARRIVAL'/>
             <br />
-             <div className='w-[1110px] mx-auto flex items-center justify-end'>
+             <div className='w-[1200px] mx-auto flex items-center justify-end'>
                 <div className=' w-[130px] mt-2 px-2 py-2 text-white  font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer flex  items-center justify-between'>
                      <button >Show Now </button>
                     <ArrowRight/>

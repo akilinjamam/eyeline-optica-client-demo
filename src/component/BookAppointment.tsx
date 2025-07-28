@@ -3,6 +3,7 @@ import appointment from '../../public/images/appointment-img.png';
 import Image from 'next/image';
 import arrow from '../../public/images/33-right.png';
 import { TAppointmentService } from '@/ts-definition/types';
+import Title from './Title';
 const BookAppointment:FC = () => {
 
     const serviceData:TAppointmentService[] = [
@@ -31,11 +32,7 @@ const BookAppointment:FC = () => {
 
     return (
         <div className='w-full mt-5'>
-            <div  className="w-[85%] flex items-center gap-4 mx-auto">
-                <hr className="flex-grow border-t border-gray-300" />
-                    <p className="whitespace-nowrap text-[36px] font-medium">BOOK APPOINTMENT</p>
-                <hr className="flex-grow border-t border-gray-300" />
-            </div>
+            <Title value='BOOK APPOINTMENT'/>
             <br />
             <div  style={{ backgroundImage: "url('/images/appointment-background.png')", backgroundSize:'cover', backgroundPosition:'center', height:'100%' }} className='w-[100%]' >
                 <br />

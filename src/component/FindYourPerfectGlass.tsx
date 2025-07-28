@@ -1,0 +1,33 @@
+import React, { FC } from 'react';
+import image1 from '../../public/images/findYourPerfectImageGlass-1.png'
+import image2 from '../../public/images/findYourPerfectImageGlass-2.png'
+import image3 from '../../public/images/findYourPerfectImageGlass-3.png'
+import Image from 'next/image';
+import Title from './Title';
+
+const FindYourPerfectGlass:FC = () => {
+    return (
+        <div>
+             <Title value='FIND YOUR PERFECT GLASS'/>
+            <div className="grid grid-cols-2 gap-4 w-full max-w-[1200px] mx-auto mt-8 ">
+  
+                <div className="flex flex-col gap-4">
+                    <div className="w-full">
+                    <Image src={image1} alt="Photochromic-Lenses" className="w-full h-auto rounded-xl shadow" />
+                    </div>
+                    <div className="w-full">
+                    <Image src={image2} alt="Progressive Lenses" className="w-full h-auto rounded-xl shadow" />
+                    </div>
+                </div>
+
+  
+                <div className="w-full h-full">
+                    <Image src={image3} alt="Reading Glasses" className="w-full h-full object-cover rounded-xl shadow" />
+                </div>
+            </div>
+
+        </div>
+    );
+};
+
+export default FindYourPerfectGlass;
