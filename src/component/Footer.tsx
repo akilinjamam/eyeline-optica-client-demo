@@ -31,7 +31,6 @@ const Footer:FC = () => {
                             <ul className="space-y-1 text-white">
                                 <li> <a href="#">Eyeglasses</a></li>
                                 <li> <a href="#">Sunglasses</a></li>
-                                <li><a href="#">Lense</a></li>
                                 <li><a href="#">Contact Lense</a></li>
                                 <li><a href="#">Brand</a></li>
                                 <li><a href="#">Accessories</a></li>
