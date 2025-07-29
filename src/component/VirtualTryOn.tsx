@@ -6,7 +6,7 @@ import Webcam from 'react-webcam';
 import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-backend-webgl';
 import Image from 'next/image';
-import glassesOverlay from '../../public/images/glass-1.png';
+import glassesOverlay from '../../public/images/glass-3.png';
 
 const GlassTryOn = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -105,6 +105,7 @@ const GlassTryOn = () => {
           top: 0,
           left: 0,
           width: 150,
+        // backgroundColor: 'rgba(255,0,0,0.3)',
           transition: '0.1s linear',
         }}
       >
