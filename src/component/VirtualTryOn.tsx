@@ -55,7 +55,7 @@ const GlassTryOn = () => {
 
           const leftEye = keypoints.find((kp: any) => kp.name === 'leftEye');
           const rightEye = keypoints.find((kp: any) => kp.name === 'rightEye');
-          console.log(leftEye)
+         
 
           if (leftEye && rightEye && overlayRef.current) {
             const eyeCenterX = (leftEye.x + rightEye.x) / 2;
