@@ -14,8 +14,6 @@
 // import ShopByFrameShape from "@/component/ShopByFrameShape";
 // import TopFooter from "@/component/TopFooter";
 // import Footer from "@/component/Footer";
-// import GlassTryOn from "@/component/GlassTryOn";
-
 import GlassTryOnV2 from "@/component/GlassTryOnV2";
 
 export default function Home() {
