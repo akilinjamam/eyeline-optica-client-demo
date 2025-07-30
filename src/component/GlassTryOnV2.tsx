@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-backend-webgl';
 import { Canvas } from '@react-three/fiber';
 import GlassesModel from './GlassesModel';
-import { useControls } from 'leva';
+import { Leva, useControls } from 'leva';
 
 const GlassTryOn = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -15,16 +15,17 @@ const GlassTryOn = () => {
   const [modelPosition, setModelPosition] = useState<[number, number, number]>([0, 0, 0]);
   const [modelRotation, setModelRotation] = useState<[number, number, number]>([0, 0, 0]);
   const [modelScale, setModelScale] = useState<number>(1);
+    const [hasDetection, setHasDetection] = useState<string>('');
 
   // Leva controls for fine-tuning
   const { xOffset, yOffset, zOffset, rotationOffsetX, rotationOffsetY, rotationOffsetZ, scaleAdjust } = useControls({
     xOffset: { value: 0.0, min: -0.5, max: 0.5, step: 0.01 }, // Horizontal fine-tune
     yOffset: { value: 0.0, min: -0.5, max: 0.5, step: 0.01 }, // Vertical fine-tune
     zOffset: { value: 0.0, min: -1.0, max: 1.0, step: 0.01 }, // Depth fine-tune. Can be negative/positive depending on GLB origin and estimatedZ.
-    rotationOffsetX: { value: 0, min: -Math.PI / 4, max: Math.PI / 4, step: 0.01 }, // Pitch fine-tune (-45 to +45 degrees)
+    rotationOffsetX: { value: 0.1, min: -Math.PI / 4, max: Math.PI / 4, step: 0.01 }, // Pitch fine-tune (-45 to +45 degrees)
     rotationOffsetY: { value: 0, min: -Math.PI / 4, max: Math.PI / 4, step: 0.01 }, // Yaw fine-tune (-45 to +45 degrees)
     rotationOffsetZ: { value: 0, min: -Math.PI / 6, max: Math.PI / 6, step: 0.01 }, // Roll fine-tune (-30 to +30 degrees). Keep `value: 0` initially.
-   scaleAdjust: { value: 1.0, min: 0.5, max: 2.0, step: 0.01 }, // Global scale adjustment (e.g., half to double the calculated size)
+   scaleAdjust: { value: 1.1, min: 0.5, max: 2.0, step: 0.01 }, // Global scale adjustment (e.g., half to double the calculated size)
   });
 
   useEffect(() => {
@@ -47,9 +48,18 @@ const GlassTryOn = () => {
 
   useEffect(() => {
     let animationId: number;
+    let lastDetectionTime = 0;
 
     const detectFace = async () => {
       // console.log('detectFace loop running...');
+
+      const now = performance.now();
+      const interval = 100;
+
+       if (now - lastDetectionTime < interval) {
+      animationId = requestAnimationFrame(detectFace);
+      return;
+    }
 
       if (
         detector &&
@@ -68,6 +78,7 @@ const GlassTryOn = () => {
         // console.log('Faces detected:', faces.length);
 
         if (faces.length > 0) {
+          setHasDetection('')
           const face = faces[0];
           const keypoints = face.keypoints;
 
@@ -75,6 +86,7 @@ const GlassTryOn = () => {
           const rightEye = keypoints.find((kp: any) => kp.name === 'rightEye');
 
           if (leftEye && rightEye) {
+            setHasDetection('')
             // console.log('Left and Right eyes found.');
             // console.log('leftEye:', leftEye);
             // console.log('rightEye:', rightEye);
@@ -91,7 +103,7 @@ const GlassTryOn = () => {
 
             // Adjust position for the Three.js scene's scale.
             // A multiplier like 2 or 3 often works well for a camera at Z=5 and FOV=75.
-            const sceneScaleMultiplier = 2.5; // Tune this value!
+            const sceneScaleMultiplier = 5; // Tune this value!
             const newX = normX * sceneScaleMultiplier;
             const newY = normY * sceneScaleMultiplier;
 
@@ -156,13 +168,18 @@ const GlassTryOn = () => {
 
           } else {
             // console.log('Eyes not found. Waiting for detection...');
+            setHasDetection('Eyes not found. Waiting for detection...')
           }
         } else {
           // console.log('No face detected.');
+           setHasDetection('face detecting. please wait...')
         }
       } else {
         // console.log('Webcam or detector not ready.');
+         setHasDetection('Webcam or detector is initializing...')
       }
+
+       lastDetectionTime = now;
 
       animationId = requestAnimationFrame(detectFace);
     };
@@ -175,33 +192,46 @@ const GlassTryOn = () => {
   }, [detector, xOffset, yOffset, zOffset, rotationOffsetX, rotationOffsetY, rotationOffsetZ, scaleAdjust]); // Added new dependencies
 
   return (
-    <div className="relative w-full max-w-[600px] mx-auto aspect-video border border-gray-300 rounded-lg overflow-hidden">
-      <Webcam
-        ref={webcamRef}
-        audio={false}
-        mirrored
-        screenshotFormat="image/jpeg"
-        className="absolute inset-0 w-full h-full object-cover" // Ensure it covers the container
-      />
+    <>
+      <Leva hidden /> {/* ← Add this line to hide the panel */}
+      <div className="relative w-full max-w-[800px] mx-auto aspect-video border border-gray-300 rounded-lg overflow-hidden">
+        <Webcam
+          ref={webcamRef}
+          audio={false}
+          mirrored
+          screenshotFormat="image/jpeg"
+          className="absolute inset-0 w-full h-full object-cover" // Ensure it covers the container
+        />
 
-      {/* Overlay for the 3D model */}
-      <div className="absolute top-0 left-0 w-full h-full z-10">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }} style={{ pointerEvents: 'none'}}>
-          {/* pointerEvents: 'none' is important if you don't want the canvas to block clicks */}
-          <ambientLight intensity={1} />
-          <directionalLight position={[10, 10, 10]} intensity={2} />
-          <directionalLight position={[-10, -10, -10]} intensity={1} />
-          {/* Optional: Add a light from the opposite side for better shading */}
+         {hasDetection && (
+          <div className="absolute inset-0 z-20 flex items-start justify-center  bg-opacity-60 text-white text-lg font-medium">
+            {hasDetection}
+          </div>
+        )}
 
-          <GlassesModel
-            position={modelPosition}
-            rotation={modelRotation}
-            scale={modelScale}
-          />
-          {/* <OrbitControls /> // Temporarily uncomment for debugging 3D scene manually */}
-        </Canvas>
+        {/* Overlay for the 3D model */}
+        <div className="absolute top-0 left-0 w-full h-full z-10">
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }} style={{ pointerEvents: 'none'}}>
+            {/* pointerEvents: 'none' is important if you don't want the canvas to block clicks */}
+            <ambientLight intensity={1} />
+            <directionalLight position={[10, 10, 10]} intensity={2} />
+            <directionalLight position={[-10, -10, -10]} intensity={1} />
+            {/* Optional: Add a light from the opposite side for better shading */}
+
+            <Suspense fallback={null}>
+              {!hasDetection && (
+                <GlassesModel
+                  position={modelPosition}
+                  rotation={modelRotation}
+                  scale={modelScale}
+                />
+              )}
+            </Suspense>
+            {/* <OrbitControls /> // Temporarily uncomment for debugging 3D scene manually */}
+          </Canvas>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
