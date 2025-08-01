@@ -24,12 +24,12 @@ const GlassesModel: React.FC<GlassesModelProps> = ({ position, rotation, scale }
     }
   });
 
-  console.log('modelPosition', position)
-  console.log('modelScale', scale)
-  console.log('modelRotation', rotation)
+  // console.log('modelPosition', position)
+  // console.log('modelScale', scale)
+  // console.log('modelRotation', rotation)
 
   return (
-    <group scale={[1, -1, 1]}>
+    <group scale={[1, 1, 1]}>
       <primitive object={scene} ref={modelRef} />
     </group>
   );

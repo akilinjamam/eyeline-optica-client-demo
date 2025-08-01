@@ -14,7 +14,8 @@ import Kidsglass from "@/component/KidsGlasses";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import Footer from "@/component/Footer";
-// import GlassTryOnV2 from "@/component/GlassTryOnV2";
+
+// import GlassTryOn from "@/component/GlassTryOnV2";
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
         <ShopByFrameShape/>
         <TopFooter/>
         <Footer/>
-        {/* <GlassTryOnV2/> */}
+        {/* <GlassTryOn/> */}
     </div>
   );
 }

@@ -22,10 +22,10 @@ const GlassTryOn = () => {
     xOffset: { value: 0.0, min: -0.5, max: 0.5, step: 0.01 }, // Horizontal fine-tune
     yOffset: { value: 0.0, min: -0.5, max: 0.5, step: 0.01 }, // Vertical fine-tune
     zOffset: { value: 0.0, min: -1.0, max: 1.0, step: 0.01 }, // Depth fine-tune. Can be negative/positive depending on GLB origin and estimatedZ.
-    rotationOffsetX: { value: 0.1, min: -Math.PI / 4, max: Math.PI / 4, step: 0.01 }, // Pitch fine-tune (-45 to +45 degrees)
+    rotationOffsetX: { value: 0, min: -Math.PI / 4, max: Math.PI / 4, step: 0.01 }, // Pitch fine-tune (-45 to +45 degrees)
     rotationOffsetY: { value: 0, min: -Math.PI / 4, max: Math.PI / 4, step: 0.01 }, // Yaw fine-tune (-45 to +45 degrees)
     rotationOffsetZ: { value: 0, min: -Math.PI / 6, max: Math.PI / 6, step: 0.01 }, // Roll fine-tune (-30 to +30 degrees). Keep `value: 0` initially.
-   scaleAdjust: { value: 1.1, min: 0.5, max: 2.0, step: 0.01 }, // Global scale adjustment (e.g., half to double the calculated size)
+   scaleAdjust: { value: 1.5, min: 0.5, max: 2.0, step: 0.01 }, // Global scale adjustment (e.g., half to double the calculated size)
   });
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const GlassTryOn = () => {
       const model = await faceLandmarksDetection.createDetector(
         faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
         {
+          maxFaces: 1,
           runtime: 'tfjs',
           refineLandmarks: true,
         }
@@ -73,6 +74,7 @@ const GlassTryOn = () => {
 
         video.width = videoWidth;
         video.height = videoHeight;
+        
 
         const faces = await detector.estimateFaces(video);
         // console.log('Faces detected:', faces.length);
@@ -82,8 +84,14 @@ const GlassTryOn = () => {
           const face = faces[0];
           const keypoints = face.keypoints;
 
-          const leftEye = keypoints.find((kp: any) => kp.name === 'leftEye');
-          const rightEye = keypoints.find((kp: any) => kp.name === 'rightEye');
+          console.log(keypoints)
+
+          // const leftEye = keypoints.find((kp: any) => kp.name === 'leftEye');
+          // const rightEye = keypoints.find((kp: any) => kp.name === 'rightEye');
+          const leftEye = keypoints[468]
+          const rightEye = keypoints[473]
+          // const leftEye = keypoints[234];
+          // const rightEye = keypoints[454];
 
           if (leftEye && rightEye) {
             setHasDetection('')
@@ -99,7 +107,7 @@ const GlassTryOn = () => {
             // Three.js typically has Y-axis up, X-axis right, Z-axis out of screen (towards viewer)
             // Webcam coordinates: origin top-left, Y-down. Need to invert Y and center.
             const normX = -((centerX - videoWidth / 2) / (videoWidth / 2)); // -1 (left) to 1 (right)
-            const normY = (centerY - videoHeight / 2) / (videoHeight / 2); // -1 (bottom) to 1 (top)
+           const normY = -((centerY - videoHeight / 2) / (videoHeight / 2)); // -1 (bottom) to 1 (top)
 
             // Adjust position for the Three.js scene's scale.
             // A multiplier like 2 or 3 often works well for a camera at Z=5 and FOV=75.
@@ -138,7 +146,7 @@ const GlassTryOn = () => {
             if (leftEye.z !== undefined && rightEye.z !== undefined) {
                 // Very rough Yaw: If one eye's Z is significantly different, head is turned.
                 // Adjust multiplier for sensitivity.
-                angleY = (rightEye.z - leftEye.z) * 0.02; // Tune this.
+                angleY = -(rightEye.z - leftEye.z) * 0.02; // Tune this.
             }
             // Pitch is even harder. You might just have to rely on `rotationOffsetX` from Leva for this.
 
@@ -176,7 +184,7 @@ const GlassTryOn = () => {
         }
       } else {
         // console.log('Webcam or detector not ready.');
-         setHasDetection('Webcam or detector is initializing...')
+         setHasDetection('Webcam and detector is initializing...')
       }
 
        lastDetectionTime = now;
