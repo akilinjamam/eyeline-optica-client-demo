@@ -1,26 +1,26 @@
-// import ImagePreview from "@/component/ImagePreview";
-// import PopularBrand from "@/component/PopularBrand";
-// import WeeklyDeals from "@/component/WeeklyDeals";
-// import GlassCardsGallary from "@/component/GlassCardsGallary";
-// import LatestCollections from "@/component/LatestCollections";
-// import BookAppointment from "@/component/BookAppointment";
-// import NewArrivals from "@/component/NewArrival";
-// import BestSelling from "@/component/BestSelling";
-// import ContactLense from "@/component/ContactLense";
-// import FindYourPerfectGlass from "@/component/FindYourPerfectGlass";
-// import MensSunglass from "@/component/MensSunglass";
-// import WomenSunglass from "@/component/WomenSunglass";
-// import Kidsglass from "@/component/KidsGlasses";
-// import ShopByFrameShape from "@/component/ShopByFrameShape";
-// import TopFooter from "@/component/TopFooter";
-// import Footer from "@/component/Footer";
+import ImagePreview from "@/component/ImagePreview";
+import PopularBrand from "@/component/PopularBrand";
+import WeeklyDeals from "@/component/WeeklyDeals";
+import GlassCardsGallary from "@/component/GlassCardsGallary";
+import LatestCollections from "@/component/LatestCollections";
+import BookAppointment from "@/component/BookAppointment";
+import NewArrivals from "@/component/NewArrival";
+import BestSelling from "@/component/BestSelling";
+import ContactLense from "@/component/ContactLense";
+import FindYourPerfectGlass from "@/component/FindYourPerfectGlass";
+import MensSunglass from "@/component/MensSunglass";
+import WomenSunglass from "@/component/WomenSunglass";
+import Kidsglass from "@/component/KidsGlasses";
+import ShopByFrameShape from "@/component/ShopByFrameShape";
+import TopFooter from "@/component/TopFooter";
+import Footer from "@/component/Footer";
 
 // import GlassTryOn from "@/component/GlassTryOnV2";
 
 export default function Home() {
   return (
     <div className="bg-blue-50">
-        {/* <ImagePreview/>
+        <ImagePreview/>
         <PopularBrand/>
         <WeeklyDeals/>
         <GlassCardsGallary/>
@@ -35,7 +35,7 @@ export default function Home() {
         <Kidsglass/>
         <ShopByFrameShape/>
         <TopFooter/>
-        <Footer/> */}
+        <Footer/>
         {/* <GlassTryOn/> */}
     </div>
   );
