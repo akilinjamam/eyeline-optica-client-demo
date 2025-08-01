@@ -4,7 +4,7 @@ import {FC, useRef} from 'react';
 
 const Tab:FC = () => {
     const swipeRef = useRef(null);
-    const {handleMouseDown, handleMouseLeave, handleMouseMove, handleMouseUp, swipeRef:swippedRef} = useSwipe(swipeRef);
+    const {handleMouseDown, handleMouseLeave, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchStart, swipeRef:swippedRef} = useSwipe(swipeRef);
     const elements = [
         {id: 1, name: 'EYEGLASSES'},
         {id: 2, name: 'SUNGLASSES'},
@@ -29,6 +29,8 @@ const Tab:FC = () => {
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             >
             <div className="flex whitespace-nowrap gap-4">
                 {elements.map((element, index) => (

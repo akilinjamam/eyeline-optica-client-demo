@@ -6,6 +6,8 @@ const useSwipe = (swipeRef: any) => {
   let isDown = false;
   let startX = 0;
   let scrollLeft = 0;
+  let touchStartX = 0;
+  let touchScrollLeft = 0;
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!swipeRef.current) return;
@@ -30,11 +32,27 @@ const useSwipe = (swipeRef: any) => {
     swipeRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  // Touch Events
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!swipeRef.current) return;
+    touchStartX = e.touches[0].pageX - swipeRef.current.offsetLeft;
+    touchScrollLeft = swipeRef.current.scrollLeft;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!swipeRef.current) return;
+    const x = e.touches[0].pageX - swipeRef.current.offsetLeft;
+    const walk = (x - touchStartX) * 1.5;
+    swipeRef.current.scrollLeft = touchScrollLeft - walk;
+  };
+
   return {
     handleMouseDown,
     handleMouseLeave,
     handleMouseUp,
     handleMouseMove,
+    handleTouchMove,
+    handleTouchStart,
     swipeRef,
   };
 };
