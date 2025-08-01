@@ -60,7 +60,7 @@ const ImagePreview:FC = () => {
         
     ]
     return  (
-    <div className="w-full px-4 py-4 overflow-x-hidden">
+    <div className="w-full px-4 py-4 overflow-x-hidden relative">
       <div
         ref={swippedRef}
         style={{userSelect:'none'}}
@@ -68,6 +68,7 @@ const ImagePreview:FC = () => {
           flex gap-4 overflow-x-hidden cursor-grab 
           mx-auto max-w-full
           sm:justify-center
+          
         "
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
@@ -95,7 +96,9 @@ const ImagePreview:FC = () => {
             </p>
           </div>
         ))}
+         
       </div>
+      <div className="lg:hidden pointer-events-none absolute -top-4 right-0 h-full w-16 bg-gradient-to-l from-blue-50 via-blue-50/90 to-transparent z-10" />
     </div>
   );
 };
