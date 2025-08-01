@@ -14,17 +14,17 @@ const HorizontalBrandScroll:FC = () => {
 
     return (
         <div className='w-full'>
-                <div
-                    onMouseEnter={() => setPause(true)}
-                    onMouseLeave={() => setPause(false)}
-                    className="lg:w-[1250px] md:w-[90%] sm:w-full overflow-y-hidden overflow-x-hidden mx-auto" ref={scrollRef}>
-                    <div className="w-[5000px] h-[200px] flex items-center justify-between">
-                        {brands.map((item: Brand, index:number) => (
-                            <Image src={item.elements} key={index} alt='User' className="w-[120px] h-auto m-[10px]" />
-                        ))}
+            <div
+                onMouseEnter={() => setPause(true)}
+                onMouseLeave={() => setPause(false)}
+                className="lg:w-[1250px] md:w-[90%] sm:w-full overflow-y-hidden overflow-x-hidden mx-auto" ref={scrollRef}>
+                <div className="w-[5000px] h-[200px] flex items-center justify-between">
+                    {brands.map((item: Brand, index:number) => (
+                        <Image src={item.elements} key={index} alt='User' className="w-[120px] h-auto m-[10px]" />
+                    ))}
                     </div>
-                </div>
             </div>
+        </div>
     );
 };
 

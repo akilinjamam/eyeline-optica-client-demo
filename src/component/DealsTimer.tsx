@@ -9,6 +9,7 @@ const DealsTimer:FC = () => {
     return (
     <div className="flex flex-col items-end text-sm">
       <span className="text-xs mb-2 text-white mx-auto">Hurry Up!! Offer ends in</span>
+      <br className='lg:hidden'/>
       <div className="flex gap-6">
           <CountdownCircle value={days} max={7} label="days" />
           <CountdownCircle value={hours} max={24} label="hrs" />
