@@ -65,9 +65,9 @@ const ImagePreview:FC = () => {
         ref={swippedRef}
         style={{userSelect:'none'}}
         className="
-          flex gap-4 overflow-x-auto cursor-grab 
+          flex gap-4 overflow-x-hidden cursor-grab 
           mx-auto max-w-full
-          sm:justify-center sm:overflow-x-hidden md:overflow-x-hidden overflow-hidden
+          sm:justify-center
         "
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
