@@ -19,7 +19,7 @@ const GlassCardsGallary:FC = () => {
                 {
                     glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCard colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
                 }
-               <div className="pointer-events-none absolute top-0 right-16 xs:right-15 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
+               <div className="pointer-events-none absolute top-0 right-16 xs:right-13 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
             </div>
              <Image className='cursor-pointer inline-block mx-3' src={arrowRight} alt='right-arrow' onClick={() => handleNavigation('left')}/>
         </div>
