@@ -6,7 +6,7 @@ import LatestCollectionCard from './LatestCollectionCard';
 import useSwipe from '@/custom-hooks/useSwipe';
 
 const LatestCollectionGallery:FC = () => {
-     const swipeRef = useRef(null);
+        const swipeRef = useRef(null);
     
         const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
     return (
