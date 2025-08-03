@@ -4,7 +4,7 @@ import React from 'react';
 
 const LatestCollectionCard:React.FC<TLatestCollectionsData> = ({image, type}) => {
     return (
-        <div className='w-full'>
+        <div className='w-[200px] '>
             <div className='flex items-center justify-center'>
                 <Image width={150} src={image} alt='latest-collection'/>
             </div>

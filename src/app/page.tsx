@@ -1,8 +1,8 @@
 import ImagePreview from "@/component/ImagePreview";
 import PopularBrand from "@/component/PopularBrand";
 import WeeklyDeals from "@/component/WeeklyDeals";
-// import GlassCardsGallary from "@/component/GlassCardsGallary";
-// import LatestCollections from "@/component/LatestCollections";
+import GlassCardsGallary from "@/component/GlassCardsGallary";
+import LatestCollections from "@/component/LatestCollections";
 // import BookAppointment from "@/component/BookAppointment";
 // import NewArrivals from "@/component/NewArrival";
 // import BestSelling from "@/component/BestSelling";
@@ -21,11 +21,11 @@ export default function Home() {
   return (
     <div className="bg-blue-50">
         <ImagePreview/>
-         <PopularBrand/>
+        <PopularBrand/>
         <WeeklyDeals/>
-        {/*<GlassCardsGallary/>
+        <GlassCardsGallary/>
         <LatestCollections/>
-        <BookAppointment/>
+        {/*<BookAppointment/>
         <NewArrivals/>
         <BestSelling/>
         <ContactLense/>
