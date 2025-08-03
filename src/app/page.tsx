@@ -5,7 +5,7 @@ import GlassCardsGallary from "@/component/GlassCardsGallary";
 import LatestCollections from "@/component/LatestCollections";
 import BookAppointment from "@/component/BookAppointment";
 import NewArrivals from "@/component/NewArrival";
-// import BestSelling from "@/component/BestSelling";
+import BestSelling from "@/component/BestSelling";
 // import ContactLense from "@/component/ContactLense";
 // import FindYourPerfectGlass from "@/component/FindYourPerfectGlass";
 // import MensSunglass from "@/component/MensSunglass";
@@ -27,8 +27,8 @@ export default function Home() {
         <LatestCollections/>
         <BookAppointment/>
         <NewArrivals/>
-        {/*<BestSelling/>
-        <ContactLense/>
+        <BestSelling/>
+        {/*<ContactLense/>
         <FindYourPerfectGlass/>
         <MensSunglass/>
         <WomenSunglass/>
