@@ -31,7 +31,7 @@ const BookAppointment:FC = () => {
 
 
     return (
-        <div className='w-full mt-5'>
+        <div className='hidden lg:block w-full mt-5'>
             <Title value='BOOK APPOINTMENT'/>
             <br />
             <div  style={{ backgroundImage: "url('/images/appointment-background.png')", backgroundSize:'cover', backgroundPosition:'center', height:'100%' }} className='w-[100%]' >
