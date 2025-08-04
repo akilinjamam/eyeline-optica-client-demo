@@ -20,8 +20,8 @@ const Sidebar:FC = () => {
 
       {/* Overlay (mobile only) */}
       <div
-        className={`fixed inset-0  bg-transparent z-40 transition-opacity ${
-          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed inset-0  bg-black bg-opacity-50 z-40 transition-opacity ${
+          isOpen ? "opacity-50 visible" : "opacity-0 invisible"
         } md:hidden`}
         onClick={() => setIsOpen(false)}
       ></div>
