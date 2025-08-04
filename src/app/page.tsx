@@ -12,8 +12,8 @@ import MensSunglass from "@/component/MensSunglass";
 import WomenSunglass from "@/component/WomenSunglass";
 import Kidsglass from "@/component/KidsGlasses";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
-// import TopFooter from "@/component/TopFooter";
-// import Footer from "@/component/Footer";
+import TopFooter from "@/component/TopFooter";
+import Footer from "@/component/Footer";
 
 // import GlassTryOn from "@/component/GlassTryOnV2";
 
@@ -31,12 +31,11 @@ export default function Home() {
         <ContactLense/>
         <FindYourPerfectGlass/>
         <MensSunglass/>
-        
         <WomenSunglass/>
         <Kidsglass/>
         <ShopByFrameShape/>
-        {/*<TopFooter/>
-        <Footer/> */}
+        <TopFooter/>
+        <Footer/>
         {/* <GlassTryOn/> */}
     </div>
   );
