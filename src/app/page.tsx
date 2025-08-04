@@ -6,7 +6,7 @@ import LatestCollections from "@/component/LatestCollections";
 import BookAppointment from "@/component/BookAppointment";
 import NewArrivals from "@/component/NewArrival";
 import BestSelling from "@/component/BestSelling";
-// import ContactLense from "@/component/ContactLense";
+import ContactLense from "@/component/ContactLense";
 // import FindYourPerfectGlass from "@/component/FindYourPerfectGlass";
 // import MensSunglass from "@/component/MensSunglass";
 // import WomenSunglass from "@/component/WomenSunglass";
@@ -28,8 +28,8 @@ export default function Home() {
         <BookAppointment/>
         <NewArrivals/>
         <BestSelling/>
-        {/*<ContactLense/>
-        <FindYourPerfectGlass/>
+        <ContactLense/>
+        {/*<FindYourPerfectGlass/>
         <MensSunglass/>
         <WomenSunglass/>
         <Kidsglass/>
