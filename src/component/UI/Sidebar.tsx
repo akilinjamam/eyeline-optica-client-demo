@@ -1,5 +1,8 @@
 'use client'
 import React, { FC, useState } from "react";
+import { frameData } from "./frameData";
+import { IFrameData } from "@/ts-definition/interfaces";
+import Accordion from "./Accordion";
 
 const Sidebar:FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,10 +29,10 @@ const Sidebar:FC = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 h-screen w-50 bg-blue-50 shadow-lg z-50
+          fixed top-0 left-0 max-h-[100vh] w-50 bg-blue-50 shadow-lg z-50
           transform transition-transform duration-300 ease-in-out border-r-2 border-gray-200
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
-          md:translate-x-0 md:static md:shadow-none
+          md:translate-x-0 md:static md:shadow-none overflow-y-scroll hide-scrollbar
         `}
       >
         <div className="flex justify-between items-center p-4 border-b md:hidden">
@@ -37,37 +40,28 @@ const Sidebar:FC = () => {
           <button
             onClick={() => setIsOpen(false)}
             aria-label="Close sidebar"
-            className="text-gray-600 hover:text-gray-900"
+            className="text-gray-600 hover:text-gray-900 cursor-pointer"
           >
             ✕
           </button>
         </div>
 
         {/* Sidebar content */}
-        <nav className="p-4">
-          <ul className="space-y-4">
-            <li>
-              <a href="#" className="block text-gray-700 hover:text-blue-600">
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block text-gray-700 hover:text-blue-600">
-                Profile
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block text-gray-700 hover:text-blue-600">
-                Settings
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block text-gray-700 hover:text-blue-600">
-                Logout
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <p className="font-bold">FRAME COLOR</p>
+        <br />
+        {
+          frameData.map((item:IFrameData, index:number) => {
+            return (
+              <div  className="flex items-center" key={index}>
+                  <input  className="mx-1" type="checkbox" name="" id="" />
+                  <div style={{background:`${item.color}`}} className={`w-[15px] h-[15px] rounded-full  mx-1`}></div>
+                  <p className="mx-1">{item.title}</p>
+              </div>
+            )
+          })
+        }
+        <br />
+        <Accordion/>
       </aside>
     </>
   );

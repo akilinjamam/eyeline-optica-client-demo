@@ -29,3 +29,8 @@ export interface ILenseData {
   discountPercentage?: number;
   discountLabel?: string;
 }
+
+export interface IFrameData {
+  color: string;
+  title: string;
+}

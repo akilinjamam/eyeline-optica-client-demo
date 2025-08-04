@@ -7,8 +7,8 @@ const ProductGallery:FC = () => {
     return (
         <div className=' w-full'>
             <div className='w-full bg-gray-200 py-2 px-3 flex items-center justify-end' >
-                <div className='flex items-center justify-between w-[170px] '>
-                    <label htmlFor="" className='text-blue-500'>SORT BY:</label>
+                <div className='flex items-center justify-between w-auto '>
+                    <label htmlFor="" className='text-blue-500 mx-2'>SORT BY:</label>
                     <select name="" id="" className='border border-black'>
                         <option value="hello">Best Sellers</option>
                         <option value="hello">hello</option>
