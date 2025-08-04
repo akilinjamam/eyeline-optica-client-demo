@@ -1,12 +1,13 @@
 'use client'
 import useSwipe from '@/custom-hooks/useSwipe';
+import Link from 'next/link';
 import {FC, useRef} from 'react';
 
 const Tab:FC = () => {
     const swipeRef = useRef(null);
     const {handleMouseDown, handleMouseLeave, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchStart, swipeRef:swippedRef} = useSwipe(swipeRef);
     const elements = [
-        {id: 1, name: 'EYEGLASSES'},
+        {id: 1, name: 'EYEGLASSES', link: '/allProducts'},
         {id: 2, name: 'SUNGLASSES'},
         {id: 3, name: 'LENSES'},
         {id: 4, name: 'CONTACT LENSES'},
@@ -34,12 +35,14 @@ const Tab:FC = () => {
             >
             <div className="flex whitespace-nowrap gap-4">
                 {elements.map((element, index) => (
-                <button
-                    key={index}
+                <Link href={`${element.link}`} key={index}>
+                    <button
+                    
                     className="px-4 py-2 text-sm font-semibold hover:bg-blue-200 rounded-md transition cursor-pointer"
                 >
                     {element.name}
                 </button>
+                </Link>
                 ))}
             </div>
             </div>
