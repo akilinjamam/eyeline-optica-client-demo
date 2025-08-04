@@ -7,9 +7,9 @@ import Title from './Title';
 
 const FindYourPerfectGlass:FC = () => {
     return (
-        <div>
-             <Title value='FIND YOUR PERFECT GLASS'/>
-            <div className="grid grid-cols-2 gap-4 w-full max-w-[1200px] mx-auto mt-8 ">
+        <div className='hidden lg:block'>
+            <Title value='FIND YOUR PERFECT GLASS'/>
+            <div className=" grid grid-cols-2 gap-4 w-full max-w-[1200px] mx-auto mt-8 ">
   
                 <div className="flex flex-col gap-4">
                     <div className="w-full">

@@ -11,7 +11,7 @@ const LatestCollectionGallery:FC = () => {
         const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
     return (
        <div className='relative'>
-            <div className=' w-[97%] mx-auto flex items-center lg:justify-center sm:justify-start overflow-x-hidden cursor-grab'
+        <div className=' w-[97%] mx-auto flex items-center lg:justify-center sm:justify-start overflow-x-hidden cursor-grab'
         ref={swippedRef}
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
@@ -27,7 +27,7 @@ const LatestCollectionGallery:FC = () => {
             </div>
            
             </div>
-             <div className="pointer-events-none absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
        </div>
     );
 };
