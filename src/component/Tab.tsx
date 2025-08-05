@@ -1,17 +1,19 @@
 'use client'
 import useSwipe from '@/custom-hooks/useSwipe';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {FC, useRef} from 'react';
 
 const Tab:FC = () => {
+    const pathName = usePathname()
     const swipeRef = useRef(null);
     const {handleMouseDown, handleMouseLeave, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchStart, swipeRef:swippedRef} = useSwipe(swipeRef);
     const elements = [
-        {id: 1, name: 'EYEGLASSES', link: '/allProducts'},
-        {id: 2, name: 'SUNGLASSES'},
-        {id: 3, name: 'LENSES'},
-        {id: 4, name: 'CONTACT LENSES'},
-        {id: 5, name: 'BRAND'},
+        {id: 1, name: 'EYEGLASSES', link: '/allglasses'},
+        {id: 2, name: 'SUNGLASSES', link: '/allglasses/sunglasses'},
+        {id: 3, name: 'LENSES', link: '/allglasses/lense'},
+        {id: 4, name: 'CONTACT LENSES', link: '/allglasses/contactlense'},
+        {id: 5, name: 'BRAND', link: '/allglasses/brand'},
         {id: 6, name: 'TELEMEDICINE SERVICE'},
         {id: 7, name: 'PATIENT CARE'},
         {id: 8, name: 'ACCESSORIES'},
@@ -34,16 +36,21 @@ const Tab:FC = () => {
             onTouchMove={handleTouchMove}
             >
             <div className="flex whitespace-nowrap gap-4">
-                {elements.map((element, index) => (
-                <Link href={`${element.link}`} key={index}>
+                {elements.map((element, index) => {
+
+                    const isActive = pathName === element.link
+
+                    return (
+                        <Link href={`${element.link}`} key={index}>
                     <button
                     
-                    className="px-4 py-2 text-sm font-semibold hover:bg-blue-200 rounded-md transition cursor-pointer"
+                    className={`px-4 py-2 text-sm font-semibold hover:bg-blue-200 rounded-md transition cursor-pointer ${isActive ? 'bg-blue-200' : '' }`}
                 >
                     {element.name}
                 </button>
                 </Link>
-                ))}
+                    )
+                } )}
             </div>
             </div>
             {/* Gradient overlay for aesthetics */}
