@@ -15,3 +15,7 @@ export type TAppointmentService = {
 export type TContactLenseData = {
   lense: StaticImageData;
 };
+
+export type TRegardingInfoTab = {
+  info: string;
+};
