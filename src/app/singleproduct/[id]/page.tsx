@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { glassData } from "@/component/glassData";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
-import { ISinglePageProps } from "@/ts-definition/interfaces";
 
 
 
- const SingleProduct = async ({ params }: ISinglePageProps) => {
+ const SingleProduct = async ({ params }: any) => {
   const { id } = params; // destructure inside function body
   const product = glassData.find((p) => p.id === Number(id));
   console.log(product)
