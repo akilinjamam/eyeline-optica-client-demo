@@ -5,7 +5,7 @@ export interface Brand {
 }
 
 export interface GlassCardProps {
-  id: number;
+  id?: number;
   image: StaticImageData;
   title: string;
   model: string;
