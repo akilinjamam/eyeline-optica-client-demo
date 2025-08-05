@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { glassData } from '../glassData';
 import { GlassCardProps } from '@/ts-definition/interfaces';
-import GlassCard from '../GlassCard';
+import GlassCardAuto from './GlassCardAuto';
 
 const ProductGallery:FC = () => {
     return (
@@ -16,10 +16,10 @@ const ProductGallery:FC = () => {
                     </select>
                 </div>
             </div>
-            <section className='w-full p-2 flex items-start justify-start'>
-                <div className='flex gap-2 flex-wrap w-full'>
+            <section className='w-full p-2 flex items-center justify-center '>
+                <div className='flex gap-2 flex-wrap w-[70%] md:w-full lg:w-full '>
                     {
-                        glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCard colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
+                        glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCardAuto colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
                     }
                 </div>
             </section>
