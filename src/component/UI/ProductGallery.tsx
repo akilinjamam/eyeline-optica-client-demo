@@ -19,7 +19,7 @@ const ProductGallery:FC = () => {
             <section className='w-full p-2 flex items-center justify-center '>
                 <div className='flex gap-2 flex-wrap w-[70%] md:w-full lg:w-full '>
                     {
-                        glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCardAuto colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
+                        glassData?.map(({colorCount, title, model, price, tag, image, id }: GlassCardProps, index: number) => <GlassCardAuto colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} id={id} key={index}/> )
                     }
                 </div>
             </section>

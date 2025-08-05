@@ -5,11 +5,14 @@ export interface Brand {
 }
 
 export interface GlassCardProps {
+  id: number;
   image: StaticImageData;
   title: string;
   model: string;
   price: number;
   tag?: string;
+  key?: number;
+  images?: StaticImageData[];
   colorCount: number;
 }
 
@@ -33,4 +36,10 @@ export interface ILenseData {
 export interface IFrameData {
   color: string;
   title: string;
+}
+
+export interface ISinglePageProps {
+  params: {
+    id: string;
+  };
 }

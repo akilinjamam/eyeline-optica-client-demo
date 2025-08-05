@@ -2,10 +2,11 @@ import React from 'react';
 import {CameraIcon} from 'lucide-react'
 import { GlassCardProps } from '@/ts-definition/interfaces';
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 
-const GlassCardAuto:React.FC<GlassCardProps> = ({image, title, model, price, tag, colorCount}) => {
+const GlassCardAuto:React.FC<GlassCardProps> = ({image, title, model, price, tag, colorCount, id}) => {
 
     return (
     <div className="relative bg-white shadow-md p-4 rounded-md w-full md:w-[230px] lg:w-[230px] xl:w-[210px] 2xl:w-[230px] ">
@@ -21,13 +22,15 @@ const GlassCardAuto:React.FC<GlassCardProps> = ({image, title, model, price, tag
       </span>
 
       <div className=" mb-3 w-full flex items-center justify-center">
-        <Image
+        <Link href={`/singleproduct/${id}`}>
+          <Image
           src={image}
           alt={title}
           width={120}
           height={60}
           className="object-contain block  "
         />
+        </Link>
       </div>
 
       <p className="text-[10px] text-gray-500">{model}</p>
