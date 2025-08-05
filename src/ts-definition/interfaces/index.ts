@@ -40,6 +40,6 @@ export interface IFrameData {
 
 export interface ISinglePageProps {
   params: {
-    id: number;
+    id: string;
   };
 }
