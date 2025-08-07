@@ -1,7 +1,18 @@
+'use client'
 import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
+import { AnimatePresence } from "framer-motion";
+import SlideInPanel from './SlidePannel';
+import { GlassCardProps } from '@/ts-definition/interfaces';
 
-const DetailPart:React.FC = () => {
+
+const DetailPart:React.FC<GlassCardProps> = (product) => {
+
+  console.log(product)
+
+const [showLensPanel, setShowLensPanel] = useState(false);
+
+
     return (
     <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
       <div>
@@ -54,7 +65,7 @@ const DetailPart:React.FC = () => {
       </div>
 
       <div className="flex flex-col space-y-3">
-        <button className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-full font-semibold">
+        <button onClick={() => setShowLensPanel(true)} className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-full font-semibold cursor-pointer">
           Select Lenses
         </button>
         <button className="border border-blue-500 text-blue-500 py-2 rounded-full flex items-center justify-center gap-2 font-semibold">
@@ -66,12 +77,17 @@ const DetailPart:React.FC = () => {
         Pay with insurance.{" "}
         <span className="underline text-blue-500 cursor-pointer">Learn more</span>
       </p>
-
+        <AnimatePresence>
+          {showLensPanel && (
+            <SlideInPanel onClose={() => setShowLensPanel(false)} product={product}/>
+          )}
+      </AnimatePresence>
       <div className="flex justify-center gap-4 text-blue-600 mt-2">
         <a href="#"><Facebook size={18} /></a>
         <a href="#"><Instagram size={18} /></a>
         <a href="#"><Twitter size={18} /></a>
       </div>
+      
     </div>
   );
 };

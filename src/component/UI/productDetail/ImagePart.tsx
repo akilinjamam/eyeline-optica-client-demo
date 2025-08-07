@@ -21,7 +21,7 @@ const ImagePart:React.FC<any> = ({product}) => {
             <div className='w-full bg-white'>
                 <div className='lg:w-[80%] mx-auto flex items-center justify-between'>
                     {
-                        product.images.slice(0,6).map((img:StaticImageData, index:number) => <Image onClick={() => setSelectImg(index)} src={img} key={index} width={50} height={50} alt='horizontal-img' className={`cursor-pointer ${index === selectImg ? 'border-2 border-t-gray-400' : ''}`}/> )
+                        product.images.slice(0,6).map((img:StaticImageData, index:number) => <Image onClick={() => setSelectImg(index)} src={img} key={index} width={50} height={50} alt='horizontal-img' className={`cursor-pointer ${index === selectImg ? 'border-t-2 border-gray-400' : ''}`}/> )
                     }
                 </div>
             </div>
