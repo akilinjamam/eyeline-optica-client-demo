@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 // components/Accordion.tsx
 import { useEffect, useRef, useState } from 'react';
 
 type AccordionItemProps = {
   title: string;
-  content: string;
+  content: any;
 };
 
 
@@ -12,7 +13,7 @@ type AccordionItemProps = {
 const AccordionItem = ({ title, content }: AccordionItemProps) => {
     const contentRef = useRef<HTMLDivElement>(null)
     const [maxHeight, setMaxHeight] = useState('0px');
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
   if (isOpen && contentRef.current) {
@@ -24,36 +25,44 @@ const AccordionItem = ({ title, content }: AccordionItemProps) => {
 
   return (
     <div className="border-b-gray-300 mx-1">
-      <button
-        className="w-full flex justify-between items-center py-4 text-left"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span className="">{title}</span>
-        <svg
-          className={`w-5 h-5 transform transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+        <button
+          className="w-full flex justify-between items-center py-4 text-left"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      <div
-  ref={contentRef}
-  className="overflow-hidden transition-all duration-500 ease-in-out text-gray-700"
-  style={{ maxHeight }}
->
-  <div className="pb-4">{content}</div>
-</div>
+            <span className="">{title}</span>
+            <svg
+              className={`w-5 h-5 transform transition-transform duration-200 ${
+                isOpen ? 'rotate-180' : ''
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+        <div
+          ref={contentRef}
+          className="overflow-hidden transition-all duration-500 ease-in-out text-gray-700"
+          style={{ maxHeight }}>
+
+          {typeof content === 'string' ? <div className="pb-4">{content}</div> : (content.map((items:any, index:number) => {
+            return (
+              <div key={index} className="pb-4">
+                <p >{items.content}</p>
+                <br />
+                {items.subContents.map((sub:any, index:number) => <p key={index}>{sub.title}</p> )}
+              </div>
+            )
+          })) }
+        </div>
     </div>
   );
 };
 
 export default function Accordion() {
   const items = [
-    { title: 'BRAND', content: 'Next.js is a React framework for production.' },
+    { title: 'BRAND', content: [{content: 'Next.js is a React framework for production.', subContents: [{title: '1'}]}, {content: 'Next.js is a React framework for production.', subContents: [{title: '2'}]}] },
     { title: 'FRAME SIZE', content: 'Tailwind CSS is a utility-first CSS framework.' },
     { title: 'GENDER', content: 'An accordion expands/collapses to show content.' },
     { title: 'MATERIAL', content: 'An accordion expands/collapses to show content.' },
@@ -66,35 +75,7 @@ export default function Accordion() {
     <div className="max-w-xl mx-auto mt-10 divide-y">
       {items.map((item, idx) => (
         <AccordionItem key={idx} title={item.title} content={item.content} />
-      ))}
+    ))}
     </div>
   );
 }
-
-
-/* 
-
-import Footer from '@/component/Footer';
-import TopFooter from '@/component/TopFooter';
-import ProductGallery from '@/component/UI/ProductGallery';
-import Sidebar from '@/component/UI/Sidebar';
-import React from 'react';
-
-const Sunglasses:React.FC = () => {
-     return (
-        <div className="w-full bg-blue-50 relative">
-            <div className="w-full mx-auto flex items-start">
-                <Sidebar/>
-                <ProductGallery/>
-            </div>
-            <TopFooter/>
-            <Footer/>
-        </div>
-    );
-};
-
-export default Sunglasses;
-
-
-
-*/
