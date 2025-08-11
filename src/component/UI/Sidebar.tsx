@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import { frameData } from "./frameData";
 import { IFrameData } from "@/ts-definition/interfaces";
 import Accordion from "./Accordion";
+import { items } from "./productDetail/accordionData";
 
 const Sidebar:FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -61,7 +62,7 @@ const Sidebar:FC = () => {
           })
         }
         <br />
-        <Accordion/>
+        <Accordion item={items}/>
       </aside>
     </>
   );

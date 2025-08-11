@@ -1,11 +1,8 @@
 'use client'
+import { AccordionItemType } from '@/ts-definition/types';
 import { useState } from 'react';
 
-type AccordionItemType = {
-  title: string;
-  content?: string;
-  children?: AccordionItemType[];
-};
+
 
 type AccordionItemProps = {
   item: AccordionItemType;
@@ -23,7 +20,7 @@ const AccordionItem = ({ item }: AccordionItemProps) => {
         <span>{item.title}</span>
         {(item.children || item.content) && (
           <svg
-            className={`w-5 h-5 transform transition-transform duration-200 ${
+            className={`w-5 h-5 transform transition-transform duration-200 cursor-pointer ${
               isOpen ? 'rotate-180' : ''
             }`}
             fill="none"
@@ -63,36 +60,12 @@ const AccordionItem = ({ item }: AccordionItemProps) => {
   );
 };
 
-export default function Accordion() {
-  const items: AccordionItemType[] = [
-    {
-      title: 'BRAND',
-      children: [
-        { title: 'Nike', content: 'Sports eyewear from Nike.' },
-        { title: 'Ray-Ban', content: 'Classic eyewear brand.' },
-      ],
-    },
-    {
-      title: 'FRAME SIZE',
-      children: [
-        { title: 'Small', content: 'Best for narrow faces.' },
-        {
-          title: 'Medium',
-          children: [
-            { title: 'Option 1', content: 'Medium frame option 1.' },
-            { title: 'Option 2', content: 'Medium frame option 2.' },
-          ],
-        },
-        { title: 'Large', content: 'Best for wide faces.' },
-      ],
-    },
-    { title: 'GENDER', content: 'Men, Women, Unisex.' },
-    { title: 'MATERIAL', content: 'Plastic, Metal, Titanium.' },
-  ];
+export default function Accordion({item}: {item:AccordionItemType[]}) {
+  
 
   return (
     <div className="max-w-xl mx-auto mt-10 divide-y">
-      {items.map((item, idx) => (
+      {item.map((item, idx) => (
         <AccordionItem key={idx} item={item} />
       ))}
     </div>

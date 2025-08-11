@@ -19,3 +19,9 @@ export type TContactLenseData = {
 export type TRegardingInfoTab = {
   info: string;
 };
+
+export type AccordionItemType = {
+  title?: string;
+  content?: string;
+  children?: AccordionItemType[];
+};
