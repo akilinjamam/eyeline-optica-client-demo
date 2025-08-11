@@ -5,7 +5,7 @@ import { eyeglass } from './accordionData';
 
 const SlideImageAndPriceDetail = ({product}: {product:GlassCardProps}) => {
     return (
-        <div className="p-2 h-[90vh] overflow-y-scroll">
+        <div className="p-2 ">
             <div className="w-full h-[200px]  mx-auto flex items-center justify-between">
                 <div className="w-[40%] h-full bg-gray-200 flex items-center justify-center">
                     <Image src={product.image} alt="single-img" />
@@ -24,8 +24,9 @@ const SlideImageAndPriceDetail = ({product}: {product:GlassCardProps}) => {
                 </div>
             </div>
 
+            <br />
             {/* Your lens selection content goes here */}
-            <div className="">
+            <div className="max-h-[60vh] overflow-y-scroll border-1 border-gray-200 py-2">
                 <Accordion item={eyeglass}/>
             </div>
         </div>
