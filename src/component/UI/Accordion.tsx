@@ -1,21 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { AccordionItemType } from '@/ts-definition/types';
 import { useState } from 'react';
 
-
-
 type AccordionItemProps = {
   item: AccordionItemType;
+  selectData?:any
+  parentTitle?: string;
 };
 
-const AccordionItem = ({ item }: AccordionItemProps) => {
+const AccordionItem = ({ item, selectData, parentTitle }: AccordionItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const rootTitle = parentTitle || item.title; // top-level parent
+
+  const handleClick = () => {
+    // only trigger selectData if this is a leaf (no children)
+    if (!item.children || item.children.length === 0) {
+      selectData({ [String(rootTitle)]: item.title });
+    } else {
+      setIsOpen(!isOpen);
+    }
+  };
 
   return (
     <div className="border-b border-gray-300 mx-1">
       <button
         className="w-full flex justify-between items-center py-4 text-left"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClick}
       >
         <span>{item.title}</span>
         {(item.children || item.content) && (
@@ -45,11 +57,15 @@ const AccordionItem = ({ item }: AccordionItemProps) => {
           style={{ willChange: 'max-height, opacity' }}
         >
           <div className="pb-4 pl-4">
-            {item.content && <p>{item.content}</p>}
+            {item.content && <p >{item.content}</p>}
             {item.children && (
-              <div className="ml-4 border-l border-gray-300">
+              <div className="ml-4 border-l border-gray-300" >
                 {item.children.map((child, idx) => (
-                  <AccordionItem key={idx} item={child} />
+                  <div
+                    key={idx}
+                  >
+                    <AccordionItem key={idx} item={child} selectData={selectData}  parentTitle={rootTitle}/>
+                  </div>
                 ))}
               </div>
             )}
@@ -60,13 +76,14 @@ const AccordionItem = ({ item }: AccordionItemProps) => {
   );
 };
 
-export default function Accordion({item}: {item:AccordionItemType[]}) {
+export default function Accordion({item, selectData}: {item:AccordionItemType[], selectData:any}) {
   
+
 
   return (
     <div className="max-w-xl mx-auto mt-10 divide-y">
       {item.map((item, idx) => (
-        <AccordionItem key={idx} item={item} />
+        <AccordionItem key={idx} item={item} selectData={selectData} parentTitle={item.title}/>
       ))}
     </div>
   );
