@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import { AccordionItemType } from '@/ts-definition/types';
+import { AccordionItemType, TAccordion } from '@/ts-definition/types';
 import { useState } from 'react';
 
 type AccordionItemProps = {
@@ -76,7 +76,10 @@ const AccordionItem = ({ item, selectData, parentTitle }: AccordionItemProps) =>
   );
 };
 
-export default function Accordion({item, selectData}: {item:AccordionItemType[], selectData:any}) {
+
+
+
+export default function Accordion({item, selectData}: TAccordion) {
   
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StaticImageData } from "next/image";
 
 export type TTimes = {
@@ -24,4 +25,9 @@ export type AccordionItemType = {
   title?: string;
   content?: string;
   children?: AccordionItemType[];
+};
+
+export type TAccordion = {
+  item: AccordionItemType[];
+  selectData?: any;
 };
