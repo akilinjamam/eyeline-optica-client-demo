@@ -25,9 +25,11 @@ export type AccordionItemType = {
   title?: string;
   content?: string;
   children?: AccordionItemType[];
+  price?: number;
 };
 
 export type TAccordion = {
   item: AccordionItemType[];
   selectData?: any;
+  selectPrice?: any;
 };

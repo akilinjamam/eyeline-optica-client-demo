@@ -30,12 +30,12 @@ export const eyeglass: AccordionItemType[] = [
   {
     title: "POWER TYPE",
     children: [
-      { title: "With Power (single vision)" },
-      { title: "Zero Power" },
-      { title: "Bifocal Power" },
-      { title: "Prograssive Power" },
-      { title: "Reading Power" },
-      { title: "Only Frame" },
+      { title: "With Power (single vision)", price: 200 },
+      { title: "Zero Power", price: 100 },
+      { title: "Bifocal Power", price: 300 },
+      { title: "Prograssive Power", price: 250 },
+      { title: "Reading Power", price: 400 },
+      { title: "Only Frame", price: 230 },
     ],
   },
   {
@@ -44,31 +44,34 @@ export const eyeglass: AccordionItemType[] = [
       {
         title: "Regular White",
         children: [
-          { title: "White" },
-          { title: "Blue Cut" },
-          { title: "Phochomatic" },
-          { title: "HMC" },
+          { title: "White", price: 50 },
+          { title: "Blue Cut", price: 250 },
+          { title: "Phochomatic", price: 100 },
+          { title: "HMC", price: 500 },
         ],
       },
       {
         title: "Premium",
         children: [
-          { title: "Platinum Rio" },
-          { title: "Titanium Blue" },
-          { title: "Crizal" },
+          { title: "Platinum Rio", price: 600 },
+          { title: "Titanium Blue", price: 260 },
+          { title: "Crizal", price: 500 },
         ],
       },
       {
         title: "High Power",
         children: [
-          { title: "Platinum Rio" },
-          { title: "Titanium Blue" },
-          { title: "Crizal" },
+          { title: "Platinum Rio", price: 80 },
+          { title: "Titanium Blue", price: 70 },
+          { title: "Crizal", price: 20 },
         ],
       },
       {
         title: "Drivesa",
-        children: [{ title: "Zieye Drive" }, { title: "Rio drivesafa" }],
+        children: [
+          { title: "Zieye Drive", price: 700 },
+          { title: "Rio drivesafa", price: 250 },
+        ],
       },
     ],
   },
