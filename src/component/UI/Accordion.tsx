@@ -19,8 +19,14 @@ const AccordionItem = ({ item, selectData, parentTitle, selectPrice }: Accordion
   const handleClick = () => {
     
     if (!item.children || item.children.length === 0) {
-      selectData({ [String(rootTitle)]: item.title, price: item.price });
-      selectPrice({[String(rootTitle)]: item.price})
+     
+      if (selectData) {
+        selectData({ [String(rootTitle)]: item.title, price: item.price });
+      }
+      
+      if (selectPrice) {
+        selectPrice({[String(rootTitle)]: item.price});
+      }
     } else {
       setIsOpen(!isOpen);
     }

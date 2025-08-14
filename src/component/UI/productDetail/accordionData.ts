@@ -3,27 +3,21 @@ import { AccordionItemType } from "@/ts-definition/types";
 export const items: AccordionItemType[] = [
   {
     title: "BRAND",
-    children: [
-      { title: "Nike", content: "Sports eyewear from Nike." },
-      { title: "Ray-Ban", content: "Classic eyewear brand." },
-    ],
+    children: [{ title: "Nike" }, { title: "Ray-Ban" }],
   },
   {
     title: "FRAME SIZE",
     children: [
-      { title: "Small", content: "Best for narrow faces." },
+      { title: "Small" },
       {
         title: "Medium",
-        children: [
-          { title: "Option 1", content: "Medium frame option 1." },
-          { title: "Option 2", content: "Medium frame option 2." },
-        ],
+        children: [{ title: "Option 1" }, { title: "Option 2" }],
       },
-      { title: "Large", content: "Best for wide faces." },
+      { title: "Large" },
     ],
   },
-  { title: "GENDER", content: "Men, Women, Unisex." },
-  { title: "MATERIAL", content: "Plastic, Metal, Titanium." },
+  { title: "GENDER", children: [{ title: "MALE" }, { title: "FEMALE" }] },
+  { title: "MATERIAL" },
 ];
 
 export const eyeglass: AccordionItemType[] = [
@@ -75,4 +69,30 @@ export const eyeglass: AccordionItemType[] = [
       },
     ],
   },
+];
+
+export const itemsOld: AccordionItemType[] = [
+  {
+    title: "BRAND",
+    children: [
+      { title: "Nike", content: "Sports eyewear from Nike." },
+      { title: "Ray-Ban", content: "Classic eyewear brand." },
+    ],
+  },
+  {
+    title: "FRAME SIZE",
+    children: [
+      { title: "Small", content: "Best for narrow faces." },
+      {
+        title: "Medium",
+        children: [
+          { title: "Option 1", content: "Medium frame option 1." },
+          { title: "Option 2", content: "Medium frame option 2." },
+        ],
+      },
+      { title: "Large", content: "Best for wide faces." },
+    ],
+  },
+  { title: "GENDER", content: "Men, Women, Unisex." },
+  { title: "MATERIAL", content: "Plastic, Metal, Titanium." },
 ];

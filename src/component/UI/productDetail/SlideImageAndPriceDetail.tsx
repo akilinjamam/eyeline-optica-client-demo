@@ -1,85 +1,42 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { GlassCardProps } from '@/ts-definition/interfaces';
 import Image from 'next/image';
 import Accordion from '../Accordion';
 import { eyeglass } from './accordionData';
-import { useEffect, useState } from 'react';
 import { calculatingTotal } from '@/utilities/calculatingTotal';
+import useManageAccordionData from '@/custom-hooks/useManageAccordionData';
 
 const SlideImageAndPriceDetail = ({product}: {product:GlassCardProps}) => {
+    const accordionItem = eyeglass
+    const {setSelectData, setSelectPrice, setSelectedData, setSelectedPrice, totalPrice, combineValue, setCombineValue} = useManageAccordionData({accordionItem, product})
 
-    const [selectData, setSelectData] = useState<{ price?: number; [key: string]: any }>({});
-    const [selectPrice, setSelectPrice] = useState<{ price?: number; [key: string]: any }>({});
-    const [selectedData, setSelectedData] = useState<{ [key: string]: any }>({});
-    const [selectedPrice, setSelectedPrice] = useState<{ [key: string]: any }>({});
-    const [combineValue, setCombineValue] = useState<string[]>([])
-    
-    useEffect(() => {
-        const allTypes = eyeglass.map((item) => item.title);
-        if (allTypes.includes(Object.keys(selectData)[0])){
-            setSelectedData((prev) => ({...prev, ...selectData}))
-        };
-
-        
-    },[selectData])
-
-    useEffect(() => {
+    const handleDelete = (indexToDelete:number) => {
        
-        if (selectData.price && selectData.price){
-            setSelectedPrice((prev) => ({...prev, ...selectPrice}))
-        }
-    }, [selectData, selectPrice])
-
-   useEffect(() => {
-        const titleArray:string[] = [];
-        const priceArray:string[] = [];
-        const combineArray:string[] = []; 
-
+        const updatedCombineValue = combineValue.filter((_, index) => index !== indexToDelete);
+        setCombineValue(updatedCombineValue);
         
-        const { price, ...propertiesWithoutPrice} = selectedData;
 
-       
-        for(const key in propertiesWithoutPrice){
-            titleArray.push(`${key}: ${propertiesWithoutPrice[key]}`);
-        }
+        const deletedItemString = combineValue[indexToDelete];
+        if (deletedItemString) {
+            const [deletedKey] = deletedItemString.split(': ');
+            if (deletedKey) {
+                // Update selectedData
+                setSelectedData(prevSelectedData => {
+                    const newSelectedData = { ...prevSelectedData };
+                    delete newSelectedData[deletedKey];
+                    return newSelectedData;
+                });
 
-      
-        for(const key in selectedPrice){
-          
-            if (key !== 'price') { 
-                 priceArray.push(`${key}: ${selectedPrice[key]}`);
+                // Update selectedPrice
+                setSelectedPrice(prevSelectedPrice => {
+                    const newSelectedPrice = { ...prevSelectedPrice };
+                    delete newSelectedPrice[deletedKey];
+                    return newSelectedPrice;
+                });
             }
         }
-
-       
-        if(titleArray.length === 0 || priceArray.length === 0) return;
-
-        
-        for(let i = 0; i < titleArray.length; i++){
-            const [key1, value1] = titleArray[i]?.split(': ');
-            const [key2, value2] = priceArray[i]?.split(': ');
-
-           
-            if (key1 && value1 && key2 && value2 && key1 === key2) {
-                combineArray.push(`${key1}: ${value1}/${value2}`);
-            } else {
-              
-                console.warn(`Mismatch or missing data at index ${i}. titleArray: "${titleArray[i]}", priceArray: "${priceArray[i]}"`);
-            }
-        }       
-        console.log("Combined Array:", combineArray); 
-        setCombineValue(combineArray);
-    },[selectedData, selectedPrice]);
-
-
-    const totalPrice = [product.price, ...combineValue?.map((item:any) => Number(item?.split('/')?.[1]))];
-
-    const handleDelete = (value:number) => {
-        const unDeletedItem = combineValue.filter((_, index:number) => index !== value);
-        setCombineValue(unDeletedItem)
-        console.log(combineValue)
+        console.log("combineValue after deletion:", updatedCombineValue); 
     };
 
 

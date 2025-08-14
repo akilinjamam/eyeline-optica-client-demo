@@ -4,10 +4,13 @@ import { frameData } from "./frameData";
 import { IFrameData } from "@/ts-definition/interfaces";
 import Accordion from "./Accordion";
 import { items } from "./productDetail/accordionData";
+import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
 
 const Sidebar:FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const accordionItem = items
+  const {selectedData, setSelectData} = useManageAccordionData({accordionItem})
+  console.log(selectedData)
   return (
     <>
       {/* Mobile hamburger button */}
@@ -62,7 +65,7 @@ const Sidebar:FC = () => {
           })
         }
         <br />
-        <Accordion item={items}/>
+        <Accordion item={items} selectData={setSelectData} />
       </aside>
     </>
   );
