@@ -11,11 +11,13 @@ const SlideImageAndPriceDetail = ({product}: {product:GlassCardProps}) => {
     const accordionItem = eyeglass
     const {setSelectData, setSelectPrice, setSelectedData, setSelectedPrice, totalPrice, combineValue, setCombineValue} = useManageAccordionData({accordionItem, product})
 
+    console.log(eyeglass.length) // fixed length
+    console.log(combineValue.length) // dynamic length
+
     const handleDelete = (indexToDelete:number) => {
        
         const updatedCombineValue = combineValue.filter((_, index) => index !== indexToDelete);
         setCombineValue(updatedCombineValue);
-        
 
         const deletedItemString = combineValue[indexToDelete];
         if (deletedItemString) {
@@ -39,6 +41,12 @@ const SlideImageAndPriceDetail = ({product}: {product:GlassCardProps}) => {
         console.log("combineValue after deletion:", updatedCombineValue); 
     };
 
+    // fixed & dynamic length
+  const fixedLength = eyeglass.length;
+  const dynamicLength = combineValue.length;
+
+  // calculate percentage
+  const percentage = Math.min((dynamicLength / fixedLength) * 100, 100);
 
     return (
         <div className="p-2 ">
@@ -64,10 +72,22 @@ const SlideImageAndPriceDetail = ({product}: {product:GlassCardProps}) => {
                         }
                     <br />
                     <hr />
-                <div className="flex justify-between font-bold text-sm">
+                    <div className="flex justify-between font-bold text-sm">
                         <label htmlFor="">Total:</label>
                         <p>{calculatingTotal(totalPrice)}</p>
                     </div>
+                    <div className="mt-3">
+                    <div className="flex justify-between text-xs font-medium mb-1">
+                    <span>Selection Progress</span>
+                    <span>{percentage.toFixed(0)}%</span>
+                    </div>
+                    <div className="w-full h-4 rounded-full bg-gray-200/30 backdrop-blur-md border border-white/20 shadow-inner overflow-hidden">
+                    <div
+                        className="h-4 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-lg transition-all duration-500 ease-in-out"
+                        style={{ width: `${percentage}%` }}
+                    />
+                    </div>
+          </div>
                 </div>
             </div>
 
