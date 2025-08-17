@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
 import { glassData } from '../glassData';
 import { GlassCardProps } from '@/ts-definition/interfaces';
 import GlassCardAuto from './GlassCardAuto';
 
-const ProductGallery:FC = () => {
+const ProductGallery = () => {
     return (
         <div className=' w-full'>
             <div className='w-full bg-gray-200 py-2 px-3 flex items-center justify-end' >

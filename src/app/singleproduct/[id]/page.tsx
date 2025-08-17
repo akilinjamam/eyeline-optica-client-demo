@@ -11,7 +11,7 @@ import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 
 
  const SingleProduct = async ({ params }: any) => {
-  const { id } = params; // destructure inside function body
+  const { id } = await params;
   const product = glassData.find((p) => p.id === Number(id));
  
   if (!product) return null;
