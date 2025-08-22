@@ -2,7 +2,7 @@
 import { GlassCardProps, ILense, ILenseFeatures, IPowerOptions, IPowerTypes } from '@/ts-definition/interfaces';
 import Image from 'next/image';
 import { lenses, powerOptions, powerTypes } from './productCategoryData';
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -11,6 +11,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
     { type: 'powerTypes' }, 
   ]);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+   const [selectedLense, setSelectedLense] = useState<ILense | null>(null);
 
   const current = history[history.length - 1];
   console.log(history) 
@@ -112,13 +113,16 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
                       className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                     >
                      <div className='w-[95%]'>
-                         <p className="px-1 font-bold mb-2">{item.title}</p>
+                         <p  className="px-1 font-bold mb-2">{item.title}</p>
                         {
                             item.features.map((feature: ILenseFeatures, index:number) => <p className='ml-3 text-sm' key={index}>{feature.feature}</p> )
                         }
                         <br />
                         <div className='flex items-center justify-between'>
-                            <div className='text-sm text-green-400 ml-3 flex items-center'> 
+                            <div onClick={(event) => {
+                                 event.stopPropagation();
+                                setSelectedLense(item)
+                            }}  className='text-sm text-green-400 ml-3 flex items-center'> 
                                 <p>Details</p> 
                                 <ChevronRight size={13}/>
                             </div>
@@ -151,6 +155,33 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
             )}
           </motion.div>
         </AnimatePresence>
+        {/* Bottom Sheet Details */}
+      <AnimatePresence>
+        {selectedLense && (
+          <motion.div
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ duration: 0.4 }}
+            className="fixed bottom-0 left-0 w-full h-[60%] bg-white rounded-t-2xl shadow-lg z-50 p-4 overflow-y-scroll"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-bold text-lg">{selectedLense.title}</h2>
+              <button onClick={() => {
+                setSelectedLense(null)
+              }}>
+                <X/>
+              </button>
+            </div>
+            {selectedLense.features.map((feature: ILenseFeatures, idx: number) => (
+              <p key={idx} className="text-sm mb-2">
+                - {feature.feature}
+              </p>
+            ))}
+            <p className="font-bold text-orange-600 mt-4">৳{selectedLense.price}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
       </div>
     </div>
   );
