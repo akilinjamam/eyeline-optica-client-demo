@@ -65,7 +65,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
 
       <div className="flex flex-col space-y-3">
         <button onClick={() => setShowLensPanel(true)} className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-full font-semibold cursor-pointer">
-          Select Lenses
+          Procced to Cart
         </button>
         <button className="border border-blue-500 text-blue-500 py-2 rounded-full flex items-center justify-center gap-2 font-semibold">
           <Heart /> Add to wishlist
