@@ -122,7 +122,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
                             <div onClick={(event) => {
                                  event.stopPropagation();
                                 setSelectedLense(item)
-                            }}  className='text-sm text-green-400 ml-3 flex items-center'> 
+                            }}  className='text-sm text-green-400 ml-3 flex items-center hover:bg-gray-300 rounded-md p-1'> 
                                 <p>Details</p> 
                                 <ChevronRight size={13}/>
                             </div>
