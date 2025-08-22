@@ -49,10 +49,16 @@ export interface IPowerTypes {
   title: string;
 }
 
+export interface ILenseFeatures {
+  feature: string;
+}
+
 export interface ILense {
   type: string;
   subType: string;
   title: string;
+  features: ILenseFeatures[];
+  price: number;
 }
 
 export interface IPowerOptions {

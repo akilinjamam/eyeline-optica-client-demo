@@ -1,5 +1,5 @@
 'use client'
-import { GlassCardProps, ILense, IPowerOptions, IPowerTypes } from '@/ts-definition/interfaces';
+import { GlassCardProps, ILense, ILenseFeatures, IPowerOptions, IPowerTypes } from '@/ts-definition/interfaces';
 import Image from 'next/image';
 import { lenses, powerOptions, powerTypes } from './productCategoryData';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
@@ -109,9 +109,22 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
                     <div
                       key={index}
                       onClick={() => goForward({ type: 'details', title: item.title })}
-                      className="flex items-center justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
+                      className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                     >
-                      <p className="px-1 text-sm">{item.title}</p>
+                     <div className='w-[95%]'>
+                         <p className="px-1 font-bold mb-2">{item.title}</p>
+                        {
+                            item.features.map((feature: ILenseFeatures, index:number) => <p className='ml-3 text-sm' key={index}>{feature.feature}</p> )
+                        }
+                        <br />
+                        <div className='flex items-center justify-between'>
+                            <div className='text-sm text-green-400 ml-3 flex items-center'> 
+                                <p>Details</p> 
+                                <ChevronRight size={13}/>
+                            </div>
+                            <p className='text-sm font-bold text-orange-600'> ৳{item.price}</p>
+                        </div>
+                     </div>
                       <ChevronRight />
                     </div>
                   ))}
