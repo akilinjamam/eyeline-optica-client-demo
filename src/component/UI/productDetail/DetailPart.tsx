@@ -8,8 +8,7 @@ import { GlassCardProps } from '@/ts-definition/interfaces';
 
 const DetailPart:React.FC<GlassCardProps> = (product) => {
 
-  console.log(product)
-
+ 
 const [showLensPanel, setShowLensPanel] = useState(false);
 
 
@@ -81,7 +80,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
           {showLensPanel && (
             <SlideInPanel onClose={() => setShowLensPanel(false)} product={product}/>
           )}
-      </AnimatePresence>
+        </AnimatePresence>
       <div className="flex justify-center gap-4 text-blue-600 mt-2">
         <a href="#"><Facebook size={18} /></a>
         <a href="#"><Instagram size={18} /></a>
