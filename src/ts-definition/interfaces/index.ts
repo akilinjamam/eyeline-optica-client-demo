@@ -43,3 +43,20 @@ export interface ISinglePageProps {
     id: string;
   };
 }
+
+export interface IPowerTypes {
+  type: string;
+  title: string;
+}
+
+export interface ILense {
+  type: string;
+  subType: string;
+  title: string;
+}
+
+export interface IPowerOptions {
+  title: string;
+  subTitle: string;
+  description: string;
+}
