@@ -92,7 +92,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
                   <div
                     key={index}
                     onClick={() => goForward({ type: 'lenses', title: item.title })}
-                    className="flex items-center justify-between p-1 bg-gray-100 m-2 rounded-md cursor-pointer"
+                    className="flex items-center justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                   >
                     <p className="px-1 text-sm">{item.title}</p>
                     <ChevronRight />
@@ -109,7 +109,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
                     <div
                       key={index}
                       onClick={() => goForward({ type: 'details', title: item.title })}
-                      className="flex items-center justify-between p-1 bg-gray-100 m-2 rounded-md cursor-pointer"
+                      className="flex items-center justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                     >
                       <p className="px-1 text-sm">{item.title}</p>
                       <ChevronRight />
@@ -123,7 +123,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
                 {
                     powerOptions.map((power:IPowerOptions, index:number) => {
                         return (
-                            <div key={index} className='bg-gray-100 my-2 rounded-md cursor-pointer flex items-center justify-between'>
+                            <div key={index} className='bg-gray-100 hover:bg-gray-200 my-2 rounded-md cursor-pointer flex items-center justify-between'>
                                 <div>
                                     <p className='px-2 pb-3 font-bold'>{power.subTitle}</p>
                                 
