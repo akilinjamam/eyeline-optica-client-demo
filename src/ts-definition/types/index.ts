@@ -33,3 +33,5 @@ export type TAccordion = {
   selectData?: any;
   selectPrice?: any;
 };
+
+export type GoForwardPayload = { type: string; title: string };
