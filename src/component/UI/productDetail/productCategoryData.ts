@@ -4,22 +4,27 @@ export const powerTypes: IPowerTypes[] = [
   {
     type: "Power Type",
     title: "With Power",
+    description: "Positive, Negative or Cylindrical",
   },
   {
     type: "Power Type",
     title: "Zero Power",
+    description: "Blue light block for screen protector",
   },
   {
     type: "Power Type",
     title: "Progressive Power",
+    description: "Two Power in One eye",
   },
   {
     type: "Power Type",
     title: "Bifocal",
+    description: "Two Power in One eye",
   },
   {
     type: "Power Type",
     title: "Frame Only",
+    description: "With no lenses",
   },
 ];
 

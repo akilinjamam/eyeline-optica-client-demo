@@ -47,6 +47,7 @@ export interface ISinglePageProps {
 export interface IPowerTypes {
   type: string;
   title: string;
+  description: string;
 }
 
 export interface ILenseFeatures {

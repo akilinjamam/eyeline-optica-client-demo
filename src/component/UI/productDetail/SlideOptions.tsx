@@ -12,7 +12,7 @@ const SlideOptions = () => {
   const [selectedLense, setSelectedLense] = useState<ILense | null>(null);
 
   const current = history[history.length - 1];
-
+ 
   // Variants depending on direction
   const variants = {
     enter: (dir: 'forward' | 'backward') => ({
@@ -28,6 +28,8 @@ const SlideOptions = () => {
 
   const goForward = (next: { type: string; title?: string }) => {
     if(next.title === 'Frame Only') return
+    if(next.title === "I don't know my power") return
+    // if(next.title === 'Zero Power') return
     setDirection('forward');
     setHistory((prev) => [...prev, next]);
   };
@@ -68,9 +70,13 @@ const SlideOptions = () => {
                   <div
                     key={index}
                     onClick={() => goForward({ type: 'lenses', title: item.title })}
-                    className="flex items-center justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
+                    className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                   >
-                    <p className="px-1 text-sm">{item.title}</p>
+                    <div>
+                        <p className="px-1 font-bold mb-4">{item.title}</p>
+                        <p className='px-1 text-sm'>{item.description}</p>
+                    </div>
+
                     <ChevronRight />
                   </div>
                 ))}
@@ -84,7 +90,10 @@ const SlideOptions = () => {
                   .map((item: ILense, index: number) => (
                     <div
                       key={index}
-                      onClick={() => goForward({ type: 'details', title: item.title })}
+                      onClick={() => {
+                        if(item.subType === 'Zero Power') return
+                        goForward({ type: 'details', title: item.title })
+                      }}
                       className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                     >
                      <div className='w-[95%]'>
@@ -109,13 +118,13 @@ const SlideOptions = () => {
                   ))}
               </>
             )}
-
+            {/* Detail part */}
             {current.type === 'details' && (
               <div className="p-4">
                 {
                     powerOptions.map((power:IPowerOptions, index:number) => {
                         return (
-                            <div key={index} className='bg-gray-100 hover:bg-gray-200 my-2 rounded-md cursor-pointer flex items-center justify-between'>
+                            <div onClick={() => goForward({type: power.subTitle, title: power.title})} key={index} className='bg-gray-100 hover:bg-gray-200 my-2 rounded-md cursor-pointer flex items-center justify-between'>
                                 <div>
                                     <p className='px-2 pb-3 font-bold'>{power.subTitle}</p>
                                 
@@ -127,6 +136,16 @@ const SlideOptions = () => {
                     })
                 }
               </div>
+            )}
+            {current.type === "Enter Power Manually" && (
+              <>
+                Enter Power Manually
+              </>
+            )}
+            {current.type === "Upload Prescription" && (
+              <>
+                Upload Prescription
+              </>
             )}
           </motion.div>
         </AnimatePresence>
