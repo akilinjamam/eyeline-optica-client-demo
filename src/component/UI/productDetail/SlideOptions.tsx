@@ -3,6 +3,7 @@ import { lenses, powerOptions, powerTypes } from './productCategoryData';
 import { ArrowLeft, ChevronRight, X } from 'lucide-react';
 import { ILense, ILenseFeatures, IPowerOptions, IPowerTypes } from '@/ts-definition/interfaces';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 
 const SlideOptions = () => {
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
@@ -40,6 +41,18 @@ const SlideOptions = () => {
       setHistory((prev) => prev.slice(0, -1));
     }
   };
+
+   const [image, setImage] = useState<string | null>(null);
+
+  const handleCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setImage(url);
+    }
+  };
+
+
     return (
         <div className="relative w-full overflow-hidden h-[60vh] border border-gray-200 rounded-md">
         <AnimatePresence custom={direction} mode="popLayout">
@@ -180,7 +193,11 @@ const SlideOptions = () => {
                         <br /><br />
                         <input className='w-full rounded-md p-4 border border-gray-400' type="text" name="" id="" placeholder='Phone Number *' />
                     </div>
-                    <div className='w-full text-center mt-6 text-green-800'>
+                    <br />
+                    <div className='flex items-center justify-center w-full h-[20px]'>
+                        <button className='bg-blue-900 rounded-3xl px-2 py-1 text-white font-bold cursor-pointer'>Save & Add to Cart</button>
+                    </div>
+                    <div className='w-full text-center mt-5 text-green-800 text-sm'>
                         <p>Can’t find your power, Call +8801 99088765675</p>
                     </div>
                 </div>
@@ -188,7 +205,24 @@ const SlideOptions = () => {
             )}
             {current.type === "Upload Prescription" && (
               <>
-                Upload Prescription
+                <div className="p-4">
+                  <label className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">
+                    Take Photo
+                    <input
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      className="hidden"
+                      onChange={handleCapture}
+                    />
+                  </label>
+
+                  {image && (
+                    <div className="mt-4">
+                      <Image src={image} alt="Prescription" className="rounded shadow-md"/>
+                    </div>
+                  )}
+                </div>
               </>
             )}
           </motion.div>
