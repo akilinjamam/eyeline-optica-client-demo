@@ -13,7 +13,7 @@ const slideInVariants = {
 export default function SlideInPanel({ onClose, product }: { onClose: () => void, product: GlassCardProps }) {
   return (
     <motion.div
-      className="fixed top-0 right-0 w-full md:w-1/3 h-full bg-white shadow-lg z-50"
+      className="fixed top-0 right-0 w-full md:w-2/5 h-full bg-white shadow-lg z-50"
       initial="hidden"
       animate="visible"
       exit="exit"

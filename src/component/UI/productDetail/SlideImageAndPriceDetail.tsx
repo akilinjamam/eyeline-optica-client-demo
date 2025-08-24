@@ -46,7 +46,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
   return (
     <div className="p-2">
       {/* top section */}
-      <div className="w-full h-[200px] mx-auto flex items-center">
+      <div className="w-full h-[20vh] mx-auto flex items-start">
         <div className="w-[40%] h-full bg-gray-200 flex items-center justify-center">
           <Image src={product.image} alt="single-img" width={150} height={150} />
         </div>
@@ -155,7 +155,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
             )}
           </motion.div>
         </AnimatePresence>
-        {/* Bottom Sheet Details */}
+      {/* Bottom Sheet Details */}
       <AnimatePresence>
         {selectedLense && (
           <motion.div
@@ -163,11 +163,11 @@ const SlideImageAndPriceDetail = ({ product }: { product: GlassCardProps }) => {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ duration: 0.4 }}
-            className="fixed bottom-0 left-0 w-full h-[60%] bg-white rounded-t-2xl shadow-lg z-50 p-4 overflow-y-scroll"
+            className="absolute bottom-0 left-0 w-full h-[100%] bg-black/20 backdrop-blur-sm rounded-md-2xl shadow-lg z-50 p-4 overflow-y-scroll hide-scrollbar"
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-bold text-lg">{selectedLense.title}</h2>
-              <button onClick={() => {
+              <button className='cursor-pointer' onClick={() => {
                 setSelectedLense(null)
               }}>
                 <X/>
