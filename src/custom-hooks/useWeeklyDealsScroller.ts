@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-const useWeeklyDealsScroller = (parentRef: any) => {
+const useWeeklyDealsScroller = (parentRef: any, scrollLength: number = 200) => {
   const handleNavigation = (value: string) => {
     const parentElement = parentRef.current;
 
@@ -13,11 +13,11 @@ const useWeeklyDealsScroller = (parentRef: any) => {
         parentElement.scrollLeft = 0;
         return;
       }
-      parentElement.scrollLeft += 200;
+      parentElement.scrollLeft += scrollLength;
     }
     if (value === "right") {
       if (parentElement.scrollLeft > 0) {
-        parentElement.scrollLeft -= 200;
+        parentElement.scrollLeft -= scrollLength;
       }
     }
   };

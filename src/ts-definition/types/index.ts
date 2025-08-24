@@ -35,3 +35,13 @@ export type TAccordion = {
 };
 
 export type GoForwardPayload = { type: string; title: string };
+
+export type TTelemedicineData = {
+  name: string;
+  degree: string;
+  post: string;
+  reviews: number;
+  exp: number;
+  img: StaticImageData;
+  key?: number;
+};
