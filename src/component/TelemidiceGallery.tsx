@@ -11,11 +11,11 @@ import { TTelemedicineData } from "@/ts-definition/types";
 
 const TelemidiceGallery = () => {
      const currentRef = useRef(null);
-    const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef, 320)
+    const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef, telemedicineData.length)
     return (
-        <div className='flex items-center justify-around lg:w-[1200px] md:w-[80%] mx-auto gap-5 relative'>
+        <div className='flex items-center justify-around w-full mx-auto gap-5 relative '>
             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
-            <div style={{userSelect:'none'}}  ref={parentRef} className='w-[8600px] h-[250px] mx-auto flex items-center  gap-6  overflow-x-hidden scroll-smooth  px-2 '>
+            <div style={{userSelect:'none'}}  ref={parentRef} className='w-auto h-auto mx-auto flex items-center  gap-6  overflow-x-hidden scroll-smooth  px-2'>
                {
                     telemedicineData?.map(({degree, post, exp, name, reviews, img }: TTelemedicineData, index: number) => <TelemedicineCart degree={degree} post={post} name={name} exp={exp} reviews={reviews} img={img}   key={index}/> )
                 }

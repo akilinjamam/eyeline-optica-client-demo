@@ -14,8 +14,9 @@ const Telemedicine = () => {
            <div>
                 <Title value='Our Specialists'/>
            </div>
-           <div className="mt-10 lg:w-[80%] md:w-[85%] mx-auto">
+           <div className="mt-10 lg:w-[80%] md:w-[90%] w-[100%] mx-auto">
                 <TelemidiceGallery/>
+                <br />
            </div>
         </div>
     );

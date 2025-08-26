@@ -7,20 +7,20 @@ import { ChevronRight, Star } from 'lucide-react';
 const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, reviews, img}) => {
 
     return (
-    <div className="relative bg-white shadow-md  rounded-md w-[350px] h-[233px] ">
-      <div className=" mb-3 w-[350px]  p-2">
-            <div className='w-full flex items-start justify-between '>
-                <div className='w-[40%]'>
+    <div className="relative bg-white shadow-md  rounded-md   h-auto ">
+      <div className=" mb-3 lg:w-[350px] w-[250px] p-2">
+            <div className='w-full lg:flex lg:items-start lg:justify-between '>
+                <div className='lg:w-[40%] w-[100%] flex items-center justify-center'>
                     <Image className='w-[125px]'  src={img} alt='telemidicne-dr-image'/>
                 </div>
-                <div className='w-[55%]'>
+                <div className='lg:w-[55%] w-[100%] lg:text-left text-center '>
                     <p className='text-sm font-bold'>{name}</p>
                     <p className='text-xs'>{degree}</p>
                     
-                    <div title={post} className='mt-4'>
+                    <div title={post} className='mt-4 w-[100%] flex items-center justify-end'>
                         <DoctorTag text={post} />
                     </div>
-                    <div className="flex items-center gap-1 mt-2 text-blue-600">
+                    <div className="flex items-center lg:justify-start justify-center gap-1 mt-2 text-blue-600">
                         <span className="text-sm text-gray-700">({reviews})</span>
                         {[...Array(5)].map((_, i) => (
                         <Star
@@ -31,7 +31,6 @@ const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, 
                         ))}
                     </div>
                 </div>
-                
             </div>
             <hr className='mt-3 text-gray-200' />
             <p className='font-semibold'>{exp}+ years</p>

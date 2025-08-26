@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-const useWeeklyDealsScroller = (parentRef: any, scrollLength: number = 200) => {
+const useWeeklyDealsScroller = (parentRef: any, dataLength: number = 12) => {
   const handleNavigation = (value: string) => {
     const parentElement = parentRef.current;
+
+    const perScrollWidth = parentElement.scrollWidth / dataLength;
+
+    console.log(parentElement.scrollWidth);
 
     if (value === "left") {
       if (
@@ -13,11 +17,11 @@ const useWeeklyDealsScroller = (parentRef: any, scrollLength: number = 200) => {
         parentElement.scrollLeft = 0;
         return;
       }
-      parentElement.scrollLeft += scrollLength;
+      parentElement.scrollLeft += perScrollWidth;
     }
     if (value === "right") {
       if (parentElement.scrollLeft > 0) {
-        parentElement.scrollLeft -= scrollLength;
+        parentElement.scrollLeft -= perScrollWidth;
       }
     }
   };
