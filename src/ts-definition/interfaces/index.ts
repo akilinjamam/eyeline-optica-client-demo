@@ -67,3 +67,8 @@ export interface IPowerOptions {
   subTitle: string;
   description: string;
 }
+
+export interface ITelemedicineServiceData {
+  img: StaticImageData;
+  title: string;
+}

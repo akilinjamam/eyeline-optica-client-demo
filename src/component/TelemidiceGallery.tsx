@@ -23,7 +23,7 @@ const TelemidiceGallery = () => {
             </div>
              <Image className='cursor-pointer inline-block mx-3' src={arrowRight} alt='right-arrow' onClick={() => handleNavigation('left')}/>
             
-        </div>
+        </div> 
     );
 };
 

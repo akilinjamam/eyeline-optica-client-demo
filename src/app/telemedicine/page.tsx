@@ -3,6 +3,9 @@ import telemedicineBanner from '../../../public/images/telemedicine/Group 366.pn
 import Title from "@/component/Title";
 
 import TelemidiceGallery from "@/component/TelemidiceGallery";
+import TelemedicineServices from "@/component/TelemedicineServices";
+import TelemedicineEyeTest from "@/component/TelemedicineEyeTest";
+import Footer from "@/component/Footer";
 
 const Telemedicine = () => {
     return (
@@ -18,6 +21,13 @@ const Telemedicine = () => {
                 <TelemidiceGallery/>
                 <br />
            </div>
+           <div>
+               <TelemedicineServices/>
+           </div>
+           <div>
+               <TelemedicineEyeTest/>
+           </div>
+           <Footer/>
         </div>
     );
 };
