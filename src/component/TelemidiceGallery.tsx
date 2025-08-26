@@ -15,7 +15,7 @@ const TelemidiceGallery = () => {
     return (
         <div className='flex items-center justify-around w-full mx-auto gap-5 relative '>
             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
-            <div style={{userSelect:'none'}}  ref={parentRef} className='w-auto h-auto mx-auto flex items-center  gap-6  overflow-x-hidden scroll-smooth  px-2'>
+            <div style={{userSelect:'none'}}  ref={parentRef} className='w-auto h-auto mx-auto flex items-center  gap-8  overflow-x-hidden scroll-smooth  px-2'>
                {
                     telemedicineData?.map(({degree, post, exp, name, reviews, img }: TTelemedicineData, index: number) => <TelemedicineCart degree={degree} post={post} name={name} exp={exp} reviews={reviews} img={img}   key={index}/> )
                 }
