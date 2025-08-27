@@ -42,7 +42,7 @@ const useSwipe = (swipeRef: any) => {
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!swipeRef.current) return;
     const x = e.touches[0].pageX - swipeRef.current.offsetLeft;
-    const walk = (x - touchStartX) * 1.5;
+    const walk = (x - touchStartX) * 1;
     swipeRef.current.scrollLeft = touchScrollLeft - walk;
   };
 
