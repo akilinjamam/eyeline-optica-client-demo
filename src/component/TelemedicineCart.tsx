@@ -3,13 +3,15 @@ import { TTelemedicineData } from '@/ts-definition/types';
 import Image from 'next/image';
 import DoctorTag from './DoctorTag';
 import { ChevronRight, Star } from 'lucide-react';
+import Link from 'next/link';
 
-const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, reviews, img}) => {
+const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, reviews, img, id}) => {
 
     return (
     <div className="relative bg-white shadow-md  rounded-md   h-auto ">
       <div className=" mb-3 lg:w-[350px] w-[250px] p-2">
-            <div className='w-full lg:flex lg:items-start lg:justify-between '>
+            <Link href={`/telemedicine/${id}`}>
+                <div className='w-full lg:flex lg:items-start lg:justify-between '>
                 <div className='lg:w-[40%] w-[100%] flex items-center justify-center'>
                     <Image className='w-[125px]'  src={img} alt='telemidicne-dr-image'/>
                 </div>
@@ -32,6 +34,7 @@ const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, 
                     </div>
                 </div>
             </div>
+            </Link>
             <hr className='mt-3 text-gray-200' />
             <p className='font-semibold'>{exp}+ years</p>
             <div className='flex items-center justify-between text-sm'>

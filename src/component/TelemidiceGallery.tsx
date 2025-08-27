@@ -17,7 +17,7 @@ const TelemidiceGallery = () => {
             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
             <div style={{userSelect:'none'}}  ref={parentRef} className='w-auto h-auto mx-auto flex items-center  gap-8  overflow-x-hidden scroll-smooth  px-2'>
                {
-                    telemedicineData?.map(({degree, post, exp, name, reviews, img }: TTelemedicineData, index: number) => <TelemedicineCart degree={degree} post={post} name={name} exp={exp} reviews={reviews} img={img}   key={index}/> )
+                    telemedicineData?.map(({degree, post, exp, name, reviews, img, id }: TTelemedicineData) => <TelemedicineCart degree={degree} post={post} name={name} exp={exp} reviews={reviews} img={img} id={id}  key={id}/> )
                 }
                {/* <div className="pointer-events-none absolute top-0 right-13 lg:right-16 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" /> */}
             </div>

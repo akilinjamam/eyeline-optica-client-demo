@@ -37,8 +37,14 @@ const Tab: FC = () => {
                 >
                     <div className="flex whitespace-nowrap gap-4">
                         {elements.map((element, index) => {
-
-                            const isActive = pathName === element.link
+                            let isActive;
+                            if(element.link === '/telemedicine'){
+                                console.log(element.link.slice(0,13))
+                                isActive = pathName.slice(0,13) === element.link
+                                
+                            }else{
+                                isActive = pathName === element.link
+                            }
 
                             return (
                                 <Link href={`${element.link}`} key={index}>

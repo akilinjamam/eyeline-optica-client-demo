@@ -4,7 +4,7 @@ import { Calendar, Star } from "lucide-react";
 import Image from "next/image";
 
 const Doctor = ({getSingleDoctor}: {getSingleDoctor: TTelemedicineData}) => {
-    console.log(getSingleDoctor)
+  
     return (
         <div className="w-full">
             <section className="w-full h-auto bg-gradient-to-r from-blue-100 to-blue-200 py-3">

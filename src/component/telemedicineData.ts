@@ -5,6 +5,7 @@ import drSharmin from "../../public/images/telemedicine/dr-sharmin.png";
 
 export const telemedicineData: TTelemedicineData[] = [
   {
+    id: 1,
     name: "Dr M A Karim",
     degree: "MBBS, FRCS, DCO, PhD",
     post: "Glaucoma Specialist & Pacho Surgeon",
@@ -14,6 +15,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 2,
     name: "Dr MD Asrarul Hoque",
     degree: "MBBS, DCO, ICO [UK], FCPS [P2]",
     post: "Ophthalmologist & Pacho Surgeon",
@@ -23,6 +25,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 3,
     name: "Dr. Sharmin Akter",
     degree: "MBBS, DCO, FCPS",
     post: "Ophthalmologist & Surgeon",
@@ -33,6 +36,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 4,
     name: "Dr. Saiful Islam",
     degree: "MBBS, FCPS (Eye), MS (Ophthalmology)",
     post: "Retina Specialist & Surgeon",
@@ -42,6 +46,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 5,
     name: "Dr. Nusrat Jahan",
     degree: "MBBS, DO, MCPS, FCPS",
     post: "Cornea & Anterior Segment Specialist",
@@ -51,6 +56,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 6,
     name: "Dr. Tanvir Hossain",
     degree: "MBBS, DCO, ICO [UK]",
     post: "Pediatric Ophthalmologist",
@@ -61,6 +67,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 7,
     name: "Dr. Farhana Rahman",
     degree: "MBBS, FCPS (Eye), MS",
     post: "Cataract & Refractive Surgeon",
@@ -70,6 +77,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 8,
     name: "Dr. Ahsan Kabir",
     degree: "MBBS, DCO, FACS (USA)",
     post: "Oculoplastic Surgeon",
@@ -79,6 +87,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 9,
     name: "Dr. Mst. Rokia Sultana",
     degree: "MBBS, DO, FCPS",
     post: "Neuro-Ophthalmologist",
@@ -89,6 +98,7 @@ export const telemedicineData: TTelemedicineData[] = [
     fee: 400,
   },
   {
+    id: 10,
     name: "Dr. Jahidul Alam",
     degree: "MBBS, MS (Ophthalmology), FCPS",
     post: "Vitreo-Retinal Surgeon",

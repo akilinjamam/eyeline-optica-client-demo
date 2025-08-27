@@ -37,6 +37,7 @@ export type TAccordion = {
 export type GoForwardPayload = { type: string; title: string };
 
 export type TTelemedicineData = {
+  id: number;
   name: string;
   degree: string;
   post: string;

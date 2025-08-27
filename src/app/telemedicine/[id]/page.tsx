@@ -7,9 +7,8 @@ const SingleDoctorProfile = async ({params}: any) => {
 
     const {id} = await params
     console.log(id)
-    const getSingleDoctor =  telemedicineData.find((_, index:number) => index === 0);
-    console.log(getSingleDoctor);
-
+    const getSingleDoctor =  telemedicineData.find((_, index:number) => (index + 1) === Number(id));
+   
     if(!getSingleDoctor) return;
 
     return (
