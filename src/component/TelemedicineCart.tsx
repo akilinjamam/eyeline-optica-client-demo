@@ -18,7 +18,7 @@ const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, 
                     <p className='text-xs'>{degree}</p>
                     
                     <div title={post} className='mt-4 w-[100%] flex items-center justify-end'>
-                        <DoctorTag text={post} />
+                        <DoctorTag text={post} charWidth={13} />
                     </div>
                     <div className="flex items-center lg:justify-start justify-center gap-1 mt-2 text-blue-600">
                         <span className="text-sm text-gray-700">({reviews})</span>

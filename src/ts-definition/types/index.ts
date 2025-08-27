@@ -44,4 +44,6 @@ export type TTelemedicineData = {
   exp: number;
   img: StaticImageData;
   key?: number;
+  bmdcNumber?: string;
+  fee?: number;
 };

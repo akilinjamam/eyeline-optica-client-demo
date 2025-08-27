@@ -11,6 +11,7 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 4,
     img: drKarim,
     exp: 20,
+    fee: 400,
   },
   {
     name: "Dr MD Asrarul Hoque",
@@ -19,6 +20,7 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 4,
     img: drAshrarVai,
     exp: 10,
+    fee: 400,
   },
   {
     name: "Dr. Sharmin Akter",
@@ -27,6 +29,8 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 4,
     img: drSharmin,
     exp: 6,
+
+    fee: 400,
   },
   {
     name: "Dr. Saiful Islam",
@@ -35,6 +39,7 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 5,
     img: drAshrarVai,
     exp: 15,
+    fee: 400,
   },
   {
     name: "Dr. Nusrat Jahan",
@@ -43,6 +48,7 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 4,
     img: drAshrarVai,
     exp: 12,
+    fee: 400,
   },
   {
     name: "Dr. Tanvir Hossain",
@@ -51,6 +57,8 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 5,
     img: drAshrarVai,
     exp: 8,
+
+    fee: 400,
   },
   {
     name: "Dr. Farhana Rahman",
@@ -59,6 +67,7 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 4,
     img: drAshrarVai,
     exp: 11,
+    fee: 400,
   },
   {
     name: "Dr. Ahsan Kabir",
@@ -67,6 +76,7 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 5,
     img: drAshrarVai,
     exp: 18,
+    fee: 400,
   },
   {
     name: "Dr. Mst. Rokia Sultana",
@@ -75,6 +85,8 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 4,
     img: drAshrarVai,
     exp: 9,
+
+    fee: 400,
   },
   {
     name: "Dr. Jahidul Alam",
@@ -83,5 +95,6 @@ export const telemedicineData: TTelemedicineData[] = [
     reviews: 5,
     img: drAshrarVai,
     exp: 14,
+    fee: 400,
   },
 ];

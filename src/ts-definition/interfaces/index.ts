@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StaticImageData } from "next/image";
 
 export interface Brand {
@@ -71,4 +72,9 @@ export interface IPowerOptions {
 export interface ITelemedicineServiceData {
   img: StaticImageData;
   title: string;
+}
+
+export interface ISelectOtherOptionsForDoctor {
+  title: string;
+  icon: any;
 }

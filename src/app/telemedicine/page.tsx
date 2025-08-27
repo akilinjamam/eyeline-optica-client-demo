@@ -21,12 +21,8 @@ const Telemedicine = () => {
                 <TelemidiceGallery/>
                 <br />
            </div>
-           <div>
-               <TelemedicineServices/>
-           </div>
-           <div>
-               <TelemedicineEyeTest/>
-           </div>
+           <TelemedicineServices/>
+           <TelemedicineEyeTest/>
            <Footer/>
         </div>
     );
