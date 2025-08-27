@@ -28,7 +28,7 @@ const useSwipe = (swipeRef: any) => {
     if (!isDown || !swipeRef.current) return;
     e.preventDefault();
     const x = e.pageX - swipeRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // speed factor
+    const walk = (x - startX) * 1; // speed factor
     swipeRef.current.scrollLeft = scrollLeft - walk;
   };
 
