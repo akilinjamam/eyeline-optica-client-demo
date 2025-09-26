@@ -48,3 +48,50 @@ export type TTelemedicineData = {
   bmdcNumber?: string;
   fee?: number;
 };
+
+export type TData<T> = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: {
+    meta?: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPage: number;
+    };
+    data: T;
+  };
+};
+
+export type TFrame = {
+  _id?: string;
+  name?: string;
+  images?: string[];
+  type?: string;
+  materialsCategory?: string;
+  frameCategory?: string;
+  sizeCategory?: string;
+  shapeCategory?: string;
+  biologyCategory?: string;
+  color?: string;
+  purchase?: number;
+  salesPrice?: number;
+  discount?: number;
+  quantity?: number;
+  sold?: number;
+  features?: string[]; // array is empty but probably string[] in future
+  brand?: string;
+  barcode?: string;
+  badge?: string;
+  description?: string;
+  weeklyDeals?: boolean;
+  reviews?: string[]; // assuming reviews array holds strings, can be expanded to object type if needed
+  frameMeasurements?: string;
+  frameDetails?: string;
+  prescriptionDetails?: string;
+  date?: string; // ISO date
+  createdAt?: string; // ISO date
+  updatedAt?: string; // ISO date
+  __v?: number;
+};

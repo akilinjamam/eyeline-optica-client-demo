@@ -1,14 +1,15 @@
 "use client"
-import React, { FC, useRef } from 'react';
-import { glassData } from './glassData';
-import { GlassCardProps } from '@/ts-definition/interfaces';
+import React, { useRef } from 'react';
 import GlassCard from './GlassCard';
 import arrowLeft from '../../public/images/arrow-left.png'
 import arrowRight from '../../public/images/arrow-right.png'
 import Image from 'next/image';
 import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
+import { TFrame } from '@/ts-definition/types';
 
-const GlassCardsGallary:FC = () => {
+
+const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
+    console.log(data)
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
 
@@ -17,7 +18,7 @@ const GlassCardsGallary:FC = () => {
             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
             <div style={{userSelect:'none'}}  ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2 '>
                 {
-                    glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCard colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
+                    data?.slice(0,13)?.map(({color, name, brand, salesPrice, badge, images }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index}/> )
                 }
                <div className="pointer-events-none absolute top-0 right-13 lg:right-16 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
             </div>
