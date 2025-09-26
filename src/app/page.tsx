@@ -19,7 +19,7 @@ import { TData, TFrame } from "@/ts-definition/types";
 // import GlassTryOn from "@/component/GlassTryOnV2";
 
 async function getFrame() {
-  const res = await fetch(`http://localhost:5000/api/v1/products`, {
+  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/products`, {
     
     next: { tags: ["frames"] },
   });
@@ -32,7 +32,7 @@ async function getFrame() {
 export default async function Home() {
 
   const frame = await getFrame() as TData<TFrame>;
-  const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data : [];
+  const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data?.slice(0,13) : [];
 
   return (
     <div className="bg-blue-50">
