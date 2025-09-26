@@ -1,16 +1,15 @@
 "use client"
-import React, { FC, useRef } from 'react';
-import { glassData } from './glassData';
-import { GlassCardProps } from '@/ts-definition/interfaces';
+import React, { useRef } from 'react';
 import GlassCard from './GlassCard';
 import arrowLeft from '../../public/images/arrow-left.png'
 import arrowRights from '../../public/images/arrow-right.png'
 import Image from 'next/image';
 import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
 import {ArrowRight} from 'lucide-react'
+import { TFrame } from '@/ts-definition/types';
 import Title from './Title';
 
-const BestSelling:FC = () => {
+const BestSelling = ({data}:{data:TFrame[]}) => {
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
     return (
@@ -28,7 +27,7 @@ const BestSelling:FC = () => {
                 <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                 <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
                 {
-                    glassData?.map(({colorCount, title, model, price, tag, image }: GlassCardProps, index: number) => <GlassCard colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} key={index}/> )
+                    data?.map(({color, name, brand, salesPrice, badge, images }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index}/> )
                 }
                 </div>
                 <Image className='cursor-pointer inline-block mx-3' src={arrowRights} alt='right-arrow' onClick={() => handleNavigation('left')}/>

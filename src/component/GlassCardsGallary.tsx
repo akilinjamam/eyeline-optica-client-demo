@@ -9,7 +9,7 @@ import { TFrame } from '@/ts-definition/types';
 
 
 const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
-    console.log(data)
+
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {CameraIcon} from 'lucide-react'
 import Image from 'next/image';
 import { TFrame } from '@/ts-definition/types';
-
+import defaultImage from '../../public/images/glass-1.png';
 
 
 const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color}) => {
@@ -22,7 +22,7 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
 
       <div className=" mb-3 w-[140px] flex items-center justify-center">
         <Image
-          src={images && images?.length ? images[0] : '/placeholder.png'}
+          src={images && images?.length ? images?.[0] : defaultImage}
            alt={name || "Glass product image"}
           width={120}
           height={60}

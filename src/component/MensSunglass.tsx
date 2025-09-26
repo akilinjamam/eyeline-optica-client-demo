@@ -1,12 +1,12 @@
-import { TContactLenseData } from '@/ts-definition/types';
-import React, { FC } from 'react';
+import { TContactLenseData, TFrame } from '@/ts-definition/types';
+import React from 'react';
 import mensImg from '../../public/images/mens-sunglass-banner.png';
 import Image from 'next/image';
 
 import Title from './Title';
 import GlassCardsGallary from './GlassCardsGallary';
 
-const MensSunglass:FC = () => {
+const MensSunglass = ({data} : {data:TFrame[]}) => {
 
     const contactLense:TContactLenseData ={
         lense: mensImg
@@ -19,7 +19,7 @@ const MensSunglass:FC = () => {
                 <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
             </div>
             <div className='w-full'>
-                <GlassCardsGallary/>
+                <GlassCardsGallary data={data}/>
             </div>
         </div>
     );

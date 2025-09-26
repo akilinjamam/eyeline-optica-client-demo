@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
-import GlassCardsGallary from "@/component/GlassCardsGallary";
+// import GlassCardsGallary from "@/component/GlassCardsGallary";
 import { glassData } from "@/component/glassData";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
@@ -30,7 +30,7 @@ import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
           <RegardingInfo/>
         </div>
         <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-          <GlassCardsGallary/>
+          {/* <GlassCardsGallary/> */}
           <ShopByFrameShape/>
         </div>
         <TopFooter/>

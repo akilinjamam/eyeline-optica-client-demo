@@ -1,12 +1,11 @@
-import { TContactLenseData } from '@/ts-definition/types';
-import React, { FC } from 'react';
+import { TContactLenseData, TFrame } from '@/ts-definition/types';
 import kidsImg from '../../public/images/kids-glass-banner.png';
 import Image from 'next/image';
 
 import Title from './Title';
 import GlassCardsGallary from './GlassCardsGallary';
 
-const Kidsglass:FC = () => {
+const Kidsglass = ({data}:{data:TFrame[]}) => {
 
     const contactLense:TContactLenseData ={
         lense: kidsImg
@@ -19,7 +18,7 @@ const Kidsglass:FC = () => {
                 <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
             </div>
             <div className='w-full'>
-                <GlassCardsGallary/>
+                <GlassCardsGallary data={data}/>
             </div>
         </div>
     );
