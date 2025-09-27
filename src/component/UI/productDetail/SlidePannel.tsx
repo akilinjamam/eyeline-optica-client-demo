@@ -1,8 +1,8 @@
 // components/SlideInPanel.tsx
 "use client";
-import { GlassCardProps } from "@/ts-definition/interfaces";
 import { motion } from "framer-motion";
 import SlideImageAndPriceDetail from "./SlideImageAndPriceDetail";
+import { TFrame } from "@/ts-definition/types";
 
 const slideInVariants = {
   hidden: { x: "100%" },
@@ -10,7 +10,7 @@ const slideInVariants = {
   exit: { x: "100%" },
 };
 
-export default function SlideInPanel({ onClose, product }: { onClose: () => void, product: GlassCardProps }) {
+export default function SlideInPanel({ onClose, product }: { onClose: () => void, product: TFrame }) {
   return (
     <motion.div
       className="fixed top-0 right-0 w-full md:w-2/5 h-full bg-white shadow-lg z-50"

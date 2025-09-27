@@ -1,8 +1,8 @@
-import { glassData } from '../glassData';
-import { GlassCardProps } from '@/ts-definition/interfaces';
 import GlassCardAuto from './GlassCardAuto';
+import { TFrame, TLens } from '@/ts-definition/types';
 
-const ProductGallery = () => {
+const ProductGallery = ({data}: {data:TLens[]}) => {
+
     return (
         <div className=' w-full'>
             <div className='w-full bg-gray-200 py-2 px-3 flex items-center justify-end' >
@@ -18,7 +18,7 @@ const ProductGallery = () => {
             <section className='w-full p-2 flex items-center justify-center '>
                 <div className='flex gap-2 flex-wrap w-[70%] md:w-full lg:w-full '>
                     {
-                        glassData?.map(({colorCount, title, model, price, tag, image, id }: GlassCardProps, index: number) => <GlassCardAuto colorCount={colorCount} image={image} tag={tag} price={price} title={title} model={model} id={id} key={index}/> )
+                        data?.map(({color, name, brand, salesPrice, badge, images, _id }: TFrame, index: number) => <GlassCardAuto color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} _id={_id} key={index}/> )
                     }
                 </div>
             </section>

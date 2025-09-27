@@ -1,10 +1,14 @@
 import ProductGallery from '@/component/UI/ProductGallery';
+import { getFrame } from '@/fetchData/fetchFrameData';
+import { TData, TFrame } from '@/ts-definition/types';
 import React from 'react';
 
-const Brand:React.FC = () => {
+const Brand:React.FC = async () => {
+     const frame = await getFrame("") as TData<TFrame>;
+      const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data : [];
     return (
         <>
-            <ProductGallery/>
+            <ProductGallery data={allFrames}/>
         </>
     );
 };

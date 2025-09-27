@@ -3,10 +3,10 @@ import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'luci
 import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 import SlideInPanel from './SlidePannel';
-import { GlassCardProps } from '@/ts-definition/interfaces';
+import { TFrame } from '@/ts-definition/types';
 
 
-const DetailPart:React.FC<GlassCardProps> = (product) => {
+const DetailPart:React.FC<TFrame> = (product) => {
 
  
 const [showLensPanel, setShowLensPanel] = useState(false);

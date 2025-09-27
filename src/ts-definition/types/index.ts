@@ -95,3 +95,36 @@ export type TFrame = {
   updatedAt?: string; // ISO date
   __v?: number;
 };
+
+// src/types/lens.type.ts
+
+export type LensType = "single vision" | "bifocal" | "progressive" | "reading";
+
+export type LensMaterial = "plastic" | "polycarbonate" | "high-index" | "glass";
+
+export type TLens = {
+  _id: string;
+  name: string;
+  description?: string;
+  purchasePrice: number;
+  salesPrice: number;
+  stock: number;
+  category: string;
+  brand?: string;
+  images: string[];
+  lensType: LensType;
+  material: LensMaterial;
+  coatings?: string[];
+  prescriptionRange?: string;
+  index?: number;
+  thickness?: string;
+  color?: string;
+  diameter?: number;
+  warranty?: string;
+  deliveryTime?: string;
+  offer?: number;
+  rating?: number;
+  createdAt?: string; // ISO date
+  updatedAt?: string; // ISO date
+  __v?: number;
+};

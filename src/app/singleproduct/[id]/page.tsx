@@ -1,18 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
 // import GlassCardsGallary from "@/component/GlassCardsGallary";
-import { glassData } from "@/component/glassData";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
+import { TData, TFrame } from "@/ts-definition/types";
+
+async function getSingleProduct(){
+  const response = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/products`,{
+    
+    next: { tags: ["frames"] },
+  })
+
+  return response.json();
+}
 
 
 
  const SingleProduct = async ({ params }: any) => {
+  const allData = await getSingleProduct() as TData<TFrame[]>;
+  const data = allData?.data?.data;
+
   const { id } = await params;
-  const product = glassData.find((p) => p.id === Number(id));
+  const product = data?.find((p) => p._id === id as string);
  
   if (!product) return null;
 
