@@ -10,6 +10,8 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 async function getSingleProduct(id: string) {
+  console.log("🔍 [SingleProduct] params.id:", id);
+
   const response = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,
     { cache: "no-store" }
@@ -26,8 +28,8 @@ export default async function SingleProduct({
   params: ParamsPromise;
 }) {
   const { id } = await params;
-
   const product = (await getSingleProduct(id)) as TData<TFrame>;
+  console.log(product)
   if (!product?.data) return notFound();
 
   const frame = product.data;
