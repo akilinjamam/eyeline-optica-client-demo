@@ -21,14 +21,14 @@ async function getSingleProduct(id: string) {
   );
 
   if (!response.ok) return null;
-  return response.json() as Promise<TData<TFrame>>;
+  return response.json() 
 }
 
 
 const SingleProduct = async ({ params }: SingleProductPageProps) => {
   const { id } = params;
 
-  const product = await getSingleProduct(id);
+  const product = await getSingleProduct(id) as TData<TFrame>;
   if (!product?.data) return notFound();
 
   const frame = product.data;
