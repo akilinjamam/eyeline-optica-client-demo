@@ -13,7 +13,7 @@ async function getSingleProduct(id: string) {
 
   const response = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,{
-        next: {revalidate: 6000}
+        next: {revalidate: 60}
     },
 
   );
