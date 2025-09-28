@@ -3,9 +3,10 @@ import {CameraIcon} from 'lucide-react'
 import Image from 'next/image';
 import { TFrame } from '@/ts-definition/types';
 import defaultImage from '../../public/images/glass-1.png';
+import Link from 'next/link';
 
 
-const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color}) => {
+const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id}) => {
 
     return (
     <div className="relative bg-white shadow-md p-4 rounded-md w-[180px]">
@@ -21,13 +22,15 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
       </span>
 
       <div className=" mb-3 w-[140px] flex items-center justify-center">
-        <Image
-          src={images && images?.length ? images?.[0] : defaultImage}
-           alt={name || "Glass product image"}
-          width={120}
-          height={60}
-          className="object-contain block  "
-        />
+        <Link href={`/productDetail/${_id}`}>
+          <Image
+            src={images && images?.length ? images?.[0] : defaultImage}
+            alt={name || "Glass product image"}
+            width={120}
+            height={60}
+            className="object-contain block cursor-pointer"
+          />
+        </Link>
       </div>
 
       <p className="text-[10px] text-gray-500">{brand}</p>
