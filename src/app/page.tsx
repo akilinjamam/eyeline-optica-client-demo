@@ -56,3 +56,18 @@ export default async function Home() {
     </div>
   );
 }
+
+
+/* 
+
+// {
+//     "rewrites": [
+//         {
+//             "source": "/(.*)",
+//             "destination": "/"
+//         }
+//     ]
+// }
+
+
+*/
