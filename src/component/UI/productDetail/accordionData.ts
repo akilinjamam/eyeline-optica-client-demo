@@ -1,25 +1,5 @@
 import { AccordionItemType } from "@/ts-definition/types";
 
-export const items: AccordionItemType[] = [
-  {
-    title: "BRAND",
-    children: [{ title: "Nike" }, { title: "Ray-Ban" }],
-  },
-  {
-    title: "FRAME SIZE",
-    children: [
-      { title: "Small" },
-      {
-        title: "Medium",
-        children: [{ title: "Option 1" }, { title: "Option 2" }],
-      },
-      { title: "Large" },
-    ],
-  },
-  { title: "GENDER", children: [{ title: "MALE" }, { title: "FEMALE" }] },
-  { title: "MATERIAL" },
-];
-
 export const eyeglass: AccordionItemType[] = [
   {
     title: "POWER TYPE",

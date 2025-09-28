@@ -1,16 +1,62 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React, { FC, useState } from "react";
-import { frameData } from "./frameData";
-import { IFrameData } from "@/ts-definition/interfaces";
+import React, { useState } from "react";
 import Accordion from "./Accordion";
-import { items } from "./productDetail/accordionData";
-import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
 
-const Sidebar:FC = () => {
+import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
+import { AccordionItemType, TFrame } from "@/ts-definition/types";
+
+const Sidebar = ({data}:{data:TFrame[]}) => {
+
+  const colors = [...new Set(data?.map((p: TFrame) => p.color))]?.map((color) => {
+    return (
+      { title: color }
+    );
+  });
+
+  const brand = [...new Set(data.map((p:TFrame) => p.brand))]?.map((brand) => {
+    return (
+      {title: brand}
+    )
+  })
+  const frameSize = [...new Set(data.map((p:TFrame) => p.sizeCategory))]?.map((size) => {
+    return (
+      {title: size}
+    )
+  })
+  const material = [...new Set(data.map((p:TFrame) => p.materialsCategory))]?.map((material) => {
+    return (
+      {title: material}
+    )
+  })
+  const biology = [...new Set(data.map((p:TFrame) => p.biologyCategory))]?.map((bio) => {
+    return (
+      {title: bio}
+    )
+  })
+
+   const items: AccordionItemType[] = [
+    {
+      title: "BRAND",
+      children: brand,
+    },
+    {
+      title: "FRAME SIZE",
+      children: frameSize
+    },
+    { title: "GENDER", children: biology },
+    { title: "MATERIAL", children: material },
+  ];
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const accordionItem = items
   const {selectedData, setSelectData} = useManageAccordionData({accordionItem})
   console.log(selectedData)
+
+  
+
+  
+
   return (
     <>
       {/* Mobile hamburger button */}
@@ -54,16 +100,23 @@ const Sidebar:FC = () => {
         <p className="font-bold">FRAME COLOR</p>
         <br />
         {
-          frameData.map((item:IFrameData, index:number) => {
-            return (
-              <div  className="flex items-center" key={index}>
-                  <input  className="mx-1" type="checkbox" name="" id="" />
-                  <div style={{background:`${item.color}`}} className={`w-[15px] h-[15px] rounded-full  mx-1`}></div>
-                  <p className="mx-1">{item.title}</p>
-              </div>
-            )
-          })
+          colors.map((item: any, index: number) => (
+            <div className="flex items-center" key={index}>
+              <input
+                className="mx-1"
+                type="radio"
+                name="frameColor"   // all radios share the same name
+                value={item.title}
+                id={`color-${index}`}
+                onChange={() => console.log("Selected color:", item.title)}
+              />
+              <label htmlFor={`color-${index}`} className="mx-1">
+                {item.title}
+              </label>
+            </div>
+          ))
         }
+
         <br />
         <Accordion item={items} selectData={setSelectData} />
       </aside>
