@@ -1,10 +1,10 @@
 'use client'
-import { TRegardingInfoTab } from '@/ts-definition/types';
+import { TFrame, TRegardingInfoTab } from '@/ts-definition/types';
 import React, { useState } from 'react';
 import OtherDetailInfo from './OtherDetailInfo';
 import Description from './Description';
 
-const RegardingInfo:React.FC = () => {
+const RegardingInfo = ({data}:{data:TFrame}) => {
     const [selectTab, setSelectTab] = useState<number>(0);
 
     const info:TRegardingInfoTab[] = [
@@ -27,7 +27,7 @@ const RegardingInfo:React.FC = () => {
                 }
             </div>
              {selectTab === 0 && <OtherDetailInfo/>}
-             {selectTab === 1 && <Description/>}
+             {selectTab === 1 && <Description description={data.description as string}/>}
         </div>
     );
 };

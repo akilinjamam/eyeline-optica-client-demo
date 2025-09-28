@@ -39,7 +39,7 @@ async function getSingleProduct(){
             </div>
         </div>
         <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-          <RegardingInfo/>
+          <RegardingInfo data={product}/>
         </div>
         <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
           {/* <GlassCardsGallary/> */}

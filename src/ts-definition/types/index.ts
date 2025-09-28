@@ -75,7 +75,7 @@ export type TFrame = {
   shapeCategory?: string;
   biologyCategory?: string;
   color?: string;
-  purchase?: number;
+  purchasePrice?: number;
   salesPrice?: number;
   discount?: number;
   quantity?: number;

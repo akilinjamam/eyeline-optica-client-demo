@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'lucide-react';
 import React, { useState } from 'react';
@@ -11,14 +12,14 @@ const DetailPart:React.FC<TFrame> = (product) => {
  
 const [showLensPanel, setShowLensPanel] = useState(false);
 
-
+console.log(product)
     return (
     <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
       <div>
-        <h2 className="text-xl font-bold">Square Glasses</h2>
-        <p className="text-sm text-gray-500">BTH045226 Optics</p>
+        <h2 className="text-xl font-bold">{product?.name}</h2>
+        <p className="text-sm text-gray-500">BT-{product?.barcode}</p>
         <div className="flex items-center mt-1">
-          <p className="font-semibold text-sm mr-2">REVIEWS (134)</p>
+          <p className="font-semibold text-sm mr-2">No Review Given yet</p>
           <div className="flex text-blue-500">
             <Star />
             <Star />
@@ -28,14 +29,14 @@ const [showLensPanel, setShowLensPanel] = useState(false);
           </div>
         </div>
         <div className="flex space-x-2 mt-2">
-          <button className="bg-gray-200 text-sm px-3 py-1 rounded">Adult Medium</button>
+          <button className="bg-gray-200 text-sm px-3 py-1 rounded">{product.type}</button>
           <button className="underline text-sm text-blue-500">Size Chart</button>
         </div>
       </div>
 
       <div className="bg-white p-4 rounded-lg grid grid-cols-2 gap-4 text-sm">
         <div>
-          <p className="text-2xl font-bold">1299 TK</p>
+          <p className="text-2xl font-bold">{product.salesPrice}TK</p>
           <label className="flex items-center space-x-2 mt-2">
             <input type="checkbox" className="w-4 h-4" />
             <span>Get it as early as Wed, Apr 9</span>
@@ -43,20 +44,19 @@ const [showLensPanel, setShowLensPanel] = useState(false);
         </div>
         <div>
           <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
-          <ul className="space-y-1">
-            <li className="flex items-start gap-2">
-              <Check className="text-green-500 mt-0.5" /> High-quality frame
-            </li>
-            <li className="flex items-start gap-2">
-              <Check className="text-green-500 mt-0.5" /> Basic prescription lenses*
-            </li>
-            <li className="flex items-start gap-2">
-              <Check className="text-green-500 mt-0.5" /> Anti-scratch coating
-            </li>
-            <li className="flex items-start gap-2">
-              <Check className="text-green-500 mt-0.5" /> UV protection
-            </li>
-          </ul>
+          {
+            product?.features && product?.features?.length > 0 ? product?.features?.map((item:any, index:number) => (
+              <ul key={index+1} className="space-y-1">
+            
+                <li className="flex items-start gap-2">
+                  <Check className="text-green-500 mt-0.5" /> {item}*
+                </li>
+           
+              </ul>
+            ))
+            :
+            <p>No Features Added here yet...</p>
+          }
           <p className="text-xs mt-1 text-gray-500">
             *multifocal or readers lenses start at additional cost
           </p>
