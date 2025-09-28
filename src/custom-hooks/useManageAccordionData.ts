@@ -26,22 +26,35 @@ const useManageAccordionData = ({
   );
   const [combineValue, setCombineValue] = useState<string[]>([]);
 
-  // console.log(selectData);
-  // console.log(selectPrice);
-
+  // --- Update selectedData safely ---
   useEffect(() => {
     const allTypes = accordionItem.map((item) => item.title);
-    if (allTypes.includes(Object.keys(selectData)[0])) {
-      setSelectedData((prev) => ({ ...prev, ...selectData }));
+    const key = Object.keys(selectData)[0];
+
+    if (key && allTypes.includes(key)) {
+      setSelectedData((prev) => {
+        if (prev[key] === selectData[key]) return prev; // no change, skip update
+        return { ...prev, ...selectData };
+      });
     }
   }, [selectData, accordionItem]);
 
+  // --- Update selectedPrice safely ---
   useEffect(() => {
-    if (selectData.price && selectData.price) {
-      setSelectedPrice((prev) => ({ ...prev, ...selectPrice }));
+    if (selectData.price !== undefined) {
+      setSelectedPrice((prev) => {
+        const updated = { ...prev, ...selectPrice };
+        // shallow equality check to prevent unnecessary re-renders
+        const isSame =
+          Object.keys(updated).length === Object.keys(prev).length &&
+          Object.keys(updated).every((key) => updated[key] === prev[key]);
+
+        return isSame ? prev : updated;
+      });
     }
   }, [selectData, selectPrice]);
 
+  // --- Combine data and prices ---
   useEffect(() => {
     const titleArray: string[] = [];
     const priceArray: string[] = [];
@@ -74,22 +87,19 @@ const useManageAccordionData = ({
         );
       }
     }
-    // console.log("Combined Array:", combineArray);
+
     setCombineValue(combineArray);
   }, [selectedData, selectedPrice]);
 
+  // --- Calculate total price ---
   const basePrice = product?.price ?? 0;
 
-  let totalPrice: number[] = [];
-
-  if (product) {
-    totalPrice = [
-      basePrice,
-      ...combineValue?.map((item: any) => Number(item?.split("/")?.[1])),
-    ];
-  } else {
-    totalPrice = [];
-  }
+  const totalPrice: number[] = product
+    ? [
+        basePrice,
+        ...combineValue.map((item) => Number(item?.split("/")?.[1]) || 0),
+      ]
+    : [];
 
   return {
     selectData,

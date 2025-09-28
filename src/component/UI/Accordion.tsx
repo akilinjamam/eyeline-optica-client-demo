@@ -6,12 +6,11 @@ import { useState } from 'react';
 type AccordionItemProps = {
   item: AccordionItemType;
   selectData?:any
-  selectPrice?:any
   parentTitle?: string;
   price?:number;
 };
 
-const AccordionItem = ({ item, selectData, parentTitle, selectPrice }: AccordionItemProps) => {
+const AccordionItem = ({ item, selectData, parentTitle }: AccordionItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const rootTitle = parentTitle || item.title; 
@@ -21,12 +20,10 @@ const AccordionItem = ({ item, selectData, parentTitle, selectPrice }: Accordion
     if (!item.children || item.children.length === 0) {
      
       if (selectData) {
-        selectData({ [String(rootTitle)]: item.title, price: item.price });
+        selectData({ [String(rootTitle)]: item.title });
       }
       
-      if (selectPrice) {
-        selectPrice({[String(rootTitle)]: item.price});
-      }
+      
     } else {
       setIsOpen(!isOpen);
     }
@@ -39,7 +36,6 @@ const AccordionItem = ({ item, selectData, parentTitle, selectPrice }: Accordion
         onClick={handleClick}
       >
         <span>{item.title}</span>
-        <span>{item.price}</span>
         {(item.children || item.content) && (
           <svg
             className={`w-5 h-5 transform transition-transform duration-200 cursor-pointer ${
@@ -74,7 +70,7 @@ const AccordionItem = ({ item, selectData, parentTitle, selectPrice }: Accordion
                   <div
                     key={idx}
                   >
-                    <AccordionItem key={idx} item={child} selectData={selectData} selectPrice={selectPrice}  parentTitle={rootTitle} />
+                    <AccordionItem key={idx} item={child} selectData={selectData}  parentTitle={rootTitle} />
                   </div>
                 ))}
               </div>
@@ -89,14 +85,14 @@ const AccordionItem = ({ item, selectData, parentTitle, selectPrice }: Accordion
 
 
 
-export default function Accordion({item, selectData, selectPrice}: TAccordion) {
+export default function Accordion({item, selectData}: TAccordion) {
   
 
 
   return (
     <div className="max-w-xl mx-auto mt-2 divide-y">
       {item.map((item, idx) => (
-        <AccordionItem key={idx} item={item} selectData={selectData} selectPrice={selectPrice} parentTitle={item.title}/>
+        <AccordionItem key={idx} item={item} selectData={selectData} parentTitle={item.title}/>
       ))}
     </div>
   );
