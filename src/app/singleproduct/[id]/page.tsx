@@ -17,6 +17,7 @@ async function getSingleProduct(id: string) {
   if (!response.ok) return null;
   return response.json();
 }
+
 type ParamsPromise = Promise<{ id: string }>;
 
 export default async function SingleProduct({
@@ -24,28 +25,28 @@ export default async function SingleProduct({
 }: {
   params: ParamsPromise;
 }) {
-  // Because params is a Promise in Next 15
   const { id } = await params;
 
-  const product = await getSingleProduct(id) as (TData<TFrame>);
+  const product = (await getSingleProduct(id)) as TData<TFrame>;
   if (!product?.data) return notFound();
 
   const frame = product.data;
 
   return (
     <div className="w-full bg-blue-50 px-1">
-      <div className="w-full md:w-[90%] lg=w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
+      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
           <ImagePart product={frame} />
         </div>
-        <div className="sm=w-full md:w-[45%] lg:w-[45%]">
-          <DetailPart {...frame as TFrame} />
+        <div className="sm:w-full md:w-[45%] lg:w-[45%]">
+          <DetailPart {...(frame as TFrame)} />
         </div>
       </div>
-      <div className="bg-blue-50 w-full md:w-[90%] lg=w-[1250px] mx-auto">
+
+      <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <RegardingInfo data={frame as TFrame} />
       </div>
-      <div className="bg-blue-50 w-full md:w-[90%] lg=w-[1250px] mx-auto">
+      <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />
       </div>
       <TopFooter />
