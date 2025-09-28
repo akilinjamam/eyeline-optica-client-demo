@@ -8,6 +8,25 @@ interface IUseMangeAccordion {
   product?: GlassCardProps;
 }
 
+// 🔑 Normalize a single key (lowercase + remove spaces/dashes/underscores)
+const normalizeKey = (key: string) =>
+  key
+    .toLowerCase()
+    .split(/[-_]+/) // split by dash or underscore
+    .map((word, index) =>
+      index === 0 ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join("");
+
+// 🔑 Normalize all keys in an object
+const normalizeKeys = (obj: Record<string, any>) => {
+  const normalized: Record<string, any> = {};
+  for (const key in obj) {
+    normalized[normalizeKey(key)] = obj[key];
+  }
+  return normalized;
+};
+
 const useManageAccordionData = ({
   accordionItem,
   product,
@@ -26,25 +45,29 @@ const useManageAccordionData = ({
   );
   const [combineValue, setCombineValue] = useState<string[]>([]);
 
-  // --- Update selectedData safely ---
+  // --- Update selectedData safely (keys normalized) ---
   useEffect(() => {
-    const allTypes = accordionItem.map((item) => item.title);
-    const key = Object.keys(selectData)[0];
+    const allTypes = accordionItem.map((item) =>
+      normalizeKey(item?.title ? item?.title : "")
+    );
+    const normalized = normalizeKeys(selectData);
+    const key = Object.keys(normalized)[0];
 
     if (key && allTypes.includes(key)) {
       setSelectedData((prev) => {
-        if (prev[key] === selectData[key]) return prev; // no change, skip update
-        return { ...prev, ...selectData };
+        if (prev[key] === normalized[key]) return prev; // no change
+        return { ...prev, ...normalized };
       });
     }
   }, [selectData, accordionItem]);
 
-  // --- Update selectedPrice safely ---
+  // --- Update selectedPrice safely (keys normalized) ---
   useEffect(() => {
     if (selectData.price !== undefined) {
+      const normalized = normalizeKeys(selectPrice);
       setSelectedPrice((prev) => {
-        const updated = { ...prev, ...selectPrice };
-        // shallow equality check to prevent unnecessary re-renders
+        const updated = { ...prev, ...normalized };
+
         const isSame =
           Object.keys(updated).length === Object.keys(prev).length &&
           Object.keys(updated).every((key) => updated[key] === prev[key]);

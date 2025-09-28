@@ -41,7 +41,7 @@ const Sidebar = ({data}:{data:TFrame[]}) => {
       children: brand,
     },
     {
-      title: "FRAME SIZE",
+      title: "FRAME-SIZE",
       children: frameSize
     },
     { title: "GENDER", children: biology },
