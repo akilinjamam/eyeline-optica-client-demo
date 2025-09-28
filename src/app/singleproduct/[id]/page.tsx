@@ -9,18 +9,19 @@ import { notFound } from "next/navigation";
 
 async function getSingleProduct(id: string) {
   const response = await fetch(
-    `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,{
-      next: {revalidate: 60}
-    }
+    `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,
+    {next: {revalidate:60}}
   );
 
   if (!response.ok) return null;
   return response.json() as Promise<TData<TFrame>>;
 }
 
-const SingleProduct = async ({ params }: { params: { id: string } }) => {
-  const product = await getSingleProduct(params.id);
 
+const SingleProduct = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+
+  const product = await getSingleProduct(id);
   if (!product?.data) return notFound();
 
   const frame = product.data;
