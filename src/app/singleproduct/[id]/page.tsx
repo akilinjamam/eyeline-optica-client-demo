@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
@@ -6,13 +7,6 @@ import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TData, TFrame } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
-
-
-type SingleProductPageProps = {
-  params: {
-    id: string;
-  };
-};
 
 async function getSingleProduct(id: string) {
   const response = await fetch(
@@ -25,9 +19,9 @@ async function getSingleProduct(id: string) {
 }
 
 
-const SingleProduct = async ({ params }: SingleProductPageProps) => {
-  const { id } = params;
-
+const SingleProduct = async ({params}:any) => {
+  const { id } = await params;
+  console.log(id)
   const product = await getSingleProduct(id) as TData<TFrame>;
   if (!product?.data) return notFound();
 
