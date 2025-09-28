@@ -12,7 +12,9 @@ import { notFound } from "next/navigation";
 async function getSingleProduct() {
  
   const response = await fetch(
-    `https://eyeline-optica-server.onrender.com/api/v1/products`
+    `https://eyeline-optica-server.onrender.com/api/v1/products`, {
+        cache: "force-cache"
+    }
   );
   if (!response.ok) return null;
   return response.json();
