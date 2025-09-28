@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
@@ -11,42 +10,44 @@ import { notFound } from "next/navigation";
 async function getSingleProduct(id: string) {
   const response = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,
-    {next: {revalidate:60}}
+    { cache: "no-store" }
   );
-
   if (!response.ok) return null;
-  return response.json() 
+  return response.json();
 }
+type ParamsPromise = Promise<{ id: string }>;
 
-
-const SingleProduct = async ({params}:any) => {
+export default async function SingleProduct({
+  params,
+}: {
+  params: ParamsPromise;
+}) {
+  // Because params is a Promise in Next 15
   const { id } = await params;
-  console.log(id)
-  const product = await getSingleProduct(id) as TData<TFrame>;
+
+  const product = await getSingleProduct(id) as (TData<TFrame>);
   if (!product?.data) return notFound();
 
   const frame = product.data;
 
   return (
     <div className="w-full bg-blue-50 px-1">
-      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
+      <div className="w-full md:w-[90%] lg=w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
           <ImagePart product={frame} />
         </div>
-        <div className="sm:w-full md:w-[45%] lg:w-[45%]">
+        <div className="sm=w-full md:w-[45%] lg:w-[45%]">
           <DetailPart {...frame as TFrame} />
         </div>
       </div>
-      <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
+      <div className="bg-blue-50 w-full md:w-[90%] lg=w-[1250px] mx-auto">
         <RegardingInfo data={frame as TFrame} />
       </div>
-      <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
+      <div className="bg-blue-50 w-full md:w-[90%] lg=w-[1250px] mx-auto">
         <ShopByFrameShape />
       </div>
       <TopFooter />
       <Footer />
     </div>
   );
-};
-
-export default SingleProduct;
+}
