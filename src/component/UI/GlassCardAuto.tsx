@@ -29,7 +29,7 @@ const GlassCardAuto:React.FC<TFrame> = ({images, name, brand, salesPrice, badge,
           alt={name as string}
           width={120}
           height={60}
-          className="object-contain block  "
+          className="object-contain block"
         />
         </Link>
       </div>

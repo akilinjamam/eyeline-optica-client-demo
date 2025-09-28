@@ -7,6 +7,8 @@ import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TData, TFrame } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 async function getSingleProduct(id: string) {
   const response = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,
