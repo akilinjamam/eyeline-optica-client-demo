@@ -1,54 +1,50 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
-// import GlassCardsGallary from "@/component/GlassCardsGallary";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TData, TFrame } from "@/ts-definition/types";
+import { notFound } from "next/navigation";
 
-async function getSingleProduct(){
-  const response = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/products`,{
-    
-    next: { tags: ["frames"] },
-  })
+async function getSingleProduct(id: string) {
+  const response = await fetch(
+    `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,{
+      next: {revalidate: 60}
+    }
+  );
 
-  return response.json();
+  if (!response.ok) return null;
+  return response.json() as Promise<TData<TFrame>>;
 }
 
+const SingleProduct = async ({ params }: { params: { id: string } }) => {
+  const product = await getSingleProduct(params.id);
 
+  if (!product?.data) return notFound();
 
- const SingleProduct = async ({ params }: any) => {
-  const allData = await getSingleProduct() as TData<TFrame[]>;
-  const data = allData?.data?.data;
-
-  const { id } = await params;
-  const product = data?.find((p) => p._id === id as string);
- 
-  if (!product) return null;
+  const frame = product.data;
 
   return (
     <div className="w-full bg-blue-50 px-1">
-        <div className='w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap'>
-            <div className='sm:w-full md:w-[55%] lg:w-[55%]'>
-              <ImagePart product={product}/>
-            </div>
-            <div className='sm:w-full md:w-[45%] lg:w-[45%]'>
-              <DetailPart {...product} />
-            </div>
+      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
+        <div className="sm:w-full md:w-[55%] lg:w-[55%]">
+          <ImagePart product={frame} />
         </div>
-        <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-          <RegardingInfo data={product}/>
+        <div className="sm:w-full md:w-[45%] lg:w-[45%]">
+          <DetailPart {...frame as TFrame} />
         </div>
-        <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-          {/* <GlassCardsGallary/> */}
-          <ShopByFrameShape/>
-        </div>
-        <TopFooter/>
-        <Footer/>
-    </div> 
+      </div>
+      <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
+        <RegardingInfo data={frame as TFrame} />
+      </div>
+      <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
+        <ShopByFrameShape />
+      </div>
+      <TopFooter />
+      <Footer />
+    </div>
   );
 };
 
-export default SingleProduct
+export default SingleProduct;
