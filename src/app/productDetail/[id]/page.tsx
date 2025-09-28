@@ -13,7 +13,7 @@ async function getSingleProduct(id: string) {
 
   const response = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,{
-        cache: "no-store"
+        next: {revalidate: 60}
     },
 
   );
@@ -34,7 +34,7 @@ export default async function SingleProduct({
   if (!product?.data) return notFound();
 
   const frame = product.data;
-  console.log(frame)
+ 
 
   return (
     <div className="w-full bg-blue-50 px-1">
