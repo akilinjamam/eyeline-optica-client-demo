@@ -9,12 +9,11 @@ import { notFound } from "next/navigation";
 
 
 
-async function getSingleProduct() {
+async function getSingleProduct(id: string) {
  
   const response = await fetch(
-    `https://eyeline-optica-server.onrender.com/api/v1/products`, {
-        cache: "force-cache"
-    }
+    `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,
+
   );
   if (!response.ok) return null;
   return response.json();
@@ -28,24 +27,25 @@ export default async function SingleProduct({
   params: ParamsPromise;
 }) {
   const { id } = await params;
-  const product = (await getSingleProduct()) as TData<TFrame[]>;
-  const findById = product?.data?.data?.find((item: TFrame) => item?._id === id);
-  console.log(findById)
+  const product = (await getSingleProduct(id)) as TData<TFrame>;
+
   if (!product?.data) return notFound();
+
+  const frame = product.data;
 
   return (
     <div className="w-full bg-blue-50 px-1">
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
-          <ImagePart product={findById} />
+          <ImagePart product={frame} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
-          <DetailPart {...(findById as TFrame)} />
+          <DetailPart {...(frame as TFrame)} />
         </div>
       </div>
 
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-        <RegardingInfo data={findById as TFrame} />
+        <RegardingInfo data={frame as TFrame} />
       </div>
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />
