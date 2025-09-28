@@ -22,7 +22,7 @@ const GlassCardAuto:React.FC<TFrame> = ({images, name, brand, salesPrice, badge,
       </span>
 
       <div className=" mb-3 w-full flex items-center justify-center">
-        <Link href={`/allglasses/${_id}`}>
+        <Link href={`/productDetail/${_id}`}>
           <Image
           src={images?.length && images?.length > 0 ? images?.[0] : defaultImage}
           alt={name as string}
