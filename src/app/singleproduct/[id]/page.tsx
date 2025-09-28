@@ -7,6 +7,13 @@ import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TData, TFrame } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
+
+type SingleProductPageProps = {
+  params: {
+    id: string;
+  };
+};
+
 async function getSingleProduct(id: string) {
   const response = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products/get-single-product/${id}`,
@@ -18,7 +25,7 @@ async function getSingleProduct(id: string) {
 }
 
 
-const SingleProduct = async ({ params }: { params: { id: string } }) => {
+const SingleProduct = async ({ params }: SingleProductPageProps) => {
   const { id } = params;
 
   const product = await getSingleProduct(id);
