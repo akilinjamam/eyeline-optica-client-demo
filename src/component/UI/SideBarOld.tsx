@@ -187,6 +187,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
           <div className="flex flex-wrap gap-2 mt-2">
           <p className="font-bold">Active Filters:</p>
             {/* Frame Color */}
+            <br />
             {getColor && (
               <span className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2">
                 <span>{getColor}</span>
