@@ -4,7 +4,7 @@ import { TData, TFrame } from '@/ts-definition/types';
 import React from 'react';
 
 const Brand:React.FC = async () => {
-     const frame = await getFrame("") as TData<TFrame>;
+     const frame = await getFrame({}) as TData<TFrame>;
       const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data : [];
     return (
         <>

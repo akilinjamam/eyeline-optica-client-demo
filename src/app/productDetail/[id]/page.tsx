@@ -33,7 +33,7 @@ export default async function SingleProduct({
 
   if (!product?.data) return notFound();
 
-  const frame = product.data;
+  const frame = product?.data;
  
 
   return (

@@ -1,30 +1,31 @@
-export type TQueryType = "eye glasses" | "sunglasses" | ""
 
-export async function getFrame(query:TQueryType) {
-    let modifiedQuery = "";
 
-    if(query === ""){
-        modifiedQuery = ""
-    }else{
-        modifiedQuery = `?type=${query}`
+export async function getFrame(query: Record<string, string>) {
+
+  const mergedQuery = query // always include type
+
+  const params = new URLSearchParams(mergedQuery).toString();
+
+  const res = await fetch(
+    `https://eyeline-optica-server.onrender.com/api/v1/products?${params}`,
+    {
+      next: { tags: ["frames"] },
     }
-
-  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/products${modifiedQuery}`, {
-    
-    next: { tags: ["frames"] },
-  });
+  );
 
   if (!res.ok) throw new Error("Failed to fetch frames");
 
   return res.json();
 }
-export async function getLens(query:TQueryType) {
+export async function getLens(query: Record<string,string>) {
+  
+    const params = "?" + new URLSearchParams(query);
     let modifiedQuery = "";
 
-    if(query === ""){
-        modifiedQuery = ""
-    }else{
-        modifiedQuery = `?type=${query}`
+    if (Object.keys(query).length === 0) {
+        modifiedQuery = "";
+    } else {
+        modifiedQuery = params;
     }
 
   const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/lens${modifiedQuery}`, {
@@ -36,13 +37,14 @@ export async function getLens(query:TQueryType) {
 
   return res.json();
 }
-export async function getcontactLens(query:TQueryType) {
+export async function getcontactLens(query:Record<string,string>) {
+   const params = "?" + new URLSearchParams(query);
     let modifiedQuery = "";
 
-    if(query === ""){
-        modifiedQuery = ""
-    }else{
-        modifiedQuery = `?type=${query}`
+    if (Object.keys(query).length === 0) {
+        modifiedQuery = "";
+    } else {
+        modifiedQuery = params;
     }
 
   const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/contact-lens${modifiedQuery}`, {
