@@ -9,7 +9,7 @@ export async function getFrame(query: Record<string, string>) {
   const res = await fetch(
     `https://eyeline-optica-server.onrender.com/api/v1/products?${params}`,
     {
-      next: { tags: ["frames"] },
+      next: {revalidate: 120},
     }
   );
 
@@ -24,9 +24,8 @@ export async function getLens(query: Record<string,string>) {
   const params = new URLSearchParams(mergedQuery).toString();
 
   const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/lens?${params}`, {
-    
-    next: { tags: ["lens"] },
-  });
+      next: {revalidate: 120},
+    });
 
   if (!res.ok) throw new Error("Failed to fetch lens");
 
@@ -38,9 +37,8 @@ export async function getcontactLens(query:Record<string,string>) {
   const params = new URLSearchParams(mergedQuery).toString();
 
   const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/contact-lens?${params}`, {
-    
-    next: { tags: ["lens"] },
-  });
+      next: {revalidate: 120},
+    });
 
   if (!res.ok) throw new Error("Failed to fetch lens");
 
