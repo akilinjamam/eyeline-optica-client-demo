@@ -1,5 +1,6 @@
 import Footer from '@/component/Footer';
 import TopFooter from '@/component/TopFooter';
+import SidebarSkeleton from '@/component/UI/sceleton/SidebarScheleton';
 import SidebarContactLens from '@/component/UI/SidebarContactLens';
 import { getcontactLens } from '@/fetchData/fetchFrameData';
 import { TContactLens, TData, } from '@/ts-definition/types';
@@ -13,7 +14,7 @@ const ContactLensLayout = async ({ children }: { children: ReactNode }) => {
     <div className="w-full bg-blue-50 relative">
       <div className="w-full mx-auto flex items-start">
        
-        <Suspense fallback={<div>Loading filters...</div>}>
+        <Suspense fallback={<SidebarSkeleton/>}>
           <SidebarContactLens data={data} />
         </Suspense>
         {children}

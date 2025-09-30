@@ -1,5 +1,6 @@
 import Footer from '@/component/Footer';
 import TopFooter from '@/component/TopFooter';
+import SidebarSkeleton from '@/component/UI/sceleton/SidebarScheleton';
 import SidebarOld from '@/component/UI/SideBarOld';
 import { getFrame } from '@/fetchData/fetchFrameData';
 import { TData, TFrame } from '@/ts-definition/types';
@@ -13,7 +14,7 @@ const Sunglasses = async ({ children }: { children: ReactNode }) => {
     <div className="w-full bg-blue-50 relative">
       <div className="w-full mx-auto flex items-start">
        
-        <Suspense fallback={<div>Loading filters...</div>}>
+        <Suspense fallback={<SidebarSkeleton/>}>
           <SidebarOld data={data} />
         </Suspense>
         {children}
