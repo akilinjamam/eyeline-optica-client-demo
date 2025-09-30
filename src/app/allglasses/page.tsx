@@ -2,6 +2,8 @@ import ProductGallery from "@/component/UI/ProductGallery";
 import { getFrame } from "@/fetchData/fetchFrameData";
 import { TData, TFrame } from "@/ts-definition/types";
 
+export const revalidate = 120; // ✅ enable ISR every 2 minutes
+
 export interface PageProps {
   searchParams?: Promise<Record<string, string | string[]>>;
 }
