@@ -2,15 +2,13 @@ import ProductGallery from "@/component/UI/ProductGallery";
 import { getFrame } from "@/fetchData/fetchFrameData";
 import { TData, TFrame } from "@/ts-definition/types";
 
-interface PageProps {
+export interface PageProps {
   searchParams?: Promise<Record<string, string | string[]>>;
 }
 
-const Eyeglasses = async ({ searchParams }: PageProps) => {
+  const Eyeglasses = async ({ searchParams }: PageProps) => {
   
   const resolvedParams = await searchParams;
-
-  
   const plainParams: Record<string, string> = {};
   if (resolvedParams) {
     for (const [key, value] of Object.entries(resolvedParams)) {

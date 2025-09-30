@@ -11,8 +11,8 @@ const Tab: FC = () => {
     const elements = [
         { id: 1, name: 'EYEGLASSES', link: '/allglasses' },
         { id: 2, name: 'SUNGLASSES', link: '/allglasses/sunglasses' },
-        { id: 3, name: 'LENSES', link: '/allglasses/lense' },
-        { id: 4, name: 'CONTACT LENSES', link: '/allglasses/contactlense' },
+        { id: 3, name: 'LENSES', link: '/allLens' },
+        { id: 4, name: 'CONTACT LENSES', link: '/allContactLens' },
         { id: 5, name: 'BRAND', link: '/allglasses/brand' },
         { id: 6, name: 'TELEMEDICINE SERVICE', link: '/telemedicine' },
         { id: 7, name: 'PATIENT CARE' },

@@ -19,16 +19,11 @@ export async function getFrame(query: Record<string, string>) {
 }
 export async function getLens(query: Record<string,string>) {
   
-    const params = "?" + new URLSearchParams(query);
-    let modifiedQuery = "";
+    const mergedQuery = query 
 
-    if (Object.keys(query).length === 0) {
-        modifiedQuery = "";
-    } else {
-        modifiedQuery = params;
-    }
+  const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/lens${modifiedQuery}`, {
+  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/lens?${params}`, {
     
     next: { tags: ["lens"] },
   });
@@ -38,16 +33,11 @@ export async function getLens(query: Record<string,string>) {
   return res.json();
 }
 export async function getcontactLens(query:Record<string,string>) {
-   const params = "?" + new URLSearchParams(query);
-    let modifiedQuery = "";
+  const mergedQuery = query // always include type
 
-    if (Object.keys(query).length === 0) {
-        modifiedQuery = "";
-    } else {
-        modifiedQuery = params;
-    }
+  const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/contact-lens${modifiedQuery}`, {
+  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/contact-lens?${params}`, {
     
     next: { tags: ["lens"] },
   });

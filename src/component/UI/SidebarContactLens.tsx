@@ -4,26 +4,13 @@ import React, { useEffect, useState } from "react";
 import Accordion from "./Accordion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
-import { AccordionItemType, TFrame } from "@/ts-definition/types";
+import { AccordionItemType, TContactLens} from "@/ts-definition/types";
 
-const SidebarOld = ({ data }: { data: TFrame[] }) => {
-  const [dataAcordingToPath, setDataAccordingToPath] = useState<TFrame[]>([])
+const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
+ 
   const location = usePathname();
   const defaultType = location?.split('/')?.[location?.split('/')?.length - 1];
-  console.log(defaultType)
-
-  useEffect(() => {
-    if(location === "/allglasses"){
-      const result = data?.filter((item:TFrame) => item?.type === 'eye glasses');
-      setDataAccordingToPath(result)
-    }
-    if(location ===  '/allglasses/sunglasses'){
-      const result = data?.filter((item:TFrame) => item?.type === 'sunglasses');
-      setDataAccordingToPath(result)
-    }
-  },[location, data])
-  
-
+ 
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -32,24 +19,21 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   // local mirror of hook-selected filters (makes UI reactive)
   const [localSelected, setLocalSelected] = useState<Record<string, string>>({});
 
-  const brand = [...new Set(dataAcordingToPath.map((p: TFrame) => p.brand))]?.map((brand) => ({
+  const brand = [...new Set(data.map((p: TContactLens) => p.brand))]?.map((brand) => ({
     title: brand,
   }));
-  const frameSize = [...new Set(dataAcordingToPath.map((p: TFrame) => p.sizeCategory))]?.map(
+  const contactLensType = [...new Set(data.map((p: TContactLens) => p.type))]?.map(
     (size) => ({ title: size })
   );
   const material = [
-    ...new Set(dataAcordingToPath.map((p: TFrame) => p.materialsCategory)),
+    ...new Set(data.map((p: TContactLens) => p.material)),
   ]?.map((material) => ({ title: material }));
-  const biology = [...new Set(dataAcordingToPath.map((p: TFrame) => p.biologyCategory))]?.map(
-    (bio) => ({ title: bio })
-  );
+  
 
   const items: AccordionItemType[] = [
     { title: "BRAND", children: brand },
-    { title: "SIZE-CATEGORY", children: frameSize },
-    { title: "BIOLOGY-CATEGORY", children: biology },
-    { title: "MATERIALS-CATEGORY", children: material },
+    { title: "Type", children: contactLensType },
+    { title: "MATERIAL", children: material },
   ];
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -89,7 +73,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   // When localSelected or color changes, update the URL (server page will re-fetch)
   useEffect(() => {
     const params = new URLSearchParams();
-    params.set("type", defaultType === 'allglasses' ? 'eye glasses' : defaultType);
+  
 
     if (getColor) params.set("color", getColor);
 
@@ -135,7 +119,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
       // ignore if hook API differs
       console.log(err)
     }
-    // effect will push ?type=eye glasses automatically because localSelected & getColor changed
+   
   };
 
   return (
@@ -178,9 +162,9 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
         </div>
 
         {/* Sidebar content */}
-        <p className="font-bold">FRAME COLOR</p>
+        <p className="font-bold">CONTACT LENS COLOR</p>
         <br />
-        {dataAcordingToPath
+        {data
           .map((p) => p.color)
           .filter((c, i, arr) => arr.indexOf(c) === i)
           .map((color, idx) => (
@@ -254,4 +238,4 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   );
 };
 
-export default SidebarOld;
+export default SidebarContactLens;
