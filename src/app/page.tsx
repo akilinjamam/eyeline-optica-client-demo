@@ -19,7 +19,7 @@ import { TData, TFrame } from "@/ts-definition/types";
 // import GlassTryOn from "@/component/GlassTryOnV2";
 
 async function getFrame() {
-  const res = await fetch(`https://eyeline-optica-server.onrender.com/api/v1/products`, {
+  const res = await fetch(`https://server.eyelineoptica.com/api/v1/products`, {
     
     next: { tags: ["frames"] },
   });
