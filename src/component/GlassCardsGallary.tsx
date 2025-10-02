@@ -12,7 +12,7 @@ const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
 
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
-    console.log('test-frame:', data?.filter(item => item.weeklyDeals === true).length)
+  
     return (
         <div className='flex items-center justify-around lg:w-[1200px] md:w-[80%] mx-auto gap-5 relative'>
             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
