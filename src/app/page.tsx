@@ -32,7 +32,7 @@ async function getFrame() {
 export default async function Home() {
 
   const frame = await getFrame() as TData<TFrame>;
-  const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data?.slice(0,13) : [];
+  const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data : [];
 
   return (
     <div className="bg-blue-50">
