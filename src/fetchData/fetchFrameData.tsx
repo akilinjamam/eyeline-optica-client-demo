@@ -42,5 +42,6 @@ export async function getcontactLens(query:Record<string,string>) {
 
   if (!res.ok) throw new Error("Failed to fetch lens");
 
+  
   return res.json();
 }
