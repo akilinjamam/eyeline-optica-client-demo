@@ -1,0 +1,17 @@
+{
+"DEPLOYPATH": "/home/akilinja/git/eyeline-optica-client",
+"task": [
+    "package.json",
+    "package-lock.json",
+    "public",
+    "src",
+    ".next",
+    "eslint.congig.mjs",
+    "next.config.ts",
+    "postcss.config.mjs",
+    "tailwind.config.js",
+    "README.md",
+    "copyAppStructure.js",
+    "tsconfig.json"
+]
+}
