@@ -1,5 +1,5 @@
 {
-"DEPLOYPATH": "/home/akilinja/git/eyeline-optica-client",
+"DEPLOYPATH": "/home/akilinja/public_html/eyeline-optica-client",
 "task": [
     "package.json",
     "package-lock.json",
