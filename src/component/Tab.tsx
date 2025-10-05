@@ -23,7 +23,7 @@ const Tab: FC = () => {
 
 
     return (
-        <div className="bg-blue-500">
+        <div className="bg-blue-50">
             <div style={{ userSelect: 'none' }} className="max-w-7xl px-6 py-4 mx-auto relative sm:px-4 md:px-6">
                 <div
                     ref={swippedRef}
