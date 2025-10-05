@@ -6,7 +6,7 @@
     "public",
     "src",
     ".next",
-    "eslint.congig.mjs",
+    "eslint.config.mjs",
     "next.config.ts",
     "postcss.config.mjs",
     "tailwind.config.js",
