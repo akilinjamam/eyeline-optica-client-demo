@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-export async function getFrame(query: Record<string, string>) {
+export async function getFrame(query: Record<string, any>) {
 
   const mergedQuery = query // always include type
 
   const params = new URLSearchParams(mergedQuery).toString();
-
   const res = await fetch(
     `https://server.eyelineoptica.com/api/v1/products?${params}`,
     {

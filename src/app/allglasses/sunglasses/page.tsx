@@ -17,9 +17,11 @@ const Sunglasses =  async({ searchParams }: PageProps) => {
 
     const frame = await getFrame(mergedParams) as TData<TFrame>;
     const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data : [];
+    const page = frame?.data?.meta?.page;
+    const totalPage = frame?.data?.meta?.totalPage;
     return (
         <>
-            <ProductGallery data={allFrames} />
+            <ProductGallery data={allFrames} currentPage={page as number} totalPage={totalPage as number} />
         </>
         );
     };

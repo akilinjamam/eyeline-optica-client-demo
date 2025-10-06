@@ -90,6 +90,8 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   useEffect(() => {
     const params = new URLSearchParams();
     params.set("type", defaultType === 'allglasses' ? 'eye glasses' : defaultType);
+    // params.set("page", "1")
+    // params.set("limit", "20")
 
     if (getColor) params.set("color", getColor);
 
