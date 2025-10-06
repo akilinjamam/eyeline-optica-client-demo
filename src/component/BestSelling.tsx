@@ -27,7 +27,7 @@ const BestSelling = ({data}:{data:TFrame[]}) => {
                 <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                 <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
                 {
-                    data?.map(({color, name, brand, salesPrice, badge, images }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index}/> )
+                    data?.slice(0,13).map(({color, name, brand, salesPrice, badge, images }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index}/> )
                 }
                 </div>
                 <Image className='cursor-pointer inline-block mx-3' src={arrowRights} alt='right-arrow' onClick={() => handleNavigation('left')}/>
