@@ -1,7 +1,30 @@
+"use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useRouter, useSearchParams } from 'next/navigation';
 import ContactLensCardAuto from './ContactLensCardAuto';
 import { TContactLens, } from '@/ts-definition/types';
+import Pagination from '../Pagination';
 
-const ContactLensGallery = ({data}: {data:TContactLens[]}) => {
+const ContactLensGallery = ({data, currentPage, totalPage}: {data:TContactLens[], currentPage:number, totalPage:number}) => {
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+        
+        //   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        //     const sortValue = event.target.value;
+        //     const params = new URLSearchParams(searchParams);
+        //     params.set("sort", sortValue);
+        //     router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
+        //   };
+        
+          const handleNextPage = (value:any) => {
+            const params = new URLSearchParams(searchParams);
+            if(currentPage <= totalPage){
+                params.set("page", String(value));
+                router.push(`?${params.toString()}`);
+            }
+          };
+
 
     return (
         <div className=' w-full'>
@@ -22,6 +45,12 @@ const ContactLensGallery = ({data}: {data:TContactLens[]}) => {
                     }
                 </div>
             </section>
+         {/* Pagination Component */}
+                <Pagination
+                currentPage={currentPage}
+                totalPage={totalPage}
+                onPageChange={handleNextPage}
+                />
         </div>
     );
 };

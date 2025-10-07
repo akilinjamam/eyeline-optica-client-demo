@@ -26,7 +26,6 @@ export interface PageProps {
   const page = frame?.data?.meta?.page;
   const totalPage = frame?.data?.meta?.totalPage;
   
-
   return <ProductGallery data={allFrames} currentPage={page as number} totalPage={totalPage as number} />;
 };
 

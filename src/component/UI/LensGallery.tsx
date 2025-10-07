@@ -1,7 +1,29 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import {TLens } from '@/ts-definition/types';
 import LensCardAuto from './LensCardAuto';
+import { useRouter, useSearchParams } from "next/navigation";
+import Pagination from '../Pagination';
 
-const LensGallery = ({data}: {data:TLens[]}) => {
+const LensGallery = ({data, currentPage, totalPage}: {data:TLens[], currentPage:number, totalPage:number}) => {
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    
+    //   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const sortValue = event.target.value;
+    //     const params = new URLSearchParams(searchParams);
+    //     params.set("sort", sortValue);
+    //     router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
+    //   };
+    
+      const handleNextPage = (value:any) => {
+        const params = new URLSearchParams(searchParams);
+        if(currentPage <= totalPage){
+            params.set("page", String(value));
+            router.push(`?${params.toString()}`);
+        }
+      };
 
     return (
         <div className=' w-full'>
@@ -37,6 +59,12 @@ const LensGallery = ({data}: {data:TLens[]}) => {
                     }
                 </div>
             </section>
+             {/* Pagination Component */}
+                <Pagination
+                currentPage={currentPage}
+                totalPage={totalPage}
+                onPageChange={handleNextPage}
+                />
         </div>
     );
 };

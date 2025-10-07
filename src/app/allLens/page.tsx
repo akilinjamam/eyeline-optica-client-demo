@@ -14,12 +14,14 @@ const Lense = async ({ searchParams }: PageProps) => {
         }
     }
 
-    const lens = await getLens(plainParams) as TData<TLens>;
+    const lens = await getLens({page:"1", limit:"20", ...plainParams}) as TData<TLens>;
     const allLens = Array.isArray(lens?.data?.data) ? lens?.data?.data : [];
+    const page = lens?.data?.meta?.page;
+    const totalPage = lens?.data?.meta?.totalPage
    
     return (
         <>
-            <LensGallery data={allLens}/>
+            <LensGallery data={allLens} currentPage={page as number} totalPage={totalPage as number}/>
         </>
     );
 };

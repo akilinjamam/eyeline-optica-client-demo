@@ -6,7 +6,7 @@ import GlassCardAuto from "./GlassCardAuto";
 import { TFrame, TLens } from "@/ts-definition/types";
 import Pagination from "../Pagination";
 
-type Props = {
+export type Props = {
   data: TLens[];
   currentPage: number;
   totalPage:number;
@@ -66,7 +66,7 @@ const ProductGallery = ({ data,  currentPage, totalPage }: Props) => {
           ))}
         </div>
 
-       {/* Pagination Component */}
+      {/* Pagination Component */}
       <Pagination
         currentPage={currentPage}
         totalPage={totalPage}

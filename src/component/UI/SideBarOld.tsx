@@ -21,6 +21,9 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
       const result = data?.filter((item:TFrame) => item?.type === 'sunglasses');
       setDataAccordingToPath(result)
     }
+    if(location ===  '/allglasses/brand'){
+      setDataAccordingToPath(data)
+    }
   },[location, data])
   
 
@@ -89,7 +92,13 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   // When localSelected or color changes, update the URL (server page will re-fetch)
   useEffect(() => {
     const params = new URLSearchParams();
-    params.set("type", defaultType === 'allglasses' ? 'eye glasses' : defaultType);
+    if(defaultType === 'allglasses'){
+      params.set("type",  'eye glasses');
+    }
+
+    if(defaultType === 'sunglasses'){
+      params.set("type", defaultType);
+    }
     // params.set("page", "1")
     // params.set("limit", "20")
 

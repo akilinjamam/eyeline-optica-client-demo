@@ -15,11 +15,15 @@ const Contactlense = async ({searchParams}: PageProps) => {
         }
     }
 
-    const contactlens = await getcontactLens(plainParams) as TData<TContactLens>;
-      const allContactLens = Array.isArray(contactlens?.data?.data) ? contactlens?.data?.data : [];
+    const contactlens = await getcontactLens({page:"1",limit:"20",...plainParams}) as TData<TContactLens>;
+    const allContactLens = Array.isArray(contactlens?.data?.data) ? contactlens?.data?.data : [];
+
+    const page = contactlens?.data?.meta?.page;
+    const totalPage = contactlens?.data?.meta?.totalPage;
+
     return (
         <>
-            <ContactLensGallery data={allContactLens}/>
+            <ContactLensGallery data={allContactLens} currentPage={page as number} totalPage={totalPage as number}/>
         </>
     );
 };
