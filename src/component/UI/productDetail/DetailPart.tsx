@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 import SlideInPanel from './SlidePannel';
 import { TFrame } from '@/ts-definition/types';
+import { ILense } from '@/ts-definition/interfaces';
 
 
-const DetailPart:React.FC<TFrame> = (product) => {
-
+const DetailPart = ({product, lens}: {product:TFrame, lens:ILense[]}) => {
  
 const [showLensPanel, setShowLensPanel] = useState(false);
 
@@ -78,7 +78,7 @@ console.log(product)
       </p>
         <AnimatePresence>
           {showLensPanel && (
-            <SlideInPanel onClose={() => setShowLensPanel(false)} product={product}/>
+            <SlideInPanel onClose={() => setShowLensPanel(false)} product={product} lens={lens}/>
           )}
         </AnimatePresence>
       <div className="flex justify-center gap-4 text-blue-600 mt-2">

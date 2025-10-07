@@ -3,7 +3,7 @@ import { ILense, IPowerOptions, IPowerTypes } from "@/ts-definition/interfaces";
 export const powerTypes: IPowerTypes[] = [
   {
     type: "Power Type",
-    title: "With Power",
+    title: "single vision",
     description: "Positive, Negative or Cylindrical",
   },
   {
@@ -13,12 +13,12 @@ export const powerTypes: IPowerTypes[] = [
   },
   {
     type: "Power Type",
-    title: "Progressive Power",
+    title: "progressive",
     description: "Two Power in One eye",
   },
   {
     type: "Power Type",
-    title: "Bifocal",
+    title: "bifocal",
     description: "Two Power in One eye",
   },
   {
@@ -32,7 +32,7 @@ export const lenses: ILense[] = [
   // With power
   {
     type: "Lense",
-    subType: "With Power",
+    subType: "single vision",
     title: "Anti-glare Premium",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -42,7 +42,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "With Power",
+    subType: "single vision",
     title: "Blue Screen Lens",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -52,7 +52,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "With Power",
+    subType: "single vision",
     title: "Thgin Blue Screen Lens",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -62,7 +62,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "With Power",
+    subType: "single vision",
     title: "Own Days Japan Clear Vision",
     features: [
       { feature: "Double Side Anti Glare Lense" },

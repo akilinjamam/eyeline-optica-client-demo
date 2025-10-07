@@ -103,17 +103,17 @@ export type LensType = "single vision" | "bifocal" | "progressive" | "reading";
 export type LensMaterial = "plastic" | "polycarbonate" | "high-index" | "glass";
 
 export type TLens = {
-  _id: string;
-  name: string;
+  _id?: string;
+  name?: string;
   description?: string;
-  purchasePrice: number;
-  salesPrice: number;
-  stock: number;
-  category: string;
+  purchasePrice?: number;
+  salesPrice?: number;
+  stock?: number;
+  category?: string;
   brand?: string;
-  images: string[];
-  lensType: LensType;
-  material: LensMaterial;
+  images?: string[];
+  lensType?: LensType;
+  material?: LensMaterial;
   coatings?: string[];
   prescriptionRange?: string;
   index?: number;

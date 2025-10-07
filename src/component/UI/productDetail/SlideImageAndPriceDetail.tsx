@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import SlideOptions from './SlideOptions';
 import { TFrame } from '@/ts-definition/types';
+import { ILense } from '@/ts-definition/interfaces';
 
 
-const SlideImageAndPriceDetail = ({ product }: { product: TFrame }) => {
-  
+const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILense[] }) => {
+ 
   return (
     <div className="p-2">
       {/* top section */}
@@ -27,7 +28,7 @@ const SlideImageAndPriceDetail = ({ product }: { product: TFrame }) => {
       <br />
 
       {/* Sliding container */}
-      <SlideOptions/>
+      <SlideOptions lens={lens}/>
     </div>
   );
 };

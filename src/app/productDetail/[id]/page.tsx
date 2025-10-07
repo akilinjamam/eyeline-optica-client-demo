@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
-import { TData, TFrame } from "@/ts-definition/types";
+import { TData, TFrame, TLens } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
 
@@ -21,6 +22,12 @@ async function getSingleProduct(id: string) {
   return response.json();
 }
 
+async function getAllLensData(){
+  const response = await fetch('https://server.eyelineoptica.com/api/v1/lens');
+  return response.json();
+};
+
+
 type ParamsPromise = Promise<{ id: string }>;
 
 export default async function SingleProduct({
@@ -30,11 +37,34 @@ export default async function SingleProduct({
 }) {
   const { id } = await params;
   const product = (await getSingleProduct(id)) as TData<TFrame>;
-
+  
   if (!product?.data) return notFound();
-
+  
   const frame = product?.data;
- 
+
+  const lensData = await getAllLensData() as TData<TLens[]>;
+
+  const allLens = lensData?.data?.data?.map((item:TLens) => {
+    return {
+      type: "Lense",
+      subType: item?.lensType,
+      title: item?.name,
+      features: item?.coatings?.map((coating:string) => coating),
+      price: item?.salesPrice,
+      images: item?.images?.map((img) => img),
+      index: item?.index,
+      material:item?.material,
+      thickness: item?.thickness,
+      color:item?.color,
+      diameter:item?.diameter,
+      warrenty:item?.warranty,
+      deliveryTime:item?.deliveryTime,
+      offer:item?.offer,
+      rating:item?.rating,
+      
+    }
+  });
+
   return (
     <div className="w-full bg-blue-50 px-1">
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
@@ -42,7 +72,7 @@ export default async function SingleProduct({
           <ImagePart product={frame} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
-          <DetailPart {...(frame as TFrame)} />
+          <DetailPart product={frame as TFrame} lens={allLens as any} />
         </div>
       </div>
 

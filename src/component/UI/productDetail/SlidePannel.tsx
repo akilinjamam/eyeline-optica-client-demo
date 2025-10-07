@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import SlideImageAndPriceDetail from "./SlideImageAndPriceDetail";
 import { TFrame } from "@/ts-definition/types";
+import { ILense } from "@/ts-definition/interfaces";
 
 const slideInVariants = {
   hidden: { x: "100%" },
@@ -10,7 +11,8 @@ const slideInVariants = {
   exit: { x: "100%" },
 };
 
-export default function SlideInPanel({ onClose, product }: { onClose: () => void, product: TFrame }) {
+export default function SlideInPanel({ onClose, product, lens }: { onClose: () => void, product: TFrame, lens:ILense[] }) {
+  console.log(lens)
   return (
     <motion.div
       className="fixed top-0 right-0 w-full md:w-2/5 h-full bg-white shadow-lg z-50"
@@ -25,7 +27,7 @@ export default function SlideInPanel({ onClose, product }: { onClose: () => void
         <button onClick={onClose} className="text-xl cursor-pointer">✕</button>
       </div>
       <br />
-      <SlideImageAndPriceDetail product={product} />
+      <SlideImageAndPriceDetail product={product} lens={lens}/>
     </motion.div>
   );
 }

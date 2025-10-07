@@ -61,6 +61,20 @@ export interface ILense {
   title: string;
   features: ILenseFeatures[];
   price: number;
+  images?: string[];
+  brand?: string;
+  category?: string;
+  lensType?: string;
+  material?: string;
+  color?: string;
+  index?: number;
+  diameter?: number;
+  prescriptionRange?: string;
+  warranty?: string;
+  deliveryTime?: string;
+  offer?: number;
+  purchasePrice?: number;
+  rating?: number;
 }
 
 export interface IPowerOptions {

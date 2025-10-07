@@ -10,7 +10,8 @@ import EnterPowerSection from './EnterPowerSection';
 import UploadPrescription from './UploadPrescription';
 import LneseFeatureSection from './LneseFeatureSection';
 
-const SlideOptions = () => {
+const SlideOptions = ({lens}: {lens:ILense[]}) => {
+   
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
     { type: 'powerTypes' }, 
   ]);
@@ -49,7 +50,7 @@ const SlideOptions = () => {
 
   
     return (
-        <div className="relative w-full overflow-hidden h-[60vh] border border-gray-200 rounded-md">
+        <div className="relative w-full overflow-hidden h-[60vh] border border-gray-200 rounded-md ">
         <AnimatePresence custom={direction} mode="popLayout">
           <motion.div
             key={current.type + (current.title ?? '')} // unique key per screen
@@ -59,7 +60,7 @@ const SlideOptions = () => {
             animate="center"
             exit="exit"
             transition={{ duration: 0.4 }}
-            className="absolute top-0 left-0 w-full h-full overflow-y-scroll hide-scrollbar py-2 bg-white"
+            className="absolute top-0 left-0 w-full h-full overflow-y-scroll hide-scrollbar py-2 bg-blue-200"
           >
             {/* Back Button (not on root) */}
             {history.length > 1 && (
@@ -80,7 +81,7 @@ const SlideOptions = () => {
 
             {current.type === 'lenses' && (
               <>
-                <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense}/>
+                <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens}/>
               </>
             )}
             {/* Detail part */}

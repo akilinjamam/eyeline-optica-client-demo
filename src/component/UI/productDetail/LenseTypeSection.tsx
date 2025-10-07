@@ -2,13 +2,16 @@
 import { ILense, ILenseFeatures } from '@/ts-definition/interfaces';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
-import { lenses } from './productCategoryData';
+// import { lenses } from './productCategoryData';
 import { GoForwardPayload } from '@/ts-definition/types';
 
-const LenseTypeSection = ({current, goForward, setSelectedLense}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void }) => {
+const LenseTypeSection = ({current, goForward, setSelectedLense, lens}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[] }) => {
+
+    console.log(current.title)
+
     return (
         <div>
-            {lenses
+            {lens
             .filter((l: ILense) => l.subType === current.title)
             .map((item: ILense, index: number) => (
                 <div
