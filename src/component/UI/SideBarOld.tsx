@@ -92,15 +92,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   // When localSelected or color changes, update the URL (server page will re-fetch)
   useEffect(() => {
     const params = new URLSearchParams();
-    if(defaultType === 'allglasses'){
-      params.set("type",  'eye glasses');
-    }
-
-    if(defaultType === 'sunglasses'){
-      params.set("type", defaultType);
-    }
-    // params.set("page", "1")
-    // params.set("limit", "20")
+    
 
     if (getColor) params.set("color", getColor);
 

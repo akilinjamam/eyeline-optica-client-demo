@@ -13,7 +13,7 @@ const Sunglasses =  async({ searchParams }: PageProps) => {
         }
     }
 
-    const mergedParams = {type: "sunglasses", ...plainParams}
+    const mergedParams = {type: "sunglasses",page:"1",limit:"20",...plainParams}
 
     const frame = await getFrame(mergedParams) as TData<TFrame>;
     const allFrames = Array.isArray(frame?.data?.data) ? frame?.data?.data : [];
