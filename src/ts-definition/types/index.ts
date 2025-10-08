@@ -104,6 +104,7 @@ export type LensMaterial = "plastic" | "polycarbonate" | "high-index" | "glass";
 
 export type TLens = {
   _id?: string;
+  id?: string;
   name?: string;
   description?: string;
   purchasePrice?: number;

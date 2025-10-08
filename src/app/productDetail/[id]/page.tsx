@@ -61,6 +61,9 @@ export default async function SingleProduct({
       deliveryTime:item?.deliveryTime,
       offer:item?.offer,
       rating:item?.rating,
+      brand:item?.brand,
+      category:item?.category,
+      id:item?._id
       
     }
   });

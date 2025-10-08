@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Search, Star, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import logo from '../../public/images/brand_logo.png';
-import profile from '../../public/images/demo-profile-img.png';
+import profile from '../../public/images/lense-4.png';
 import logo_title from '../../public/icons/brand_title.png';
 import { useRouter } from 'next/navigation';
 

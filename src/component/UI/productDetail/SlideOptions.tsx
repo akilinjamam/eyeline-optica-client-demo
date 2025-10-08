@@ -10,7 +10,7 @@ import EnterPowerSection from './EnterPowerSection';
 import UploadPrescription from './UploadPrescription';
 import LneseFeatureSection from './LneseFeatureSection';
 
-const SlideOptions = ({lens}: {lens:ILense[]}) => {
+const SlideOptions = ({lens, setLensInfo}: {lens:ILense[], setLensInfo:() => void}) => {
    
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
     { type: 'powerTypes' }, 
@@ -81,7 +81,7 @@ const SlideOptions = ({lens}: {lens:ILense[]}) => {
 
             {current.type === 'lenses' && (
               <>
-                <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens}/>
+                <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo}/>
               </>
             )}
             {/* Detail part */}

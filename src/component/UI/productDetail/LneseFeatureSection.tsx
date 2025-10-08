@@ -26,11 +26,10 @@ const LensFeatureSection = ({
     diameter,
     prescriptionRange,
     warranty,
-    deliveryTime,
+    // deliveryTime,
     features,
     offer,
     price,
-    purchasePrice,
     rating,
   } = selectedLense;
 
@@ -87,8 +86,8 @@ const LensFeatureSection = ({
         {lensType && <p><span className="font-medium">Lens Type:</span> {lensType}</p>}
         {material && <p><span className="font-medium">Material:</span> {material}</p>}
         {color && <p><span className="font-medium">Color:</span> {color}</p>}
-        {index && <p><span className="font-medium">Index:</span> {index}</p>}
-        {diameter && <p><span className="font-medium">Diameter:</span> {diameter} mm</p>}
+        {index !== 0 && <p><span className="font-medium">Index:</span> {index}</p>}
+        {diameter !== 0 && <p><span className="font-medium">Diameter:</span> {diameter} mm</p>}
         {prescriptionRange && (
           <p>
             <span className="font-medium">Prescription Range:</span>{" "}
@@ -96,12 +95,12 @@ const LensFeatureSection = ({
           </p>
         )}
         {warranty && <p><span className="font-medium">Warranty:</span> {warranty}</p>}
-        {deliveryTime && (
+        {/* {deliveryTime && (
           <p>
             <span className="font-medium">Delivery Time:</span> {deliveryTime}
           </p>
-        )}
-        {rating && (
+        )} */}
+        {rating !== 0 && (
           <p>
             <span className="font-medium">Rating:</span> ⭐ {rating}/5
           </p>
@@ -122,12 +121,6 @@ const LensFeatureSection = ({
         </div>
       )}
 
-      {/* Purchase Info */}
-      {purchasePrice && (
-        <p className="text-xs text-gray-500 mt-4">
-          Purchase Price: ৳{purchasePrice?.toLocaleString()}
-        </p>
-      )}
     </div>
   );
 };

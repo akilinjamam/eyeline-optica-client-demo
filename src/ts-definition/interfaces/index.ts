@@ -56,6 +56,7 @@ export interface ILenseFeatures {
 }
 
 export interface ILense {
+  id?: string;
   type: string;
   subType: string;
   title: string;

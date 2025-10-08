@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { ILense, ILenseFeatures } from '@/ts-definition/interfaces';
 import { ChevronRight } from 'lucide-react';
@@ -5,9 +6,7 @@ import React from 'react';
 // import { lenses } from './productCategoryData';
 import { GoForwardPayload } from '@/ts-definition/types';
 
-const LenseTypeSection = ({current, goForward, setSelectedLense, lens}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[] }) => {
-
-    console.log(current.title)
+const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any }) => {
 
     return (
         <div>
@@ -19,6 +18,13 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens}: {current
                 onClick={() => {
                 if(item.subType === 'Zero Power') return
                 goForward({ type: 'details', title: item.title })
+                setLensInfo({
+                    title:item?.title,
+                    price:item?.price,
+                    brand: item?.brand,
+                    color: item?.color,
+                    id:item?.id
+                })
                 }}
                 className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                                 >

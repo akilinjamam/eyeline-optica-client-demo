@@ -3,9 +3,26 @@ import Image from 'next/image';
 import SlideOptions from './SlideOptions';
 import { TFrame } from '@/ts-definition/types';
 import { ILense } from '@/ts-definition/interfaces';
+import { useState } from 'react';
 
+export type TLensInfo = {
+  title:string;
+  price:number;
+  brand:string;
+  color:string;
+  id:string;
+}
 
 const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILense[] }) => {
+  const [lensInfo, setLensInfo] = useState<TLensInfo>({
+    title:"",
+    price:0,
+    brand: "",
+    color: "",
+    id:""
+
+  })
+  console.log(lensInfo)
  
   return (
     <div className="p-2">
@@ -16,11 +33,17 @@ const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILe
         </div>
         <div className="w-[60%] h-[200px] p-1">
           <div className="flex justify-between font-bold text-sm">
-            <label>Price</label>
-            <p>{product?.salesPrice}</p>
+            <label>Frame: {product?.name}</label>
+            <p>৳{product?.salesPrice}</p>
           </div>
           <div className="flex justify-between font-bold text-sm">
+            <label>Lens: {lensInfo?.title}</label>
+            <p>৳{lensInfo?.price}</p>
+          </div>
+          <hr className='my-2'/>
+          <div className="flex justify-between font-bold text-sm">
             <label>Total:</label>
+            <p>৳{Number(product?.salesPrice) + lensInfo?.price}</p>
           </div>
         </div>
       </div>
@@ -28,7 +51,7 @@ const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILe
       <br />
 
       {/* Sliding container */}
-      <SlideOptions lens={lens}/>
+      <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void}/>
     </div>
   );
 };
