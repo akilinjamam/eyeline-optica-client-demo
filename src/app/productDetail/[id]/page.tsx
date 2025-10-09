@@ -63,8 +63,8 @@ export default async function SingleProduct({
       rating:item?.rating,
       brand:item?.brand,
       category:item?.category,
+      description:item?.description,
       id:item?._id
-      
     }
   });
 

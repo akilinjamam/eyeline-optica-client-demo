@@ -76,6 +76,7 @@ export interface ILense {
   offer?: number;
   purchasePrice?: number;
   rating?: number;
+  description?: string;
 }
 
 export interface IPowerOptions {

@@ -42,8 +42,17 @@ const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILe
           </div>
           <hr className='my-2'/>
           <div className="flex justify-between font-bold text-sm">
-            <label>Total:</label>
+            <label>Frame + Lens:</label>
             <p>৳{Number(product?.salesPrice) + lensInfo?.price}</p>
+          </div>
+          <div className="flex justify-between font-bold text-sm">
+            <label>Delivery Charge:</label>
+            <p>৳70</p>
+          </div>
+          <hr className='my-2'/>
+          <div className="flex justify-between font-bold text-sm">
+            <label>Total:</label>
+            <p>৳{Number(product?.salesPrice) + lensInfo?.price + 70 }</p>
           </div>
         </div>
       </div>

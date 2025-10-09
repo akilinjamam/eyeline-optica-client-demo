@@ -5,7 +5,7 @@ export const eyeglass: AccordionItemType[] = [
     title: "POWER TYPE",
     children: [
       { title: "With Power (single vision)", price: 200 },
-      { title: "Zero Power", price: 100 },
+      { title: "zero power", price: 100 },
       { title: "Bifocal Power", price: 300 },
       { title: "Prograssive Power", price: 250 },
       { title: "Reading Power", price: 400 },

@@ -8,7 +8,7 @@ export const powerTypes: IPowerTypes[] = [
   },
   {
     type: "Power Type",
-    title: "Zero Power",
+    title: "zero power",
     description: "Blue light block for screen protector",
   },
   {
@@ -113,10 +113,10 @@ export const lenses: ILense[] = [
     price: 800,
   },
 
-  // Zero power'
+  // zero power'
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Blue Screen Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -126,7 +126,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Own Days Japan Clear Vision Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -136,7 +136,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Brown Tinted Color Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -146,7 +146,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Pink Tinted Color Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -156,7 +156,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Yellow Tinted Color Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -166,7 +166,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Green Tinted Color Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },
@@ -176,7 +176,7 @@ export const lenses: ILense[] = [
   },
   {
     type: "Lense",
-    subType: "Zero Power",
+    subType: "zero power",
     title: "Gray Tinted Color Lenses",
     features: [
       { feature: "Double Side Anti Glare Lense" },

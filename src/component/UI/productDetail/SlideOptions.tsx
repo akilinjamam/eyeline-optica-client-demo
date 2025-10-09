@@ -79,7 +79,7 @@ const SlideOptions = ({lens, setLensInfo}: {lens:ILense[], setLensInfo:() => voi
               </>
             )}
 
-            {current.type === 'lenses' && (
+            {current.type === 'lens' && (
               <>
                 <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo}/>
               </>

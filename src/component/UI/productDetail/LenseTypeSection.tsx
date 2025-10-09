@@ -5,6 +5,8 @@ import { ChevronRight } from 'lucide-react';
 import React from 'react';
 // import { lenses } from './productCategoryData';
 import { GoForwardPayload } from '@/ts-definition/types';
+import Image from 'next/image';
+import defaultImg from '../../../../public/images/lense-1.png';
 
 const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any }) => {
 
@@ -16,7 +18,7 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                 <div
                 key={index}
                 onClick={() => {
-                if(item.subType === 'Zero Power') return
+                if(item.subType === 'zero power') return
                 goForward({ type: 'details', title: item.title })
                 setLensInfo({
                     title:item?.title,
@@ -29,7 +31,13 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                 className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                                 >
                 <div className='w-[95%]'>
-                    <p  className="px-1 font-bold mb-2">{item.title}</p>
+                   <div className='flex '>
+                     <Image width={60} height={60} src={item?.images?.[0] ?? defaultImg} alt='lens-img' className='rounded-md'/>
+                     <div>
+                        <p  className="px-1 font-bold ml-4">{item.title}</p>
+                        <p  className="text-sm px-1 mb-2 ml-4 text-gray-600">{item?.description}</p>
+                     </div>
+                   </div>
                     {
                         item.features.map((feature: ILenseFeatures, index:number) => <p className='ml-3 text-sm' key={index}>{feature.feature}</p> )
                     }

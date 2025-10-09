@@ -18,6 +18,9 @@ const PowerTypeSection = ({powerTypes, goForward}: {powerTypes: IPowerTypes[], g
         if(value === 'bifocal'){
             return 'Bifocal'
         }
+        if(value === 'zero power'){
+            return 'Zero Power'
+        }
         return value;
     }
 
@@ -26,7 +29,7 @@ const PowerTypeSection = ({powerTypes, goForward}: {powerTypes: IPowerTypes[], g
             {powerTypes.map((item: IPowerTypes, index: number) => (
                 <div
                 key={index}
-                onClick={() => goForward({ type: 'lenses', title: item.title })}
+                onClick={() => goForward({ type: 'lens', title: item.title })}
                 className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
                 >
                     <div>
