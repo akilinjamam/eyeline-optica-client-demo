@@ -9,8 +9,10 @@ import LenseDetailSection from './LenseDetailSection';
 import EnterPowerSection from './EnterPowerSection';
 import UploadPrescription from './UploadPrescription';
 import LneseFeatureSection from './LneseFeatureSection';
+import { TFrame } from '@/ts-definition/types';
+import { TLensInfo } from './SlideImageAndPriceDetail';
 
-const SlideOptions = ({lens, setLensInfo}: {lens:ILense[], setLensInfo:() => void}) => {
+const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], setLensInfo:() => void, product: TFrame[], lensInfo:TLensInfo}) => {
    
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
     { type: 'powerTypes' }, 
@@ -92,7 +94,7 @@ const SlideOptions = ({lens, setLensInfo}: {lens:ILense[], setLensInfo:() => voi
             )}
             {current.type === "Enter Power Manually" && (
               <>
-                <EnterPowerSection/>
+                <EnterPowerSection product={product as TFrame} lensInfo={lensInfo as TLensInfo }/>
               </>
             )}
             {current.type === "Upload Prescription" && (

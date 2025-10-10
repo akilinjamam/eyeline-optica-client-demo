@@ -1,15 +1,50 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Search, Star, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import logo from '../../public/images/brand_logo.png';
 import profile from '../../public/images/lense-4.png';
 import logo_title from '../../public/icons/brand_title.png';
 import { useRouter } from 'next/navigation';
+import { jwtDecode } from 'jwt-decode';
+import { JwtPayload } from '@/app/cart/page';
 
 const Header: FC = () => {
   const navigate = useRouter();
+
+  const [cart, setCart] = useState<any>(null);
+ 
+    const router = useRouter();
+    useEffect(() => {
+      const getCart = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+           router.push("/");
+           return
+        }
+  
+        // Decode JWT token
+        const decoded: JwtPayload = jwtDecode(token as string);
+        const userId = decoded.phoneNumber;
+  
+        // Fetch the cart
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart/get-cart-by-id/${userId}`,);
+  
+          if (!res.ok) throw new Error("Failed to fetch cart");
+  
+          const data = await res.json();
+          setCart(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      getCart();
+    }, [router]);
   return (
     <header className="w-full px-4 sm:px-6 py-2 border-b border-gray-200 bg-white">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -50,7 +85,16 @@ const Header: FC = () => {
           />
 
           <Star className="text-blue-500 w-5 h-5" />
-          <ShoppingBag className="text-blue-500 w-5 h-5" />
+          <div className='relative'>
+            <ShoppingBag className="text-blue-500 w-5 h-5" />
+            {
+              cart?.data?.length > 0
+              &&
+              <div className='w-5 h-5 rounded-full bg-red-500 flex items-center justify-center absolute -top-5 -right-3'>
+                <p className='text-white text-xs font-bold'>{cart?.data?.length}</p>
+            </div>
+            }
+          </div>
         </div>
       </div>
 
