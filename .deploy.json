@@ -12,6 +12,8 @@
     "tailwind.config.js",
     "README.md",
     "copyAppStructure.js",
-    "tsconfig.json"
+    "tsconfig.json",
+    ".env.local"
+    
 ]
 }
