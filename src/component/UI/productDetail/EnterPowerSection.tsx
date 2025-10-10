@@ -95,11 +95,12 @@ const EnterPowerSection = ({product, lensInfo}:{product:TFrame, lensInfo:TLensIn
             body: JSON.stringify(cartData),
         });
         
-        
+
         const data = await res.json();
         console.log(data)
         if(data.success){
             setLoading('');
+            window.dispatchEvent(new Event("cartUpdated"));
             localStorage.setItem("token", data?.data?.token)
              router.push("/cart");
         }

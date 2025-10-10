@@ -15,7 +15,7 @@ const Header: FC = () => {
   const navigate = useRouter();
 
   const [cart, setCart] = useState<any>(null);
- 
+
     const router = useRouter();
     useEffect(() => {
       const getCart = async () => {
@@ -44,6 +44,12 @@ const Header: FC = () => {
       };
   
       getCart();
+
+      // Listen for "cartUpdated" event
+  const handleCartUpdate = () => getCart();
+  window.addEventListener("cartUpdated", handleCartUpdate);
+
+  return () => window.removeEventListener("cartUpdated", handleCartUpdate);
     }, [router]);
   return (
     <header className="w-full px-4 sm:px-6 py-2 border-b border-gray-200 bg-white">
@@ -86,11 +92,11 @@ const Header: FC = () => {
 
           <Star className="text-blue-500 w-5 h-5" />
           <div className='relative'>
-            <ShoppingBag className="text-blue-500 w-5 h-5" />
+            <ShoppingBag onClick={() => navigate.push('/cart')} className="text-blue-500 w-5 h-5 cursor-pointer"  />
             {
               cart?.data?.length > 0
               &&
-              <div className='w-5 h-5 rounded-full bg-red-500 flex items-center justify-center absolute -top-5 -right-3'>
+              <div  className='w-5 h-5 rounded-full bg-red-500 flex items-center justify-center absolute -top-5 -right-3'>
                 <p className='text-white text-xs font-bold'>{cart?.data?.length}</p>
             </div>
             }
