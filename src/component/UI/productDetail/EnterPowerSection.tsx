@@ -96,7 +96,7 @@ const EnterPowerSection = ({product, lensInfo}:{product:TFrame, lensInfo:TLensIn
         });
         
         const data = await res.json();
-       
+        console.log(data)
         if(data.success){
             setLoading('');
             localStorage.setItem("token", data?.data?.token)
