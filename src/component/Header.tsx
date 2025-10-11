@@ -2,7 +2,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { Search, Star, ShoppingBag } from 'lucide-react';
+import { Search, Star, ShoppingBag, LogIn } from 'lucide-react';
 import Image from 'next/image';
 import logo from '../../public/images/brand_logo.png';
 import profile from '../../public/images/lense-4.png';
@@ -101,6 +101,7 @@ const Header: FC = () => {
             </div>
             }
           </div>
+          <LogIn onClick={() => navigate.push('/login')} className='text-blue-500 cursor-pointer'/>
         </div>
       </div>
 

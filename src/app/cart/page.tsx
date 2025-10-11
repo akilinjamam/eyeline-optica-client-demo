@@ -56,7 +56,7 @@ export default function Page() {
     const getCart = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-         router.push("/");
+         router.push("/login");
          return
       }
 
