@@ -18,8 +18,12 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                 <div
                 key={index}
                 onClick={() => {
-                if(item.subType === 'zero power') return
-                goForward({ type: 'details', title: item.title })
+                if(item.subType === 'zero power'){
+                    goForward({ type: 'details-zero-power', title: item.title })    
+                }else{
+                    goForward({ type: 'details', title: item.title })
+                }
+                
                 setLensInfo({
                     title:item?.title,
                     price:item?.price,

@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 
 const UploadPrescription = () => {
     const [image, setImage] = useState<string | null>(null);
-
+    const [loading, setLoading] = useState<string>("");
+    console.log(setLoading)
   const handleCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -14,8 +15,9 @@ const UploadPrescription = () => {
     }
   };
     return (
-        <div className="flex flex-col items-center justify-center h-auto bg-gradient-to-br from-blue-50 to-blue-100 p-6">
-                  <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6 text-center">
+        <div>
+          <div className="flex flex-col items-center justify-center h-auto bg-gradient-to-br from-blue-50 to-blue-100 p-6">
+            <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6 text-center">
                     <h1 className="text-2xl font-bold text-gray-700 mb-4">
                       Upload Prescription
                     </h1>
@@ -53,11 +55,63 @@ const UploadPrescription = () => {
                         </div>
                       </div>
                     )}
-                  </div>
-                  <div className='flex items-center justify-center w-full h-[100px] '>
-                     <button className='rounded-3xl bg-blue-800 text-white font-bold px-4 py-2 cursor-pointer'>Save & Add to Cart</button>
-                  </div>
+            </div>
+            
+          </div>
+          {/* input fields */}
+          <div className="px-2">
+            <div>
+                    
+                    <br /><br />
+                    <input
+                        className="w-full rounded-md p-4 border border-gray-400"
+                        type="text"
+                        name="name"
+                        id=""
+                        placeholder="YOUR NAME"
+                    />
+                    <br /><br />
+                    <input
+                        className="w-full rounded-md p-4 border border-gray-400"
+                        type="text"
+                        name="email"
+                        id=""
+                        placeholder="Email"
+                    />
+                    <br /><br />
+                    <input
+                        className="w-full rounded-md p-4 border border-gray-400"
+                        type="number"
+                        name="phoneNumber"
+                        id=""
+                        placeholder="Phone Number *"
+                        onWheel={(e) => e.currentTarget.blur()}
+                    />
+                    <br /><br />
+                    <textarea
+                        className="w-full rounded-md p-4 border border-gray-400"
+                        name="address"
+                        id=""
+                        placeholder="Address *"
+                    />
                 </div>
+                <br />
+                <div className="flex items-center justify-center w-full h-[20px]">
+                    {
+                        loading !== 'pending...'
+                        ?
+                        <button  type='submit' className="bg-blue-900 rounded-3xl px-4 py-2 text-white font-bold cursor-pointer">
+                            Save & Add to Cart
+                        </button>
+                        :
+                        <button disabled className="bg-blue-500 rounded-3xl px-4 py-2 text-white font-bold cursor-not-allowed">
+                            Please Wait...
+                        </button>
+                    }
+                </div>
+        </div>
+        <br />
+        </div>
     );
 };
 

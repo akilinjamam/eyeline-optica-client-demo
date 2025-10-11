@@ -11,8 +11,11 @@ import UploadPrescription from './UploadPrescription';
 import LneseFeatureSection from './LneseFeatureSection';
 import { TFrame } from '@/ts-definition/types';
 import { TLensInfo } from './SlideImageAndPriceDetail';
+import FrameOnly from './FrameOnly';
+import ZeroPowerDetailSection from './ZeroPowerDetailSection';
+import SubmitPowerLater from '@/component/SubmitPowerLater';
 
-const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], setLensInfo:() => void, product: TFrame[], lensInfo:TLensInfo}) => {
+const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], setLensInfo:() => void, product: TFrame, lensInfo:TLensInfo}) => {
    
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
     { type: 'powerTypes' }, 
@@ -21,6 +24,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
   const [selectedLense, setSelectedLense] = useState<ILense | null>(null);
 
   const current = history[history.length - 1];
+  console.log(current)
  
   // Variants depending on direction
   const variants = {
@@ -36,9 +40,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
   };
 
   const goForward = (next: { type: string; title?: string }) => {
-    if(next.title === 'Frame Only') return
-    if(next.title === "I don't know my power") return
-    // if(next.title === 'Zero Power') return
+    
     setDirection('forward');
     setHistory((prev) => [...prev, next]);
   };
@@ -77,7 +79,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
             {/* Render screens dynamically */}
             {current.type === 'powerTypes' && (
               <>
-               <PowerTypeSection powerTypes={powerTypes} goForward={goForward}/>
+               <PowerTypeSection powerTypes={powerTypes} goForward={goForward} productType={product.type as string} genderType={product.biologyCategory as string}/>
               </>
             )}
 
@@ -100,6 +102,21 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
             {current.type === "Upload Prescription" && (
               <>
                 <UploadPrescription/>
+              </>
+            )}
+            {current.title === "Frame Only" && (
+              <>
+                <FrameOnly/>
+              </>
+            )}
+            {current.type === "details-zero-power" && (
+              <>
+                <ZeroPowerDetailSection/>
+              </>
+            )}
+            {current.type === "Submit Power later in 15 days" && (
+              <>
+                <SubmitPowerLater/>
               </>
             )}
           </motion.div>

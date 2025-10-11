@@ -59,7 +59,7 @@ const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILe
       <br />
 
       {/* Sliding container */}
-      <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame[]} lensInfo={lensInfo}/>
+      <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame} lensInfo={lensInfo}/>
     </div>
   );
 };

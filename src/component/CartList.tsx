@@ -5,6 +5,7 @@ import CartItem from "@/component/CartItem";
 import { Cart, JwtPayload } from "@/app/cart/page";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 type TCart<T> = {
   success: boolean;
@@ -26,6 +27,19 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
     }
   }, []);
 
+   const [open, setOpen] = useState(false);
+
+  const handleDelete = (id:string) => {
+    console.log(id)
+    // your delete logic here
+    console.log("Item deleted ✅");
+    setOpen(false);
+  }
+
+  const confirmDelete = () => {
+    console.log('hello')
+  }
+
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h2 className="text-2xl font-semibold mb-4">{name || ""}</h2>
@@ -34,6 +48,7 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
         cart.data.map((item: Cart) => (
           <CartItem
             key={item?._id}
+            id={item?._id}
             image={item?.items[0]?.productId?.images[0] as any}
             name={item?.items[0]?.productId?.name}
             color={item?.items[0]?.productId?.color}
@@ -51,7 +66,10 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
             }}
             quantity={1}
             onEdit={() => alert("Edit clicked")}
-            onRemove={() => alert("Remove clicked")}
+            onRemove={() => {
+              handleDelete(item?._id)
+              setOpen(true)
+            }}
           />
         ))
       ) : (
@@ -64,8 +82,14 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
               You don’t have any items in your cart right now.
             </p>
           </div>
+          
         </div>
       )}
+      <ConfirmDeleteModal
+            open={open}
+            onConfirm={confirmDelete}
+            onCancel={() => setOpen(false)}
+      />
     </div>
   );
 }

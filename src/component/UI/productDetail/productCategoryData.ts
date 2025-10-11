@@ -2,29 +2,40 @@ import { ILense, IPowerOptions, IPowerTypes } from "@/ts-definition/interfaces";
 
 export const powerTypes: IPowerTypes[] = [
   {
+    frameType: "sun + eye",
     type: "Power Type",
     title: "single vision",
     description: "Positive, Negative or Cylindrical",
   },
   {
+    frameType: "sun + eye",
     type: "Power Type",
     title: "zero power",
     description: "Blue light block for screen protector",
   },
   {
+    frameType: "eye glasses",
     type: "Power Type",
     title: "progressive",
     description: "Two Power in One eye",
   },
   {
+    frameType: "eye glasses",
     type: "Power Type",
     title: "bifocal",
     description: "Two Power in One eye",
   },
   {
+    frameType: "sun + eye",
     type: "Power Type",
     title: "Frame Only",
     description: "With no lenses",
+  },
+  {
+    frameType: "kids",
+    type: "Power Type",
+    title: "Myopia control lens",
+    description: "not added",
   },
 ];
 

@@ -13,6 +13,7 @@ interface Prescription {
 interface CartItemProps {
   image: string;
   name: string;
+  id?:string;
   color?: string;
   lensType: string;
   pd:  number;
@@ -36,6 +37,7 @@ export default function CartItem({
   onRemove,
 }: CartItemProps) {
   const [qty, setQty] = useState(quantity);
+ 
 
   return (
     <div className="flex flex-col md:flex-row gap-4 bg-blue-50 rounded-xl shadow-sm p-4 mb-4">

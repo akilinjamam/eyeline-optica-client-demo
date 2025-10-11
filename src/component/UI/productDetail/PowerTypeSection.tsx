@@ -6,7 +6,15 @@ import React from 'react';
 
 
 
-const PowerTypeSection = ({powerTypes, goForward}: {powerTypes: IPowerTypes[], goForward: (payload: GoForwardPayload) => void }) => {
+const PowerTypeSection = ({powerTypes, goForward, productType, genderType}: {powerTypes: IPowerTypes[], goForward: (payload: GoForwardPayload) => void, productType:string, genderType: string }) => {
+
+    let customType = '';
+
+    if(genderType === 'kids'){
+        customType = 'kids'
+    }else{
+        customType = productType
+    }
 
     const modifyName = (value:string) => {
         if(value === 'single vision'){
@@ -23,10 +31,10 @@ const PowerTypeSection = ({powerTypes, goForward}: {powerTypes: IPowerTypes[], g
         }
         return value;
     }
-
+    console.log(productType)
     return (
         <div className='bg-blue-200 h-full'>
-            {powerTypes.map((item: IPowerTypes, index: number) => (
+            {powerTypes?.filter((f: IPowerTypes) => f.frameType === customType || f.frameType === 'sun + eye')?.map((item: IPowerTypes, index: number) => (
                 <div
                 key={index}
                 onClick={() => goForward({ type: 'lens', title: item.title })}
