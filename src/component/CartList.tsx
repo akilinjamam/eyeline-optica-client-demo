@@ -49,11 +49,16 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
           <CartItem
             key={item?._id}
             id={item?._id}
-            image={item?.items[0]?.productId?.images[0] as any}
-            name={item?.items[0]?.productId?.name}
-            color={item?.items[0]?.productId?.color}
+            image={item?.items[0]?.productId?.images[0] || item?.items[0]?.lensId?.images[0] as any}
+            type={item?.items[0]?.submitType ? item?.items[0]?.submitType : ''}
+            name={item?.items[0]?.productId?.name || item?.items[0]?.lensId?.name}
+            color={item?.items[0]?.productId?.color || item?.items[0]?.lensId?.color}
             lensType={item?.items[0]?.lensId?.lensType}
             pd={item?.items[0]?.pd as number}
+            price={item.totalAmount}
+            lensPrice={item.items[0]?.lensId?.salesPrice}
+            framePrice={item.items[0]?.productId?.salesPrice}
+            deliveryFee={item.deliveryFee}
             rightEye={{
               sphere: item?.items[0]?.rightEye?.sphere as string,
               cylinder: item?.items[0]?.rightEye?.cylinder as string,

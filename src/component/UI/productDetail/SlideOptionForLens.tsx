@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
-import { powerTypes } from './productCategoryData';
 import { ArrowLeft } from 'lucide-react';
 import { ILense } from '@/ts-definition/interfaces';
 import { AnimatePresence, motion } from 'framer-motion';
-import PowerTypeSection from './PowerTypeSection';
-import LenseTypeSection from './LenseTypeSection';
 import LenseDetailSection from './LenseDetailSection';
-import EnterPowerSection from './EnterPowerSection';
 import UploadPrescription from './UploadPrescription';
 import LneseFeatureSection from './LneseFeatureSection';
-import { TFrame } from '@/ts-definition/types';
-import { TLensInfo } from './SlideImageAndPriceDetail';
-import FrameOnly from './FrameOnly';
-import ZeroPowerDetailSection from './ZeroPowerDetailSection';
 import SubmitPowerLater from '@/component/SubmitPowerLater';
+import EnterPowerSectionForLens from './EnterPowerSectionForLens';
 
-const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], setLensInfo:() => void, product: TFrame, lensInfo:TLensInfo}) => {
-   
+const SlideOptionsForLens = ({singleLens}: {singleLens:ILense}) => {
+   console.log(singleLens)
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
-    { type: 'powerTypes' }, 
+    { type: 'details' }, 
   ]);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [selectedLense, setSelectedLense] = useState<ILense | null>(null);
 
   const current = history[history.length - 1];
-  console.log(current)
+  console.log(current);
+
+   const frameWithLensItems = {
+      lensId:singleLens._id,
+      type: "lens",
+      quantity: 1,
+      unitPrice: singleLens.salesPrice,
+      subtotal: singleLens.salesPrice,
+  }
  
   // Variants depending on direction
   const variants = {
@@ -52,26 +53,6 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
     }
   };
 
-  const totalPrice = lensInfo.price + Number(product.salesPrice);
-  const onlyFramePrice = Number(product.salesPrice);
-
-  const frameWithLensItems = {
-      productId: product._id,
-      lensId:lensInfo.id,
-      type: "frame_with_lens",
-      quantity: 1,
-      unitPrice: totalPrice,
-      subtotal: totalPrice,
-  }
-  const onlyFrameItems = {
-      productId: product._id,
-      type: "frame",
-      quantity: 1,
-      unitPrice: onlyFramePrice,
-      subtotal: onlyFramePrice,
-  }
-  
-
   
     return (
         <div className="relative w-full overflow-hidden h-[60vh] border border-gray-200 rounded-md ">
@@ -96,18 +77,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
               </button>
             )}
 
-            {/* Render screens dynamically */}
-            {current.type === 'powerTypes' && (
-              <>
-               <PowerTypeSection powerTypes={powerTypes} goForward={goForward} productType={product.type as string} genderType={product.biologyCategory as string}/>
-              </>
-            )}
-
-            {current.type === 'lens' && (
-              <>
-                <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo}/>
-              </>
-            )}
+            
             {/* Detail part */}
             {current.type === 'details' && (
               <div className="p-4">
@@ -116,7 +86,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
             )}
             {current.type === "Enter Power Manually" && (
               <>
-                <EnterPowerSection cartInfo={frameWithLensItems}/>
+                <EnterPowerSectionForLens singleLens={singleLens}/>
               </>
             )}
             {current.type === "Upload Prescription" && (
@@ -124,16 +94,8 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
                 <UploadPrescription cartInfo={frameWithLensItems}/>
               </>
             )}
-            {current.title === "Frame Only" && (
-              <>
-                <FrameOnly cartInfo={onlyFrameItems}/>
-              </>
-            )}
-            {current.type === "details-zero-power" && (
-              <>
-                <ZeroPowerDetailSection/>
-              </>
-            )}
+            
+            
             {current.type === "Submit Power later in 15 days" && (
               <>
                 <SubmitPowerLater cartInfo={frameWithLensItems}/>
@@ -159,4 +121,4 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
     );
 };
 
-export default SlideOptions;
+export default SlideOptionsForLens;

@@ -2,6 +2,7 @@
 "use client"
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ILense } from '@/ts-definition/interfaces';
 
 type TEyePowerValue = {
     sphere?:string;
@@ -15,7 +16,7 @@ type TEyePower = {
     rightEye?:TEyePowerValue;
 }
 
-const EnterPowerSection = ({cartInfo}:{cartInfo:any}) => {
+const EnterPowerSectionForLens = ({singleLens}:{singleLens:ILense}) => {
 
     const router = useRouter();
 
@@ -62,24 +63,32 @@ const EnterPowerSection = ({cartInfo}:{cartInfo:any}) => {
         e.preventDefault();
         const {name, pd, phoneNumber, email, address} = e.target;
 
+        const totalPrice = singleLens.salesPrice
+        console.log(singleLens)
         const cartData = {
             customerName: name.value, //string
             phoneNumber:phoneNumber.value, 
             email: email.value,
             address:address.value,
             items: [
-                {   ...cartInfo,
+                {
+                    
+                    lensId:singleLens._id,
                     pd: Number(pd.value),
+                    type: "lens",
+                    submitType:"Enter Power Manually",
+                    quantity: 1,
+                    unitPrice: totalPrice,
+                    subtotal: totalPrice,
                     leftEye: eyePower.leftEye,
                     rightEye: eyePower.rightEye,
-                    submitType:"Enter Power Manually",
                 }
             ],
-            totalAmount: Number(cartInfo.subtotal),
+            totalAmount: totalPrice,
             deliveryFee: 70,
         }
-        setLoading('pending...')
         console.log(cartData)
+        setLoading('pending...')
        try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}cart/create-cart`, {
             method: "POST",
@@ -380,4 +389,4 @@ const EnterPowerSection = ({cartInfo}:{cartInfo:any}) => {
     );
 };
 
-export default EnterPowerSection;
+export default EnterPowerSectionForLens;

@@ -57,9 +57,12 @@ export interface ILenseFeatures {
 }
 
 export interface ILense {
+  _id?: string;
   id?: string;
   type: string;
+  salesPrice?: string;
   subType: string;
+  name?: string;
   title: string;
   features: ILenseFeatures[];
   price: number;

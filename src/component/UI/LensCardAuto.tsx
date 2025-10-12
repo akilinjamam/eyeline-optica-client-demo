@@ -21,7 +21,7 @@ const LensCardAuto:React.FC<TLens> = ({images, name, brand, salesPrice,  color, 
       </span>
 
       <div className=" mb-3 w-full flex items-center justify-center">
-        <Link href={`/productDetail/${_id}`}>
+        <Link href={`/lensDetail/${_id}`}>
           <Image
           src={images?.length && images?.length > 0 ? images?.[0] : defaultImage}
           alt={name as string}
