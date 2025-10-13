@@ -150,5 +150,6 @@ export type TContactLens = {
   offer?: number; // percentage (0-100)
   rating?: number; // 1-5
   description?: string;
+  additionalType?: string;
   images: string[];
 };

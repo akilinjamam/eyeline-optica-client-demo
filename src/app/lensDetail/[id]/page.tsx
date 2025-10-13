@@ -8,8 +8,6 @@ import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TData, TLens } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
-
-
 async function getSingleLens(id: string) {
 
   const response = await fetch(
@@ -21,12 +19,6 @@ async function getSingleLens(id: string) {
   if (!response.ok) return null;
   return response.json();
 }
-
-async function getAllLensData(){
-  const response = await fetch('https://server.eyelineoptica.com/api/v1/lens');
-  return response.json();
-};
-
 
 type ParamsPromise = Promise<{ id: string }>;
 
@@ -42,31 +34,6 @@ export default async function SingleProduct({
   
   const singleLens = product?.data;
 
-  const lensData = await getAllLensData() as TData<TLens[]>;
-
-  const allLens = lensData?.data?.data?.map((item:TLens) => {
-    return {
-      type: "Lense",
-      subType: item?.lensType,
-      title: item?.name,
-      features: item?.coatings?.map((coating:string) => coating),
-      price: item?.salesPrice,
-      images: item?.images?.map((img) => img),
-      index: item?.index,
-      material:item?.material,
-      thickness: item?.thickness,
-      color:item?.color,
-      diameter:item?.diameter,
-      warrenty:item?.warranty,
-      deliveryTime:item?.deliveryTime,
-      offer:item?.offer,
-      rating:item?.rating,
-      brand:item?.brand,
-      category:item?.category,
-      description:item?.description,
-      id:item?._id
-    }
-  });
 
   return (
     <div className="w-full bg-blue-50 px-1">
@@ -75,7 +42,7 @@ export default async function SingleProduct({
           <ImagePart product={singleLens} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
-          <DetailPartForLens singleLens={singleLens as any} lens={allLens as any} />
+          <DetailPartForLens singleLens={singleLens as any}  />
         </div>
       </div>
 

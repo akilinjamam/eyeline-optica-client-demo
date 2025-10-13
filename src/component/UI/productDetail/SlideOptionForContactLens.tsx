@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { ILense } from '@/ts-definition/interfaces';
@@ -6,12 +7,16 @@ import LenseDetailSection from './LenseDetailSection';
 import UploadPrescription from './UploadPrescription';
 import LneseFeatureSection from './LneseFeatureSection';
 import SubmitPowerLater from '@/component/SubmitPowerLater';
-import EnterPowerSectionForLens from './EnterPowerSectionForLens';
+import ContactLensPowerOption from './ContactLensPowerOptions';
+// import WithoutPowerContactLens from './WithoutPowerContactLens';
+import ContactLensAccessories from './ContactLensAccessories';
+import ZeroPowerContactLens from './ZeroPowerContactLens';
+import EnterPowerSectionForContactLens from './EnterPowerSectionForContactLens';
 
-const SlideOptionsForLens = ({singleLens}: {singleLens:ILense}) => {
+const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
    console.log(singleLens)
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
-    { type: 'details' }, 
+    { type: 'powerType' }, 
   ]);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [selectedLense, setSelectedLense] = useState<ILense | null>(null);
@@ -19,13 +24,15 @@ const SlideOptionsForLens = ({singleLens}: {singleLens:ILense}) => {
   const current = history[history.length - 1];
   console.log(current);
 
-   const LensWithPowerItems = {
-      lensId:singleLens._id,
-      type: "lens",
+   const contactLensItems = {
+      contactLensId:singleLens._id,
+      type: "contact_lens",
       quantity: 1,
       unitPrice: singleLens.salesPrice,
       subtotal: singleLens.salesPrice,
   }
+
+  console.log(contactLensItems)
  
   // Variants depending on direction
   const variants = {
@@ -79,26 +86,46 @@ const SlideOptionsForLens = ({singleLens}: {singleLens:ILense}) => {
 
             
             {/* Detail part */}
-            {current.type === 'details' && (
+            {current.type === 'powerType' && (
               <div className="p-4">
-                <LenseDetailSection goForward={goForward} />
+                <ContactLensPowerOption goForward={goForward} />
+              </div>
+            )}
+            {current.type === 'with power' && (
+              <div className="p-4">
+                <ContactLensAccessories goForward={goForward} current={current as any}/>
+              </div>
+            )}
+            {current.type === 'without power' && (
+              <div className="p-4">
+                    <ContactLensAccessories goForward={goForward} current={current as any}/>
               </div>
             )}
             {current.type === "Enter Power Manually" && (
               <>
-                <EnterPowerSectionForLens singleLens={singleLens}/>
+                <EnterPowerSectionForContactLens singleLens={singleLens}/>
               </>
             )}
             {current.type === "Upload Prescription" && (
               <>
-                <UploadPrescription cartInfo={LensWithPowerItems}/>
+                <UploadPrescription cartInfo={contactLensItems}/>
               </>
             )}
             
             
             {current.type === "Submit Power later in 15 days" && (
               <>
-                <SubmitPowerLater cartInfo={LensWithPowerItems}/>
+                <SubmitPowerLater cartInfo={contactLensItems}/>
+              </>
+            )}
+            {(current.title === "with power and accessories" && current.type === "Only Contact Lens" ) && (
+              <>
+                <LenseDetailSection goForward={goForward}/>
+              </>
+            )}
+            {(current.title === "without power and accessories" && current.type === "Only Contact Lens" ) && (
+              <>
+                <ZeroPowerContactLens cartInfo={contactLensItems}/>
               </>
             )}
           </motion.div>
@@ -121,4 +148,4 @@ const SlideOptionsForLens = ({singleLens}: {singleLens:ILense}) => {
     );
 };
 
-export default SlideOptionsForLens;
+export default SlideOptionsForContactLens;

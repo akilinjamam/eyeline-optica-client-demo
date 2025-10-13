@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import Image from 'next/image';
-import SlideOptionsForLens from './SlideOptionForLens';
+import SlideOptionsForContactLens from './SlideOptionForContactLens';
 
 export type TLensInfo = {
   title:string;
@@ -11,9 +11,8 @@ export type TLensInfo = {
   id:string;
 }
 
-const SlideImageAndPriceDetailForLens = ({ singleLens }: { singleLens: any }) => {
+const SlideImageAndPriceDetailForContactLens = ({ singleLens }: { singleLens: any }) => {
   
- 
   return (
     <div className="p-2">
       {/* top section */}
@@ -48,9 +47,9 @@ const SlideImageAndPriceDetailForLens = ({ singleLens }: { singleLens: any }) =>
 
       {/* Sliding container */}
       
-      <SlideOptionsForLens singleLens={singleLens}/>
+       <SlideOptionsForContactLens singleLens={singleLens}/>
     </div>
   );
 };
 
-export default SlideImageAndPriceDetailForLens;
+export default SlideImageAndPriceDetailForContactLens

@@ -49,15 +49,16 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
           <CartItem
             key={item?._id}
             id={item?._id}
-            image={item?.items[0]?.productId?.images[0] || item?.items[0]?.lensId?.images[0] as any}
+            image={item?.items[0]?.productId?.images[0] || item?.items[0]?.lensId?.images[0] || item?.items[0]?.contactLensId?.images[0]  as any}
             type={item?.items[0]?.submitType ? item?.items[0]?.submitType : ''}
-            name={item?.items[0]?.productId?.name || item?.items[0]?.lensId?.name}
-            color={item?.items[0]?.productId?.color || item?.items[0]?.lensId?.color}
-            lensType={item?.items[0]?.lensId?.lensType}
+            name={item?.items[0]?.productId?.name || item?.items[0]?.lensId?.name || item?.items[0]?.contactLensId?.name}
+            color={item?.items[0]?.productId?.color || item?.items[0]?.lensId?.color || item?.items[0]?.contactLensId?.color}
+            lensType={item?.items[0]?.contactLensId?.type}
             pd={item?.items[0]?.pd as number}
             price={item.totalAmount}
             lensPrice={item.items[0]?.lensId?.salesPrice}
             framePrice={item.items[0]?.productId?.salesPrice}
+            contactLensPrice={item.items[0]?.contactLensId?.salesPrice}
             deliveryFee={item.deliveryFee}
             rightEye={{
               sphere: item?.items[0]?.rightEye?.sphere as string,

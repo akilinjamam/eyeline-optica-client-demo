@@ -21,13 +21,13 @@ const ContactLensCardAuto:React.FC<TContactLens> = ({images, name, brand, salesP
       </span>
 
       <div className=" mb-3 w-full flex items-center justify-center">
-        <Link href={`/productDetail/${_id}`}>
+        <Link href={`/contactLensDetail/${_id}`}>
           <Image
           src={images?.length && images?.length > 0 ? images?.[0] : defaultImage}
           alt={name as string}
           width={120}
           height={60}
-          className="object-contain block  "
+          className="object-contain block"
         />
         </Link>
       </div>

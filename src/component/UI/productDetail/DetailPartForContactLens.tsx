@@ -3,10 +3,10 @@
 import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'lucide-react';
 import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
-import SlideInPanelForLens from './SlidePannelForLens';
+import SlideInPanelForContactLens from './SlideInPanelForContactLens';
 
 
-const DetailPartForLens = ({singleLens}: {singleLens:any}) => {
+const DetailPartForContactLens = ({singleLens}: {singleLens:any}) => {
  
 const [showLensPanel, setShowLensPanel] = useState(false);
 
@@ -75,7 +75,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
       </p>
         <AnimatePresence>
           {showLensPanel && (
-            <SlideInPanelForLens onClose={() => setShowLensPanel(false)} singleLens={singleLens} />
+            <SlideInPanelForContactLens onClose={() => setShowLensPanel(false)} singleLens={singleLens} />
           )}
         </AnimatePresence>
       <div className="flex justify-center gap-4 text-blue-600 mt-2">
@@ -88,4 +88,4 @@ const [showLensPanel, setShowLensPanel] = useState(false);
   );
 };
 
-export default DetailPartForLens;
+export default DetailPartForContactLens;

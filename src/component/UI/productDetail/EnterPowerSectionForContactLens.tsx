@@ -16,7 +16,7 @@ type TEyePower = {
     rightEye?:TEyePowerValue;
 }
 
-const EnterPowerSectionForLens = ({singleLens}:{singleLens:ILense}) => {
+const EnterPowerSectionForContactLens = ({singleLens}:{singleLens:ILense}) => {
 
     const router = useRouter();
 
@@ -73,9 +73,9 @@ const EnterPowerSectionForLens = ({singleLens}:{singleLens:ILense}) => {
             items: [
                 {
                     
-                    lensId:singleLens._id,
+                    contactLensId:singleLens._id,
                     pd: Number(pd.value),
-                    type: "lens",
+                    type: "contact_lens",
                     submitType:"Enter Power Manually",
                     quantity: 1,
                     unitPrice: totalPrice,
@@ -396,4 +396,4 @@ const EnterPowerSectionForLens = ({singleLens}:{singleLens:ILense}) => {
     );
 };
 
-export default EnterPowerSectionForLens;
+export default EnterPowerSectionForContactLens;

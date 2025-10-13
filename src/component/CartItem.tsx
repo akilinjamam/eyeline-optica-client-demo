@@ -25,6 +25,7 @@ interface CartItemProps {
   deliveryFee: number;
   lensPrice: number;
   framePrice: number;
+  contactLensPrice:number;
   onEdit?: () => void;
   onRemove?: () => void;
 }
@@ -43,6 +44,7 @@ export default function CartItem({
   deliveryFee,
   lensPrice,
   framePrice,
+  contactLensPrice,
   onEdit,
   onRemove,
 }: CartItemProps) {
@@ -105,6 +107,12 @@ export default function CartItem({
               <p>
                 <span className="font-medium text-gray-700">Lens Price:</span>{" "}
                 ৳{lensPrice.toLocaleString()}
+              </p>
+            )}
+            {contactLensPrice > 0 && (
+              <p>
+                <span className="font-medium text-gray-700">Contact Lens Price:</span>{" "}
+                ৳{contactLensPrice.toLocaleString()}
               </p>
             )}
             <p>
