@@ -24,7 +24,7 @@ export type Prescription = {
 
 // 🛒 Each item in the cart
 export type CartItem = {
-  type: "frame" | "frame_with_lens" | "lens" | "contact_lens" | "accessory";
+  type: "frame" | "frame_with_lens" | "lens" | "contact_lens" | "accessory" | "";
   submitType?:string;
   productId?: any;
   lensId?: any;

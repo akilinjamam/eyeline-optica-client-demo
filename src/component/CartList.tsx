@@ -6,6 +6,8 @@ import { Cart, JwtPayload } from "@/app/cart/page";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 type TCart<T> = {
   success: boolean;
@@ -16,6 +18,8 @@ type TCart<T> = {
 
 export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
   const [name, setName] = useState("");
+  const router = useRouter();
+  const {addToCart} = useCart()
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -38,6 +42,14 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
 
   const confirmDelete = () => {
     console.log('hello')
+  }
+
+  const handleCheckout = (value:string) => {
+    const findCart = cart?.data?.find((cart:Cart) => cart?._id === value);
+    if(!findCart) return
+    localStorage.setItem('cartData', JSON.stringify(findCart)) 
+    addToCart(findCart)
+    router.push("/cart/checkout");
   }
 
   return (
@@ -76,6 +88,7 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
               handleDelete(item?._id)
               setOpen(true)
             }}
+            onCheckout={() =>handleCheckout(item?._id) }
           />
         ))
       ) : (

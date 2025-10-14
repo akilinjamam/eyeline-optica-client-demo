@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Trash2, Edit } from "lucide-react";
 
@@ -28,6 +28,7 @@ interface CartItemProps {
   contactLensPrice:number;
   onEdit?: () => void;
   onRemove?: () => void;
+  onCheckout?: () => void
 }
 
 export default function CartItem({
@@ -47,11 +48,16 @@ export default function CartItem({
   contactLensPrice,
   onEdit,
   onRemove,
+  onCheckout,
 }: CartItemProps) {
   const [qty, setQty] = useState(quantity);
 
   // ✅ Compute total price dynamically
   const totalPrice = useMemo(() => price * qty + deliveryFee, [price, qty, deliveryFee]);
+
+  useEffect(() => {
+    localStorage.setItem("newQty", qty.toString())
+  },[qty])
 
   return (
     <div className="flex flex-col md:flex-row gap-5 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 mb-6 border border-gray-100">
@@ -183,6 +189,15 @@ export default function CartItem({
               <Trash2 size={16} /> Remove
             </button>
           </div>
+        </div>
+        {/* ✅ Checkout Button */}
+        <div className="mt-5 flex justify-end">
+          <button
+            onClick={onCheckout} // or use Next.js router
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-sm transition-colors"
+          >
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>
