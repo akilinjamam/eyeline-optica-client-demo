@@ -30,8 +30,8 @@ export default function ReturnAndRefundPolicyPage() {
       <h2 className="text-xl font-semibold mt-6 mb-2">4. Contact Information</h2>
       <p className="mb-2">For any refund or return inquiries, please contact:</p>
       <p>Email: <a href="mailto:support@eyelineoptica.com" className="text-blue-600 underline">support@eyelineoptica.com</a></p>
-      <p>Phone: [Insert your business phone number]</p>
-      <p>Address: [Insert your registered business address]</p>
+      <p>Phone: --------------</p>
+      <p>Address: -----------------</p>
 
       <p className="mt-10 text-sm text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
     </div>
