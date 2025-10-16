@@ -43,7 +43,7 @@ export default function TermsAndConditionsPage() {
         Eyeline Optica will not be liable for indirect or consequential damages resulting from product use or delivery delays.
       </p>
 
-      <p className="mt-10 text-sm text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
+      <p className="mt-10 text-sm text-gray-500">Last updated: 10/15/2025</p>
     </div>
   );
 }

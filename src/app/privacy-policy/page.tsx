@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
         <a href="mailto:support@eyelineoptica.com" className="text-blue-600 underline"> support@eyelineoptica.com</a>.
       </p>
 
-      <p className="mt-10 text-sm text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
+      <p className="mt-10 text-sm text-gray-500">Last updated: 10/15/2025</p>
     </div>
   );
 }

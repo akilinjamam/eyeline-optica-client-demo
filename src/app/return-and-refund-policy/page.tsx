@@ -33,7 +33,7 @@ export default function ReturnAndRefundPolicyPage() {
       <p>Phone: --------------</p>
       <p>Address: -----------------</p>
 
-      <p className="mt-10 text-sm text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
+      <p className="mt-10 text-sm text-gray-500">Last updated: 10/15/2025</p>
     </div>
   );
 }

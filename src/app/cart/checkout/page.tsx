@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -5,9 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import { CreditCard } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import sslLogo from "../../../../public/images/ssl-photo.png";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function CheckoutPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { cart } = useCart();
   const getNewQtyRef = useRef<string>("");
 
@@ -34,9 +37,9 @@ export default function CheckoutPage() {
     });
   }, [cart]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setLoading(true);
     const quantity = Number(getNewQtyRef.current) || 1;
     const subtotal = cart.items[0]?.subtotal * quantity;
     const deliveryFee = cart.deliveryFee || 0;
@@ -59,15 +62,47 @@ export default function CheckoutPage() {
     }
 
     console.log({
-      billing,
       shipping,
       totalCost,
       payableAmount,
       dueAmount,
+      cart_id: cart._id
     });
 
-    // 🔹 TODO: Integrate SSLCommerz payment redirection with payableAmount
-    // redirectToSSLCommerz(payableAmount);
+    const sendDataForPayment = {
+      quantity: quantity,
+      customer_name: billing.name,
+      customer_phone: cart.phoneNumber,
+      customer_email: billing.email,
+      customer_address: shipping.address,
+      totalCost,
+      payableAmount,
+      dueAmount,
+      cart_id: cart._id
+    }
+
+    console.log(sendDataForPayment)
+
+    try {
+      const sendData = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}ssl/ssl-init`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sendDataForPayment),
+    });
+
+    const data = await sendData.json();
+    console.log(data);
+    if(data.success){
+      setLoading(false);
+      window.location.href = data?.data
+    }else{
+      toast.error(data.message)
+      setLoading(false);
+    }
+
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   // Precalculate totals for UI
@@ -91,6 +126,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">
+       <ToastContainer/>
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* LEFT: Order Summary */}
         <div>
@@ -234,7 +270,7 @@ export default function CheckoutPage() {
                 }
               />
               <input
-                value={billing.phone}
+                value={cart.phoneNumber}
                 type="text"
                 placeholder="Phone Number"
                 className="border border-gray-200 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none md:col-span-2"
@@ -310,7 +346,10 @@ export default function CheckoutPage() {
           </div>
 
           {/* Submit */}
-          <button
+          {
+            !loading
+            ?
+            <button
             type="submit"
             disabled={!isChecked}
             className={`w-full font-semibold py-3 rounded-lg transition-colors ${
@@ -321,6 +360,14 @@ export default function CheckoutPage() {
           >
             Place Order & Pay ৳{payableAmount}
           </button>
+          :
+          <button
+            disabled={true}
+            className={`w-full font-semibold py-3 rounded-lg transition-colors bg-blue-600 text-white cursor-not-allowed`}
+          >
+            Initializing...
+          </button>
+          }
         </form>
       </div>
     </div>

@@ -167,7 +167,7 @@ export default function CartItem({
               value={qty}
               onChange={(e) => setQty(Number(e.target.value))}
             >
-              {[1, 2, 3, 4, 5].map((num) => (
+              {Array.from({length:55}, (_,i) => i + 1).map((num) => (
                 <option key={num} value={num}>
                   {num}
                 </option>
