@@ -61,10 +61,11 @@ console.log(product)
             *multifocal or readers lenses start at additional cost
           </p>
         </div>
+        {product.stock && product?.stock ? <p className='text-green-500 font-bold'>Available {product?.quantity}</p> : <p className='text-red-400 font-bold'>Stock Out</p> }
       </div>
 
       <div className="flex flex-col space-y-3">
-        <button onClick={() => setShowLensPanel(true)} className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-full font-semibold cursor-pointer">
+        <button disabled={!product.stock} onClick={() => setShowLensPanel(true)} className={`text-white py-2 rounded-full font-semibold  ${product?.stock ? 'bg-gradient-to-r from-blue-500 to-blue-700 cursor-pointer' : 'bg-gradient-to-r from-gray-500 to-gray-700 cursor-not-allowed'}`}>
           Procced to Cart
         </button>
         <button className="border border-blue-500 text-blue-500 py-2 rounded-full flex items-center justify-center gap-2 font-semibold">

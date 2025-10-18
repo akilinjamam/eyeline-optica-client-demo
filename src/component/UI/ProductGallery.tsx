@@ -3,7 +3,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import GlassCardAuto from "./GlassCardAuto";
-import { TFrame, TLens } from "@/ts-definition/types";
+import { TLens } from "@/ts-definition/types";
 import Pagination from "../Pagination";
 
 export type Props = {
@@ -52,7 +52,7 @@ const ProductGallery = ({ data,  currentPage, totalPage }: Props) => {
 
       <section className="w-full p-2 flex flex-col items-center">
         <div className="flex gap-2 flex-wrap w-[70%] md:w-full lg:w-full">
-          {data?.map(({ color, name, brand, salesPrice, badge, images, _id }: TFrame, index: number) => (
+          {data?.map(({ color, name, brand, salesPrice, badge, images, _id }: any, index: number) => (
             <GlassCardAuto
               key={index}
               color={color}

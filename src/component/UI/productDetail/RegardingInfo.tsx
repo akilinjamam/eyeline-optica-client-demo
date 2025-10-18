@@ -1,10 +1,10 @@
 'use client'
-import { TFrame, TRegardingInfoTab } from '@/ts-definition/types';
+import { TFrame, TLens, TRegardingInfoTab } from '@/ts-definition/types';
 import React, { useState } from 'react';
 import OtherDetailInfo from './OtherDetailInfo';
 import Description from './Description';
 
-const RegardingInfo = ({data}:{data:TFrame}) => {
+const RegardingInfo = ({data}:{data:TFrame | TLens}) => {
     const [selectTab, setSelectTab] = useState<number>(0);
 
     const info:TRegardingInfoTab[] = [

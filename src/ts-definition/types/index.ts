@@ -90,6 +90,7 @@ export type TFrame = {
   frameMeasurements?: string;
   frameDetails?: string;
   prescriptionDetails?: string;
+  stock?: boolean;
   date?: string; // ISO date
   createdAt?: string; // ISO date
   updatedAt?: string; // ISO date

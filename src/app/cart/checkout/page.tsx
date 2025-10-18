@@ -84,7 +84,7 @@ export default function CheckoutPage() {
     console.log(sendDataForPayment)
 
     try {
-      const sendData = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}ssl/ssl-init`, {
+      const sendData = await fetch(`http://localhost:5000/api/v1/ssl/ssl-init`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sendDataForPayment),
