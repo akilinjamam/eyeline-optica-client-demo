@@ -21,9 +21,21 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
       const result = data?.filter((item:TFrame) => item?.type === 'sunglasses');
       setDataAccordingToPath(result)
     }
-    if(location ===  '/allglasses/brand'){
+    if(location ===  '/allglasses/brand' || location ===  '/allglasses/bestSelling'){
       setDataAccordingToPath(data)
-    }
+    }    
+    if(location ===  '/allglasses/mensGlasses' || location ===  '/allglasses/womensGlasses' || location ===  '/allglasses/kidsGlasses'){
+      const result = data?.filter((item:TFrame) => item?.biologyCategory === 'men' || item?.biologyCategory === 'women' || item?.biologyCategory === 'kids');
+      setDataAccordingToPath(result)
+    }    
+    if(location ===  '/allglasses/womensGlasses'){
+      const result = data?.filter((item:TFrame) => item?.biologyCategory === 'women' );
+      setDataAccordingToPath(result)
+    }    
+    if( location ===  '/allglasses/kidsGlasses'){
+      const result = data?.filter((item:TFrame) =>  item?.biologyCategory === 'kids');
+      setDataAccordingToPath(result)
+    }    
   },[location, data])
   
 

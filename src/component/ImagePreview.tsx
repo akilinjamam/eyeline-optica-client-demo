@@ -8,9 +8,10 @@ import imageFour from '../../public/images/glass-4.png';
 import imageFive from '../../public/images/glass-5.png';
 import imageSix from '../../public/images/glass-6.png';
 import useSwipe from '@/custom-hooks/useSwipe';
+import { useRouter } from 'next/navigation';
 
 const ImagePreview:FC = () => {
-
+    const router = useRouter();
     const swipeRef = useRef(null);
 
     const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
@@ -19,45 +20,45 @@ const ImagePreview:FC = () => {
         id: number;
         name: string;
         image: StaticImageData;
+        link:string;
     };
     const elements:Element[] = [
         {
             id: 1,
             name: 'Eyeglasses',
-            image: imageOne
+            image: imageOne,
+            link: "/allglasses"
         },
         {
             id: 2,
             name: 'Sunglasses',
-            image: imageTwo
+            image: imageTwo,
+            link: "/allglasses/sunglasses"
         },
         {
             id: 3,
             name: 'Special Glasses',
-            image: imageThree
+            image: imageThree,
+            link: "/allglasses/not-added"
         },
         {
             id: 4,
             name: 'Contact Lenses',
-            image: imageFour
+            image: imageFour,
+            link: "/allContactLens"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
-            image: imageFive
+            image: imageFive,
+            link: "/allglasses/not-added"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
-            image: imageSix
+            image: imageSix,
+            link: "/allLens/progressiveLens"
         },
-        {
-            id: 7,
-            name: 'Progressive Lenses',
-            image: imageSix
-        },
-        
-        
     ]
     return  (
     <div className="w-full px-4 py-4 overflow-x-hidden relative">
@@ -79,6 +80,7 @@ const ImagePreview:FC = () => {
       >
         {elements.map((element: Element) => (
           <div
+            onClick={() => router.push(element.link)}
             key={element.id}
             className="shrink-0 mb-4 bg-white w-[180px] h-[150px] p-2 rounded-md shadow-sm"
           >
@@ -88,7 +90,7 @@ const ImagePreview:FC = () => {
                 width={100}
                 src={element.image}
                 alt={element.name}
-                className="rounded-md"
+                className="rounded-md cursor-pointer"
               />
             </div>
             <p className="text-sm font-semibold text-center text-blue-400 mt-1.5">

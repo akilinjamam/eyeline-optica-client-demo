@@ -8,8 +8,12 @@ import arrowRight from '../../public/images/arrow-right.png'
 import Title from './Title';
 import GlassCard from './GlassCard';
 import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
+import { ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const MensSunglass = ({data} : {data:TFrame[]}) => {
+
+    const router = useRouter();
 
     const contactLense:TContactLenseData ={
         lense: mensImg
@@ -25,6 +29,13 @@ const MensSunglass = ({data} : {data:TFrame[]}) => {
                 <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
             </div>
             <div className='w-full'>
+                <br />
+                <div className='w-[90%] sm:w-[75%] md:w-[85%] lg:w-[1200px] mx-auto flex items-center justify-end'>
+                    <div className=' w-[130px] mt-2 px-2 py-2 text-white  font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer flex  items-center justify-between'>
+                        <button onClick={() => router.push('/allglasses/mensGlasses')} >Shop Now </button>
+                        <ArrowRight/>
+                    </div>
+                </div>
                 <div className='flex items-center justify-around lg:w-[1200px] md:w-[80%] mx-auto gap-5 relative'>
                             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                             <div style={{userSelect:'none'}}  ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2 '>
