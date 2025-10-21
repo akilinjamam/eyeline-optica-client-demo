@@ -270,6 +270,12 @@ export const powerTypeAndAccessories: IPowerOptions[] = [
       "All-in-one travel combo with contact lens bag and kit for daily convenience.",
   },
   {
+    title: "with power and accessories",
+    subTitle: "With Solution + Bag + Kit",
+    description:
+      "All-in-one travel combo with contact lens bag and kit for daily convenience.",
+  },
+  {
     title: "without power and accessories",
     subTitle: "Only Contact Lens",
     description: "choose your desired solution here",
@@ -307,6 +313,12 @@ export const powerTypeAndAccessories: IPowerOptions[] = [
   {
     title: "without power and accessories",
     subTitle: "With Kit + Bag",
+    description:
+      "All-in-one travel combo with contact lens bag and kit for daily convenience",
+  },
+  {
+    title: "without power and accessories",
+    subTitle: "With Solution + Bag + Kit",
     description:
       "All-in-one travel combo with contact lens bag and kit for daily convenience",
   },

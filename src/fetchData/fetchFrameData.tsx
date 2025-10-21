@@ -45,3 +45,17 @@ export async function getcontactLens(query:Record<string,string>) {
   
   return res.json();
 }
+export async function getAccessory(query:Record<string,string>) {
+  const mergedQuery = query // always include type
+
+  const params = new URLSearchParams(mergedQuery).toString();
+
+  const res = await fetch(`https://server.eyelineoptica.com/api/v1/accessory/get-accessories?${params}`, {
+      next: {revalidate: 120},
+    });
+
+  if (!res.ok) throw new Error("Failed to fetch accessory");
+
+  
+  return res.json();
+}

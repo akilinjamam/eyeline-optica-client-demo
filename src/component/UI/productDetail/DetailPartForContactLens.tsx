@@ -4,9 +4,10 @@ import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'luci
 import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 import SlideInPanelForContactLens from './SlideInPanelForContactLens';
+import { TAccessory } from '@/ts-definition/types';
 
 
-const DetailPartForContactLens = ({singleLens}: {singleLens:any}) => {
+const DetailPartForContactLens = ({singleLens, allAccessory}: {singleLens:any, allAccessory:TAccessory[]}) => {
  
 const [showLensPanel, setShowLensPanel] = useState(false);
 
@@ -75,7 +76,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
       </p>
         <AnimatePresence>
           {showLensPanel && (
-            <SlideInPanelForContactLens onClose={() => setShowLensPanel(false)} singleLens={singleLens} />
+            <SlideInPanelForContactLens onClose={() => setShowLensPanel(false)} singleLens={singleLens} allAccessory={allAccessory}/>
           )}
         </AnimatePresence>
       <div className="flex justify-center gap-4 text-blue-600 mt-2">

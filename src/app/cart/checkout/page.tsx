@@ -7,6 +7,7 @@ import { CreditCard } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import sslLogo from "../../../../public/images/ssl-photo.png";
 import { toast, ToastContainer } from "react-toastify";
+import { TAccessoryItem } from "@/ts-definition/types";
 
 export default function CheckoutPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -47,6 +48,7 @@ export default function CheckoutPage() {
     const hasFrame = !!cart.items[0]?.productId;
     const hasLens = !!cart.items[0]?.lensId;
     const hasContactLens = !!cart.items[0]?.contactLensId;
+    const hasAccessory = !!cart.items[0]?.accessoryId;
 
     const totalCost = subtotal + deliveryFee;
 
@@ -56,7 +58,7 @@ export default function CheckoutPage() {
     if (hasFrame && hasLens) {
       payableAmount = totalCost * 0.5;
       dueAmount = totalCost * 0.5;
-    } else if (hasFrame || hasLens || hasContactLens) {
+    } else if (hasFrame || hasLens || hasContactLens || hasAccessory) {
       payableAmount = 200;
       dueAmount = totalCost - 200;
     }
@@ -89,6 +91,11 @@ export default function CheckoutPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sendDataForPayment),
     });
+    //   const sendData = await fetch(`http://localhost:5000/api/v1/ssl/ssl-init`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(sendDataForPayment),
+    // });
 
     const data = await sendData.json();
     console.log(data);
@@ -112,6 +119,7 @@ export default function CheckoutPage() {
   const hasFrame = !!cart.items[0]?.productId;
   const hasLens = !!cart.items[0]?.lensId;
   const hasContactLens = !!cart.items[0]?.contactLensId;
+  const hasAccessory = !!cart.items[0]?.accessoryId
   const totalCost = subtotal + deliveryFee;
 
   let payableAmount = 0;
@@ -119,7 +127,7 @@ export default function CheckoutPage() {
   if (hasFrame && hasLens) {
     payableAmount = totalCost * 0.5;
     dueAmount = totalCost * 0.5;
-  } else if (hasFrame || hasLens || hasContactLens) {
+  } else if (hasFrame || hasLens || hasContactLens || hasAccessory) {
     payableAmount = 200;
     dueAmount = totalCost - 200;
   }
@@ -199,6 +207,29 @@ export default function CheckoutPage() {
                   </p>
                   <p className="text-sm font-semibold text-blue-700">
                     ৳{cart.items[0]?.contactLensId?.salesPrice}
+                  </p>
+                </div>
+              </div>
+            )}
+            {cart?.items[0]?.accessoryId && (
+              <div className="flex items-center gap-4 border border-gray-100 rounded-xl p-3">
+                <div className="relative w-20 h-16">
+                  <Image
+                    src={cart.items[0].accessoryId?.images[0]}
+                    alt="item"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-sm font-medium text-gray-800">
+                    {cart.items[0].accessoryId?.items?.map((v:TAccessoryItem) => v.name)?.join('+')}
+                  </h4>
+                  <p className="text-xs text-gray-500">
+                    {cart.items[0].accessoryId?.items?.map((v:TAccessoryItem) => v.brand)?.join('+')}
+                  </p>
+                  <p className="text-sm font-semibold text-blue-700">
+                    ৳{cart.items[0].accessoryId?.items?.map((v:TAccessoryItem) => v.salesPrice)?.join('+')}
                   </p>
                 </div>
               </div>

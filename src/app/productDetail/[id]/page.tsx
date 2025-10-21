@@ -13,11 +13,7 @@ import { notFound } from "next/navigation";
 async function getSingleProduct(id: string) {
 
   const response = await fetch(
-    `https://server.eyelineoptica.com/api/v1/products/get-single-product/${id}`,{
-        next: {revalidate: 60}
-    },
-
-  );
+    `https://server.eyelineoptica.com/api/v1/products/get-single-product/${id}`);
   if (!response.ok) return null;
   return response.json();
 }

@@ -2,16 +2,32 @@
 'use client'
 import Image from 'next/image';
 import SlideOptionsForContactLens from './SlideOptionForContactLens';
+import { TAccessory } from '@/ts-definition/types';
+import { useState } from 'react';
 
-export type TLensInfo = {
-  title:string;
+export type TAccessoryInfo = {
+  images: string[],
+  name:string;
   price:number;
+  total:number;
   brand:string;
-  color:string;
   id:string;
+  description:string;
+  category:string;
 }
 
-const SlideImageAndPriceDetailForContactLens = ({ singleLens }: { singleLens: any }) => {
+const SlideImageAndPriceDetailForContactLens = ({ singleLens, allAccessory }: { singleLens: any, allAccessory:TAccessory[] }) => {
+
+  const [selectAccessory, setSelectAccessory] = useState<TAccessoryInfo>({
+  images: [],
+  name: "",
+  brand: "",
+  price: 0,
+  total: 0,
+  id: "",
+  description: "",
+  category: ""
+})
   
   return (
     <div className="p-2">
@@ -22,14 +38,22 @@ const SlideImageAndPriceDetailForContactLens = ({ singleLens }: { singleLens: an
         </div>
         <div className="w-[60%] h-[200px] p-1">
           <div className="flex justify-between font-bold text-sm">
-            <label>Frame: {singleLens?.name}</label>
+            <label>{singleLens?.name}</label>
             <p>৳{singleLens?.salesPrice}</p>
           </div>
+          {
+            selectAccessory?.name
+            &&
+            <div className="flex justify-between font-bold text-sm">
+              <label>{selectAccessory?.name}</label>
+              <p>৳{selectAccessory?.price}</p>
+          </div>
+          }
           
           <hr className='my-2'/>
           <div className="flex justify-between font-bold text-sm">
             <label>Sub total:</label>
-            <p>৳{Number(singleLens?.salesPrice) }</p>
+            <p>৳{Number(singleLens?.salesPrice) +  (selectAccessory?.total ? selectAccessory?.total : 0) }</p>
           </div>
           <div className="flex justify-between font-bold text-sm">
             <label>Delivery Charge:</label>
@@ -38,7 +62,7 @@ const SlideImageAndPriceDetailForContactLens = ({ singleLens }: { singleLens: an
           <hr className='my-2'/>
           <div className="flex justify-between font-bold text-sm">
             <label>Total:</label>
-            <p>৳{Number(singleLens?.salesPrice)  + 70 }</p>
+            <p>৳{Number(singleLens?.salesPrice) + (selectAccessory?.total ? selectAccessory?.total : 0)  + 70 }</p>
           </div>
         </div>
       </div>
@@ -47,7 +71,7 @@ const SlideImageAndPriceDetailForContactLens = ({ singleLens }: { singleLens: an
 
       {/* Sliding container */}
       
-       <SlideOptionsForContactLens singleLens={singleLens}/>
+       <SlideOptionsForContactLens singleLens={singleLens} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} selectAccessory={selectAccessory}/>
     </div>
   );
 };

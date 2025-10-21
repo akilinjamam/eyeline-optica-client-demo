@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { Trash2, Edit } from "lucide-react";
+import { Trash2, } from "lucide-react";
 
 interface Prescription {
   sphere: string;
@@ -26,7 +26,7 @@ interface CartItemProps {
   lensPrice: number;
   framePrice: number;
   contactLensPrice:number;
-  onEdit?: () => void;
+  accessoryPrice:number;
   onRemove?: () => void;
   onCheckout?: () => void
 }
@@ -46,7 +46,7 @@ export default function CartItem({
   lensPrice,
   framePrice,
   contactLensPrice,
-  onEdit,
+  accessoryPrice,
   onRemove,
   onCheckout,
 }: CartItemProps) {
@@ -100,9 +100,13 @@ export default function CartItem({
               </p>
 
             }
-            <p>
+            {
+              (framePrice || lensPrice || contactLensPrice)
+              &&
+              <p>
               <span className="font-medium text-gray-700">PD:</span> {pd}
             </p>
+            }
             {framePrice > 0 && (
               <p>
                 <span className="font-medium text-gray-700">Frame Price:</span>{" "}
@@ -119,6 +123,12 @@ export default function CartItem({
               <p>
                 <span className="font-medium text-gray-700">Contact Lens Price:</span>{" "}
                 ৳{contactLensPrice.toLocaleString()}
+              </p>
+            )}
+            {accessoryPrice > 0 && (
+              <p>
+                <span className="font-medium text-gray-700">Accessory Price:</span>{" "}
+                ৳{accessoryPrice.toLocaleString()}
               </p>
             )}
             <p>
@@ -167,7 +177,7 @@ export default function CartItem({
               value={qty}
               onChange={(e) => setQty(Number(e.target.value))}
             >
-              {Array.from({length:55}, (_,i) => i + 1).map((num) => (
+              {Array.from({length:5}, (_,i) => i + 1).map((num) => (
                 <option key={num} value={num}>
                   {num}
                 </option>
@@ -176,12 +186,7 @@ export default function CartItem({
           </div>
 
           <div className="flex gap-4 mt-3 md:mt-0">
-            <button
-              onClick={onEdit}
-              className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors"
-            >
-              <Edit size={16} /> Edit
-            </button>
+            
             <button
               onClick={onRemove}
               className="flex items-center gap-1 text-red-500 hover:text-red-700 text-sm font-medium transition-colors"

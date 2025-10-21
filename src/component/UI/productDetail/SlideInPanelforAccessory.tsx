@@ -1,9 +1,8 @@
 // components/SlideInPanel.tsx
 "use client";
 import { motion } from "framer-motion";
-import { ILense } from "@/ts-definition/interfaces";
-import SlideImageAndPriceDetailForContactLens from "./SlideImageAndPriceDetailForContactLens";
 import { TAccessory } from "@/ts-definition/types";
+import SlideImageAndPriceDetailForAccessory from "./SlideImageAndPriceDetailForAccessory";
 
 const slideInVariants = {
   hidden: { x: "100%" },
@@ -11,7 +10,7 @@ const slideInVariants = {
   exit: { x: "100%" },
 };
 
-export default function SlideInPanelForContactLens({ onClose, singleLens, allAccessory }: { onClose: () => void, singleLens: ILense, allAccessory:TAccessory[] }) {
+export default function SlideInPanelForAccessory({ onClose, singleAccessory }: { onClose: () => void, singleAccessory: TAccessory }) {
 
   return (
     <motion.div
@@ -23,11 +22,11 @@ export default function SlideInPanelForContactLens({ onClose, singleLens, allAcc
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <div className="p-4 flex justify-between items-center border-b">
-        <h2 className="text-xl font-semibold">Select Your Lens</h2>
+        <h2 className="text-xl font-semibold">Select Your Accessory</h2>
         <button onClick={onClose} className="text-xl cursor-pointer">✕</button>
       </div>
       <br />
-      <SlideImageAndPriceDetailForContactLens singleLens={singleLens} allAccessory={allAccessory}/>
+      <SlideImageAndPriceDetailForAccessory singleLens={singleAccessory} />
     </motion.div>
   );
 }

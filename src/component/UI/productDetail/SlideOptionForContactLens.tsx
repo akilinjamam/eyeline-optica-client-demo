@@ -5,21 +5,26 @@ import { ILense } from '@/ts-definition/interfaces';
 import { AnimatePresence, motion } from 'framer-motion';
 import LenseDetailSection from './LenseDetailSection';
 import UploadPrescription from './UploadPrescription';
-import LneseFeatureSection from './LneseFeatureSection';
 import SubmitPowerLater from '@/component/SubmitPowerLater';
 import ContactLensPowerOption from './ContactLensPowerOptions';
 // import WithoutPowerContactLens from './WithoutPowerContactLens';
 import ContactLensAccessories from './ContactLensAccessories';
 import ZeroPowerContactLens from './ZeroPowerContactLens';
 import EnterPowerSectionForContactLens from './EnterPowerSectionForContactLens';
+import FilteredAccessories from './FilteredAccessories';
+import { TAccessory } from '@/ts-definition/types';
+import { TAccessoryInfo } from './SlideImageAndPriceDetailForContactLens';
+import AccessoryFeatureSection from './AccessoryFeatureSection';
+import LenseDetailSectionWithAccessory from './LensDetailSectionWithAccessory';
+import EnterPowerSectionForContactLensAndAccessories from './EnterPowerSectionForContactLensAndAccessories';
 
-const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
-   console.log(singleLens)
+const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, setSelectAccessory}: {singleLens:ILense, allAccessory:TAccessory[], selectAccessory:TAccessoryInfo, setSelectAccessory: any}) => {
+    const [open, setOpen] = useState<boolean>(false)
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
     { type: 'powerType' }, 
   ]);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
-  const [selectedLense, setSelectedLense] = useState<ILense | null>(null);
+
 
   const current = history[history.length - 1];
   console.log(current);
@@ -32,7 +37,16 @@ const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
       subtotal: singleLens.salesPrice,
   }
 
-  console.log(contactLensItems)
+  const contactLensWithAccessory = {
+      contactLensId:singleLens._id,
+      accessoryId: selectAccessory?.id,
+      type: "contact_lens_with_accessory",
+      quantity: 1,
+      unitPrice: Number(singleLens.salesPrice ?? 0) + Number(selectAccessory?.total ?? 0),
+      subtotal: Number(singleLens.salesPrice ?? 0) + Number(selectAccessory?.total ?? 0)
+  }
+
+  console.log(contactLensWithAccessory)
  
   // Variants depending on direction
   const variants = {
@@ -106,9 +120,20 @@ const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
                 <EnterPowerSectionForContactLens singleLens={singleLens}/>
               </>
             )}
+            {(current.type === "details" && current.title === "Enter Power Manually") && (
+              <>
+                <EnterPowerSectionForContactLensAndAccessories singleLens={singleLens} singleAccessory={selectAccessory}/>
+              </>
+            )}
             {current.type === "Upload Prescription" && (
               <>
                 <UploadPrescription cartInfo={contactLensItems}/>
+              </>
+            )}
+            
+            {(current.type === "details" && current.title === "Upload Prescription") && (
+              <>
+                <UploadPrescription cartInfo={contactLensWithAccessory}/>
               </>
             )}
             
@@ -118,9 +143,24 @@ const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
                 <SubmitPowerLater cartInfo={contactLensItems}/>
               </>
             )}
+            {(current.type === "details" && current.title === "Submit Power later in 15 days") && (
+              <>
+                <SubmitPowerLater cartInfo={contactLensWithAccessory}/>
+              </>
+            )}
             {(current.title === "with power and accessories" && current.type === "Only Contact Lens" ) && (
               <>
                 <LenseDetailSection goForward={goForward}/>
+              </>
+            )}
+            {(current.type === "details" && current.title === "with power and accessories" ) && (
+              <>
+                <LenseDetailSectionWithAccessory goForward={goForward}/>
+              </>
+            )}
+            {(current.type === "details" && current.title === "without power and accessories" ) && (
+             <>
+                <ZeroPowerContactLens cartInfo={contactLensWithAccessory}/>
               </>
             )}
             {(current.title === "without power and accessories" && current.type === "Only Contact Lens" ) && (
@@ -128,11 +168,21 @@ const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
                 <ZeroPowerContactLens cartInfo={contactLensItems}/>
               </>
             )}
+            {(current.title === "with power and accessories" && current.type !== "Only Contact Lens" ) && (
+              <>
+                <FilteredAccessories current={current as any}  goForward={goForward} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} setOpen={setOpen}/>
+              </>
+            )}
+            {(current.title === "without power and accessories" && current.type !== "Only Contact Lens" ) && (
+              <>
+                <FilteredAccessories current={current as any}  goForward={goForward} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} setOpen={setOpen}/>
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
       {/* Bottom Sheet Details */}
       <AnimatePresence>
-        {selectedLense && (
+        {open && (
           <motion.div
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -140,7 +190,7 @@ const SlideOptionsForContactLens = ({singleLens}: {singleLens:ILense}) => {
             transition={{ duration: 0.4 }}
             className="absolute bottom-0 left-0 w-full h-[100%] bg-black/20 backdrop-blur-sm rounded-md-2xl shadow-lg z-50 p-4 overflow-y-scroll hide-scrollbar"
           >
-            <LneseFeatureSection selectedLense={selectedLense} setSelectedLense={setSelectedLense}/>
+            <AccessoryFeatureSection selectedAccessory={selectAccessory} setSelectedAccessory={setSelectAccessory} setOpen={setOpen}/>
           </motion.div>
         )}
       </AnimatePresence>

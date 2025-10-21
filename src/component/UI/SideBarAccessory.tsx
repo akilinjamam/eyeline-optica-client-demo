@@ -2,38 +2,30 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import Accordion from "./Accordion";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import {  useRouter, usePathname } from "next/navigation";
 import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
-import { AccordionItemType, TContactLens} from "@/ts-definition/types";
+import { AccordionItemType, TAccessory} from "@/ts-definition/types";
 
-const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
+const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
  
   const location = usePathname();
   const defaultType = location?.split('/')?.[location?.split('/')?.length - 1];
  
   const router = useRouter();
-  const searchParams = useSearchParams();
+
 
   const [getColor, setGetColor] = useState<string>("");
 
   // local mirror of hook-selected filters (makes UI reactive)
   const [localSelected, setLocalSelected] = useState<Record<string, string>>({});
 
-  const brand = [...new Set(data.map((p: TContactLens) => p.brand))]?.map((brand) => ({
-    title: brand,
-  }));
-  const contactLensType = [...new Set(data.map((p: TContactLens) => p.type))]?.map(
-    (size) => ({ title: size })
-  );
-  const material = [
-    ...new Set(data.map((p: TContactLens) => p.material)),
-  ]?.map((material) => ({ title: material }));
-  
 
+  const AccessoryType = [...new Set(data.map((p: TAccessory) => p.type))]?.map(
+    (type) => ({ title: type })
+  );
+  
   const items: AccordionItemType[] = [
-    { title: "BRAND", children: brand },
-    { title: "TYPE", children: contactLensType },
-    { title: "MATERIAL", children: material },
+    { title: "TYPE", children: AccessoryType },
   ];
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -42,28 +34,7 @@ const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
     accordionItem,
   });
 
-  // Initialize localSelected + getColor from current URL on mount / when searchParams changes
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams?.toString() ?? "");
-    const init: Record<string, string> = {};
-    for (const [k, v] of params.entries()) {
-      if (k === "color") {
-        setGetColor(v);
-      } else {
-        init[k] = v;
-      }
-    }
-    setLocalSelected(init);
-    // try to sync hook with URL (safe-guard in case hook expects initialization)
-    try {
-      setSelectData(init as any);
-    } catch (err) {
-      console.log(err)
-      // ignore if hook API differs
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
-
+  
   // Keep localSelected in sync with hook selectedData (hook -> local)
   useEffect(() => {
     setLocalSelected(selectedData ?? {});
@@ -161,25 +132,7 @@ const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
         </div>
 
         {/* Sidebar content */}
-        <p className="font-bold">CONTACT LENS COLOR</p>
-        <br />
-        {data
-          .map((p) => p.color)
-          .filter((c, i, arr) => arr.indexOf(c) === i)
-          .map((color, idx) => (
-            <div key={idx} className="flex items-center">
-              <input
-                type="radio"
-                name="frameColor"
-                value={color}
-                checked={getColor === color}
-                onChange={() => setGetColor(color as string)}
-              />
-              <label className="ml-2">{color}</label>
-            </div>
-          ))}
-        <br />
-
+       
         <Accordion item={items} selectData={setSelectData} />
 
         {/* Selected Filters */}
@@ -237,4 +190,4 @@ const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
   );
 };
 
-export default SidebarContactLens;
+export default SidebarAccessory;

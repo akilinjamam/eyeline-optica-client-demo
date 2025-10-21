@@ -2,30 +2,19 @@
 import Footer from "@/component/Footer";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
-import DetailPartForContactLens from "@/component/UI/productDetail/DetailPartForContactLens";
+import DetailPartForAccessory from "@/component/UI/productDetail/DetalPartForAccessory";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
-import { TAccessory, TContactLens, TData, TLens } from "@/ts-definition/types";
+import { TAccessory,  TData, TLens } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
 async function getSingleLens(id: string) {
 
   const response = await fetch(
-    `https://server.eyelineoptica.com/api/v1/contact-lens/get-contact-lens-by-id/${id}`,{
-        next: {revalidate: 60}
-    },
+    `https://server.eyelineoptica.com/api/v1/accessory/get-accessory-by-id/${id}`);
 
-  );
   if (!response.ok) return null;
   return response.json();
-}
-
-
-async function getAllAccessories(){
-  const allAccessories = await fetch(`https://server.eyelineoptica.com/api/v1/accessory/get-accessories`);
-
-  if (!allAccessories.ok) return null;
-  return allAccessories.json();
 }
 
 type ParamsPromise = Promise<{ id: string }>;
@@ -36,30 +25,25 @@ export default async function page({
   params: ParamsPromise;
 }) {
   const { id } = await params;
-  const product = (await getSingleLens(id)) as TData<TContactLens>;
-  const allAccessories = (await getAllAccessories()) as TData<TAccessory>;
+  const product = (await getSingleLens(id)) as TData<TAccessory>;
   
   if (!product?.data) return notFound();
-  if (!allAccessories?.data) return notFound();
   
-  const singleLens = product?.data;
-  const allAccessoryData = allAccessories?.data?.data;
-  const addingNewFieldWithSingleLens = {...singleLens, additionalType:'contact-lens'}
-
-
+  const singleAccessory = product?.data as any;
+  
   return (
     <div className="w-full bg-blue-50 px-1">
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
-          <ImagePart product={addingNewFieldWithSingleLens} />
+          <ImagePart product={singleAccessory} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
-          <DetailPartForContactLens singleLens={addingNewFieldWithSingleLens as any} allAccessory={allAccessoryData as any} />
+          <DetailPartForAccessory singAccessory={singleAccessory as any} />
         </div>
       </div>
 
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-        <RegardingInfo data={singleLens as TLens} />
+        <RegardingInfo data={singleAccessory as TLens} />
       </div>
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />

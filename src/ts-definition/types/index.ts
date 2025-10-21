@@ -154,3 +154,34 @@ export type TContactLens = {
   additionalType?: string;
   images: string[];
 };
+
+export type TAccessoryItem = {
+  name: string;
+  barcode?: string; // optional since you may default to "not-added"
+  brand: string;
+  category: string;
+  quantity: number;
+  stock?: boolean; // default true
+  purchasePrice: number;
+  salesPrice: number;
+  discount?: number; // default 0
+  sold?: number; // default 0
+  measurement: string;
+  description?: string; // default "not-added"
+};
+
+export type TAccessory = {
+  _id?: string;
+  images: string[];
+  customerId: string; // MongoDB ObjectId as string
+  type:
+    | "With Solution"
+    | "With Bag"
+    | "With Kit"
+    | "With Solution + Kit"
+    | "With Solution + Bag"
+    | "With Kit + Bag"
+    | "With Solution + Bag + Kit"
+    | "others";
+  items: TAccessoryItem[];
+};
