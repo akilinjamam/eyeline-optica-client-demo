@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 export type JwtPayload = {
   id: string; // assuming your token has user ID as `id`
+  customerId?:string;
   email?: string;
   name?:string;
   iat?: number;

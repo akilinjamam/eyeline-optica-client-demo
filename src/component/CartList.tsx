@@ -82,7 +82,10 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
   return (
     <div className="p-6 max-w-5xl mx-auto">
        <ToastContainer/>
-      <h2 className="text-2xl font-semibold mb-4">{name || ""}</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-semibold mb-4">{name || ""}</h2>
+        <button onClick={() => router.push("/cart/paymentHistory")} className="px-2 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold cursor-pointer">Payment History</button>
+      </div>
 
       {cart?.data?.length > 0 ? (
         cart.data.slice()?.reverse()?.map((item: Cart) => (
