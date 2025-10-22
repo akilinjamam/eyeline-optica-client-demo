@@ -224,7 +224,15 @@ const Header: FC = () => {
                   onClick={() => {
                     setQuery('');
                     setShowSuggestions(false);
-                    router.push(`/product/${item._id}`);
+                    if(item?.category === 'Frame'){
+                          router.push(`/productDetail/${item._id}`);
+                        }
+                        if(item?.category === 'Lens'){
+                          router.push(`/lensDetail/${item._id}`);
+                        }
+                        if(item?.category === 'Contact Lens'){
+                          router.push(`/contactLensDetail/${item._id}`);
+                        }
                   }}
                 >
                   <p className="font-medium text-gray-800">{item.name}</p>
