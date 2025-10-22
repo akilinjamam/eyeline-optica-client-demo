@@ -10,12 +10,12 @@ const ContactLensGallery = ({data, currentPage, totalPage}: {data:TContactLens[]
     const router = useRouter();
     const searchParams = useSearchParams();
         
-        //   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        //     const sortValue = event.target.value;
-        //     const params = new URLSearchParams(searchParams);
-        //     params.set("sort", sortValue);
-        //     router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
-        //   };
+          const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+            const sortValue = event.target.value;
+            const params = new URLSearchParams(searchParams);
+            params.set("sort", sortValue);
+            router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
+          };
         
           const handleNextPage = (value:any) => {
             const params = new URLSearchParams(searchParams);
@@ -31,10 +31,10 @@ const ContactLensGallery = ({data, currentPage, totalPage}: {data:TContactLens[]
             <div className='w-full bg-gray-200 py-2 px-3 flex items-center justify-end' >
                 <div className='flex items-center justify-between w-auto '>
                     <label htmlFor="" className='text-blue-500 mx-2'>SORT BY:</label>
-                    <select name="" id="" className='border border-black'>
-                        <option value="hello">Best Sellers</option>
-                        <option value="hello">hello</option>
-                        <option value="hello">hello</option>
+                    <select onChange={handleSortChange} name="" id="" className='border border-black'>
+                        <option value="">Price</option>
+                        <option value="salesPrice">Price (Low → High)</option>
+                        <option value="-salesPrice">Price (High → Low)</option>
                     </select>
                 </div>
             </div>

@@ -11,7 +11,7 @@ import { notFound } from "next/navigation";
 async function getSingleLens(id: string) {
 
   const response = await fetch(
-    `https://server.eyelineoptica.com/api/v1/contact-lens/get-contact-lens-by-id/${id}`,{
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}contact-lens/get-contact-lens-by-id/${id}`,{
         next: {revalidate: 60}
     },
 
@@ -22,7 +22,7 @@ async function getSingleLens(id: string) {
 
 
 async function getAllAccessories(){
-  const allAccessories = await fetch(`https://server.eyelineoptica.com/api/v1/accessory/get-accessories`);
+  const allAccessories = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}accessory/get-accessories`);
 
   if (!allAccessories.ok) return null;
   return allAccessories.json();

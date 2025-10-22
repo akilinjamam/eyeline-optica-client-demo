@@ -18,12 +18,12 @@ const ProductGallery = ({ data,  currentPage, totalPage }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-//   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//     const sortValue = event.target.value;
-//     const params = new URLSearchParams(searchParams);
-//     params.set("sort", sortValue);
-//     router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
-//   };
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const sortValue = event.target.value;
+    const params = new URLSearchParams(searchParams);
+    params.set("sort", sortValue);
+    router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
+  };
 
   const handleNextPage = (value:any) => {
     const params = new URLSearchParams(searchParams);
@@ -41,11 +41,11 @@ const ProductGallery = ({ data,  currentPage, totalPage }: Props) => {
           <select
             className="border border-black"
             // value={currentSort}
-            // onChange={handleSortChange}
+            onChange={handleSortChange}
           >
-            <option value="bestseller">Best Sellers</option>
-            <option value="price_asc">Price (Low → High)</option>
-            <option value="price_desc">Price (High → Low)</option>
+            <option value="">Price</option>
+            <option value="salesPrice">Price (Low → High)</option>
+            <option value="-salesPrice">Price (High → Low)</option>
           </select>
         </div>
       </div>

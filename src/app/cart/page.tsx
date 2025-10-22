@@ -80,6 +80,15 @@ export default function Page() {
     };
 
     getCart();
+
+    // 🔥 Listen for the custom event
+    const handleCartUpdated = () => getCart()
+
+    window.addEventListener("cartUpdated", handleCartUpdated);
+
+    // cleanup listener
+    return () => window.removeEventListener("cartUpdated", handleCartUpdated);
+
   }, [router]);
 
   return <CartList cart={cart}/>;

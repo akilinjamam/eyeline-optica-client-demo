@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
 
 type TCart<T> = {
   success: boolean;
@@ -32,16 +33,42 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
   }, []);
 
    const [open, setOpen] = useState(false);
+   const [selectedCartId, setSelectedCartId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+ 
 
   const handleDelete = (id:string) => {
+    setSelectedCartId(id);
     console.log(id)
     // your delete logic here
     console.log("Item deleted ✅");
     setOpen(false);
   }
 
-  const confirmDelete = () => {
-    console.log('hello')
+  const confirmDelete = async () => {
+    if (!selectedCartId) return;
+    try {
+      setLoading(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}cart/delete-cart-by-id/${selectedCartId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+      if (!res.ok) toast.error(data.message)
+      if(res.ok) {
+        toast.success(data.message)
+        setOpen(false);
+        window.dispatchEvent(new Event("cartUpdated"));
+      }
+      
+      setSelectedCartId(null);
+      console.log("✅ Cart deleted successfully");
+    } catch (err) {
+      console.error("❌ Error deleting cart:", err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const handleCheckout = (value:string) => {
@@ -54,10 +81,11 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
+       <ToastContainer/>
       <h2 className="text-2xl font-semibold mb-4">{name || ""}</h2>
 
       {cart?.data?.length > 0 ? (
-        cart.data.map((item: Cart) => (
+        cart.data.slice()?.reverse()?.map((item: Cart) => (
           <CartItem
             key={item?._id}
             id={item?._id}
@@ -105,6 +133,7 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
         </div>
       )}
       <ConfirmDeleteModal
+            loading={loading}
             open={open}
             onConfirm={confirmDelete}
             onCancel={() => setOpen(false)}

@@ -11,7 +11,8 @@ import { notFound } from "next/navigation";
 async function getSingleLens(id: string) {
 
   const response = await fetch(
-    `https://server.eyelineoptica.com/api/v1/accessory/get-accessory-by-id/${id}`);
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}accessory/get-accessory-by-id/${id}`
+  );
 
   if (!response.ok) return null;
   return response.json();

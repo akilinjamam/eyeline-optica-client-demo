@@ -131,7 +131,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
             )}
             {current.type === "details-zero-power" && (
               <>
-                <ZeroPowerDetailSection/>
+                <ZeroPowerDetailSection cartInfo={frameWithLensItems}/>
               </>
             )}
             {current.type === "Submit Power later in 15 days" && (

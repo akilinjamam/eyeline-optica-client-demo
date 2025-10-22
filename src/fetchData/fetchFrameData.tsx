@@ -7,7 +7,7 @@ export async function getFrame(query: Record<string, any>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
   const res = await fetch(
-    `https://server.eyelineoptica.com/api/v1/products?${params}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}products?${params}`,
     {
       next: {revalidate: 120},
     }
@@ -23,7 +23,7 @@ export async function getLens(query: Record<string,string>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`https://server.eyelineoptica.com/api/v1/lens?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens?${params}`, {
       next: {revalidate: 120},
     });
 
@@ -36,7 +36,7 @@ export async function getcontactLens(query:Record<string,string>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`https://server.eyelineoptica.com/api/v1/contact-lens?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}contact-lens?${params}`, {
       next: {revalidate: 120},
     });
 
@@ -50,7 +50,7 @@ export async function getAccessory(query:Record<string,string>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`https://server.eyelineoptica.com/api/v1/accessory/get-accessories?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}accessory/get-accessories?${params}`, {
       next: {revalidate: 120},
     });
 

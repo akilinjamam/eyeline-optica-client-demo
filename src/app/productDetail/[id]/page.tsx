@@ -9,17 +9,16 @@ import { TData, TFrame, TLens } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
 
-
 async function getSingleProduct(id: string) {
 
   const response = await fetch(
-    `https://server.eyelineoptica.com/api/v1/products/get-single-product/${id}`);
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}products/get-single-product/${id}`);
   if (!response.ok) return null;
   return response.json();
 }
 
 async function getAllLensData(){
-  const response = await fetch('https://server.eyelineoptica.com/api/v1/lens');
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens`);
   return response.json();
 };
 

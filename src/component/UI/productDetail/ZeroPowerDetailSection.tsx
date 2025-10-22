@@ -1,11 +1,55 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
-const ZeroPowerDetailSection = () => {
-    const [loading, setLoaiding] = useState<string>('')
-    console.log(setLoaiding)
+const ZeroPowerDetailSection = ({cartInfo}: {cartInfo:any}) => {
+    const [loading, setLoading] = useState<string>('')
+    console.log(setLoading);
+    const router = useRouter();
+    const handleSubmit = async (e:any) => {
+        e.preventDefault();
+        const {name, phoneNumber, email, address} = e.target;
+
+        const cartData = {
+            customerName: name.value,
+            phoneNumber:phoneNumber.value, 
+            email: email.value,
+            address:address.value,
+            items: [
+                {   ...cartInfo,
+                    submitType:"zero power lens",
+                }
+            ],
+            totalAmount: Number(cartInfo.subtotal),
+            deliveryFee: 70,
+        }
+        setLoading('pending...')
+        console.log(cartData)
+       try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}cart/create-cart`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cartData),
+        });
+        
+
+        const data = await res.json();
+        console.log(data)
+        if(data.success){
+            setLoading('');
+            window.dispatchEvent(new Event("cartUpdated"));
+            localStorage.setItem("token", data?.data?.token)
+             router.push("/cart");
+        }
+
+       } catch (error) {
+        console.log(error)
+       }
+    }
     return (
-        <div className="px-2">
+        <form onSubmit={handleSubmit} action="">
+            <div className="px-2">
             <div>
                     
                     <br /><br />
@@ -56,6 +100,7 @@ const ZeroPowerDetailSection = () => {
                     }
                 </div>
         </div>
+        </form>
         
     );
 };
