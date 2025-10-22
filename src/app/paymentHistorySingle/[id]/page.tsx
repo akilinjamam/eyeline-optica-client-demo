@@ -27,7 +27,8 @@ const PaymentHistorySingle = async ({
       
       if (!payment?.data) return notFound();
       
-      const singlePayment = payment?.data as any;
+      const singlePayment = payment?.data?.data as any;
+      console.log(singlePayment?.data)
 
     return <CustomerHistorySingle item={singlePayment}/>
 };
