@@ -35,11 +35,11 @@ interface PaymentItem {
   accessoryId?: { types: string; items:TAccessoryItems[] };
 }
 
-const statusFlow = ['Order receieved', 'processsing', 'packaging', 'on the way', 'delivered'];
+const statusFlow = ['Order received', 'processsing', 'packaging', 'on the way', 'delivered'];
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const statusColors: Record<string, string> = {
-  'Order receieved': 'bg-gray-200 text-gray-700',
+  'Order received': 'bg-gray-200 text-gray-700',
   processsing: 'bg-yellow-100 text-yellow-700',
   packaging: 'bg-blue-100 text-blue-700',
   'on the way': 'bg-orange-100 text-orange-700',
