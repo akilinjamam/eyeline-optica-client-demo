@@ -10,23 +10,23 @@ import useSwipe from '@/custom-hooks/useSwipe';
 
 
 const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
-
+    
+    const swipeRef = useRef(null);
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
 
 
-    const swipeRef = useRef(null);
 
     const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
   
     return (
         <div>
             <div className='md:hidden lg:hidden block'>
-                <div className=' flex items-center justify-around lg:w-[1200px] md:w-[80%] mx-auto gap-5 relative'>
+                <div className=' flex items-center justify-around  lg:w-[1200px] md:w-[80%] mx-auto gap-5 relative'>
                     <div 
                     style={{userSelect:'none'}}  
                     ref={swippedRef} 
-                    className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2 '
+                    className=' h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2 '
                     onMouseDown={handleMouseDown}
                     onMouseLeave={handleMouseLeave}
                     onMouseUp={handleMouseUp}

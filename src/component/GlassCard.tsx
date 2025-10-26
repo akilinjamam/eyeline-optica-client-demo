@@ -9,7 +9,7 @@ import Link from 'next/link';
 const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id}) => {
 
     return (
-    <div className="relative bg-white shadow-md p-4 rounded-md w-[180px]">
+    <div className="relative bg-white shadow-md p-4 rounded-md w-[240px]">
       {badge && (
         <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-[2px] rounded-sm font-semibold">
           {badge}
@@ -21,7 +21,7 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
         Colour
       </span>
 
-      <div className=" mb-3 w-[140px] flex items-center justify-center">
+      <div className=" mb-3 w-[200px] flex items-center justify-center">
         <Link href={`/productDetail/${_id}`}>
           <Image
             src={images && images?.length ? images?.[0] : defaultImage}
