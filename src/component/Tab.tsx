@@ -50,7 +50,7 @@ const Tab: FC = () => {
                                 <Link href={`${element.link}`} key={index}>
                                     <button
 
-                                        className={`px-4 py-2 text-sm font-semibold hover:bg-blue-200 rounded-md transition cursor-pointer ${isActive ? 'bg-blue-200' : ''}`}
+                                        className={`px-4 py-2 text-black text-sm font-semibold hover:bg-blue-200 rounded-md transition cursor-pointer ${isActive ? 'bg-blue-200' : ''}`}
                                     >
                                         {element.name}
                                     </button>

@@ -8,7 +8,7 @@ const FrameShapeCard:React.FC<TLatestCollectionsData> = ({image, type}) => {
             <div className='flex items-center justify-center w-[200px]  mx-auto'>
                 <Image width={150} src={image} alt='latest-collection'/>
             </div>
-            <p className='text-center font-bold'>{type}</p>
+            <p className='text-center font-bold text-black'>{type}</p>
             
         </div>
     );

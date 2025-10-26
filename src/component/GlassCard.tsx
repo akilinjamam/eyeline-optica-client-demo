@@ -34,7 +34,7 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
       </div>
 
       <p className="text-[10px] text-gray-500">{brand}</p>
-      <p className="text-[11px] font-semibold">{name}</p>
+      <p className="text-[11px] font-semibold text-black">{name}</p>
       <p className="text-md font-bold text-red-600 mt-1">৳ {salesPrice}</p>
 
       <div className='absolute bottom-2 right-2'>

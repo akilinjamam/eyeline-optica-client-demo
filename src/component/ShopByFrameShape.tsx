@@ -5,7 +5,7 @@ const ShopByFrameShape = () => {
     return (
             <div className='w-full'>
                 <div className="px-4 sm:px-6 md:px-8 lg:px-0 max-w-screen-lg mx-auto">
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-2">
+                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-2 text-black">
                     Shop By Frame Shape
                 </p>
                 <p className="text-sm sm:text-base md:text-lg text-center text-gray-600">
@@ -17,7 +17,7 @@ const ShopByFrameShape = () => {
             <br />
             <button className='w-[120px] block mx-auto mt-2 py-1  text-white font-semibold rounded-xl bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer'>Shop All</button>
             <br />
-           <div className="px-4 sm:px-6 md:px-8 max-w-3xl mx-auto text-center">
+           <div className="px-4 sm:px-6 md:px-8 max-w-3xl mx-auto text-center text-black">
                 <p className="font-semibold text-xl sm:text-2xl md:text-3xl">
                 Get 20% off your first order
                 </p>

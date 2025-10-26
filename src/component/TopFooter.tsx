@@ -5,7 +5,7 @@ import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 const TopFooter: FC = () => {
   return (
-    <div className="px-4 py-8">
+    <div className="px-4 py-8 text-black">
       {/* Brand + Title */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
         <Image src={image} alt="brand-icon" className="w-16" />
