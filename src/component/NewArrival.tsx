@@ -10,11 +10,16 @@ import {ArrowRight} from 'lucide-react'
 import Title from './Title';
 import { TFrame } from '@/ts-definition/types';
 import { useRouter } from 'next/navigation';
+import useSwipe from '@/custom-hooks/useSwipe';
 
 const NewArrivals = ({data} : {data:TFrame[]}) => {
     const router = useRouter();
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
+
+    const swipeRef = useRef(null);
+
+    const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
     return (
         <div className='w-full mt-8 '>
             <Title value='NEW ARRIVAL'/>
@@ -26,7 +31,8 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
                 </div>
             </div>
 
-            <div className='flex items-center justify-around lg:w-[1200px] md:w-[90%] sm:w-[85%] mx-auto gap-5 relative'>
+            <div className='hidden md:block lg:block'>
+                <div className='flex items-center justify-around lg:w-[1200px] md:w-[90%] sm:w-[85%] mx-auto gap-5 relative'>
                 <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                 <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
                 {
@@ -35,8 +41,28 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
                 </div>
                 <Image className='cursor-pointer inline-block mx-3' src={arrowRights} alt='right-arrow' onClick={() => handleNavigation('left')}/>
                 <div className="pointer-events-none absolute top-0 right-13 lg:right-16 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
+                </div>
             </div>
-             
+            <div className='lg:hidden md:hidden block'>
+                <div className='flex items-center justify-around lg:w-[1200px] md:w-[90%] sm:w-[85%] mx-auto gap-5 relative'>
+                
+                <div 
+                ref={swippedRef} 
+                className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'
+                onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                >
+                {
+                    data?.slice(0,13)?.map(({color, name, brand, salesPrice, badge, images, _id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                }
+                </div>
+                
+                </div>
+            </div>
         </div>
     );
 };

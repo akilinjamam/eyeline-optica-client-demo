@@ -12,7 +12,7 @@ interface GlassesModelProps {
 }
 
 const GlassesModel: React.FC<GlassesModelProps> = ({ position, rotation, scale }) => {
-  const { scene } = useGLTF('/3dImages/transparent-glass-4.glb'); // adjust path if needed
+  const { scene } = useGLTF('/3dImages/glasses-7.glb'); // adjust path if needed
   const modelRef = useRef<any>(scene);
 
 
