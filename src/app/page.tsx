@@ -15,6 +15,12 @@ import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import Footer from "@/component/Footer";
 import { TData, TFrame } from "@/ts-definition/types";
+import MobileBanner from "@/component/MobileBanner";
+import FeaturedCategory from "@/component/FeaturedCategory";
+import MobileImageGrid from "@/component/MobileImageGrid";
+import MobileBookAppointment from "@/component/MobileBookAppointment";
+import DesignedSunglasses from "@/component/DesignedSunglasses";
+import MobileLensSection from "@/component/MobileLensSection";
 
 // import GlassTryOn from "@/component/GlassTryOnV2";
 
@@ -108,14 +114,20 @@ export default async function Home() {
 
   return (
     <div className="bg-blue-50">
+        <MobileBanner/>
         <ImagePreview/>
         <PopularBrand/>
         <WeeklyDeals/>
         <GlassCardsGallary data={allFramesWithDeals}/>
+        <FeaturedCategory/>
         <LatestCollections/>
         <BookAppointment/>
         <NewArrivals data={allFramesWithNewArrivals}/>
         <BestSelling data={allFramesWithBestSelling}/>
+        <MobileImageGrid/>
+        <MobileBookAppointment/>
+        <DesignedSunglasses/>
+        <MobileLensSection/>
         <ContactLense/>
         <FindYourPerfectGlass/>
         <MensSunglass data={allFramesWithMan}/>

@@ -3,6 +3,7 @@ import { StaticImageData } from "next/image";
 
 export interface Brand {
   elements: StaticImageData;
+  elements2: StaticImageData;
 }
 
 export interface GlassCardProps {

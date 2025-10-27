@@ -12,9 +12,9 @@ const ContactLense:FC = () => {
     }
 
     return (
-        <div className='mt-8 mb-8'>
+        <div className='mt-8 mb-8 hidden md:block lg:block'>
            <Title value='CONTACT LENS'/>
-            <div className='w-full mt-8'>
+            <div className='w-full mt-8 md:block lg:block hidden'>
                 <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
             </div>
             <div className='w-full mt-8'>

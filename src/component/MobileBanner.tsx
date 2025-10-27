@@ -1,16 +1,12 @@
 'use client'
 import Image, { StaticImageData } from 'next/image';
 import {FC, useRef} from 'react';
-import imageOne from '../../public/images/glass-1.png';
-import imageTwo from '../../public/images/glass-2.png';
-import imageThree from '../../public/images/glass-3.png';
-import imageFour from '../../public/images/glass-4.png';
-import imageFive from '../../public/images/glass-5.png';
-import imageSix from '../../public/images/glass-6.png';
-import useSwipe from '@/custom-hooks/useSwipe';
+import imageOne from '../../public/images/mobileBanner/mobile-banner-3.png'
+import imageTwo from '../../public/images/mobileBanner/mobile-banner-2.png'
 import { useRouter } from 'next/navigation';
+import useSwipe from '@/custom-hooks/useSwipe';
 
-const ImagePreview:FC = () => {
+const MobileBanner:FC = () => {
     const router = useRouter();
     const swipeRef = useRef(null);
 
@@ -38,30 +34,30 @@ const ImagePreview:FC = () => {
         {
             id: 3,
             name: 'Special Glasses',
-            image: imageThree,
+            image: imageOne,
             link: "/allglasses/not-added"
         },
         {
             id: 4,
             name: 'Contact Lenses',
-            image: imageFour,
+            image: imageTwo,
             link: "/allContactLens"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
-            image: imageFive,
+            image: imageTwo,
             link: "/allglasses/not-added"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
-            image: imageSix,
+            image: imageOne,
             link: "/allLens/progressiveLens"
         },
     ]
     return  (
-    <div className="w-full px-4 py-4 overflow-x-hidden relative md:block lg:block hidden">
+    <div className="w-full px-4 py-4 overflow-x-hidden relative md:hidden lg:hidden block">
       <div
         ref={swippedRef}
         style={{userSelect:'none'}}
@@ -82,27 +78,29 @@ const ImagePreview:FC = () => {
           <div
             onClick={() => router.push(element.link)}
             key={element.id}
-            className="shrink-0 mb-4 bg-white w-[180px] h-[150px] p-2 rounded-md shadow-sm"
+            style={{borderRadius: '50px'}}
+            className="shrink-0 mb-4 bg-blue-800 w-[240px] h-[340px] shadow-sm"
           >
-            <div className="bg-blue-100 h-[110px] flex items-center justify-center rounded">
+            <div className="  flex items-center justify-center">
               <Image
-                height={100}
-                width={100}
+                height={400}
+                width={400}
                 src={element.image}
                 alt={element.name}
-                className="rounded-md cursor-pointer"
+                style={{borderTopRightRadius: "50px", borderTopLeftRadius: "50px", borderBottomLeftRadius: "30px", borderBottomRightRadius:"30px"}}
+                className=" cursor-pointer h-[300px]"
               />
             </div>
-            <p className="text-sm font-semibold text-center text-blue-400 mt-1.5">
+            <p className="text-sm font-semibold text-center text-white mt-1.5">
               {element.name}
             </p>
           </div>
         ))}
          
       </div>
-      <div className="lg:hidden pointer-events-none absolute -top-4 right-0 h-full w-16 bg-gradient-to-l from-blue-50 via-blue-50/90 to-transparent z-10" />
+      
     </div>
   );
 };
 
-export default ImagePreview;
+export default MobileBanner;

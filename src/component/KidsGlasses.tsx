@@ -27,9 +27,9 @@ const Kidsglass = ({data}:{data:TFrame[]}) => {
         const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
 
     return (
-        <div className='mt-8'>
+        <div className='mt-8 hidden md:block lg:block'>
             <Title value='KIDS GLASSES'/>
-            <div className='w-full mt-8'>
+            <div className='w-full mt-8 md:block lg:block hidden'>
                 <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
             </div>
             <div className='w-full'>
@@ -49,28 +49,34 @@ const Kidsglass = ({data}:{data:TFrame[]}) => {
                                             }
                                             </div>
                                                 <Image className='cursor-pointer inline-block mx-3' src={arrowRight} alt='right-arrow' onClick={() => handleNavigation('left')}/>
-                                                    <div className="pointer-events-none absolute top-0 right-13 lg:right-16 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />
+                                                    
                                             </div>
                                 </div>
                                 <div className='lg:hidden md:hidden block'>
-                                    <div className='flex items-center justify-around lg:w-[1200px] md:w-[90%] sm:w-[85%] mx-auto gap-5 relative'>
-                                                                
-                                        <div 
-                                            ref={swippedRef} 
-                                            className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'
-                                            onMouseDown={handleMouseDown}
-                                            onMouseLeave={handleMouseLeave}
-                                            onMouseUp={handleMouseUp}
-                                            onMouseMove={handleMouseMove}
-                                            onTouchStart={handleTouchStart}
-                                            onTouchMove={handleTouchMove}
-                                        >
-                                        {
-                                            data?.slice(0,13)?.map(({color, name, brand, salesPrice, badge, images, _id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
-                                        }
-                                        </div>
-                                                                
-                                        </div>
+                                    <div className="w-full px-4 py-4 overflow-x-hidden relative">
+                      <div
+                        ref={swippedRef}
+                        style={{userSelect:'none'}}
+                        className="
+                          flex gap-4 overflow-x-hidden cursor-grab 
+                          mx-auto max-w-full
+                          sm:justify-center
+                          
+                        "
+                        onMouseDown={handleMouseDown}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseUp={handleMouseUp}
+                        onMouseMove={handleMouseMove}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                      >
+                        {
+                            data?.map(({color, name, brand, salesPrice, badge, images,_id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                        }
+                         
+                      </div>
+                     
+                </div>
                                 </div>
             </div>
         </div>

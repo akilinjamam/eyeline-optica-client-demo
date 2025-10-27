@@ -13,7 +13,7 @@ const HorizontalBrandScroll:FC = () => {
     console.log(scrollRef)
 
     return (
-        <div className='w-full'>
+        <div className='w-full lg:block md:block hidden'>
             <div
                 onMouseEnter={() => setPause(true)}
                 onMouseLeave={() => setPause(false)}

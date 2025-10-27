@@ -50,7 +50,7 @@ const Tab: FC = () => {
                                 <Link href={`${element.link}`} key={index}>
                                     <button
 
-                                        className={`px-4 py-2 text-black text-sm font-semibold hover:bg-blue-200 rounded-md transition cursor-pointer ${isActive ? 'bg-blue-200' : ''}`}
+                                        className={`px-4 py-2 lg:text-black md:text-black text-white bg-blue-800 md:bg-blue-50 lg:bg-blue-50  text-sm font-semibold lg:hover:bg-blue-200 md:hover:bg-blue-200 lg:rounded-lg md:rounded-lg rounded-full hover:bg-blue-900 transition cursor-pointer ${isActive ? 'bg-blue-200' : ''}`}
                                     >
                                         {element.name}
                                     </button>
@@ -60,7 +60,7 @@ const Tab: FC = () => {
                     </div>
                 </div>
                 {/* Gradient overlay for aesthetics */}
-                <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-blue-50 via-blue-50/90 to-transparent z-10" />
+                {/* <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-blue-50 via-blue-50/90 to-transparent z-10" /> */}
             </div>
         </div>
     );
