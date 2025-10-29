@@ -9,7 +9,7 @@ import defaultImage from '../../../public/images/glass-1.png';
 const ContactLensCardAuto:React.FC<TContactLens> = ({images, name, brand, salesPrice,  color, _id}) => {
 
     return (
-    <div className="relative bg-white shadow-md p-4 rounded-md w-full md:w-[230px] lg:w-[230px] xl:w-[210px] 2xl:w-[230px] ">
+    <div className="relative bg-white shadow-md p-4 rounded-md w-full">
       {/* {badge && (
         <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-[2px] rounded-sm font-semibold">
           {badge}

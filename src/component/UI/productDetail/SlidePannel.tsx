@@ -26,7 +26,6 @@ export default function SlideInPanel({ onClose, product, lens }: { onClose: () =
         <h2 className="text-xl font-semibold">Select Your Lens</h2>
         <button onClick={onClose} className="text-xl cursor-pointer">✕</button>
       </div>
-      <br />
       <SlideImageAndPriceDetail product={product} lens={lens}/>
     </motion.div>
   );

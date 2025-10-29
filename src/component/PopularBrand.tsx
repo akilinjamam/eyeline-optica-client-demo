@@ -6,7 +6,7 @@ import HorizontalMobileBrandScroll from './HorizontalMobileBrandScroll';
 
 const PopularBrand:FC = () => {
     return (
-        <div className='w-full md:mt-5 lg:mt-5 mt-2'>
+        <div className='w-full md:mt-5 lg:mt-5 mt-0'>
             <Title value='OUR POPULAR BRANDS'/>
             <HorizontalBrandScroll/>
             <HorizontalMobileBrandScroll/>

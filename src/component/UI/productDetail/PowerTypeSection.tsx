@@ -33,7 +33,7 @@ const PowerTypeSection = ({powerTypes, goForward, productType, genderType}: {pow
     }
     console.log(productType)
     return (
-        <div className='bg-blue-200 h-full'>
+        <div className='bg-blue-100 h-full'>
             {powerTypes?.filter((f: IPowerTypes) => f.frameType === customType || f.frameType === 'sun + eye')?.map((item: IPowerTypes, index: number) => (
                 <div
                 key={index}

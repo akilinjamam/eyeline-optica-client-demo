@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import Image from 'next/image';
 import SlideOptionsForAccessory from './SlideOptionForAccessory';
 
 export type TLensInfo = {
@@ -15,39 +14,17 @@ const SlideImageAndPriceDetailForAccessory = ({ singleLens }: { singleLens: any 
   
   return (
     <div className="p-2">
-      {/* top section */}
-      <div className="w-full h-[20vh] mx-auto flex items-start">
-        <div className="w-[40%] h-full border border-gray-400 rounded-md flex items-center justify-center">
-          <Image src={singleLens?.images?.length ? singleLens.images?.[0] : ''} alt="single-img" width={150} height={150} />
-        </div>
-        <div className="w-[60%] h-[200px] p-1">
-          <div className="flex justify-between font-bold text-sm">
-            <label> {singleLens?.items?.map((i:any) => i.name)?.join('+')}</label>
-            <p>৳{singleLens?.items?.map((i:any) => i.salesPrice)?.join('+')}</p>
-          </div>
-          
-          <hr className='my-2'/>
-          <div className="flex justify-between font-bold text-sm">
-            <label>Sub total:</label>
-            <p>৳{singleLens?.items?.map((value:any) => value.salesPrice)?.reduce((acc:any, sum:any) => acc + sum , 0)}</p>
-          </div>
-          <div className="flex justify-between font-bold text-sm">
-            <label>Delivery Charge:</label>
-            <p>৳70</p>
-          </div>
-          <hr className='my-2'/>
-          <div className="flex justify-between font-bold text-sm">
-            <label>Total:</label>
-            <p>৳{singleLens?.items?.map((value:any) => value.salesPrice)?.reduce((acc:any, sum:any) => acc + sum , 0)  + 70 }</p>
+      
+       <SlideOptionsForAccessory singleLens={singleLens}/>
+       {/* bottom section */}
+      <div className="w-full absolute bottom-0 h-15 flex items-center justify-center bg-white">
+        <div className="w-[100%] h-auto  flex items-center justify-center">
+          <div className="flex items-center justify-end font-bold text-sm w-[90%]">
+            <p className='bg-blue-800 rounded-md text-white px-2 py-1 w-full text-center'>৳{singleLens?.items?.map((value:any) => value.salesPrice)?.reduce((acc:any, sum:any) => acc + sum , 0) }
+            </p>
           </div>
         </div>
       </div>
-
-      <br />
-
-      {/* Sliding container */}
-      
-       <SlideOptionsForAccessory singleLens={singleLens}/>
     </div>
   );
 };

@@ -57,15 +57,14 @@ const MobileBanner:FC = () => {
         },
     ]
     return  (
-    <div className="w-full px-4 py-4 overflow-x-hidden relative md:hidden lg:hidden block">
+    <div className="w-full px-1 py-4 overflow-x-hidden relative md:hidden lg:hidden block">
       <div
         ref={swippedRef}
         style={{userSelect:'none'}}
         className="
-          flex gap-4 overflow-x-hidden cursor-grab 
+          flex gap-2 overflow-x-hidden cursor-grab 
           mx-auto max-w-full
           sm:justify-center
-          
         "
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
@@ -79,16 +78,16 @@ const MobileBanner:FC = () => {
             onClick={() => router.push(element.link)}
             key={element.id}
             style={{borderRadius: '50px'}}
-            className="shrink-0 mb-4 bg-blue-800 w-[240px] h-[340px] shadow-sm"
+            className="shrink-0 mb-4 bg-blue-800 w-[200px] h-[300px] shadow-sm"
           >
             <div className="  flex items-center justify-center">
               <Image
-                height={400}
-                width={400}
+                height={360}
+                width={360}
                 src={element.image}
                 alt={element.name}
                 style={{borderTopRightRadius: "50px", borderTopLeftRadius: "50px", borderBottomLeftRadius: "30px", borderBottomRightRadius:"30px"}}
-                className=" cursor-pointer h-[300px]"
+                className=" cursor-pointer h-[260px]"
               />
             </div>
             <p className="text-sm font-semibold text-center text-white mt-1.5">

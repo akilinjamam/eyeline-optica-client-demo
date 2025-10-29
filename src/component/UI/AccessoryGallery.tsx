@@ -46,18 +46,26 @@ const AccessoryGallery = ({data, currentPage, totalPage}: {data:TAccessory[], cu
 
     return (
         <div className=' w-full'>
-            <div className='w-full bg-gray-200 py-2 px-3 flex items-center justify-end' >
+            <div className='w-full h-[40px] bg-gray-200 py-2 px-3 flex items-center justify-end' >
                 <div className='flex items-center justify-between w-auto '>
-                    <label htmlFor="" className='text-blue-500 mx-2'>SORT BY:</label>
+                    {/* <label htmlFor="" className='text-blue-500 mx-2'>SORT BY:</label>
                     <select name="" id="" className='border border-black'>
                         <option value="hello">Best Sellers</option>
                         <option value="hello">hello</option>
                         <option value="hello">hello</option>
-                    </select>
+                    </select> */}
                 </div>
             </div>
-            <section className='w-full p-2 flex items-center justify-center '>
-                <div className='flex gap-2 flex-wrap w-[70%] md:w-full lg:w-full '>
+            <section className='w-full p-4 flex flex-col items-center'>
+                <div className='grid
+                    grid-cols-1
+                    sm:grid-cols-2
+                    md:grid-cols-3
+                    lg:grid-cols-4
+                    xl:grid-cols-5
+                    gap-4
+                    w-full
+                    max-w-7xl'>
                     {
                         managedData?.map(({name, brand, salesPrice, images, _id }: any, index: number) => <AccessoryCardAuto  images={images}  salesPrice={salesPrice} name={name} brand={brand} _id={_id} key={index}/> )
                     }

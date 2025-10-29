@@ -38,8 +38,16 @@ const ContactLensGallery = ({data, currentPage, totalPage}: {data:TContactLens[]
                     </select>
                 </div>
             </div>
-            <section className='w-full p-2 flex items-center justify-center '>
-                <div className='flex gap-2 flex-wrap w-[70%] md:w-full lg:w-full '>
+            <section className='w-full p-4 flex flex-col items-center'>
+                <div className='grid
+                grid-cols-1
+                sm:grid-cols-2
+                md:grid-cols-3
+                lg:grid-cols-4
+                xl:grid-cols-5
+                gap-4
+                w-full
+                max-w-7xl'>
                     {
                         data?.map(({color, name, brand, salesPrice, images, _id }: TContactLens, index: number) => <ContactLensCardAuto color={color} images={images}  salesPrice={salesPrice} name={name} brand={brand} _id={_id} key={index}/> )
                     }

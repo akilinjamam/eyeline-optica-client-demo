@@ -111,8 +111,8 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
             }}
             leftEye={{
               sphere: item?.items[0]?.leftEye?.sphere as string,
-              cylinder: item?.items[0]?.rightEye?.cylinder as string,
-              axis: item?.items[0]?.rightEye?.axis as string,
+              cylinder: item?.items[0]?.leftEye?.cylinder as string,
+              axis: item?.items[0]?.leftEye?.axis as string,
             }}
             quantity={1}
             onRemove={() => {

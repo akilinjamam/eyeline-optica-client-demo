@@ -76,7 +76,7 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
 
   
     return (
-        <div className="relative w-full overflow-hidden h-[60vh] border border-gray-200 rounded-md ">
+        <div className="relative w-full overflow-hidden h-[100vh] border border-gray-200 rounded-md ">
         <AnimatePresence custom={direction} mode="popLayout">
           <motion.div
             key={current.type + (current.title ?? '')} // unique key per screen
@@ -86,7 +86,7 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
             animate="center"
             exit="exit"
             transition={{ duration: 0.4 }}
-            className="absolute top-0 left-0 w-full h-full overflow-y-scroll hide-scrollbar py-2 bg-blue-200"
+            className="absolute top-0 left-0 w-full h-full overflow-y-scroll hide-scrollbar py-2 bg-blue-100"
           >
             {/* Back Button (not on root) */}
             {history.length > 1 && (

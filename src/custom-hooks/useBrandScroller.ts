@@ -23,7 +23,7 @@ const useBrandScroller = (parentRef: any) => {
       }
     };
 
-    const interval = setInterval(scrollHandler, 10);
+    const interval = setInterval(scrollHandler, 20);
 
     return () => {
       clearInterval(interval);

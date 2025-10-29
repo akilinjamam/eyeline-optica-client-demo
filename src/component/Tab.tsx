@@ -20,11 +20,9 @@ const Tab: FC = () => {
         { id: 9, name: 'ABOUT US' }
     ]
 
-
-
     return (
         <div className="bg-blue-50">
-            <div style={{ userSelect: 'none' }} className="max-w-7xl px-6 py-4 mx-auto relative sm:px-4 md:px-6">
+            <div style={{ userSelect: 'none' }} className="max-w-7xl px-1  py-4 mx-auto relative sm:px-4 md:px-6">
                 <div
                     ref={swippedRef}
                     className="overflow-x-hidden cursor-grab"
@@ -35,7 +33,7 @@ const Tab: FC = () => {
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                 >
-                    <div className="flex whitespace-nowrap gap-4">
+                    <div className="flex whitespace-nowrap gap-2">
                         {elements.map((element, index) => {
                             let isActive;
                             if(element.link === '/telemedicine'){
@@ -50,7 +48,7 @@ const Tab: FC = () => {
                                 <Link href={`${element.link}`} key={index}>
                                     <button
 
-                                        className={`px-4 py-2 lg:text-black md:text-black text-white bg-blue-800 md:bg-blue-50 lg:bg-blue-50  text-sm font-semibold lg:hover:bg-blue-200 md:hover:bg-blue-200 lg:rounded-lg md:rounded-lg rounded-full hover:bg-blue-900 transition cursor-pointer ${isActive ? 'bg-blue-200' : ''}`}
+                                        className={`px-4 py-2 lg:text-black md:text-black text-white bg-blue-800 md:bg-blue-50 lg:bg-blue-50  text-sm font-semibold lg:hover:bg-blue-200 md:hover:bg-blue-200 lg:rounded-lg md:rounded-lg rounded-full hover:bg-blue-900 transition cursor-pointer ${isActive ? 'lg:bg-blue-200 md:bg-blue-200' : ''}`}
                                     >
                                         {element.name}
                                     </button>
@@ -59,8 +57,7 @@ const Tab: FC = () => {
                         })}
                     </div>
                 </div>
-                {/* Gradient overlay for aesthetics */}
-                {/* <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-blue-50 via-blue-50/90 to-transparent z-10" /> */}
+               
             </div>
         </div>
     );

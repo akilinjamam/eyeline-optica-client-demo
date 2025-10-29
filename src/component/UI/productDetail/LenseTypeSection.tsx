@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { ILense, ILenseFeatures } from '@/ts-definition/interfaces';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Dot } from 'lucide-react';
 import React from 'react';
 // import { lenses } from './productCategoryData';
 import { GoForwardPayload } from '@/ts-definition/types';
@@ -36,10 +36,16 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                                 >
                 <div className='w-[95%]'>
                    <div className='flex '>
-                     <Image width={60} height={60} src={item?.images?.[0] ?? defaultImg} alt='lens-img' className='rounded-md'/>
                      <div>
-                        <p  className="px-1 font-bold ml-4">{item.title}</p>
-                        <p  className="text-sm px-1 mb-2 ml-4 text-gray-600">{item?.description}</p>
+                        <Image width={60} height={60} src={item?.images?.[0] ?? defaultImg} alt='lens-img' className='rounded-md'/>
+                     </div>
+                     <div>
+                        <p  className="px-1 font-bold">{item.title}</p>
+                        {
+                            item?.features?.slice(0,2)?.map((feature:any, index:number) => <div key={index}>
+                                <div className="text-xs flex items-center justify-start   text-gray-600"><Dot/> <p>{feature}</p></div>
+                            </div> )
+                        }
                      </div>
                    </div>
                     {

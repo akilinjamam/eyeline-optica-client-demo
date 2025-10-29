@@ -7,7 +7,7 @@ import { GoForwardPayload } from '@/ts-definition/types';
 
 const LenseDetailSection = ({goForward}: {goForward: (payload: GoForwardPayload) => void}) => {
     return (
-        <div className='px-2'>
+        <div>
             {
                 powerOptions.map((power:IPowerOptions, index:number) => {
                         return (

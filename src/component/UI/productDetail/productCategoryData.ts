@@ -241,36 +241,6 @@ export const powerTypeAndAccessories: IPowerOptions[] = [
   },
   {
     title: "with power and accessories",
-    subTitle: "With Kit",
-    description:
-      "Compact and convenient contact lens kit for safe storage and easy handling",
-  },
-  {
-    title: "with power and accessories",
-    subTitle: "With Bag",
-    description:
-      "Stylish and protective contact lens bag to carry your essentials anywhere.",
-  },
-  {
-    title: "with power and accessories",
-    subTitle: "With Solution + Kit",
-    description:
-      "Smart combo of lens kit and solution for complete lens hygiene and comfort.",
-  },
-  {
-    title: "with power and accessories",
-    subTitle: "With Solution + Bag",
-    description:
-      "Perfect pairing — contact lens bag with cleaning solution for on-the-go care",
-  },
-  {
-    title: "with power and accessories",
-    subTitle: "With Kit + Bag",
-    description:
-      "All-in-one travel combo with contact lens bag and kit for daily convenience.",
-  },
-  {
-    title: "with power and accessories",
     subTitle: "With Solution + Bag + Kit",
     description:
       "All-in-one travel combo with contact lens bag and kit for daily convenience.",
@@ -286,36 +256,7 @@ export const powerTypeAndAccessories: IPowerOptions[] = [
     description:
       "Keep your lenses fresh and clean with our multipurpose contact lens solution",
   },
-  {
-    title: "without power and accessories",
-    subTitle: "With Kit",
-    description:
-      "Compact and convenient contact lens kit for safe storage and easy handling.",
-  },
-  {
-    title: "without power and accessories",
-    subTitle: "With Bag",
-    description:
-      "Stylish and protective contact lens bag to carry your essentials anywhere.",
-  },
-  {
-    title: "without power and accessories",
-    subTitle: "With Solution + Kit",
-    description:
-      "Smart combo of lens kit and solution for complete lens hygiene and comfort",
-  },
-  {
-    title: "without power and accessories",
-    subTitle: "With Solution + Bag",
-    description:
-      "Perfect pairing — contact lens bag with cleaning solution for on-the-go care",
-  },
-  {
-    title: "without power and accessories",
-    subTitle: "With Kit + Bag",
-    description:
-      "All-in-one travel combo with contact lens bag and kit for daily convenience",
-  },
+
   {
     title: "without power and accessories",
     subTitle: "With Solution + Bag + Kit",

@@ -30,17 +30,14 @@ console.log(product)
         </div>
         <div className="flex space-x-2 mt-2">
           <button className="bg-gray-200 text-sm px-3 py-1 rounded">{product.type}</button>
-          <button className="underline text-sm text-blue-500">Size Chart</button>
+          
         </div>
       </div>
 
       <div className="bg-white p-4 rounded-lg grid grid-cols-2 gap-4 text-sm">
         <div>
           <p className="text-2xl font-bold">{product.salesPrice}TK</p>
-          <label className="flex items-center space-x-2 mt-2">
-            <input type="checkbox" className="w-4 h-4" />
-            <span>Get it as early as Wed, Apr 9</span>
-          </label>
+          
         </div>
         <div>
           <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
@@ -73,10 +70,6 @@ console.log(product)
         </button>
       </div>
 
-      <p className="text-center text-sm">
-        Pay with insurance.{" "}
-        <span className="underline text-blue-500 cursor-pointer">Learn more</span>
-      </p>
         <AnimatePresence>
           {showLensPanel && (
             <SlideInPanel onClose={() => setShowLensPanel(false)} product={product} lens={lens}/>
