@@ -35,7 +35,6 @@ export default async function SingleProduct({
 
   const frame = product?.data;
  
-
   return (
     <div className="w-full bg-blue-50 px-1">
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
