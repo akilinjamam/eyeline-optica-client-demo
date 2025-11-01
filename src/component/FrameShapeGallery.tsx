@@ -25,7 +25,7 @@ const FrameShapeGallery:FC = () => {
         >
             <div className='w-[1200px] flex items-center justify-between gap-2.5 select-none'>
                 {
-                    latestCollectionData?.map(({image, type}:TLatestCollectionsData, index: number) => <FrameShapeCard key={index} image={image} type={type}/>)
+                    latestCollectionData?.map(({image, type, value}:TLatestCollectionsData, index: number) => <FrameShapeCard key={index} image={image} type={type} value={value}/>)
                 }
             </div>
                 <div className="pointer-events-none absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-blue-50/100 to-blue-50/0 z-10" />

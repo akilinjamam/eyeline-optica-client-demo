@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import Link from 'next/link';
 import React, { FC } from 'react';
 
 const Footer: FC = () => {
@@ -38,11 +39,11 @@ const Footer: FC = () => {
           <p className="font-semibold text-2xl text-blue-500">Pages</p>
           <br />
           <ul className="space-y-2 text-white text-sm">
-            <li><a href="#">Eyeglasses</a></li>
-            <li><a href="#">Sunglasses</a></li>
-            <li><a href="#">Contact Lens</a></li>
-            <li><a href="#">Brand</a></li>
-            <li><a href="#">Accessories</a></li>
+            <li><Link href="/allglasses" >Eyeglasses</Link></li>
+            <li><Link href="/allglasses/sunglasses" >Sunglasses</Link></li>
+            <li><Link href="/allContactLens" >Contact Lens</Link></li>
+            <li><Link href="/allglasses/brand" >Brand</Link></li>
+            <li><Link href="/allAccessories" >Accessory</Link></li>
           </ul>
         </div>
 
@@ -51,8 +52,8 @@ const Footer: FC = () => {
           <p className="font-semibold text-2xl text-blue-500">Services</p>
           <br />
           <ul className="space-y-2 text-white text-sm leading-6">
-            <li><a href="#">Telemedicine Service</a></li>
-            <li><a href="#">Book an appointment</a></li>
+            <li><Link href="/telemedicine" >Telemedicine Service</Link></li>
+            {/* <li><a href="#">Book an appointment</a></li> */}
             <li><a href="#">OCT test at store</a></li>
             <li><a href="#">Childrens Eyecare</a></li>
             <li><a href="#">Corporate Eyecare</a></li>
@@ -68,6 +69,7 @@ const Footer: FC = () => {
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">FAQ</a></li>
             <li><a href="#">Help Center</a></li>
+            <li><a href="#">Trade license No: TRAD/CHTG/001180/2025</a></li>
           </ul>
         </div>
       </div>
@@ -89,10 +91,11 @@ const Footer: FC = () => {
       {/* Policy Links */}
       <div className="w-[90%] mx-auto">
         <ul className="flex flex-wrap items-center justify-center gap-6 text-sm">
-          <li><a href="#" className="text-blue-600">Privacy Policy</a></li>
-          <li><a href="#" className="text-blue-600">Terms & Conditions</a></li>
-          <li><a href="#" className="text-blue-600">Legal Policy</a></li>
-          <li><a href="#" className="text-blue-600">Payment Policy</a></li>
+          <li className='text-blue-600'><Link href="/privacy-policy" >Pricacy Policy</Link></li>
+          <li className='text-blue-600'><Link href="/terms-and-conditions" >Terms & Condition</Link></li>
+          <li className='text-blue-600'><Link href="/privacy-policy" >Legal Policy</Link></li>
+          <li className='text-blue-600'><Link href="/return-and-refund-policy" >Payment Policy</Link></li>
+        
         </ul>
       </div>
 

@@ -21,6 +21,7 @@ export interface GlassCardProps {
 export interface TLatestCollectionsData {
   image: StaticImageData;
   type: string;
+  value: string;
 }
 
 export interface ILenseData {

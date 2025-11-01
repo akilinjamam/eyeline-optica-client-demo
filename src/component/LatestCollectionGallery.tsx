@@ -22,7 +22,7 @@ const LatestCollectionGallery:FC = () => {
         >
             <div className='w-[1200px] flex items-center justify-between gap-2.5 select-none'>
                 {
-                    latestCollectionData?.map(({image, type}:TLatestCollectionsData, index: number) => <LatestCollectionCard key={index} image={image} type={type}/>)
+                    latestCollectionData?.map(({image, type, value}:TLatestCollectionsData, index: number) => <LatestCollectionCard key={index} image={image} type={type} value={value}/>)
                 }
             </div>
            

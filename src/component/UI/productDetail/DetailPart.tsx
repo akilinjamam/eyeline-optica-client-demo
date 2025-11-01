@@ -58,7 +58,7 @@ console.log(product)
             *multifocal or readers lenses start at additional cost
           </p>
         </div>
-        {product.stock && product?.stock ? <p className='text-green-500 font-bold'>Available {product?.quantity}</p> : <p className='text-red-400 font-bold'>Stock Out</p> }
+        {product.stock && product?.stock ? <p className='text-green-500'>Available {product?.quantity}</p> : <p className='text-red-400'>Stock Out</p> }
       </div>
 
       <div className="flex flex-col space-y-3">

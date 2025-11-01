@@ -1,10 +1,13 @@
+"use client"
 import { TLatestCollectionsData } from '@/ts-definition/interfaces';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const FrameShapeCard:React.FC<TLatestCollectionsData> = ({image, type}) => {
+const FrameShapeCard:React.FC<TLatestCollectionsData> = ({image, type, value}) => {
+    const router = useRouter()
     return (
-        <div className='w-full '>
+        <div onClick={() => router.push(`/allglasses/brand?shapeCategory=${value}`)} className='w-full cursor-pointer '>
             <div className='flex items-center justify-center w-[200px]  mx-auto'>
                 <Image width={150} src={image} alt='latest-collection'/>
             </div>

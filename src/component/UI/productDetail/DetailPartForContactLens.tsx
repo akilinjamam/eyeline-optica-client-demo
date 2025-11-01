@@ -56,6 +56,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
             *multifocal or readers lenses start at additional cost
           </p>
         </div>
+         {singleLens.stock && singleLens?.stock ? <p className='text-green-500'>Available {singleLens?.quantity}</p> : <p className='text-red-400 font-bold'>Stock Out</p> }
       </div>
 
       <div className="flex flex-col space-y-3">

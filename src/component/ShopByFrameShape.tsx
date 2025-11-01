@@ -1,5 +1,7 @@
+
 import React from 'react';
 import FrameShapeGallery from './FrameShapeGallery';
+import Link from 'next/link';
 
 const ShopByFrameShape = () => {
     return (
@@ -15,7 +17,7 @@ const ShopByFrameShape = () => {
             <br />
             <FrameShapeGallery/>
             <br />
-            <button className='w-[120px] block mx-auto mt-2 py-1  text-white font-semibold rounded-xl bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer'>Shop All</button>
+            <Link href="/allglasses/brand"><button className='w-[120px] block mx-auto mt-2 py-1  text-white font-semibold rounded-xl bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer'>Shop All</button></Link>
             <br />
            <div className="px-4 sm:px-6 md:px-8 max-w-3xl mx-auto text-center text-black">
                 <p className="font-semibold text-xl sm:text-2xl md:text-3xl">

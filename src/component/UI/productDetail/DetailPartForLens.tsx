@@ -34,10 +34,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
       <div className="bg-white p-4 rounded-lg grid grid-cols-2 gap-4 text-sm">
         <div>
           <p className="text-2xl font-bold">{singleLens.salesPrice}TK</p>
-          <label className="flex items-center space-x-2 mt-2">
-            <input type="checkbox" className="w-4 h-4" />
-          
-          </label>
+         
         </div>
         <div>
           <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
@@ -58,6 +55,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
             *multifocal or readers lenses start at additional cost
           </p>
         </div>
+         {singleLens.stock && singleLens?.stock ? <p className='text-green-500'>Available {singleLens?.quantity}</p> : <p className='text-red-400'>Stock Out</p> }
       </div>
 
       <div className="flex flex-col space-y-3">

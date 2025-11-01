@@ -41,6 +41,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
+  
 
   const [getColor, setGetColor] = useState<string>("");
 
@@ -110,10 +111,12 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
     Object.entries(localSelected).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
+    
+    if(Array.from(searchParams.keys())?.join('') === "shapeCategory") return
 
     // push new query string
     router.push(`?${params.toString()}`);
-  }, [localSelected, getColor, router,defaultType]);
+  }, [localSelected, getColor, router,defaultType, searchParams]);
 
   // Delete single filter (works for color and any other filter)
   const handleDelete = (key: string) => {

@@ -113,6 +113,7 @@ export default async function Home() {
   const frameWithKids = await getProduct('biologyCategoryKids') as TData<TFrame>;
   const allFramesWithKids = Array.isArray(frameWithKids?.data?.data) ? frameWithKids?.data?.data : [];
 
+
   return (
     <div className="bg-blue-50">
         <MobileBanner/>

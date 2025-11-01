@@ -28,8 +28,8 @@ export default function TermsAndConditionsPage() {
 
       <h2 className="text-xl font-semibold mt-6 mb-2">4. Delivery</h2>
       <ul className="list-disc list-inside mb-4">
-        <li>Inside Chittagong: Estimated <strong>5 working days</strong></li>
-        <li>Outside Chittagong: Estimated <strong>10 working days</strong></li>
+        <li>Inside Dhaka: Estimated <strong>5 days</strong></li>
+        <li>Outside Dhaka: Estimated <strong>10 days</strong></li>
       </ul>
       <p className="mb-4">Delays may occur due to logistics, national holidays, or natural causes.</p>
 
