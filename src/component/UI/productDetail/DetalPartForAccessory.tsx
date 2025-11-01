@@ -82,7 +82,7 @@ const handleStock = () => {
         </div>
         <div className="flex space-x-2 mt-2">
           <button className="bg-gray-200 text-sm px-3 py-1 rounded">{singAccessory?.type}</button>
-          <button className="underline text-sm text-blue-500">Size Chart</button>
+          
         </div>
       </div>
 
@@ -91,7 +91,7 @@ const handleStock = () => {
           <p className="text-2xl font-bold">{price}TK</p>
           <label className="flex items-center space-x-2 mt-2">
             <input type="checkbox" className="w-4 h-4" />
-            <span>Get it as early as Wed, Apr 9</span>
+          
           </label>
           <br />
          <div>
@@ -128,10 +128,7 @@ const handleStock = () => {
         </button>
       </div>
 
-      <p className="text-center text-sm">
-        Pay with insurance.{" "}
-        <span className="underline text-blue-500 cursor-pointer">Learn more</span>
-      </p>
+      
         <AnimatePresence>
           {showAccessoryPanel && (
             <SlideInPanelForAccessory onClose={() => setShowAccessoryPanel(false)} singleAccessory={singAccessory} />

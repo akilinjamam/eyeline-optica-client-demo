@@ -59,3 +59,17 @@ export async function getAccessory(query:Record<string,string>) {
   
   return res.json();
 }
+export async function getBlog(query:Record<string,string>) {
+  const mergedQuery = query // always include type
+
+  const params = new URLSearchParams(mergedQuery).toString();
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}blog?${params}`, {
+      next: {revalidate: 120},
+    });
+
+  if (!res.ok) throw new Error("Failed to fetch accessory");
+
+  
+  return res.json();
+}

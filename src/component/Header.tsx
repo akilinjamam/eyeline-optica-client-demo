@@ -41,6 +41,7 @@ const Header: FC = () => {
         const data = await res.json();
         setCart(data);
       } catch (error) {
+        
         console.error(error);
       }
     };

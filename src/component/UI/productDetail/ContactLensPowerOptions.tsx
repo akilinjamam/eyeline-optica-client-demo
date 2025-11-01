@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { IPowerOptions } from '@/ts-definition/interfaces';
 import { ChevronRight } from 'lucide-react';
@@ -5,11 +6,12 @@ import React from 'react';
 import {  powerTypeForContactLens } from './productCategoryData';
 import { GoForwardPayload } from '@/ts-definition/types';
 
-const ContactLensPowerOption = ({goForward}: {goForward: (payload: GoForwardPayload) => void}) => {
+const ContactLensPowerOption = ({goForward, lensInfo}: {goForward: (payload: GoForwardPayload) => void, lensInfo?:any}) => {
+    console.log(lensInfo)
     return (
         <div>
             {
-                powerTypeForContactLens.map((power:IPowerOptions, index:number) => {
+                powerTypeForContactLens?.filter((i:any) => i.title === lensInfo.powerType).map((power:IPowerOptions, index:number) => {
                         return (
                             <div onClick={() => goForward({type: power.title, title: power.title})} key={index} className='bg-gray-100 hover:bg-gray-200 my-2 rounded-md cursor-pointer flex items-center justify-between'>
                                 <div>

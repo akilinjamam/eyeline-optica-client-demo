@@ -59,7 +59,8 @@ export default async function SingleProduct({
       brand:item?.brand,
       category:item?.category,
       description:item?.description,
-      id:item?._id
+      id:item?._id,
+      badge: item?.badge
     }
   });
 

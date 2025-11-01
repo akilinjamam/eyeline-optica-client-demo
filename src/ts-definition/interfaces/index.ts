@@ -82,6 +82,8 @@ export interface ILense {
   purchasePrice?: number;
   rating?: number;
   description?: string;
+  badge?: string;
+  powerType?: string;
 }
 
 export interface IPowerOptions {

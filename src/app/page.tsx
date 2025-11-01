@@ -21,6 +21,7 @@ import MobileImageGrid from "@/component/MobileImageGrid";
 import MobileBookAppointment from "@/component/MobileBookAppointment";
 import DesignedSunglasses from "@/component/DesignedSunglasses";
 import MobileLensSection from "@/component/MobileLensSection";
+import HomeBlogSection from "@/component/HomeBlogSection";
 
 // import GlassTryOn from "@/component/GlassTryOnV2";
 
@@ -134,6 +135,7 @@ export default async function Home() {
         <WomenSunglass data={allFramesWithWomen}/>
         <Kidsglass data={allFramesWithKids}/>
         <ShopByFrameShape/>
+        <HomeBlogSection/>
         <TopFooter/>
         <Footer/> 
         {/* <GlassTryOn/> */}

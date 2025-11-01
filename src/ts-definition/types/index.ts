@@ -129,6 +129,7 @@ export type TLens = {
   createdAt?: string; // ISO date
   updatedAt?: string; // ISO date
   __v?: number;
+  badge?: string;
 };
 
 export type TContactLens = {
@@ -184,4 +185,13 @@ export type TAccessory = {
     | "With Solution + Bag + Kit"
     | "others";
   items: TAccessoryItem[];
+};
+
+export type TBlog = {
+  _id?: string;
+  title: string;
+  images: string;
+  category: string;
+  description: string;
+  createdAt?: any;
 };

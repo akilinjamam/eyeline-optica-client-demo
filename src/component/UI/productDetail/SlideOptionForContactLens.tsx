@@ -27,7 +27,7 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
 
 
   const current = history[history.length - 1];
-  console.log(current);
+  
 
    const contactLensItems = {
       contactLensId:singleLens._id,
@@ -46,7 +46,6 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
       subtotal: Number(singleLens.salesPrice ?? 0) + Number(selectAccessory?.total ?? 0)
   }
 
-  console.log(contactLensWithAccessory)
  
   // Variants depending on direction
   const variants = {
@@ -102,7 +101,7 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
             {/* Detail part */}
             {current.type === 'powerType' && (
               <div className="p-4">
-                <ContactLensPowerOption goForward={goForward} />
+                <ContactLensPowerOption lensInfo={singleLens}  goForward={goForward} />
               </div>
             )}
             {current.type === 'with power' && (

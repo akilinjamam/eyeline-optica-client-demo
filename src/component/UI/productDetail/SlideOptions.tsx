@@ -71,8 +71,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
       subtotal: onlyFramePrice,
   }
   
-
-  
+  const badgeCategory = [...new Set(lens?.map((item:ILense) => item.badge))]?.map((value) => value);
     return (
         <div className="relative w-full overflow-hidden h-[100vh] border border-gray-200 rounded-md ">
         <AnimatePresence custom={direction} mode="popLayout">
@@ -105,7 +104,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
 
             {current.type === 'lens' && (
               <>
-                <LenseTypeSection current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo}/>
+                <LenseTypeSection badgeCategory={badgeCategory} current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo}/>
               </>
             )}
             {/* Detail part */}

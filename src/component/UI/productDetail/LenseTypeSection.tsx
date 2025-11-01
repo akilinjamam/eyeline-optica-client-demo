@@ -2,18 +2,49 @@
 "use client"
 import { ILense, ILenseFeatures } from '@/ts-definition/interfaces';
 import { ChevronRight, Dot } from 'lucide-react';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 // import { lenses } from './productCategoryData';
 import { GoForwardPayload } from '@/ts-definition/types';
 import Image from 'next/image';
 import defaultImg from '../../../../public/images/lense-1.png';
+import useSwipe from '@/custom-hooks/useSwipe';
 
-const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any }) => {
+const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo, badgeCategory}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any, badgeCategory?:any }) => {
+
+    const swipeRef = useRef(null);
+            const [subType , setSubType] = useState("Lense");
+            const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
+
 
     return (
-        <div>
+        <div className='h-[80vh] overflow-y-scroll hide-scrollbar'>
+            <div className='w-[90%] absolute top-3 right-0'>
+                <div className='flex item-center justify-start overflow-x-hidden cursor-grab '
+                ref={swippedRef}
+                onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                >
+                <div className='flex items-center justify-between'>
+                    { current.title !== "Frame Only" &&
+                        ["All",...badgeCategory]?.map((item:any, index:number) => (
+                            <div onClick={() => {
+                                if(item === "All"){
+                                    setSubType("Lense")
+                                    return
+                                }
+                                setSubType(item)
+                            }} key={index} className='w-auto bg-blue-800 text-white px-3 py-1 rounded-full mr-4 cursor-pointer'>{item?.split(' ')?.join("_")}</div>
+                        ))
+                    }
+                </div>
+                </div>
+            </div>
             {lens
-            .filter((l: ILense) => l.subType === current.title)
+            .filter((l: ILense) => l.subType === current.title)?.filter((i:ILense) => i.badge === subType || i.type === subType )
             .map((item: ILense, index: number) => (
                 <div
                 key={index}
