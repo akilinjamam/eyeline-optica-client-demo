@@ -85,6 +85,7 @@ export interface ILense {
   description?: string;
   badge?: string;
   powerType?: string;
+  weeklyDeals?: boolean;
 }
 
 export interface IPowerOptions {

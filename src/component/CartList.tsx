@@ -74,7 +74,7 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
   const handleCheckout = (value:string) => {
     const findCart = cart?.data?.find((cart:Cart) => cart?._id === value);
     if(!findCart) return
-    localStorage.setItem('cartData', JSON.stringify(findCart)) 
+    // localStorage.setItem('cartData', JSON.stringify(findCart)) 
     addToCart(findCart)
     router.push("/cart/checkout");
   }
@@ -100,9 +100,13 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
             pd={item?.items[0]?.pd as number}
             price={item.totalAmount}
             lensPrice={item.items[0]?.lensId?.salesPrice}
+            lensDeals={item.items[0]?.lensId?.weeklyDeals}
             framePrice={item.items[0]?.productId?.salesPrice}
+            frameDeals={item.items[0]?.productId?.weeklyDeals}
             contactLensPrice={item.items[0]?.contactLensId?.salesPrice}
+            cLensDeals={item.items[0]?.contactLensId?.weeklyDeals}
             accessoryPrice={item.items[0]?.accessoryId?.items?.map((value:any) => value.salesPrice)?.reduce((acc:number, sum:number) => acc + sum, 0)}
+            accessoryDeals={item.items[0]?.accessoryId?.weeklyDeals}
             deliveryFee={item.deliveryFee}
             rightEye={{
               sphere: item?.items[0]?.rightEye?.sphere as string,

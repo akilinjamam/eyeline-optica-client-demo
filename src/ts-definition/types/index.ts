@@ -63,6 +63,12 @@ export type TData<T> = {
     data: T;
   };
 };
+export type TDataWithoutMeta<T> = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: T;
+};
 
 export type TFrame = {
   _id?: string;
@@ -95,6 +101,8 @@ export type TFrame = {
   createdAt?: string; // ISO date
   updatedAt?: string; // ISO date
   __v?: number;
+  dealsOffer?: number;
+  category?: string;
 };
 
 // src/types/lens.type.ts
@@ -130,6 +138,7 @@ export type TLens = {
   updatedAt?: string; // ISO date
   __v?: number;
   badge?: string;
+  weeklyDeals?: boolean;
 };
 
 export type TContactLens = {
@@ -175,6 +184,7 @@ export type TAccessory = {
   _id?: string;
   images: string[];
   customerId: string; // MongoDB ObjectId as string
+  weeklyDeals: boolean;
   type:
     | "With Solution"
     | "With Bag"
@@ -194,4 +204,15 @@ export type TBlog = {
   category: string;
   description: string;
   createdAt?: any;
+};
+
+export type TWeeklyDeals = {
+  startDate: any;
+  endDate: any;
+  available?: boolean;
+  active: boolean;
+  _id?: string;
+  id?: string;
+  title: string;
+  discountPercent: number;
 };

@@ -6,7 +6,22 @@ import defaultImage from '../../public/images/glass-1.png';
 import Link from 'next/link';
 
 
-const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id}) => {
+const GlassCardForDeals:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id, dealsOffer, weeklyDeals, category}) => {
+
+  const handleRoute = (value:string) => {
+    if(value === 'Frame'){
+      return `/productDetail/${_id}`
+    }
+    if(value === 'Lens'){
+      return `/lensDetail/${_id}`
+    }
+    if(value === 'Contact Lens'){
+      return `/contactLensDetail/${_id}`
+    }
+    if(value === 'Accessory'){
+      return `/accessoryDetail/${_id}`
+    }
+  }
 
     return (
     <div className="relative bg-white shadow-md p-4 rounded-md w-[240px]">
@@ -22,7 +37,7 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
       </span>
 
       <div className=" mb-3 w-[200px] flex items-center justify-center">
-        <Link href={`/productDetail/${_id}`}>
+        <Link href={`${handleRoute(category as string)}`}>
           <Image
             src={images && images?.length ? images?.[0] : defaultImage}
             alt={name || "Glass product image"}
@@ -35,7 +50,10 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
 
       <p className="text-[10px] text-gray-500">{brand}</p>
       <p className="text-[11px] font-semibold text-black">{name}</p>
-      <p className="text-md font-bold text-red-600 mt-1">৳ {salesPrice}</p>
+      <span className="text-md font-bold text-red-600 mt-1 line-through ">৳ { salesPrice}</span>
+      {
+        weeklyDeals && <span className="text-md font-bold text-red-600 mt-1 ml-2">৳ {(salesPrice ?? 0) - (Math.floor(((salesPrice ?? 0) * (dealsOffer ?? 0)) / 100))}</span>
+      }
 
       <div className='absolute bottom-2 right-2'>
         <div className="text-xs text-gray-600 mt-2 ">
@@ -47,4 +65,4 @@ const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, col
   );
 };
 
-export default GlassCard;
+export default GlassCardForDeals;

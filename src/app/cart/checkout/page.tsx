@@ -3,16 +3,19 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { CreditCard } from "lucide-react";
+import { CreditCard, Loader2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import sslLogo from "../../../../public/images/ssl-photo.png";
 import { toast, ToastContainer } from "react-toastify";
 import { TAccessoryItem } from "@/ts-definition/types";
+import useFetchWeeklyDealsData from "@/custom-hooks/useFetchWeeklyDealsData";
+import { handleDealsPrice } from "@/utilities/priceAfterDealsDiscount";
 
 export default function CheckoutPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { cart } = useCart();
+  const { cart, loading:loadingCartInfo } = useCart();
+  console.log(cart?.items?.[0]?.accessoryId?.weeklyDeals)
   const getNewQtyRef = useRef<string>("");
 
   useEffect(() => {
@@ -24,6 +27,7 @@ export default function CheckoutPage() {
 
   const [billing, setBilling] = useState({ name: "", phone: "", email: "" });
   const [shipping, setShipping] = useState({ address: "", city: "", zip: "" });
+  const {dealsData} = useFetchWeeklyDealsData()
 
   useEffect(() => {
     setBilling({
@@ -112,9 +116,28 @@ export default function CheckoutPage() {
     }
   };
 
+  let newSubTotalIfDealsAvailableForFrame = 0;
+  let newSubTotalIfDealsAvailableForLens = 0;
+  let newSubTotalIfDealsAvailableForContactLens = 0;
+  let newSubTotalIfDealsAvailableForAccessory = 0;
+
+  if(cart.items[0]?.productId){
+      newSubTotalIfDealsAvailableForFrame = handleDealsPrice(dealsData?.active, cart.items[0]?.productId?.weeklyDeals, cart.items[0]?.productId?.salesPrice, dealsData?.discountPercent) || 0;
+  }
+  if(cart.items[0]?.lensId){
+      newSubTotalIfDealsAvailableForLens = handleDealsPrice(dealsData?.active, cart.items[0]?.lensId?.weeklyDeals, cart.items[0]?.lensId?.salesPrice, dealsData?.discountPercent) || 0;
+  }
+  if(cart.items[0]?.contactLensId){
+      newSubTotalIfDealsAvailableForContactLens = handleDealsPrice(dealsData?.active, cart.items[0]?.contactLensId?.weeklyDeals, cart.items[0]?.contactLensId?.salesPrice, dealsData?.discountPercent) || 0;
+  }
+  if(cart.items[0]?.accessoryId){
+      newSubTotalIfDealsAvailableForAccessory = handleDealsPrice(dealsData?.active, cart.items[0]?.accessoryId?.weeklyDeals, cart.items[0]?.accessoryId?.items?.map((accessory:TAccessoryItem) => accessory.salesPrice)?.reduce((acc:number, sum:number) => acc + sum,0), dealsData?.discountPercent) || 0;
+  }
+  
+
   // Precalculate totals for UI
   const quantity = Number(getNewQtyRef.current) || 1;
-  const subtotal = cart.items[0]?.subtotal * quantity;
+  const subtotal = (newSubTotalIfDealsAvailableForFrame + newSubTotalIfDealsAvailableForLens + newSubTotalIfDealsAvailableForContactLens + newSubTotalIfDealsAvailableForAccessory) * quantity;
   const deliveryFee = cart.deliveryFee || 0;
   const hasFrame = !!cart.items[0]?.productId;
   const hasLens = !!cart.items[0]?.lensId;
@@ -131,6 +154,13 @@ export default function CheckoutPage() {
     payableAmount = 200;
     dueAmount = totalCost - 200;
   }
+
+  if (loadingCartInfo)
+      return (
+        <div className="flex justify-center items-center py-20">
+          <Loader2 className="animate-spin text-blue-500 w-8 h-8" />
+        </div>
+      );
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">
@@ -159,9 +189,15 @@ export default function CheckoutPage() {
                   <p className="text-xs text-gray-500">
                     {cart.items[0].productId?.color}
                   </p>
-                  <p className="text-sm font-semibold text-blue-700">
+                  <div>
+                    <span className="text-sm font-semibold text-blue-700">
+                    ৳{handleDealsPrice(dealsData?.active,cart.items[0]?.productId?.weeklyDeals, cart.items[0]?.productId?.salesPrice, dealsData?.discountPercent )}
+                  </span>
+                    {cart.items[0]?.productId?.weeklyDeals &&
+                      <span className="text-sm font-semibold text-red-600 line-through ">
                     ৳{cart.items[0]?.productId?.salesPrice}
-                  </p>
+                  </span>}
+                  </div>
                 </div>
               </div>
             )}
@@ -182,9 +218,17 @@ export default function CheckoutPage() {
                   <p className="text-xs text-gray-500">
                     {cart.items[0].lensId?.brand}
                   </p>
-                  <p className="text-sm font-semibold text-blue-700">
-                    ৳{cart.items[0]?.lensId?.salesPrice}
-                  </p>
+                  <div>
+                    <span className="text-sm font-semibold text-blue-700">
+                    ৳{handleDealsPrice(dealsData?.active,cart.items[0]?.lensId?.weeklyDeals, cart.items[0]?.lensId?.salesPrice, dealsData?.discountPercent )}
+                  </span>
+                    {
+                      cart?.items[0]?.lensId?.weeklyDeals && 
+                      <span className="text-sm font-semibold text-red-600 line-through ">
+                        ৳{cart.items[0]?.lensId?.salesPrice}
+                    </span>
+                    }
+                  </div>
                 </div>
               </div>
             )}
@@ -205,9 +249,17 @@ export default function CheckoutPage() {
                   <p className="text-xs text-gray-500">
                     {cart.items[0].contactLensId?.brand}
                   </p>
-                  <p className="text-sm font-semibold text-blue-700">
-                    ৳{cart.items[0]?.contactLensId?.salesPrice}
-                  </p>
+                  <div>
+                    <span className="text-sm font-semibold text-blue-700">
+                    ৳{handleDealsPrice(dealsData?.active,cart.items[0]?.contactLensId?.weeklyDeals, cart.items[0]?.contactLensId?.salesPrice, dealsData?.discountPercent )}
+                  </span>
+                    {
+                      cart?.items[0]?.contactLensId?.weeklyDeals && 
+                      <span className="text-sm font-semibold text-red-600 line-through ">
+                        ৳{cart.items[0]?.contactLensId?.salesPrice}
+                    </span>
+                    }
+                  </div>
                 </div>
               </div>
             )}
@@ -228,9 +280,20 @@ export default function CheckoutPage() {
                   <p className="text-xs text-gray-500">
                     {cart.items[0].accessoryId?.items?.map((v:TAccessoryItem) => v.brand)?.join('+')}
                   </p>
-                  <p className="text-sm font-semibold text-blue-700">
+                  {/* <p className="text-sm font-semibold text-blue-700">
                     ৳{cart.items[0].accessoryId?.items?.map((v:TAccessoryItem) => v.salesPrice)?.join('+')}
-                  </p>
+                  </p> */}
+                  <div>
+                    <span className="text-sm font-semibold text-blue-700">
+                    ৳{handleDealsPrice(dealsData?.active,cart.items[0]?.accessoryId?.weeklyDeals, cart.items[0]?.accessoryId?.items?.map((v:TAccessoryItem) => v.salesPrice)?.reduce((acc:number,sum:number) => acc + sum,0), dealsData?.discountPercent )}
+                  </span>
+                    {
+                      cart?.items[0]?.accessoryId?.weeklyDeals && 
+                      <span className="text-sm font-semibold text-red-600 line-through ">
+                        ৳{cart.items[0]?.accessoryId?.items?.map((v:TAccessoryItem) => v.salesPrice)?.reduce((acc:number,sum:number) => acc + sum,0)}
+                    </span>
+                    }
+                  </div>
                 </div>
               </div>
             )}

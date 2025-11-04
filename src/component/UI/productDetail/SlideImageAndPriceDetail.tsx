@@ -1,8 +1,9 @@
 'use client'
 import SlideOptions from './SlideOptions';
-import { TFrame } from '@/ts-definition/types';
+import { TFrame, TWeeklyDeals } from '@/ts-definition/types';
 import { ILense } from '@/ts-definition/interfaces';
 import { useState } from 'react';
+import { handleDealsPrice } from '@/utilities/priceAfterDealsDiscount';
 
 export type TLensInfo = {
   title:string;
@@ -10,9 +11,10 @@ export type TLensInfo = {
   brand:string;
   color:string;
   id:string;
+  weeklyDeals?:boolean;
 }
 
-const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILense[] }) => {
+const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals }: { product: TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals }) => {
   const [lensInfo, setLensInfo] = useState<TLensInfo>({
     title:"",
     price:0,
@@ -20,17 +22,23 @@ const SlideImageAndPriceDetail = ({ product, lens }: { product: TFrame, lens:ILe
     color: "",
     id:""
 
-  })
+  });
+
+  const price = handleDealsPrice(weeklyDeals?.active,product?.weeklyDeals ?? false, product?.salesPrice ?? 0, weeklyDeals?.discountPercent )
+
+  const lensPrice = handleDealsPrice(weeklyDeals?.active,lensInfo?.weeklyDeals ?? false, lensInfo?.price ?? 0, weeklyDeals?.discountPercent )
  
   return (
     <div className="p-2">
       {/* Sliding container */}
-      <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame} lensInfo={lensInfo}/>
+      <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame} lensInfo={lensInfo} />
       {/* bottom section */}
       <div className="w-full absolute bottom-0 h-15 flex items-center justify-center bg-white">
         <div className="w-[100%] h-auto  flex items-center justify-center">
           <div className="flex items-center justify-end font-bold text-sm w-[90%]">
-            <p className='bg-blue-800 rounded-md text-white px-2 py-1 w-full text-center'>৳{Number(product?.salesPrice) + lensInfo?.price }</p>
+            
+            <p className='bg-blue-800 rounded-md text-white px-2 py-1 w-full text-center'>৳{Number(price) + (lensPrice ?? 0) }</p>
+            
           </div>
         </div>
       </div>

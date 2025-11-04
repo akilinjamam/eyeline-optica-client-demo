@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { powerTypes } from './productCategoryData';
 import { ArrowLeft } from 'lucide-react';
@@ -14,8 +15,11 @@ import { TLensInfo } from './SlideImageAndPriceDetail';
 import FrameOnly from './FrameOnly';
 import ZeroPowerDetailSection from './ZeroPowerDetailSection';
 import SubmitPowerLater from '@/component/SubmitPowerLater';
+import useFetchWeeklyDealsData from '@/custom-hooks/useFetchWeeklyDealsData';
 
-const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], setLensInfo:() => void, product: TFrame, lensInfo:TLensInfo}) => {
+const SlideOptions = ({lens, setLensInfo, product, lensInfo,}: {lens:ILense[], setLensInfo:any, product: TFrame, lensInfo:TLensInfo}) => {
+
+   const {dealsData} = useFetchWeeklyDealsData()
    
     const [history, setHistory] = useState<Array<{ type: string; title?: string }>>([
     { type: 'powerTypes' }, 
@@ -46,10 +50,14 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
   };
 
   const goBack = () => {
+    if((current.type !== 'Submit Power later in 15 days') && (current.type !== "Enter Power Manually") && ((current.type !== "Upload Prescription"))){
+        setLensInfo({ price: 0 });
+    }
     if (history.length > 1) {
       setDirection('backward');
       setHistory((prev) => prev.slice(0, -1));
     }
+    
   };
 
   const totalPrice = lensInfo.price + Number(product.salesPrice);
@@ -104,7 +112,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo}: {lens:ILense[], se
 
             {current.type === 'lens' && (
               <>
-                <LenseTypeSection badgeCategory={badgeCategory} current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo}/>
+                <LenseTypeSection badgeCategory={badgeCategory} current={current} goForward={goForward} setSelectedLense={setSelectedLense} lens={lens} setLensInfo={setLensInfo} dealsData={dealsData}/>
               </>
             )}
             {/* Detail part */}

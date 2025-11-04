@@ -17,6 +17,7 @@ import { TAccessoryInfo } from './SlideImageAndPriceDetailForContactLens';
 import AccessoryFeatureSection from './AccessoryFeatureSection';
 import LenseDetailSectionWithAccessory from './LensDetailSectionWithAccessory';
 import EnterPowerSectionForContactLensAndAccessories from './EnterPowerSectionForContactLensAndAccessories';
+import useFetchWeeklyDealsData from '@/custom-hooks/useFetchWeeklyDealsData';
 
 const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, setSelectAccessory}: {singleLens:ILense, allAccessory:TAccessory[], selectAccessory:TAccessoryInfo, setSelectAccessory: any}) => {
     const [open, setOpen] = useState<boolean>(false)
@@ -27,7 +28,10 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
 
 
   const current = history[history.length - 1];
-  
+  console.log(current)
+
+  const {dealsData} = useFetchWeeklyDealsData()
+
 
    const contactLensItems = {
       contactLensId:singleLens._id,
@@ -70,6 +74,9 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
     if (history.length > 1) {
       setDirection('backward');
       setHistory((prev) => prev.slice(0, -1));
+      if(current.type !== 'details'){
+        setSelectAccessory({price:0})
+      }
     }
   };
 
@@ -106,12 +113,12 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
             )}
             {current.type === 'with power' && (
               <div className="p-4">
-                <ContactLensAccessories goForward={goForward} current={current as any}/>
+                <ContactLensAccessories  goForward={goForward} current={current as any}/>
               </div>
             )}
             {current.type === 'without power' && (
               <div className="p-4">
-                    <ContactLensAccessories goForward={goForward} current={current as any}/>
+                    <ContactLensAccessories  goForward={goForward} current={current as any}/>
               </div>
             )}
             {current.type === "Enter Power Manually" && (
@@ -169,12 +176,12 @@ const SlideOptionsForContactLens = ({singleLens, allAccessory, selectAccessory, 
             )}
             {(current.title === "with power and accessories" && current.type !== "Only Contact Lens" ) && (
               <>
-                <FilteredAccessories current={current as any}  goForward={goForward} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} setOpen={setOpen}/>
+                <FilteredAccessories dealsData={dealsData} current={current as any}  goForward={goForward} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} setOpen={setOpen}/>
               </>
             )}
             {(current.title === "without power and accessories" && current.type !== "Only Contact Lens" ) && (
               <>
-                <FilteredAccessories current={current as any}  goForward={goForward} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} setOpen={setOpen}/>
+                <FilteredAccessories dealsData={dealsData} current={current as any}  goForward={goForward} allAccessory={allAccessory} setSelectAccessory={setSelectAccessory} setOpen={setOpen}/>
               </>
             )}
           </motion.div>

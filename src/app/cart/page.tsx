@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import CartList from "@/component/CartList";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -52,6 +51,7 @@ export type Cart = {
   deliveryFee: number;
 };
 export default function Page() {
+  
   const [cart, setCart] = useState<any>(null);
   const router = useRouter();
   useEffect(() => {

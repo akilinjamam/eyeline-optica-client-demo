@@ -4,15 +4,17 @@ import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'luci
 import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 import SlideInPanel from './SlidePannel';
-import { TFrame } from '@/ts-definition/types';
+import { TFrame, TWeeklyDeals } from '@/ts-definition/types';
 import { ILense } from '@/ts-definition/interfaces';
+import { handleDealsPrice } from '@/utilities/priceAfterDealsDiscount';
 
 
-const DetailPart = ({product, lens}: {product:TFrame, lens:ILense[]}) => {
+const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals}) => {
+
+
  
 const [showLensPanel, setShowLensPanel] = useState(false);
 
-console.log(product)
     return (
     <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
       <div>
@@ -36,7 +38,8 @@ console.log(product)
 
       <div className="bg-white p-4 rounded-lg grid grid-cols-2 gap-4 text-sm">
         <div>
-          <p className="text-2xl font-bold">{product.salesPrice}TK</p>
+          <p className="text-2xl font-bold"><span className='line-through text-red-600'>{(product?.weeklyDeals && weeklyDeals.active) && `${product?.salesPrice}TK`}</span> <span>{(product?.weeklyDeals && weeklyDeals.active) && product?.salesPrice && `${weeklyDeals.discountPercent}%`}</span></p>
+          <p className="text-2xl font-bold">{handleDealsPrice(weeklyDeals.active, product?.weeklyDeals ?? false , product?.salesPrice ?? 0, weeklyDeals.discountPercent)}TK</p>
           
         </div>
         <div>
@@ -72,7 +75,7 @@ console.log(product)
 
         <AnimatePresence>
           {showLensPanel && (
-            <SlideInPanel onClose={() => setShowLensPanel(false)} product={product} lens={lens}/>
+            <SlideInPanel onClose={() => setShowLensPanel(false)} product={product} lens={lens} weeklyDeals={weeklyDeals}/>
           )}
         </AnimatePresence>
       <div className="flex justify-center gap-4 text-blue-600 mt-2">

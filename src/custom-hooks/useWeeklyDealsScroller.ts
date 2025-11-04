@@ -7,8 +7,6 @@ const useWeeklyDealsScroller = (parentRef: any, dataLength: number = 12) => {
 
     const perScrollWidth = parentElement.scrollWidth / dataLength;
 
-    console.log(parentElement.scrollWidth);
-
     if (value === "left") {
       if (
         parentElement.scrollLeft + parentElement.clientWidth + 1 >=

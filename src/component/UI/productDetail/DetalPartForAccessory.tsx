@@ -6,36 +6,15 @@ import { AnimatePresence } from "framer-motion";
 
 import { TAccessory, TAccessoryItem } from '@/ts-definition/types';
 import SlideInPanelForAccessory from './SlideInPanelforAccessory';
+import useFetchWeeklyDealsData from '@/custom-hooks/useFetchWeeklyDealsData';
+import { handleDealsPrice } from '@/utilities/priceAfterDealsDiscount';
 
 
 const DetailPartForAccessory = ({singAccessory}: {singAccessory:TAccessory}) => {
 const name = singAccessory?.items?.map((item:TAccessoryItem) => item.name)?.join('+');
 const price = singAccessory?.items?.map((item:TAccessoryItem) => item.salesPrice)?.join('+');
+const singlePrice = singAccessory?.items?.map((item:TAccessoryItem) => item.salesPrice)?.reduce((acc:number, sum:number) => acc + sum, 0);
 const [showAccessoryPanel, setShowAccessoryPanel] = useState(false);
-
-/* 
-(singAccessory?.items?.length === 1 && (
-                singAccessory?.items[0]?.stock ? (
-                  <p className="text-green-500 font-bold">Available</p>
-                ) : (
-                  <p className="text-red-500 font-bold">Stockout</p>
-                )
-              )) ||
-              (singAccessory?.items?.length === 2 && (
-                (singAccessory?.items[0]?.stock && singAccessory?.items[1]?.stock) ? (
-                  <p className="text-green-500 font-bold">Available</p>
-                ) : (
-                  <p className="text-red-500 font-bold">Stockout</p>
-                )
-              )) ||
-              (singAccessory?.items?.length === 3 && (
-                (singAccessory?.items[0]?.stock && singAccessory?.items[1]?.stock && singAccessory?.items[2]?.stock) ? (
-                  <p className="text-green-500 font-bold">Available</p>
-                ) : (
-                  <p className="text-red-500 font-bold">Stockout</p>
-                )
-              ))
-*/
 
 const handleStock = () => {
   if(singAccessory?.items?.length === 1 ){
@@ -63,7 +42,7 @@ const handleStock = () => {
   }
 }
 
-  console.log(handleStock())
+  const {dealsData} = useFetchWeeklyDealsData()
 
     return (
     <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
@@ -88,34 +67,16 @@ const handleStock = () => {
 
       <div className="bg-white p-4 rounded-lg grid grid-cols-2 gap-4 text-sm">
         <div>
-          <p className="text-2xl font-bold">{price}TK</p>
-          <label className="flex items-center space-x-2 mt-2">
-            <input type="checkbox" className="w-4 h-4" />
+          <p className="text-2xl font-bold"><span className='line-through text-red-600'>{(singAccessory?.weeklyDeals && dealsData.active) && `${price}TK`}</span> <span>{(singAccessory?.weeklyDeals && dealsData.active) && price && `${dealsData.discountPercent}%`}</span></p>
+          <p className="text-2xl font-bold">{handleDealsPrice(dealsData.active, singAccessory?.weeklyDeals ?? false , singlePrice ?? 0, dealsData.discountPercent)}TK</p>
           
-          </label>
           <br />
          <div>
               {handleStock() ? <p className="text-green-500 font-bold">Available</p> : <p className="text-red-500 font-bold">Stockout</p>}
           </div>
         </div>
         <div>
-          {/* <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
-          {
-            singleLens?.features && singleLens?.features?.length > 0 ? singleLens?.features?.map((item:any, index:number) => (
-              <ul key={index+1} className="space-y-1">
-            
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" /> {item}*
-                </li>
-           
-              </ul>
-            ))
-            :
-            <p>No Features Added here yet...</p>
-          } */}
-          {/* <p className="text-xs mt-1 text-gray-500">
-            *multifocal or readers lenses start at additional cost
-          </p> */}
+          
         </div>
       </div>
 

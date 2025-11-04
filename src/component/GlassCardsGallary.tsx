@@ -1,15 +1,15 @@
 "use client"
 import React, { useRef } from 'react';
-import GlassCard from './GlassCard';
 import arrowLeft from '../../public/images/arrow-left.png'
 import arrowRight from '../../public/images/arrow-right.png'
 import Image from 'next/image';
 import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
-import { TFrame } from '@/ts-definition/types';
+import { TFrame, TWeeklyDeals } from '@/ts-definition/types';
 import useSwipe from '@/custom-hooks/useSwipe';
+import GlassCardForDeals from './GlassCardForDeals';
 
 
-const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
+const GlassCardsGallary = ({data, dealsData}: {data:TFrame[], dealsData:TWeeklyDeals}) => {
     
     const swipeRef = useRef(null);
     const currentRef = useRef(null);
@@ -20,7 +20,7 @@ const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
     const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
   
     return (
-        <div>
+        <div className={`${!dealsData?.active && 'hidden'}`}>
             <div className='md:hidden lg:hidden block'>
                 <div className="w-full px-4 py-4 overflow-x-hidden relative">
                       <div
@@ -40,7 +40,7 @@ const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
                         onTouchMove={handleTouchMove}
                       >
                         {
-                            data?.map(({color, name, brand, salesPrice, badge, images,_id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                            data?.map(({color, name, brand, salesPrice, badge, images,_id, weeklyDeals, category }: TFrame, index: number) => <GlassCardForDeals color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} dealsOffer={dealsData?.discountPercent} weeklyDeals={weeklyDeals} category={category}/> )
                         }
                          
                       </div>
@@ -52,7 +52,7 @@ const GlassCardsGallary = ({data}: {data:TFrame[]}) => {
                     <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                     <div style={{userSelect:'none'}}  ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2 '>
                         {
-                            data?.map(({color, name, brand, salesPrice, badge, images,_id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                            data?.map(({color, name, brand, salesPrice, badge, images,_id, weeklyDeals, category }: TFrame, index: number) => <GlassCardForDeals color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} dealsOffer={dealsData?.discountPercent} weeklyDeals={weeklyDeals} category={category}/> )
                         }
                        
                         </div>

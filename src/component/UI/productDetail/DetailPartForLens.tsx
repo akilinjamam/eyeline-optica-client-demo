@@ -4,11 +4,15 @@ import { Check, Facebook, Heart, Instagram, Star, StarHalf, Twitter } from 'luci
 import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 import SlideInPanelForLens from './SlidePannelForLens';
+import useFetchWeeklyDealsData from '@/custom-hooks/useFetchWeeklyDealsData';
+import { handleDealsPrice } from '@/utilities/priceAfterDealsDiscount';
 
 
 const DetailPartForLens = ({singleLens}: {singleLens:any}) => {
  
 const [showLensPanel, setShowLensPanel] = useState(false);
+
+  const {dealsData} = useFetchWeeklyDealsData()
 
     return (
     <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
@@ -33,9 +37,10 @@ const [showLensPanel, setShowLensPanel] = useState(false);
 
       <div className="bg-white p-4 rounded-lg grid grid-cols-2 gap-4 text-sm">
         <div>
-          <p className="text-2xl font-bold">{singleLens.salesPrice}TK</p>
-         
-        </div>
+                  <p className="text-2xl font-bold"><span className='line-through text-red-600'>{(singleLens?.weeklyDeals && dealsData.active) && `${singleLens?.salesPrice}TK`}</span> <span>{(singleLens?.weeklyDeals && dealsData.active) && singleLens?.salesPrice && `${dealsData.discountPercent}%`}</span></p>
+                  <p className="text-2xl font-bold">{handleDealsPrice(dealsData.active, singleLens?.weeklyDeals ?? false , singleLens?.salesPrice ?? 0, dealsData.discountPercent)}TK</p>
+                  
+                </div>
         <div>
           <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
           {

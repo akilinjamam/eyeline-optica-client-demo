@@ -5,7 +5,7 @@ import TopFooter from "@/component/TopFooter";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
-import { TData, TFrame, TLens } from "@/ts-definition/types";
+import { TData, TDataWithoutMeta, TFrame, TLens, TWeeklyDeals } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
 
@@ -21,6 +21,11 @@ async function getAllLensData(){
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens`);
   return response.json();
 };
+
+async function getWeeklyDealsData(){
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}search/get-deals`);
+  return response.json();
+}
 
 
 type ParamsPromise = Promise<{ id: string }>;
@@ -60,9 +65,14 @@ export default async function SingleProduct({
       category:item?.category,
       description:item?.description,
       id:item?._id,
-      badge: item?.badge
+      badge: item?.badge,
+      weeklyDeals: item?.weeklyDeals
     }
   });
+
+  const weeklyDealsData = await getWeeklyDealsData() as TDataWithoutMeta<TWeeklyDeals>;
+  const weeklyDeals = weeklyDealsData?.data;
+  
 
   return (
     <div className="w-full bg-blue-50 px-1">
@@ -71,7 +81,7 @@ export default async function SingleProduct({
           <ImagePart product={frame} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
-          <DetailPart product={frame as TFrame} lens={allLens as any} />
+          <DetailPart weeklyDeals={weeklyDeals} product={frame as TFrame} lens={allLens as any} />
         </div>
       </div>
 

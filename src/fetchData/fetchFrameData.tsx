@@ -7,7 +7,7 @@ export async function getFrame(query: Record<string, any>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}products?${params}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}products?weeklyDeals=false&${params}`,
     {
       next: {revalidate: 120},
     }
@@ -23,7 +23,7 @@ export async function getLens(query: Record<string,string>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens?weeklyDeals=false&${params}`, {
       next: {revalidate: 120},
     });
 
@@ -36,7 +36,7 @@ export async function getcontactLens(query:Record<string,string>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}contact-lens?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}contact-lens?weeklyDeals=false&${params}`, {
       next: {revalidate: 120},
     });
 
@@ -50,7 +50,7 @@ export async function getAccessory(query:Record<string,string>) {
 
   const params = new URLSearchParams(mergedQuery).toString();
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}accessory/get-accessories?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}accessory/get-accessories?weeklyDeals=false&${params}`, {
       next: {revalidate: 120},
     });
 
@@ -71,5 +71,14 @@ export async function getBlog(query:Record<string,string>) {
   if (!res.ok) throw new Error("Failed to fetch accessory");
 
   
+  return res.json();
+}
+export async function getWeeklyDeals() {
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}search/get-deals`, {
+    cache: "no-store"
+  });
+  if (!res.ok) throw new Error("Failed to fetch weeklyDeals");
+
   return res.json();
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ImagePreview from "@/component/ImagePreview";
 import PopularBrand from "@/component/PopularBrand";
 import WeeklyDeals from "@/component/WeeklyDeals";
@@ -14,7 +15,7 @@ import Kidsglass from "@/component/KidsGlasses";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import Footer from "@/component/Footer";
-import { TData, TFrame } from "@/ts-definition/types";
+import { TData, TDataWithoutMeta, TFrame, TWeeklyDeals } from "@/ts-definition/types";
 import MobileBanner from "@/component/MobileBanner";
 import FeaturedCategory from "@/component/FeaturedCategory";
 import MobileImageGrid from "@/component/MobileImageGrid";
@@ -22,16 +23,13 @@ import MobileBookAppointment from "@/component/MobileBookAppointment";
 import DesignedSunglasses from "@/component/DesignedSunglasses";
 import MobileLensSection from "@/component/MobileLensSection";
 import HomeBlogSection from "@/component/HomeBlogSection";
+import { getWeeklyDeals } from "@/fetchData/fetchFrameData";
 
-// import GlassTryOn from "@/component/GlassTryOnV2";
 
 async function getProduct(value:string) {
 
   if(value === 'weeklyDeals'){
-    const res = await fetch(`https://server.eyelineoptica.com/api/v1/products?weeklyDeals=true&limit=12&page=1`, {
-    
-    next: { tags: ["frames"] },
-  });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}search/get-items`);
 
   if (!res.ok) throw new Error("Failed to fetch frames");
 
@@ -39,7 +37,7 @@ async function getProduct(value:string) {
   }
 
   if(value === 'newArrivals'){
-    const res = await fetch(`https://server.eyelineoptica.com/api/v1/products?limit=12&page=1`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}products?weeklyDeals=false&limit=12&page=1`, {
     
     next: { tags: ["frames"] },
   });
@@ -50,7 +48,7 @@ async function getProduct(value:string) {
   }
 
   if(value === 'sold'){
-    const res = await fetch(`https://server.eyelineoptica.com/api/v1/products?sort=-sold&limit=12&page=1`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}products?weeklyDeals=false&sort=-sold&limit=12&page=1`, {
     
     next: { tags: ["frames"] },
   });
@@ -61,7 +59,7 @@ async function getProduct(value:string) {
   }
 
   if(value === 'biologyCategoryMan'){
-    const res = await fetch(`https://server.eyelineoptica.com/api/v1/products?biologyCategory=men&limit=12&page=1`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}products?weeklyDeals=false&biologyCategory=men&limit=12&page=1`, {
     
     next: { tags: ["frames"] },
   });
@@ -72,7 +70,7 @@ async function getProduct(value:string) {
   }
 
   if(value === 'biologyCategoryWomen'){
-    const res = await fetch(`https://server.eyelineoptica.com/api/v1/products?biologyCategory=women&limit=12&page=1`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}products?weeklyDeals=false&biologyCategory=women&limit=12&page=1`, {
     
     next: { tags: ["frames"] },
   });
@@ -83,7 +81,7 @@ async function getProduct(value:string) {
   }
 
   if(value === 'biologyCategoryKids'){
-    const res = await fetch(`https://server.eyelineoptica.com/api/v1/products?biologyCategory=kids&limit=12&page=1`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}products?weeklyDeals=false&biologyCategory=kids&limit=12&page=1`, {
     
     next: { tags: ["frames"] },
   });
@@ -96,8 +94,8 @@ async function getProduct(value:string) {
 
 export default async function Home() {
 
-  const frameWithDeals = await getProduct('weeklyDeals') as TData<TFrame>;
-  const allFramesWithDeals = Array.isArray(frameWithDeals?.data?.data) ? frameWithDeals?.data?.data : [];
+  const frameWithDeals = await getProduct('weeklyDeals') as TDataWithoutMeta<TFrame>;
+  const allFramesWithDeals = Array.isArray(frameWithDeals?.data) ? frameWithDeals?.data?.filter((item:any) => item.weeklyDeals === true) : [];
   const frameWithNewArrivals = await getProduct('newArrivals') as TData<TFrame>;
   const allFramesWithNewArrivals = Array.isArray(frameWithNewArrivals?.data?.data) ? frameWithNewArrivals?.data?.data : [];
 
@@ -114,13 +112,18 @@ export default async function Home() {
   const allFramesWithKids = Array.isArray(frameWithKids?.data?.data) ? frameWithKids?.data?.data : [];
 
 
+  const getWeeklyDealsDate = await getWeeklyDeals() as TDataWithoutMeta<TWeeklyDeals>;
+  const getWeeklyDealsData = getWeeklyDealsDate?.data
+
+ 
+
   return (
     <div className="bg-blue-50">
         <MobileBanner/>
         <ImagePreview/>
         <PopularBrand/>
-        <WeeklyDeals/>
-        <GlassCardsGallary data={allFramesWithDeals}/>
+        <WeeklyDeals dealsData={getWeeklyDealsData }/>
+        <GlassCardsGallary data={allFramesWithDeals} dealsData={getWeeklyDealsData}/>
         <FeaturedCategory/>
         <LatestCollections/>
         <BookAppointment/>

@@ -2,19 +2,25 @@
 "use client"
 import { ILense, ILenseFeatures } from '@/ts-definition/interfaces';
 import { ChevronRight, Dot } from 'lucide-react';
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 // import { lenses } from './productCategoryData';
-import { GoForwardPayload } from '@/ts-definition/types';
+import { GoForwardPayload, TWeeklyDeals } from '@/ts-definition/types';
 import Image from 'next/image';
 import defaultImg from '../../../../public/images/lense-1.png';
 import useSwipe from '@/custom-hooks/useSwipe';
 
-const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo, badgeCategory}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any, badgeCategory?:any }) => {
+const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo, badgeCategory, dealsData}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any, badgeCategory?:any , dealsData:TWeeklyDeals}) => {
+
+    const sorteLensWithWeeklyDeals = useMemo(() => {
+        const sortedData = lens?.sort((a:any,b:any) => {
+            return (b.weeklyDeals ? 1 : 0) - (a.weeklyDeals ? 1 : 0)
+        });
+        return sortedData
+    }, [lens])
 
     const swipeRef = useRef(null);
             const [subType , setSubType] = useState("Lense");
             const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
-
 
     return (
         <div className='h-[80vh] overflow-y-scroll hide-scrollbar'>
@@ -43,7 +49,7 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                 </div>
                 </div>
             </div>
-            {lens
+            {sorteLensWithWeeklyDeals
             .filter((l: ILense) => l.subType === current.title)?.filter((i:ILense) => i.badge === subType || i.type === subType )
             .map((item: ILense, index: number) => (
                 <div
@@ -60,7 +66,8 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                     price:item?.price,
                     brand: item?.brand,
                     color: item?.color,
-                    id:item?.id
+                    id:item?.id,
+                    weeklyDeals: item?.weeklyDeals
                 })
                 }}
                 className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
@@ -91,7 +98,15 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                         <p>Details</p> 
                         <ChevronRight size={13}/>
                         </div>
-                            <p className='text-sm font-bold text-orange-600'> ৳{item.price}</p>
+                            
+                            <div>
+                                {   item?.weeklyDeals &&
+                                    <span className='line-through text-red-600'>{item?.price}</span>
+                                } 
+                                <span className='text-sm font-bold text-orange-600'> ৳         {item?.weeklyDeals ? (item?.price - Math.floor(((item.price * dealsData?.discountPercent) / 100))) : item?.price} 
+                                </span>
+                                
+                            </div>           
                     </div>
                 </div>
                     <ChevronRight />

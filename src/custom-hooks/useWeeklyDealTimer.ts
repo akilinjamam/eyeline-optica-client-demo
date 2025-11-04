@@ -16,6 +16,7 @@ const useWeeklyDealTimer = () => {
 
       const newDeadline = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
       localStorage.setItem("weekly-deal-deadline", newDeadline.toISOString());
+
       return newDeadline;
     }
     return new Date(); // fallback in SSR

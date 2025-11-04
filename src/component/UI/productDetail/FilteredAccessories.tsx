@@ -3,12 +3,12 @@
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 
-import { GoForwardPayload, TAccessory, TAccessoryItem } from '@/ts-definition/types';
+import { GoForwardPayload, TAccessory, TAccessoryItem, TWeeklyDeals } from '@/ts-definition/types';
 import Image from 'next/image';
 import defaultImg from '../../../../public/images/lense-1.png'
 
-const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccessory, setOpen}: {goForward: (payload: GoForwardPayload) => void, current:{type:string, title:string}, allAccessory:TAccessory[],  setSelectAccessory:any, setOpen:any }) => {
-    console.log(current)
+const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccessory, setOpen, dealsData}: {goForward: (payload: GoForwardPayload) => void, current:{type:string, title:string}, allAccessory:TAccessory[],  setSelectAccessory:any, setOpen:any, dealsData:TWeeklyDeals }) => {
+   
     console.log(allAccessory?.map((value:any) => value.type))
 
     const managedData = allAccessory?.map((item:TAccessory) => {
@@ -18,7 +18,8 @@ const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccesso
         const brand = item?.items?.map((value:TAccessoryItem) => value.brand)?.join("+");
         const description = item?.items?.map((value:TAccessoryItem) => value.description)?.join("and");
         const category = item?.items?.map((value:TAccessoryItem) => value.description)?.join("and");
-
+    
+        
         return {
             id: item?._id,
             type:item?.type,
@@ -29,9 +30,17 @@ const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccesso
             total,
             description,
             brand,
-            category
+            category,
+            weeklyDeals:item?.weeklyDeals
         }
     })
+
+    const sortedManagedData = managedData?.sort((a:any,b:any) => {
+        return (b.weeklyDeals ? 1 : 0) - (a.weeklyDeals ? 1 : 0)
+    });
+
+    console.log(sortedManagedData);
+    
 
     return (
         <div>
@@ -49,7 +58,8 @@ const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccesso
                                     brand: item?.brand,
                                     images: item?.images,
                                     description: item?.description,
-                                    category: item?.category
+                                    category: item?.category,
+                                    weeklyDeals: item?.weeklyDeals
                             })
                             goForward({ type: 'details', title: current.title })
                         }}
@@ -83,7 +93,10 @@ const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccesso
                             <p>Details</p> 
                             <ChevronRight size={13}/>
                         </div>
-                        <p className='text-sm font-bold text-orange-600'> ৳{item.price}</p>
+                        <div>
+                            <span className='text-sm font-bold text-red-600 line-through '> ৳{item?.weeklyDeals && item?.price }</span>
+                            <span className='text-sm font-bold text-orange-600'> ৳{item?.weeklyDeals ? (item?.total - (Number(item?.total * dealsData?.discountPercent) / 100)) : item.total}</span>
+                        </div>
                         </div>
                     </div>
                         <ChevronRight />

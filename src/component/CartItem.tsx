@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Trash2, } from "lucide-react";
+import useFetchWeeklyDealsData from "@/custom-hooks/useFetchWeeklyDealsData";
+import { handleDealsPrice } from "@/utilities/priceAfterDealsDiscount";
 
 interface Prescription {
   sphere: string;
@@ -24,9 +26,13 @@ interface CartItemProps {
   price: number;
   deliveryFee: number;
   lensPrice: number;
+  lensDeals:boolean;
   framePrice: number;
+  frameDeals:boolean;
   contactLensPrice:number;
+  cLensDeals:boolean;
   accessoryPrice:number;
+  accessoryDeals:boolean;
   onRemove?: () => void;
   onCheckout?: () => void
 }
@@ -44,20 +50,95 @@ export default function CartItem({
   price,
   deliveryFee,
   lensPrice,
+  lensDeals,
   framePrice,
+  frameDeals,
   contactLensPrice,
+  cLensDeals,
   accessoryPrice,
+  accessoryDeals,
   onRemove,
   onCheckout,
 }: CartItemProps) {
+  const {dealsData:weeklyDealsData} = useFetchWeeklyDealsData();
   const [qty, setQty] = useState(quantity);
 
   // ✅ Compute total price dynamically
-  const totalPrice = useMemo(() => price * qty + deliveryFee, [price, qty, deliveryFee]);
+  const totalPrice = useMemo(() => {
+    const {active, discountPercent} = weeklyDealsData
+    let newPrice = 0;
+    if(framePrice && lensPrice){
+      if(frameDeals && lensDeals && active){
+        newPrice = (Number(price) - (Math.floor((price * discountPercent)/100)))
+      }
+      if(frameDeals && !lensDeals && active){
+         newPrice = (Number(price) - (Math.floor((framePrice * discountPercent)/100)))
+      }
+      if(!frameDeals && lensDeals && active){
+         newPrice = (Number(price) - (Math.floor((lensPrice * discountPercent)/100)))
+      }
+      if(!frameDeals && !lensDeals && !active){
+        newPrice = price
+      }
+      if(!frameDeals && !lensDeals && active){
+        newPrice = price
+      }
+    }
+    if(framePrice && !lensPrice){
+      if(frameDeals && active){
+        newPrice = (Number(price) - (Math.floor((framePrice * discountPercent)/100)))
+      }else{
+        newPrice = price
+      }
+    }
+    
+    if(lensPrice && !framePrice){
+      if(lensDeals && active){
+        newPrice = (Number(price) - (Math.floor((lensPrice * discountPercent)/100)))
+      }else{
+        newPrice = price
+      }
+    }
+    if(contactLensPrice && accessoryPrice){
+      if(cLensDeals && accessoryDeals && active){
+        newPrice = (Number(price) - (Math.floor((price * discountPercent)/100)))
+      }
+      if(cLensDeals && !accessoryDeals && active){
+        newPrice = (Number(price) - (Math.floor((contactLensPrice * discountPercent)/100)))
+      }
+      if(!cLensDeals && accessoryDeals && active){
+        newPrice = (Number(price) - (Math.floor((accessoryPrice * discountPercent)/100)))
+      }
+      if(!cLensDeals && !accessoryDeals && !active){
+        newPrice = price
+      }
+      if(!cLensDeals && !accessoryDeals && active){
+        newPrice = price
+      }
+    }
+    if(contactLensPrice && !accessoryPrice){
+      if(cLensDeals && active){
+         newPrice = (Number(price) - (Math.floor((contactLensPrice * discountPercent)/100)))
+      }else{
+        newPrice = price;
+      }
+    }
+    if(accessoryPrice && !contactLensPrice){
+      if(accessoryDeals && active){
+        newPrice = (Number(price) - (Math.floor((accessoryPrice * discountPercent)/100)))
+      }else{
+        newPrice = price
+      }
+    }
+    
+    return (newPrice * qty + deliveryFee)
+  }, [qty, deliveryFee, price, frameDeals, framePrice, weeklyDealsData, lensDeals, lensPrice, contactLensPrice, cLensDeals, accessoryDeals, accessoryPrice ]);
 
   useEffect(() => {
     localStorage.setItem("newQty", qty.toString())
-  },[qty])
+  },[qty]);
+
+  
 
   return (
     <div className="flex flex-col md:flex-row gap-5 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 mb-6 border border-gray-100">
@@ -110,25 +191,39 @@ export default function CartItem({
             {framePrice > 0 && (
               <p>
                 <span className="font-medium text-gray-700">Frame Price:</span>{" "}
-                ৳{framePrice.toLocaleString()}
+               
+               <span> ৳{handleDealsPrice(weeklyDealsData?.active,frameDeals,framePrice, weeklyDealsData?.discountPercent )?.toLocaleString()}</span>
+
+               <span className="line-through text-red-600 ml-1"> {(weeklyDealsData?.active) && (frameDeals) && framePrice}</span>
               </p>
             )}
             {lensPrice > 0 && (
               <p>
                 <span className="font-medium text-gray-700">Lens Price:</span>{" "}
-                ৳{lensPrice.toLocaleString()}
+                {/* ৳{lensPrice.toLocaleString()} */}
+                <span>
+                  {handleDealsPrice(weeklyDealsData?.active,lensDeals,lensPrice, weeklyDealsData?.discountPercent )?.toLocaleString()}
+                </span>
+                <span className="line-through text-red-600 ml-1"> {(weeklyDealsData?.active) && (lensDeals) && lensPrice}</span>
               </p>
             )}
             {contactLensPrice > 0 && (
               <p>
                 <span className="font-medium text-gray-700">Contact Lens Price:</span>{" "}
-                ৳{contactLensPrice.toLocaleString()}
+                {/* ৳{contactLensPrice.toLocaleString()} */}
+                <span>
+                    {handleDealsPrice(weeklyDealsData?.active,cLensDeals,contactLensPrice, weeklyDealsData?.discountPercent )?.toLocaleString()}
+                </span>
+                 <span className="line-through text-red-600 ml-1"> {(weeklyDealsData?.active) && (cLensDeals) && contactLensPrice}</span>
               </p>
             )}
             {accessoryPrice > 0 && (
               <p>
                 <span className="font-medium text-gray-700">Accessory Price:</span>{" "}
-                ৳{accessoryPrice.toLocaleString()}
+                {/* ৳{accessoryPrice.toLocaleString()} */}
+                <span> {handleDealsPrice(weeklyDealsData?.active,accessoryDeals,accessoryPrice, weeklyDealsData?.discountPercent )?.toLocaleString()}</span>
+
+                  <span className="line-through text-red-600 ml-1"> {(weeklyDealsData?.active) && (accessoryDeals) && accessoryPrice}</span>
               </p>
             )}
             <p>
