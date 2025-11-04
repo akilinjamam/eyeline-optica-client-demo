@@ -10,7 +10,7 @@ const HorizontalBrandScroll:FC = () => {
     const parentRef = useRef<HTMLElement>(null);
 
     const {parentRef: scrollRef, setPause} = useBrandScroller(parentRef);
-    console.log(scrollRef)
+   
 
     return (
         <div className='w-full lg:block md:block hidden'>

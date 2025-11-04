@@ -3,7 +3,6 @@ import ImagePreview from "@/component/ImagePreview";
 import PopularBrand from "@/component/PopularBrand";
 import WeeklyDeals from "@/component/WeeklyDeals";
 import GlassCardsGallary from "@/component/GlassCardsGallary";
-import LatestCollections from "@/component/LatestCollections";
 import BookAppointment from "@/component/BookAppointment";
 import NewArrivals from "@/component/NewArrival";
 import BestSelling from "@/component/BestSelling";
@@ -125,7 +124,7 @@ export default async function Home() {
         <WeeklyDeals dealsData={getWeeklyDealsData }/>
         <GlassCardsGallary data={allFramesWithDeals} dealsData={getWeeklyDealsData}/>
         <FeaturedCategory/>
-        <LatestCollections/>
+        {/* <LatestCollections/> */}
         <BookAppointment/>
         <NewArrivals data={allFramesWithNewArrivals}/>
         <BestSelling data={allFramesWithBestSelling}/>
