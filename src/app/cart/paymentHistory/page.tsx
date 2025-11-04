@@ -33,6 +33,8 @@ interface PaymentItem {
   lensId?: { name: string; salesPrice: number };
   contactLensId?: { name: string; salesPrice: number };
   accessoryId?: { types: string; items:TAccessoryItems[] };
+  dealsDiscount?: number;
+  discountOn?:string;
 }
 
 const statusFlow = ['Order received', 'processsing', 'packaging', 'on the way', 'delivered'];
@@ -90,7 +92,7 @@ const CustomerHistory = () => {
       </div>
     );
 
-  console.log(history);
+ 
 
   return (
     <div className="max-w-5xl mx-auto p-4 sm:p-6">
@@ -136,7 +138,9 @@ const CustomerHistory = () => {
                     </span>
                     <span className="font-medium">
                       ৳{item.subtotal * item.quantity}
+                      
                     </span>
+                   
                   </p>
                   <p className="text-xs text-gray-500 flex items-center justify-between">
                     <label htmlFor="">Delivery Fee:</label>
@@ -144,7 +148,7 @@ const CustomerHistory = () => {
                   </p>
                   <hr className="my-2" style={{ color: 'gray' }} />
                   <p className="text-xs text-gray-500 flex items-center justify-between">
-                    <label htmlFor="">Total:</label>
+                    <label htmlFor="">Total: </label>
                     <span className="font-medium">
                       ৳{item.deliveryFee + item.subtotal * item.quantity}
                     </span>
@@ -152,13 +156,14 @@ const CustomerHistory = () => {
                   <p className="text-xs text-gray-400 mt-1">
                     Ordered on {new Date(item.createdAt).toLocaleDateString()}
                   </p>
+                  {item?.discountOn !== "no-discount" && <p className='bg-gray-200 p-1 text-xs text-gray-400 mt-1'>{item?.discountOn} {item?.dealsDiscount}%</p> }
                   <br />
                   <div className="">
                   <p className="text-sm text-blue-600 font-semibold">
                     Paid: ৳{item.payableAmount}
                   </p>
                   <p className="text-sm text-blue-600 font-semibold">
-                    Due: ৳{item.dueAmount}
+                    Cash On Delivery: ৳{item.dueAmount}
                   </p>
                 </div>
                 </div>

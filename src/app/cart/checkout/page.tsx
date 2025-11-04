@@ -1,6 +1,4 @@
-
 "use client";
-
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { CreditCard, Loader2 } from "lucide-react";
@@ -42,19 +40,60 @@ export default function CheckoutPage() {
     });
   }, [cart]);
 
+  
+
+  let newSubTotalIfDealsAvailableForFrame = 0;
+  let newSubTotalIfDealsAvailableForLens = 0;
+  let newSubTotalIfDealsAvailableForContactLens = 0;
+  let newSubTotalIfDealsAvailableForAccessory = 0;
+
+  if(cart.items[0]?.productId){
+      newSubTotalIfDealsAvailableForFrame = handleDealsPrice(dealsData?.active, cart.items[0]?.productId?.weeklyDeals, cart.items[0]?.productId?.salesPrice, dealsData?.discountPercent) || 0;
+  }
+  if(cart.items[0]?.lensId){
+      newSubTotalIfDealsAvailableForLens = handleDealsPrice(dealsData?.active, cart.items[0]?.lensId?.weeklyDeals, cart.items[0]?.lensId?.salesPrice, dealsData?.discountPercent) || 0;
+  }
+  if(cart.items[0]?.contactLensId){
+      newSubTotalIfDealsAvailableForContactLens = handleDealsPrice(dealsData?.active, cart.items[0]?.contactLensId?.weeklyDeals, cart.items[0]?.contactLensId?.salesPrice, dealsData?.discountPercent) || 0;
+  }
+  if(cart.items[0]?.accessoryId){
+      newSubTotalIfDealsAvailableForAccessory = handleDealsPrice(dealsData?.active, cart.items[0]?.accessoryId?.weeklyDeals, cart.items[0]?.accessoryId?.items?.map((accessory:TAccessoryItem) => accessory.salesPrice)?.reduce((acc:number, sum:number) => acc + sum,0), dealsData?.discountPercent) || 0;
+  }
+  
+
+  // Precalculate totals for UI
+  const quantity = Number(getNewQtyRef.current) || 1;
+  const subtotal = (newSubTotalIfDealsAvailableForFrame + newSubTotalIfDealsAvailableForLens + newSubTotalIfDealsAvailableForContactLens + newSubTotalIfDealsAvailableForAccessory) * quantity;
+  const subTotalWithoutQty = (newSubTotalIfDealsAvailableForFrame + newSubTotalIfDealsAvailableForLens + newSubTotalIfDealsAvailableForContactLens + newSubTotalIfDealsAvailableForAccessory)
+  const deliveryFee = cart.deliveryFee || 0;
+  const hasFrame = !!cart.items[0]?.productId;
+  const hasLens = !!cart.items[0]?.lensId;
+  const hasContactLens = !!cart.items[0]?.contactLensId;
+  const hasAccessory = !!cart.items[0]?.accessoryId
+  const totalCost = subtotal + deliveryFee;
+
+  let payableAmount = 0;
+  let dueAmount = 0;
+  if (hasFrame && hasLens) {
+    payableAmount = totalCost * 0.5;
+    dueAmount = totalCost * 0.5;
+  } else if (hasFrame || hasLens || hasContactLens || hasAccessory) {
+    payableAmount = 200;
+    dueAmount = totalCost - 200;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const quantity = Number(getNewQtyRef.current) || 1;
-    const subtotal = cart.items[0]?.subtotal * quantity;
-    const deliveryFee = cart.deliveryFee || 0;
+   
+    // const deliveryFee = cart.deliveryFee || 0;
 
     const hasFrame = !!cart.items[0]?.productId;
     const hasLens = !!cart.items[0]?.lensId;
     const hasContactLens = !!cart.items[0]?.contactLensId;
     const hasAccessory = !!cart.items[0]?.accessoryId;
-
-    const totalCost = subtotal + deliveryFee;
+    
 
     let payableAmount = 0;
     let dueAmount = 0;
@@ -81,7 +120,7 @@ export default function CheckoutPage() {
       customer_phone: cart.phoneNumber,
       customer_email: billing.email,
       customer_address: shipping.address,
-      totalCost,
+      totalCost:subTotalWithoutQty,
       payableAmount,
       dueAmount,
       cart_id: cart._id
@@ -115,45 +154,6 @@ export default function CheckoutPage() {
       console.log(error)
     }
   };
-
-  let newSubTotalIfDealsAvailableForFrame = 0;
-  let newSubTotalIfDealsAvailableForLens = 0;
-  let newSubTotalIfDealsAvailableForContactLens = 0;
-  let newSubTotalIfDealsAvailableForAccessory = 0;
-
-  if(cart.items[0]?.productId){
-      newSubTotalIfDealsAvailableForFrame = handleDealsPrice(dealsData?.active, cart.items[0]?.productId?.weeklyDeals, cart.items[0]?.productId?.salesPrice, dealsData?.discountPercent) || 0;
-  }
-  if(cart.items[0]?.lensId){
-      newSubTotalIfDealsAvailableForLens = handleDealsPrice(dealsData?.active, cart.items[0]?.lensId?.weeklyDeals, cart.items[0]?.lensId?.salesPrice, dealsData?.discountPercent) || 0;
-  }
-  if(cart.items[0]?.contactLensId){
-      newSubTotalIfDealsAvailableForContactLens = handleDealsPrice(dealsData?.active, cart.items[0]?.contactLensId?.weeklyDeals, cart.items[0]?.contactLensId?.salesPrice, dealsData?.discountPercent) || 0;
-  }
-  if(cart.items[0]?.accessoryId){
-      newSubTotalIfDealsAvailableForAccessory = handleDealsPrice(dealsData?.active, cart.items[0]?.accessoryId?.weeklyDeals, cart.items[0]?.accessoryId?.items?.map((accessory:TAccessoryItem) => accessory.salesPrice)?.reduce((acc:number, sum:number) => acc + sum,0), dealsData?.discountPercent) || 0;
-  }
-  
-
-  // Precalculate totals for UI
-  const quantity = Number(getNewQtyRef.current) || 1;
-  const subtotal = (newSubTotalIfDealsAvailableForFrame + newSubTotalIfDealsAvailableForLens + newSubTotalIfDealsAvailableForContactLens + newSubTotalIfDealsAvailableForAccessory) * quantity;
-  const deliveryFee = cart.deliveryFee || 0;
-  const hasFrame = !!cart.items[0]?.productId;
-  const hasLens = !!cart.items[0]?.lensId;
-  const hasContactLens = !!cart.items[0]?.contactLensId;
-  const hasAccessory = !!cart.items[0]?.accessoryId
-  const totalCost = subtotal + deliveryFee;
-
-  let payableAmount = 0;
-  let dueAmount = 0;
-  if (hasFrame && hasLens) {
-    payableAmount = totalCost * 0.5;
-    dueAmount = totalCost * 0.5;
-  } else if (hasFrame || hasLens || hasContactLens || hasAccessory) {
-    payableAmount = 200;
-    dueAmount = totalCost - 200;
-  }
 
   if (loadingCartInfo)
       return (
