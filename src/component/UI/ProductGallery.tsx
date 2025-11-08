@@ -32,6 +32,7 @@ const ProductGallery = ({ data,  currentPage, totalPage }: Props) => {
         router.push(`?${params.toString()}`);
     }
   };
+  
 
   return (
     <div className="w-full">
@@ -66,11 +67,12 @@ const ProductGallery = ({ data,  currentPage, totalPage }: Props) => {
       "
     >
       {data?.map(
-        ({ color, name, brand, salesPrice, badge, images, _id }: any, index: number) => (
+        ({ color, name, brand, salesPrice, badge, images, otherImages, _id }: any, index: number) => (
           <GlassCardAuto
             key={index}
             color={color}
             images={images}
+            otherImages={otherImages}
             badge={badge}
             salesPrice={salesPrice}
             name={name}

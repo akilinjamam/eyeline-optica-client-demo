@@ -70,10 +70,18 @@ export type TDataWithoutMeta<T> = {
   data: T;
 };
 
+export type TOtherImages = {
+  colorName: string;
+  fromColor: string;
+  toColor: string;
+  images: string[];
+};
+
 export type TFrame = {
   _id?: string;
   name?: string;
   images?: string[];
+  otherImages?: TOtherImages[];
   type?: string;
   materialsCategory?: string;
   frameCategory?: string;

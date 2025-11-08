@@ -44,3 +44,26 @@ body {
 .animate-fadeIn {
   animation: fadeIn 0.25s ease-out;
 }
+
+/* In your global CSS file, e.g., globals.css or main.css */
+
+/* Hide default button focus outline on arrows */
+.swiper-button-prev:focus, 
+.swiper-button-next:focus {
+    outline: none !important;
+}
+
+/* Style the navigation arrows (adjust colors/size as needed) */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000; /* Black color for arrows */
+    --swiper-navigation-size: 20px; /* Smaller arrow size */
+    opacity: 1; /* Initially hide the arrows */
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Show arrows when hovering over the card */
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+    opacity: 1; 
+}
