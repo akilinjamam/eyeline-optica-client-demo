@@ -4,6 +4,7 @@ import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
+import ImagePartForMobile from "@/component/UI/productDetail/ImagePartForMobile";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TData, TDataWithoutMeta, TFrame, TLens, TWeeklyDeals } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
@@ -79,6 +80,7 @@ export default async function SingleProduct({
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
           <ImagePart product={frame} />
+          <ImagePartForMobile product={frame} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
           <DetailPart weeklyDeals={weeklyDeals} product={frame as TFrame} lens={allLens as any} />

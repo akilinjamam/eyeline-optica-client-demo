@@ -11,8 +11,6 @@ import { handleDealsPrice } from '@/utilities/priceAfterDealsDiscount';
 
 const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals}) => {
 
-
- 
 const [showLensPanel, setShowLensPanel] = useState(false);
 
     return (

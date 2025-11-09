@@ -67,19 +67,19 @@ const GlassCardAuto: React.FC<TFrame> = ({
 
   return (
     <div className="relative bg-white shadow-md p-2 rounded-md w-full">
-      {/* 🔖 Badge */}
+      {/*  Badge */}
       {badge && (
         <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-[2px] rounded-sm font-semibold z-10">
           {badge}
         </span>
       )}
 
-      {/* 🎨 Color Label */}
+      {/*  Color Label */}
       <span className="absolute top-2 right-2 text-[10px] text-gray-500 text-center leading-3 z-10">
         {color}
       </span>
 
-      {/* 🖼️ Image Slider */}
+      {/* Image Slider */}
       <div className="mb-3 w-full h-[120px] relative">
         <Swiper
           modules={[Navigation]}
