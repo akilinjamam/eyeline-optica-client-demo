@@ -17,7 +17,7 @@ const Tab: FC = () => {
         { id: 6, name: 'TELEMEDICINE SERVICE', link: '/telemedicine' },
         { id: 7, name: 'PATIENT CARE', link: '/blog' },
         { id: 8, name: 'ACCESSORIES', link:'/allAccessories' },
-        { id: 9, name: 'ABOUT US' }
+        { id: 9, name: 'ABOUT US', link:"/about" }
     ]
 
     return (

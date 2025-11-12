@@ -1,6 +1,8 @@
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import paymentBanner from "../../public/paymentBanner/Payment Banner 3.png";
 
 const Footer: FC = () => {
   return (
@@ -54,9 +56,9 @@ const Footer: FC = () => {
           <ul className="space-y-2 text-white text-sm leading-6">
             <li><Link href="/telemedicine" >Telemedicine Service</Link></li>
             {/* <li><a href="#">Book an appointment</a></li> */}
-            <li><a href="#">OCT test at store</a></li>
+            {/* <li><a href="#">OCT test at store</a></li>
             <li><a href="#">Childrens Eyecare</a></li>
-            <li><a href="#">Corporate Eyecare</a></li>
+            <li><a href="#">Corporate Eyecare</a></li> */}
           </ul>
         </div>
 
@@ -65,22 +67,24 @@ const Footer: FC = () => {
           <p className="font-semibold text-2xl text-blue-500">About</p>
           <br />
           <ul className="space-y-2 text-white text-sm leading-6">
-            <li><a href="#">About Eyeline Optica</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Help Center</a></li>
+            <Link href={"/about"}><li>About Eyeline Optica</li></Link>
+            <li><a href="#">Help Center: +880 1854 090 991</a></li>
             <li><a href="#">Trade license No: TRAD/CHTG/001180/2025</a></li>
           </ul>
+        </div>
+        {/* Payment Banner */}
+        <div className="p-5 w-full sm:w-[100%] lg:w-[100%]">
+          <Image  src={paymentBanner} alt='payment-banner'/>
         </div>
       </div>
 
       {/* Social Links */}
       <div className="flex justify-center lg:justify-end w-[90%] mx-auto mt-6">
         <div className="w-[250px] flex items-center justify-around text-blue-500">
-          <Facebook />
-          <Instagram />
-          <Twitter />
-          <Youtube />
+          <Link href={"https://www.facebook.com/share/15h5Ueymyq"}><Facebook /></Link>
+          <Link href={"https://www.instagram.com/eyelineoptica?igsh=MXZ6azBvcnF6bDYzZA=="}><Instagram /></Link>
+          <Link href={"https://www.x.com/Eyeline_Optica?t=J46Qn7_g7ACv_HoEovxrXQ&s=09"}> <Twitter /></Link>
+          <Link href={"https://www.youtube.com/@EYELINEOPTICA"}> <Youtube /></Link>
         </div>
       </div>
 

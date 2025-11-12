@@ -2,13 +2,13 @@
 'use client';
 
 import { FC, useEffect, useState, useRef } from 'react';
-import { Search, Star, ShoppingBag, LogIn, X } from 'lucide-react';
+import { Search, ShoppingBag, LogIn, X, User } from 'lucide-react';
 import Image from 'next/image';
-import profile from '../../public/images/lense-4.png';
 import logo_title from '../../public/icons/brand_title.png';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 import { JwtPayload } from '@/app/cart/page';
+import Link from 'next/link';
 
 const Header: FC = () => {
   const router = useRouter();
@@ -181,19 +181,14 @@ const Header: FC = () => {
             )}
           </div>
 
-          <button className="hidden sm:block bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-md transition">
+          <Link href={"/telemedicine"}>
+            <button className="hidden sm:block bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-md transition">
             BOOK APPOINTMENT
           </button>
+          </Link>
 
-          <Image
-            src={profile}
-            alt="User"
-            width={32}
-            height={32}
-            className="rounded-full border border-blue-500"
-          />
+          <Link href={"/profile"}><User className='text-blue-500'/></Link>
 
-          <Star className="text-blue-500 w-5 h-5" />
           <div className="relative">
             <ShoppingBag
               onClick={() => router.push('/cart')}

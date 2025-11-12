@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import image from '../../public/icons/brand-icon.png';
 import Image from 'next/image';
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import Link from 'next/link';
 
 const TopFooter: FC = () => {
   return (
@@ -14,10 +15,11 @@ const TopFooter: FC = () => {
 
       {/* Social Icons */}
       <div className="mt-4 flex justify-center gap-6 text-blue-600 text-2xl">
-        <Facebook />
-        <Instagram />
-        <Twitter />
-        <Youtube />
+        <Link href={"https://www.facebook.com/share/15h5Ueymyq"}><Facebook /></Link>
+        <Link href={"https://www.instagram.com/eyelineoptica?igsh=MXZ6azBvcnF6bDYzZA=="}><Instagram /></Link>
+        <Link href={"https://www.x.com/Eyeline_Optica?t=J46Qn7_g7ACv_HoEovxrXQ&s=09"}> <Twitter /></Link>
+        <Link href={"https://www.youtube.com/@EYELINEOPTICA"}> <Youtube /></Link>
+        
       </div>
 
       {/* Footer Grid Sections */}
@@ -28,17 +30,17 @@ const TopFooter: FC = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="sm:w-1/2">
               <ul className="space-y-1 text-blue-600 text-sm sm:text-base">
-                <li><a href="#">Virtual Try-on</a></li>
-                <li><a href="#">Eyeglasses</a></li>
-                <li><a href="#">Lenses</a></li>
-                <li><a href="#">Shipping</a></li>
+                {/* <li><a href="#">Virtual Try-on</a></li> */}
+                <Link href={"/allglasses"}> <li>Eyeglasses</li></Link>
+                <Link href={"/allLens"}> <li>Lenses</li></Link>
+                
+                {/* <li><a href="#">Shipping</a></li> */}
               </ul>
             </div>
             <div className="sm:w-1/2">
               <ul className="space-y-1 text-blue-600 text-sm sm:text-base">
-                <li><a href="#">Telemedicine</a></li>
-                <li><a href="#">Prescriptions</a></li>
-                <li><a href="#">Sunglasses</a></li>
+                <Link href={"/telemedicine"}> <li>Telemedicine</li></Link>
+                <Link href={"/allglasses/sunglasses"}> <li>Sunglasses</li></Link>
               </ul>
             </div>
           </div>
@@ -49,9 +51,8 @@ const TopFooter: FC = () => {
           <p className="font-semibold text-lg sm:text-xl mb-3">Order & Returns</p>
           <div>
             <ul className="space-y-1 text-blue-600 text-sm sm:text-base">
-              <li>📦 <a href="#">Track My Order</a></li>
-              <li>↩️ <a href="#">Return Information</a></li>
-              <li>🎁 <a href="#">Gift Card</a></li>
+              <Link href={"/cart/paymentHistory"}><li>📦Track My Order</li></Link>
+              <Link href={"/return-and-refund-policy"}><li>↩️Return Information</li></Link>
             </ul>
           </div>
         </div>
@@ -61,11 +62,9 @@ const TopFooter: FC = () => {
           <p className="font-semibold text-lg sm:text-xl mb-3">Customer Support</p>
           <ul className="space-y-1 text-blue-600 text-sm sm:text-base">
             <li>Connect with us over Chat and Email 24/7</li>
-            <li>💬 <a href="#">Chat</a></li>
-            <li>📧 <a href="#">Email</a></li>
+            <li>📧 <a href="#">eyelineoptica@gmail.com</a></li>
             <li>Speak with a Live Support 8am - 9pm every day</li>
             <li>📞 Voice: <a href="tel:+8801854090991">+880 1854 090 991</a></li>
-            <li>Visit Our <a href="#">Help Center</a> For More Information!</li>
           </ul>
         </div>
       </div>

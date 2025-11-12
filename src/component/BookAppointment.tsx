@@ -4,6 +4,7 @@ import Image from 'next/image';
 import arrow from '../../public/images/33-right.png';
 import { TAppointmentService } from '@/ts-definition/types';
 import Title from './Title';
+import Link from 'next/link';
 const BookAppointment:FC = () => {
 
     const serviceData:TAppointmentService[] = [
@@ -40,7 +41,9 @@ const BookAppointment:FC = () => {
                     <div className='w-[50%] '>
                         <p><span className='text-[35px] font-semibold leading-10'>Book Your Own Appointment <br /> with</span> <span className='leading-24 text-transparent bg-clip-text bg-gradient-to-r from-[#266FFD] to-[#18449B] font-bold text-[76px]'>Consultant</span> <br /> <br /> <span className='text-[25px] font-semibold'>We Provide comprehensive Telemedicine <br /> service nationwide with top Eye Specialist & <br /> Surgeons.</span></p>
                         <br />
-                        <button className=' mt-2 px-9 py-4 text-white text-xl font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer'>Book Now</button>
+                        <Link href={"/telemedicine"}>
+                            <button className=' mt-2 px-9 py-4 text-white text-xl font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer'>Book Now</button>
+                        </Link>
                         <br /><br />
                         <p className='text-3xl font-bold text-blue-700'>Our <span className='text-blue-400'>Services</span></p>
                         <br />

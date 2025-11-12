@@ -21,13 +21,13 @@ export default function LoginForm() {
         body: JSON.stringify({ phoneNumber:phone }),
       });
       const data = await res.json()
-      console.log(data)
+     
       if (data?.success) {
         setMessage("✅ Logged in successfully!");
         localStorage.setItem("token", data?.data?.token )
         window.dispatchEvent(new Event("cartUpdated"));
         setPhone("");
-        navigate.push('/cart')
+        navigate.back();
       }
       if(!data?.success){
         setMessage(`⚠️${data?.message}`)
