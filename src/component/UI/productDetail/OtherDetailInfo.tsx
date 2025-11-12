@@ -1,36 +1,44 @@
-const OtherDetailInfo = () => {
+import { TFrame } from "@/ts-definition/types";
+import Image from "next/image";
+import frameWidth from "../../../../public/frameDetailPic/frameWidth.png"
+import bridge from "../../../../public/frameDetailPic/bridge.png"
+import lensWidth from "../../../../public/frameDetailPic/lenswidth.png"
+import lensHeight from "../../../../public/frameDetailPic/lensHeight.png"
+import templeLength from "../../../../public/frameDetailPic/templeLength.png"
+
+const OtherDetailInfo = ({detail}: {detail:TFrame}) => {
     const frameMeasurements = [
-  { label: "Frame Width", value: "130 mm / 5.1 in", icon: "" },
-  { label: "Bridge", value: "16 mm / 0.6 in", icon: "" },
-  { label: "Lens Width", value: "57 mm / 2.2 in", icon: "" },
-  { label: "Lens Height", value: "49 mm / 1.9 in", icon: "" },
-  { label: "Temple Length", value: "147 mm / 5.8 in", icon: "" },
+  { label: "Frame Width", value: detail?.frameWidth, icon: frameWidth },
+  { label: "Bridge", value: detail?.bridge, icon: bridge },
+  { label: "Lens Width", value: detail?.lensWidth, icon: lensWidth },
+  { label: "Lens Height", value: detail?.lensHeight, icon: lensHeight },
+  { label: "Temple Length", value: detail?.templeLength, icon: templeLength },
 ];
 
 const frameDetails = [
-  { label: "Size", value: "Adult Medium (126 - 132 mm / 5.0 - 5.2 in)" },
-  { label: "Material", value: "Plastic" },
-  { label: "Weight", value: "Lightweight (14 grams / 0.5 ounces)" },
-  { label: "Rim", value: "Full Rim" },
-  { label: "Shape", value: "Square" },
+  { label: "Size", value: detail?.size },
+  { label: "Material", value: detail?.materialsCategory },
+  { label: "Weight", value: detail?.weight },
+  { label: "Rim", value: detail?.sizeCategory },
+  { label: "Shape", value: detail?.shapeCategory },
   {
     label: "Feature",
-    value: "Extended Fit, Custom engraving, High Rx, Universal Bridge Fit",
+    value: detail?.features?.map((feature:string) => feature)?.join(','),
   },
 ];
 
 const prescriptionDetails = [
-  { label: "PD Range", value: "67 - 79 mm", note: "Additional fee for PDs below this range" },
-  { label: "Prescription Range", value: "-13.00 / +7.50" },
-  { label: "Available as Progressive / Bifocal", value: "Yes" },
-  { label: "Available as Readers", value: "No" },
+  { label: "PD Range", value: detail?.pdRange, note: "Additional fee for PDs below this range" },
+  { label: "Prescription Range", value: detail?.prescriptionRange },
+  { label: "Available as Progressive / Bifocal", value: detail?.availableAsProBi ? "Yes" : "No" },
+  { label: "Available as Readers", value: detail?.availableAsReader ? "Yes" : "No" },
 ];
 
 
 
 
   return (
-    <div className=" px-0 py-6 ">
+    <div className=" lg:px-0 md:px-0 px-2 py-6 ">
       <div className="max-w-[1250px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-gray-800 ">
         
         {/* Frame Measurements */}
@@ -38,9 +46,9 @@ const prescriptionDetails = [
           <h3 className="font-semibold text-lg mb-3">Frame Measurements</h3>
           <ul className="space-y-2">
             {frameMeasurements.map((item, idx) => (
-              <li key={idx} className="flex items-start ">
-                <span className="text-lg">{item.icon}</span>
-                <div>
+              <li key={idx} className="flex items-center ">
+                <Image src={item?.icon} height={40} width={40} alt={`frame-detail-${idx}`} />
+                <div className="ml-2">
                   <strong>{item.label}:</strong> {item.value}
                 </div>
               </li>

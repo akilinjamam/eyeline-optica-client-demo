@@ -22,7 +22,7 @@ import MobileBookAppointment from "@/component/MobileBookAppointment";
 import DesignedSunglasses from "@/component/DesignedSunglasses";
 import MobileLensSection from "@/component/MobileLensSection";
 import HomeBlogSection from "@/component/HomeBlogSection";
-import { getWeeklyDeals } from "@/fetchData/fetchFrameData";
+import { getcontactLens, getWeeklyDeals } from "@/fetchData/fetchFrameData";
 
 
 async function getProduct(value:string) {
@@ -93,6 +93,9 @@ async function getProduct(value:string) {
 
 export default async function Home() {
 
+  const contactLensData = await getcontactLens({});
+  const allContactLensData = contactLensData?.data?.data;
+
   const frameWithDeals = await getProduct('weeklyDeals') as TDataWithoutMeta<TFrame>;
   const allFramesWithDeals = Array.isArray(frameWithDeals?.data) ? frameWithDeals?.data?.filter((item:any) => item.weeklyDeals === true) : [];
   const frameWithNewArrivals = await getProduct('newArrivals') as TData<TFrame>;
@@ -132,7 +135,7 @@ export default async function Home() {
         <MobileBookAppointment/>
         <DesignedSunglasses/>
         <MobileLensSection/>
-        <ContactLense/>
+        <ContactLense contactLens={allContactLensData}/>
         <FindYourPerfectGlass/>
         <MensSunglass data={allFramesWithMan}/>
         <WomenSunglass data={allFramesWithWomen}/>

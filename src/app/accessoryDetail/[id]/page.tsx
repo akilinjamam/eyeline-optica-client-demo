@@ -5,7 +5,7 @@ import TopFooter from "@/component/TopFooter";
 import DetailPartForAccessory from "@/component/UI/productDetail/DetalPartForAccessory";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
-import { TAccessory,  TData, TLens } from "@/ts-definition/types";
+import { TAccessory,  TData } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
 
 async function getSingleLens(id: string) {
@@ -44,7 +44,7 @@ export default async function page({
       </div>
 
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-        <RegardingInfo data={singleAccessory as TLens} />
+        <RegardingInfo data={singleAccessory as TAccessory} />
       </div>
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />

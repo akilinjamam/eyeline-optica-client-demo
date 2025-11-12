@@ -1,11 +1,12 @@
-import { TContactLenseData } from '@/ts-definition/types';
-import React, { FC } from 'react';
+import { TContactLens, TContactLenseData } from '@/ts-definition/types';
+import React from 'react';
 import lenseImg from '../../public/images/contact-lense.png';
 import Image from 'next/image';
 import LenseCartGallary from './LenseCartGallary';
 import Title from './Title';
 
-const ContactLense:FC = () => {
+const ContactLense = ({contactLens}: {contactLens:TContactLens[]}) => {
+
 
     const contactLense:TContactLenseData ={
         lense: lenseImg
@@ -18,7 +19,7 @@ const ContactLense:FC = () => {
                 <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
             </div>
             <div className='w-full mt-8'>
-                <LenseCartGallary/>
+                <LenseCartGallary contactLens={contactLens} />
             </div>
         </div>
     );

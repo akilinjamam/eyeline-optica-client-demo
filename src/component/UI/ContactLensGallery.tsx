@@ -49,7 +49,7 @@ const ContactLensGallery = ({data, currentPage, totalPage}: {data:TContactLens[]
                 w-full
                 max-w-7xl'>
                     {
-                        data?.map(({color, name, brand, salesPrice, images, _id }: TContactLens, index: number) => <ContactLensCardAuto color={color} images={images}  salesPrice={salesPrice} name={name} brand={brand} _id={_id} key={index}/> )
+                        data?.map(({color, name, brand, salesPrice, images, _id, powerType }: TContactLens, index: number) => <ContactLensCardAuto color={color} images={images}  salesPrice={salesPrice} name={name} brand={brand} _id={_id} key={index} powerType={powerType}/> )
                     }
                 </div>
             </section>

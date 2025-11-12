@@ -83,12 +83,12 @@ export default async function SingleProduct({
           <ImagePartForMobile product={frame} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
-          <DetailPart weeklyDeals={weeklyDeals} product={frame as TFrame} lens={allLens as any} />
+          <DetailPart weeklyDeals={weeklyDeals} product={frame as any} lens={allLens as any} />
         </div>
       </div>
 
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
-        <RegardingInfo data={frame as TFrame} />
+        <RegardingInfo data={frame as any} />
       </div>
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />

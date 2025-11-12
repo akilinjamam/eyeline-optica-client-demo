@@ -5,12 +5,25 @@ import Accordion from "./Accordion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
 import { AccordionItemType, TFrame } from "@/ts-definition/types";
+import rectangle from '../../../public/frameShapeImg/frame-ractangular.png'
+import round from '../../../public/frameShapeImg/frame-round.png'
+import catseye from '../../../public/frameShapeImg/frame-catseye.png'
+import aviator from '../../../public/frameShapeImg/aviator.png'
+import hexagonal from '../../../public/frameShapeImg/hexagonal.png'
+import panthos from '../../../public/frameShapeImg/panthos.png'
+import man from '../../../public/frameGenderImg/man.png'
+import women from '../../../public/frameGenderImg/women.png'
+import kids from '../../../public/frameGenderImg/kids.png'
+import all from '../../../public/frameShapeImg/all.png'
+import Image from "next/image";
 
 const SidebarOld = ({ data }: { data: TFrame[] }) => {
-  const [dataAcordingToPath, setDataAccordingToPath] = useState<TFrame[]>([])
+  
+  const [dataAcordingToPath, setDataAccordingToPath] = useState<TFrame[]>([]);
+  // const [shapeCategory, setShapeCategory] = useState([])
   const location = usePathname();
   const defaultType = location?.split('/')?.[location?.split('/')?.length - 1];
-  console.log(defaultType)
+ 
 
   useEffect(() => {
     if(location === "/allglasses"){
@@ -57,14 +70,87 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
   const material = [
     ...new Set(dataAcordingToPath.map((p: TFrame) => p.materialsCategory)),
   ]?.map((material) => ({ title: material }));
-  const biology = [...new Set(dataAcordingToPath.map((p: TFrame) => p.biologyCategory))]?.map(
-    (bio) => ({ title: bio })
-  );
+
+  const allShapeCategory = dataAcordingToPath?.map((shape:TFrame) => shape.shapeCategory);
+  const allGenderCategory = dataAcordingToPath?.map((shape:TFrame) => shape.biologyCategory);
+
+  const frameShapeCategory = [...new Set(allShapeCategory?.map((shape:any) => shape))]
+  const genderCategory = [...new Set(allGenderCategory?.map((gender:any) => gender))]
+  
+  const isShapeAvaiable = (value:string) => {
+    const findShape = ["all",...frameShapeCategory]?.find((shape:string) => shape === value);
+
+    return findShape ? findShape : 'none'
+  }
+  const isGenderAvaiable = (value:string) => {
+    const findGender = ["all",...genderCategory]?.find((gender:string) => gender === value);
+
+    return findGender ? findGender : 'none'
+  }
+
+  const frameShapeItems = [
+    {
+      name:"all",
+      img: all,
+      isAvailable: isShapeAvaiable("all")
+    },
+    {
+      name:"rectangle",
+      img: rectangle,
+      isAvailable: isShapeAvaiable("rectangle")
+    },
+    {
+      name:"round",
+      img: round,
+      isAvailable: isShapeAvaiable("round")
+    },
+    {
+      name:"cats eye",
+      img: catseye,
+      isAvailable: isShapeAvaiable("cats eye")
+    },
+    {
+      name:"avietor",
+      img:aviator,
+      isAvailable: isShapeAvaiable("avietor")
+    },
+    {
+      name:"hexagonal",
+      img: hexagonal,
+      isAvailable: isShapeAvaiable("hexagonal")
+    },
+    {
+      name:"panthos",
+      img: panthos,
+      isAvailable: isShapeAvaiable("panthos")
+    },
+  ]
+  const genderItems = [
+    {
+      name:"all",
+      img: all,
+      isAvailable: isGenderAvaiable("all")
+    },
+    {
+      name:"men",
+      img: man,
+      isAvailable: isGenderAvaiable("men")
+    },
+    {
+      name:"women",
+      img: women,
+      isAvailable: isGenderAvaiable("women")
+    },
+    {
+      name:"kids",
+      img: kids,
+      isAvailable: isGenderAvaiable("kids")
+    }
+  ]
 
   const items: AccordionItemType[] = [
     { title: "BRAND", children: brand },
     { title: "SIZE-CATEGORY", children: frameSize },
-    { title: "BIOLOGY-CATEGORY", children: biology },
     { title: "MATERIALS-CATEGORY", children: material },
   ];
 
@@ -155,6 +241,29 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
     // effect will push ?type=eye glasses automatically because localSelected & getColor changed
   };
 
+  const handleShape = (value: string) => {
+  const params = new URLSearchParams(searchParams?.toString() ?? "");
+
+  if (value === "all") {
+    params.delete("shapeCategory");
+  } else {
+    params.set("shapeCategory", value);
+  }
+
+  router.push(`?${params.toString()}`);
+};
+  const handleGender = (value: string) => {
+  const params = new URLSearchParams(searchParams?.toString() ?? "");
+
+  if (value === "all") {
+    params.delete("biologyCategory");
+  } else {
+    params.set("biologyCategory", value);
+  }
+
+  router.push(`?${params.toString()}`);
+};
+
   return (
     <>
       {/* Mobile hamburger button */}
@@ -177,7 +286,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 h-[100vh] w-60 p-2 bg-blue-50 shadow-lg z-50
+          fixed top-0 left-0 h-[100vh] sm:w-[80%] md:w-[60%] lg:w-[25%]   p-2 bg-blue-50 shadow-lg z-50
           transform transition-transform duration-300 ease-in-out border-r-2 border-gray-200
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 md:static md:shadow-none overflow-y-scroll hide-scrollbar
@@ -195,31 +304,63 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
         </div>
 
         {/* Sidebar content */}
-        <p className="font-bold">FRAME COLOR</p>
-        <br />
-        {dataAcordingToPath
-          .map((p) => p.color)
-          .filter((c, i, arr) => arr.indexOf(c) === i)
-          .map((color, idx) => (
-            <div key={idx} className="flex items-center">
-              <input
-                type="radio"
-                name="frameColor"
-                value={color}
-                checked={getColor === color}
-                onChange={() => setGetColor(color as string)}
-              />
-              <label className="ml-2">{color}</label>
-            </div>
-          ))}
-        <br />
+        <p className="font-bold">GENDER</p>
+        <div className="w-full grid grid-cols-3 gap-2">
+        {genderItems?.map((shape: any, index: number) => (
+          <div
+            key={index}
+            className={`bg-white border h-[80px] border-gray-400 p-2 flex justify-center items-center text-center ${
+              shape.isAvailable === 'none' ? 'opacity-0' : ''
+            }`}
+          >
+          {shape.isAvailable !== 'none' 
+          ? 
+          <div onClick={() =>handleGender(shape?.name)} className="cursor-pointer">
+            <Image width={50} src={shape?.img} alt={`frame-shape-${index}`} /> 
+            <p className="text-xs">{shape?.name}</p>           
+          </div> : 'N/A'}
+        </div>
+      ))}
 
-        <Accordion item={items} selectData={setSelectData} />
+        {/* Ensure 3 columns always */}
+        {Array.from({ length: (3 - (frameShapeItems?.length % 3 || 3)) % 3 }).map((_, i) => (
+          <div key={`empty-${i}`} className="invisible">
+            filler
+          </div>
+        ))}
+        <br />
+        </div>
+        <p className="font-bold">FRAME SHAPE</p>
+        <div className="w-full grid grid-cols-3 gap-2">
+        {frameShapeItems?.map((shape: any, index: number) => (
+          <div
+            key={index}
+            className={`bg-white border h-[80px] border-gray-400 p-2 flex justify-center items-center text-center ${
+              shape.isAvailable === 'none' ? 'hidden' : ''
+            }`}
+          >
+          {shape.isAvailable !== 'none' 
+          ? 
+          <div onClick={() =>handleShape(shape?.name)} className="cursor-pointer">
+            <Image width={50} src={shape?.img} alt={`frame-shape-${index}`} /> 
+            <p className="text-xs">{shape?.name}</p>           
+          </div> : 'N/A'}
+        </div>
+      ))}
 
-        {/* Selected Filters */}
-        <div className="mt-4">
-          <div className="flex flex-wrap gap-2 mt-2">
-          <p className="font-bold">Active Filters:</p>
+        {/* Ensure 3 columns always */}
+        {Array.from({ length: (3 - (frameShapeItems?.length % 3 || 3)) % 3 }).map((_, i) => (
+          <div key={`empty-${i}`} className="invisible">
+            filler
+          </div>
+        ))}
+        </div>
+        <div>
+
+  {/* Selected Filters */}
+        <div className="mt-1">
+          <div className="flex flex-wrap mr-2 mt-1">
+          {/* <p className="font-bold">Active Filters:</p> */}
             {/* Frame Color */}
             <br />
             {getColor && (
@@ -266,6 +407,98 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
             </button>
           )}
         </div>
+  <p className="font-semibold text-gray-700 text-sm tracking-wide mb-2 border-b pb-1">
+    FRAME COLOR
+  </p>
+
+  <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-2">
+    {dataAcordingToPath
+      .map((p) => p.color)
+      .filter((c, i, arr) => arr.indexOf(c) === i)
+      .map((color, idx) => {
+        const selectedColors = getColor ? getColor.split(",") : [];
+        const isChecked = selectedColors.includes(color as string);
+
+        return (
+          <label
+            key={idx}
+            className={`flex items-center gap-2 p-2 border rounded-md cursor-pointer transition-all duration-200 hover:shadow-sm ${
+              isChecked ? "bg-blue-100 border-blue-400" : "bg-white border-gray-200"
+            }`}
+          >
+            <input
+              type="checkbox"
+              value={color}
+              checked={isChecked}
+              onChange={() => {
+                setGetColor(color as string);
+              }}
+              className="accent-blue-500 cursor-pointer"
+            />
+            <span
+              className="w-4 h-4 rounded-full border"
+              style={{ backgroundColor: color }}
+            ></span>
+            <span title={color} className="capitalize text-xs text-gray-700">{ (color && color?.length > 7) ? `${color?.slice(0,7)}..` : `${color}`}</span>
+          </label>
+        );
+      })}
+  </div>
+</div>
+        <br />
+
+        <Accordion item={items} selectData={setSelectData} />
+        {/* Selected Filters */}
+        <div className="mt-1">
+          <div className="flex flex-wrap mr-2 mt-2">
+          {/* <p className="font-bold">Active Filters:</p> */}
+            {/* Frame Color */}
+            <br />
+            {getColor && (
+              <span className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2">
+                <span>{getColor}</span>
+                <button
+                  onClick={() => handleDelete("color")}
+                  className="text-red-500 font-bold"
+                >
+                  ✕
+                </button>
+              </span>
+            )}
+
+            {/* Other filters (from localSelected) */}
+            {Object.entries(localSelected).map(([key, value]) => {
+              if (!value) return null;
+              return (
+                <span
+                  key={key}
+                  className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2"
+                >
+                  <span>
+                    {value}
+                  </span>
+                  <button
+                    onClick={() => handleDelete(key)}
+                    className="text-red-500 font-bold"
+                  >
+                    ✕
+                  </button>
+                </span>
+              );
+            })}
+          </div>
+
+          {/* Clear All Button */}
+          {(getColor || Object.keys(localSelected).some((k) => !!localSelected[k])) && (
+            <button
+              onClick={clearAllFilters}
+              className="mt-1 px-3 py-1 bg-red-500 text-white rounded"
+            >
+              Clear All
+            </button>
+          )}
+        </div>
+        
       </aside>
     </>
   );

@@ -2,10 +2,10 @@ const ProductSkeleton = () => {
   return (
     <div className="relative bg-white shadow-md p-4 rounded-md w-[97%] animate-pulse mx-1">
       {/* Badge placeholder */}
-      <span className="absolute top-2 left-2 w-10 h-4 bg-gray-300 rounded-sm"></span>
+      {/* <span className="absolute top-2 left-2 w-10 h-4 bg-gray-300 rounded-sm"></span> */}
 
       {/* Color placeholder */}
-      <span className="absolute top-2 right-2 w-8 h-3 bg-gray-200 rounded"></span>
+      {/* <span className="absolute top-2 right-2 w-8 h-3 bg-gray-200 rounded"></span> */}
 
       {/* Image placeholder */}
       <div className="mb-3 w-full flex items-center justify-center">
@@ -13,18 +13,18 @@ const ProductSkeleton = () => {
       </div>
 
       {/* Brand */}
-      <div className="h-3 w-16 bg-gray-200 rounded mb-2"></div>
+      {/* <div className="h-3 w-16 bg-gray-200 rounded mb-2"></div> */}
 
       {/* Name */}
-      <div className="h-3 w-28 bg-gray-300 rounded mb-2"></div>
+      {/* <div className="h-3 w-28 bg-gray-300 rounded mb-2"></div> */}
 
       {/* Price */}
-      <div className="h-4 w-20 bg-gray-400 rounded mb-2"></div>
+      {/* <div className="h-4 w-20 bg-gray-400 rounded mb-2"></div> */}
 
       {/* Try-on button placeholder */}
       <div className="absolute bottom-2 right-2 flex flex-col items-center space-y-1">
-        <div className="w-8 h-8 bg-gray-300 rounded"></div>
-        <div className="w-10 h-2 bg-gray-200 rounded"></div>
+        {/* <div className="w-8 h-8 bg-gray-300 rounded"></div>
+        <div className="w-10 h-2 bg-gray-200 rounded"></div> */}
       </div>
     </div>
   );

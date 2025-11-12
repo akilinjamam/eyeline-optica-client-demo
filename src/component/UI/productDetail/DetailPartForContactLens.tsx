@@ -31,7 +31,7 @@ const {dealsData} = useFetchWeeklyDealsData()
           </div>
         </div>
         <div className="flex space-x-2 mt-2">
-          <button className="bg-gray-200 text-sm px-3 py-1 rounded">{singleLens.lensType}</button>
+          <button className="bg-gray-200 text-sm px-3 py-1 rounded">{singleLens.type}</button>
           
         </div>
       </div>

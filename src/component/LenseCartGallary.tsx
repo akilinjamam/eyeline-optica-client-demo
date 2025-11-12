@@ -1,14 +1,13 @@
 "use client"
-import React, { FC, useRef } from 'react';
-import { ILenseData } from '@/ts-definition/interfaces';
+import React, {useRef } from 'react';
 import arrowLeft from '../../public/images/arrow-left.png'
 import arrowRight from '../../public/images/arrow-right.png'
 import Image from 'next/image';
 import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
 import LenseCard from './LenseCard';
-import { lenseData } from './lenseData';
+import { TContactLens } from '@/ts-definition/types';
 
-const LenseCartGallary:FC = () => {
+const LenseCartGallary = ({contactLens}: {contactLens:TContactLens[]}) => {
 
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
@@ -17,7 +16,7 @@ const LenseCartGallary:FC = () => {
             <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
             <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2'>
                 {
-                    lenseData?.map(({image, badge, name, brand, usageInfo, price, originalPrice, discountLabel, discountPercentage }: ILenseData, index: number) => <LenseCard  image={image} badge={badge} name={name} brand={brand} usageInfo={usageInfo} price={price} originalPrice={originalPrice} discountLabel={discountLabel} discountPercentage={discountPercentage}  key={index}/> )
+                    contactLens?.map(({images, badge, name, brand, salesPrice, color, _id }: TContactLens, index: number) => <LenseCard  images={images} badge={badge} name={name} brand={brand}  salesPrice={salesPrice} color={color} _id={_id}   key={index}/> )
                 }
             </div>
             <Image className='cursor-pointer inline-block mx-3' src={arrowRight} alt='right-arrow' onClick={() => handleNavigation('left')}/>

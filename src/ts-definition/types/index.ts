@@ -111,6 +111,17 @@ export type TFrame = {
   __v?: number;
   dealsOffer?: number;
   category?: string;
+  frameWidth?: string;
+  bridge?: string;
+  lensWidth?: string;
+  lensHeight?: string;
+  templeLength?: string;
+  size?: string;
+  weight?: string;
+  pdRange?: string;
+  prescriptionRange?: string;
+  availableAsProBi?: boolean;
+  availableAsReader?: boolean;
 };
 
 // src/types/lens.type.ts
@@ -150,11 +161,11 @@ export type TLens = {
 };
 
 export type TContactLens = {
-  _id: string;
+  _id?: string;
   id?: string;
   name: string;
   brand: string;
-  color: string;
+  color?: string;
   type?: "daily disposable" | "monthly" | "monthly (colored)" | string; // extendable
   material?: string;
   waterContent?: string; // e.g. "38%" (kept as string for flexibility)
@@ -171,6 +182,8 @@ export type TContactLens = {
   description?: string;
   additionalType?: string;
   images: string[];
+  powerType?: string;
+  badge?: string;
 };
 
 export type TAccessoryItem = {
