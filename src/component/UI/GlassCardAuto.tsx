@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { CameraIcon } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import defaultImage from "../../../public/images/glass-1.png";
@@ -82,9 +82,10 @@ const GlassCardAuto: React.FC<TFrame> = ({
       {/* Image Slider */}
       <div className="mb-3 w-full h-[120px] relative">
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           slidesPerView={1}
-          navigation={true}
+          navigation={false}
+          autoplay={{delay: 2500, disableOnInteraction:false}}
           className="mySwiper w-full h-full"
         >
           {imagesToDisplay.map((imageSrc, index) => (
