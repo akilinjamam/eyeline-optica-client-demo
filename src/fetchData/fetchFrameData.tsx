@@ -82,3 +82,12 @@ export async function getWeeklyDeals() {
 
   return res.json();
 }
+export async function getBanners() {
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}banner`, {
+      next: {revalidate: 120},
+    });
+  if (!res.ok) throw new Error("Failed to fetch banner data");
+
+  return res.json();
+}

@@ -103,3 +103,9 @@ export interface ISelectOtherOptionsForDoctor {
   title: string;
   icon: any;
 }
+
+export interface IBanner {
+  _id?: string;
+  category: string;
+  images: string[];
+}

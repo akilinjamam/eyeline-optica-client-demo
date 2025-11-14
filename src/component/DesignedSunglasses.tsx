@@ -2,58 +2,62 @@
 
 import React, { useRef } from 'react';
 import Title from './Title';
-import imageOne from '../../public/images/designed-sunglasses-1.png'
-import imageTwo from '../../public/images/designed-sunglasses-2.png'
-import Image, { StaticImageData } from 'next/image';
+// import imageOne from '../../public/images/designed-sunglasses-1.png'
+// import imageTwo from '../../public/images/designed-sunglasses-2.png'
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
 
  type Element = {
         id: number;
         name: string;
-        image: StaticImageData;
+        image: string;
         link:string;
     };
-    const elements:Element[] = [
+    
+
+const DesignedSunglasses = ({bannerData}: {bannerData:IBanner[]}) => {
+
+  const elements:Element[] = [
         {
             id: 1,
             name: 'Eyeglasses',
-            image: imageOne,
+            image: bannerAccordingToCategory("Mobile Designed Sunglasses One", bannerData) as string,
             link: "/allglasses"
         },
         {
             id: 2,
             name: 'Sunglasses',
-            image: imageTwo,
+            image: bannerAccordingToCategory("Mobile Designed Sunglasses Two", bannerData) as string,
             link: "/allglasses/sunglasses"
         },
         {
             id: 3,
             name: 'Special Glasses',
-            image: imageOne,
+            image: bannerAccordingToCategory("Mobile Designed Sunglasses Three", bannerData) as string,
             link: "/allglasses/not-added"
         },
         {
             id: 4,
             name: 'Contact Lenses',
-            image: imageTwo,
+            image: bannerAccordingToCategory("Mobile Designed Sunglasses Four", bannerData) as string,
             link: "/allContactLens"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
-            image: imageOne,
+           image: bannerAccordingToCategory("Mobile Designed Sunglasses Five", bannerData) as string,
             link: "/allglasses/not-added"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
-            image: imageTwo,
+           image: bannerAccordingToCategory("Mobile Designed Sunglasses Six", bannerData) as string,
             link: "/allLens/progressiveLens"
         },
     ]
-
-const DesignedSunglasses = () => {
 
      const router = useRouter();
     const swipeRef = useRef(null);
@@ -92,7 +96,7 @@ const DesignedSunglasses = () => {
                             width={200}
                             src={element.image}
                             alt={element.name}
-                            className="rounded-md cursor-pointer "
+                            className="rounded-md cursor-pointer"
                           />
                         </div>
                         

@@ -1,16 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import Image, { StaticImageData } from 'next/image';
-import {FC, useRef} from 'react';
-import imageOne from '../../public/images/glass-1.png';
-import imageTwo from '../../public/images/glass-2.png';
-import imageThree from '../../public/images/glass-3.png';
-import imageFour from '../../public/images/glass-4.png';
-import imageFive from '../../public/images/glass-5.png';
-import imageSix from '../../public/images/glass-6.png';
+import Image from 'next/image';
+import { useRef} from 'react';
 import useSwipe from '@/custom-hooks/useSwipe';
 import { useRouter } from 'next/navigation';
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
 
-const ImagePreview:FC = () => {
+const ImagePreview = ({bannerData}: {bannerData:IBanner[]}) => {
     const router = useRouter();
     const swipeRef = useRef(null);
 
@@ -19,44 +16,44 @@ const ImagePreview:FC = () => {
     type Element = {
         id: number;
         name: string;
-        image: StaticImageData;
+        image: any;
         link:string;
     };
     const elements:Element[] = [
         {
             id: 1,
             name: 'Eyeglasses',
-            image: imageOne,
+            image: bannerAccordingToCategory("Desktop Tab Banner Eyeglasses",bannerData),
             link: "/allglasses"
         },
         {
             id: 2,
             name: 'Sunglasses',
-            image: imageTwo,
+            image: bannerAccordingToCategory("Desktop Tab Banner Sunglasses",bannerData),
             link: "/allglasses/sunglasses"
         },
         {
             id: 3,
             name: 'Special Glasses',
-            image: imageThree,
+            image: bannerAccordingToCategory("Desktop Tab Banner Special Glasses",bannerData),
             link: "/allglasses/not-added"
         },
         {
             id: 4,
             name: 'Contact Lenses',
-            image: imageFour,
+            image: bannerAccordingToCategory("Desktop Tab Banner Contact Lenses",bannerData),
             link: "/allContactLens"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
-            image: imageFive,
+            image: bannerAccordingToCategory("Desktop Tab Banner Power Sunglasses",bannerData),
             link: "/allglasses/not-added"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
-            image: imageSix,
+            image: bannerAccordingToCategory("Desktop Tab Banner Progressive Lenses",bannerData),
             link: "/allLens/progressiveLens"
         },
     ]

@@ -1,11 +1,13 @@
-import React, { FC } from 'react';
-import appointment from '../../public/images/appointment-img.png';
+import React from 'react';
+// import appointment from '../../public/images/appointment-img.png';
 import Image from 'next/image';
 import arrow from '../../public/images/33-right.png';
 import { TAppointmentService } from '@/ts-definition/types';
 import Title from './Title';
 import Link from 'next/link';
-const BookAppointment:FC = () => {
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
+const BookAppointment = ({bannerData}: {bannerData:IBanner[]}) => {
 
     const serviceData:TAppointmentService[] = [
         {
@@ -52,7 +54,7 @@ const BookAppointment:FC = () => {
                         }
                     </div>
                     <div className='w-[50%] relative'>
-                        <Image className='w-full' src={appointment} alt='appointment-image'/>
+                        <Image className='w-full' width={400} height={400} src={bannerAccordingToCategory("Desktop Book Appointment", bannerData) as string} alt='appointment-image'/>
                         <br />
                         <p className='text-center text-4xl font-semibold'>Have Questions About Your</p>
                         <br />

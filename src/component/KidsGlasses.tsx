@@ -1,6 +1,6 @@
 "use client"
-import { TContactLenseData, TFrame } from '@/ts-definition/types';
-import kidsImg from '../../public/images/kids-glass-banner.png';
+import {TFrame } from '@/ts-definition/types';
+// import kidsImg from '../../public/images/kids-glass-banner.png';
 import Image from 'next/image';
 import arrowLeft from '../../public/images/arrow-left.png'
 import arrowRight from '../../public/images/arrow-right.png'
@@ -11,14 +11,16 @@ import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
 
-const Kidsglass = ({data}:{data:TFrame[]}) => {
+const Kidsglass = ({data,bannerData}:{data:TFrame[], bannerData:IBanner[]}) => {
 
     const router = useRouter()
 
-    const contactLense:TContactLenseData ={
-        lense: kidsImg
-    }
+    // const contactLense:TContactLenseData ={
+    //     lense: kidsImg
+    // }
     const ref = useRef(null)
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(ref)
 
@@ -30,7 +32,7 @@ const Kidsglass = ({data}:{data:TFrame[]}) => {
         <div className='mt-8 hidden md:block lg:block'>
             <Title value='KIDS GLASSES'/>
             <div className='w-full mt-8 md:block lg:block hidden'>
-                <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
+                <Image width={1400} height={1400} className='mx-auto' src={bannerAccordingToCategory("Desktop Kids Glasses", bannerData) as string} alt='contact-lense'/>
             </div>
             <div className='w-full'>
                 <br />

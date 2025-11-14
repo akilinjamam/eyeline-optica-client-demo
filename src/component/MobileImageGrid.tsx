@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import img1 from "../../public/images/brandsIcon/mobile-grid-1.png";
-import img2 from "../../public/images/brandsIcon/mobile-grid-2.png";
+// import img1 from "../../public/images/brandsIcon/mobile-grid-1.png";
+// import img2 from "../../public/images/brandsIcon/mobile-grid-2.png";
 // import img3 from "../../public/images/brandsIcon/mobile-grid-3.png";
-import img4 from "../../public/images/brandsIcon/mobile-grid-4.png";
+// import img4 from "../../public/images/brandsIcon/mobile-grid-4.png";
+import { IBanner } from "@/ts-definition/interfaces";
+import { bannerAccordingToCategory } from "@/fetchData/bannerAccordingToCategory";
 
-const MobileImageGrid = () => {
+const MobileImageGrid = ({bannerData}: {bannerData:IBanner[]}) => {
   return (
     <div className=" md:hidden lg:hidden w-full py-6 px-4 flex items-center justify-between">
       <div
@@ -18,7 +20,9 @@ const MobileImageGrid = () => {
         {/* 1️⃣ Big Image */}
         <div className="col-span-1 row-span-1">
           <Image
-            src={img1}
+            width={400}
+            height={400}
+            src={bannerAccordingToCategory("Mobile Banner One", bannerData) as string}
             alt="Image 1"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -27,7 +31,9 @@ const MobileImageGrid = () => {
         {/* 2️⃣ Small Image */}
         <div className="col-span-1 row-span-1">
           <Image
-            src={img4}
+             width={300}
+            height={300}
+            src={bannerAccordingToCategory("Mobile Banner Two", bannerData) as string}
             alt="Image 2"
             className="w-full object-cover rounded-lg"
           />
@@ -42,7 +48,9 @@ const MobileImageGrid = () => {
         {/* 2️⃣ Small Image */}
         <div className="col-span-1 row-span-1">
           <Image
-            src={img2}
+             width={300}
+            height={300}
+            src={bannerAccordingToCategory("Mobile Banner Four", bannerData) as string}
             alt="Image 2"
             className="w-full h-full rounded-lg"
           />
@@ -50,7 +58,9 @@ const MobileImageGrid = () => {
         {/* 1️⃣ Big Image */}
         <div className="col-span-1 row-span-1">
           <Image
-            src={img1}
+            width={400}
+            height={400}
+            src={bannerAccordingToCategory("Mobile Banner Three", bannerData) as string}
             alt="Image 1"
             className="w-full h-full object-cover rounded-lg"
           />

@@ -1,58 +1,61 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import Image, { StaticImageData } from 'next/image';
-import {FC, useRef} from 'react';
-import imageOne from '../../public/images/mobileBanner/mobile-banner-3.png'
-import imageTwo from '../../public/images/mobileBanner/mobile-banner-2.png'
+import Image from 'next/image';
+import {useRef} from 'react';
 import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
 
-const MobileBanner:FC = () => {
+const MobileBanner = ({bannerData}:{bannerData: IBanner[]}) => {
     const router = useRouter();
     const swipeRef = useRef(null);
 
     const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
 
+
+
     type Element = {
         id: number;
         name: string;
-        image: StaticImageData;
+        image: any;
         link:string;
     };
     const elements:Element[] = [
         {
             id: 1,
             name: 'Eyeglasses',
-            image: imageOne,
+            image: bannerAccordingToCategory("Mobile Tab Banner Eyeglasses", bannerData),
             link: "/allglasses"
         },
         {
             id: 2,
             name: 'Sunglasses',
-            image: imageTwo,
+            image: bannerAccordingToCategory("Mobile Tab Banner Sunglasses", bannerData),
             link: "/allglasses/sunglasses"
         },
         {
             id: 3,
             name: 'Special Glasses',
-            image: imageOne,
+            image: bannerAccordingToCategory("Mobile Tab Banner Special Glasses",bannerData),
             link: "/allglasses/not-added"
         },
         {
             id: 4,
             name: 'Contact Lenses',
-            image: imageTwo,
+            image: bannerAccordingToCategory("Mobile Tab Banner Contact Lenses", bannerData),
             link: "/allContactLens"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
-            image: imageTwo,
+            image: bannerAccordingToCategory("Mobile Tab Banner Power Sunglasses", bannerData),
             link: "/allglasses/not-added"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
-            image: imageOne,
+            image: bannerAccordingToCategory("Mobile Tab Banner Progressive Lenses", bannerData),
             link: "/allLens/progressiveLens"
         },
     ]

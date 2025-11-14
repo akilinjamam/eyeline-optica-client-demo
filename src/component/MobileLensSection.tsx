@@ -3,64 +3,67 @@
 import React, { useRef } from 'react';
 import Title from './Title';
 import imageOne from '../../public/images/mobile-lens-1.png'
-import imageTwo from '../../public/images/mobile-lens-2.png'
+// import imageTwo from '../../public/images/mobile-lens-2.png'
 import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
 
  type Element = {
         id: number;
         name: string;
         image: StaticImageData;
-        image2:StaticImageData;
+        image2:string;
         link:string;
     };
-    const elements:Element[] = [
+
+const MobileLensSection = ({bannerData}: {bannerData:IBanner[]}) => {
+
+  const elements:Element[] = [
         {
             id: 1,
             name: 'Eyeglasses',
             image: imageOne,
-            image2:imageTwo,
+            image2:bannerAccordingToCategory("Lenses One", bannerData) as string,
             link: "/allglasses"
         },
         {
             id: 2,
             name: 'Sunglasses',
             image: imageOne,
-            image2:imageTwo,
+             image2:bannerAccordingToCategory("Lenses Two", bannerData) as string,
             link: "/allglasses/sunglasses"
         },
         {
             id: 3,
             name: 'Special Glasses',
             image: imageOne,
-            image2:imageTwo,
+            image2:bannerAccordingToCategory("Lenses Three", bannerData) as string,
             link: "/"
         },
         {
             id: 4,
             name: 'Contact Lenses',
             image: imageOne,
-            image2:imageTwo,
+            image2:bannerAccordingToCategory("Lenses Four", bannerData) as string,
             link: "/"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
             image: imageOne,
-            image2:imageTwo,
+            image2:bannerAccordingToCategory("Lenses Five", bannerData) as string,
             link: "/"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
             image: imageOne,
-            image2:imageTwo,
+            image2:bannerAccordingToCategory("Lenses Six", bannerData) as string,
             link: "/"
         },
     ]
-
-const MobileLensSection = () => {
 
      const router = useRouter();
     const swipeRef = useRef(null);
@@ -101,7 +104,8 @@ const MobileLensSection = () => {
                             className="rounded-md cursor-pointer "
                           />
                           <Image 
-                            width={25}
+                            width={50}
+                            height={50}
                             src={element.image2}
                             alt={element.name}
                             className="rounded-md cursor-pointer "

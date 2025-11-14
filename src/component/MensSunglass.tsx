@@ -1,7 +1,7 @@
 "use client"
-import { TContactLenseData, TFrame } from '@/ts-definition/types';
+import { TFrame } from '@/ts-definition/types';
 import React, { useRef } from 'react';
-import mensImg from '../../public/images/mens-sunglass-banner.png';
+
 import Image from 'next/image';
 import arrowLeft from '../../public/images/arrow-left.png'
 import arrowRight from '../../public/images/arrow-right.png'
@@ -11,14 +11,16 @@ import useWeeklyDealsScroller from '@/custom-hooks/useWeeklyDealsScroller';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
+import { IBanner } from '@/ts-definition/interfaces';
+import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
 
-const MensSunglass = ({data} : {data:TFrame[]}) => {
+const MensSunglass = ({data, bannerData} : {data:TFrame[], bannerData:IBanner[]}) => {
 
     const router = useRouter();
 
-    const contactLense:TContactLenseData ={
-        lense: mensImg
-    }
+    // const contactLense:TContactLenseData ={
+    //     lense: mensImg
+    // }
 
     const currentRef = useRef(null);
     const {handleNavigation, parentRef} = useWeeklyDealsScroller(currentRef)
@@ -30,8 +32,16 @@ const MensSunglass = ({data} : {data:TFrame[]}) => {
     return (
         <div className='mt-8 hidden md:block lg:block'>
             <Title value='MENS SUNGLASSES'/>
-            <div className='w-full mt-8 md:block lg:block hidden'>
-                <Image className='mx-auto' src={contactLense.lense} alt='contact-lense'/>
+            <div className="w-full mt-8 md:block lg:block hidden">
+            <div className="mx-auto overflow-hidden w-fit">
+                <Image
+                    width={1400}
+                    height={1400}
+                    src={bannerAccordingToCategory("Desktop Mens Sunglasses", bannerData) as string}
+                    alt="contact-lense"
+                    className="w-full h-auto"
+                />
+            </div>
             </div>
             <div className='w-full'>
                 <br />

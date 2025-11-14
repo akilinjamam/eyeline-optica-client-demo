@@ -22,7 +22,8 @@ import MobileBookAppointment from "@/component/MobileBookAppointment";
 import DesignedSunglasses from "@/component/DesignedSunglasses";
 import MobileLensSection from "@/component/MobileLensSection";
 import HomeBlogSection from "@/component/HomeBlogSection";
-import { getcontactLens, getWeeklyDeals } from "@/fetchData/fetchFrameData";
+import { getBanners, getcontactLens, getWeeklyDeals } from "@/fetchData/fetchFrameData";
+import { IBanner } from "@/ts-definition/interfaces";
 
 
 async function getProduct(value:string) {
@@ -117,29 +118,31 @@ export default async function Home() {
   const getWeeklyDealsDate = await getWeeklyDeals() as TDataWithoutMeta<TWeeklyDeals>;
   const getWeeklyDealsData = getWeeklyDealsDate?.data
 
- 
+  const allBanners = await getBanners() as TData<IBanner[]>;
+  const bannerData = allBanners?.data?.data;
+
 
   return (
     <div className="bg-blue-50">
-        <MobileBanner/>
-        <ImagePreview/>
-        <PopularBrand/>
+        <MobileBanner bannerData={bannerData}/>
+        <ImagePreview bannerData={bannerData}/>
+        <PopularBrand bannerData={bannerData}/>
         <WeeklyDeals dealsData={getWeeklyDealsData }/>
         <GlassCardsGallary data={allFramesWithDeals} dealsData={getWeeklyDealsData}/>
-        <FeaturedCategory/>
+        <FeaturedCategory bannerData={bannerData}/>
         {/* <LatestCollections/> */}
-        <BookAppointment/>
+        <BookAppointment bannerData={bannerData}/>
         <NewArrivals data={allFramesWithNewArrivals}/>
         <BestSelling data={allFramesWithBestSelling}/>
-        <MobileImageGrid/>
-        <MobileBookAppointment/>
-        <DesignedSunglasses/>
-        <MobileLensSection/>
-        <ContactLense contactLens={allContactLensData}/>
-        <FindYourPerfectGlass/>
-        <MensSunglass data={allFramesWithMan}/>
-        <WomenSunglass data={allFramesWithWomen}/>
-        <Kidsglass data={allFramesWithKids}/>
+        <MobileImageGrid bannerData={bannerData}/>
+        <MobileBookAppointment bannerData={bannerData}/>
+        <DesignedSunglasses bannerData={bannerData}/>
+        <MobileLensSection bannerData={bannerData}/>
+        <ContactLense contactLens={allContactLensData} bannerData={bannerData}/>
+        <FindYourPerfectGlass bannerData={bannerData}/>
+        <MensSunglass data={allFramesWithMan} bannerData={bannerData}/>
+        <WomenSunglass data={allFramesWithWomen} bannerData={bannerData}/>
+        <Kidsglass data={allFramesWithKids} bannerData={bannerData}/>
         <ShopByFrameShape/>
         <HomeBlogSection/>
         <TopFooter/>
