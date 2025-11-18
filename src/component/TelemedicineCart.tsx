@@ -1,11 +1,11 @@
 import React from 'react';
-import { TTelemedicineData } from '@/ts-definition/types';
 import Image from 'next/image';
 import DoctorTag from './DoctorTag';
-import { ChevronRight, Star } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import defaultImg from "../../public/images/telemedicine/user.jpg"
 
-const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, reviews, img, id}) => {
+const TelemedicineCart= ({name, post, degree, exp, img, id}: {name:string, post:string, degree:string,exp:number, img:string, id:string, }) => {
 
     return (
     <div className="relative bg-white shadow-md  rounded-md   h-auto ">
@@ -13,7 +13,7 @@ const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, 
             <Link href={`/telemedicine/${id}`}>
                 <div className='w-full lg:flex lg:items-start lg:justify-between '>
                 <div className='lg:w-[40%] w-[100%] flex items-center justify-center'>
-                    <Image className='w-[125px]'  src={img} alt='telemidicne-dr-image'/>
+                    <Image width={200} height={200} className='w-[125px]'  src={img || defaultImg} alt='telemidicne-dr-image'/>
                 </div>
                 <div className='lg:w-[55%] w-[100%] lg:text-left text-center '>
                     <p className='text-sm font-bold'>{name}</p>
@@ -23,14 +23,14 @@ const TelemedicineCart:React.FC<TTelemedicineData> = ({name, post, degree, exp, 
                         <DoctorTag text={post} charWidth={13} />
                     </div>
                     <div className="flex items-center lg:justify-start justify-center gap-1 mt-2 text-blue-600">
-                        <span className="text-sm text-gray-700">({reviews})</span>
-                        {[...Array(5)].map((_, i) => (
+                        {/* <span className="text-sm text-gray-700">({reviews})</span> */}
+                        {/* {[...Array(5)].map((_, i) => (
                         <Star
                             key={i}
                             size={16}
                             className={i < reviews ? "fill-blue-500 text-blue-500" : "text-gray-300"}
                         />
-                        ))}
+                        ))} */}
                     </div>
                 </div>
             </div>

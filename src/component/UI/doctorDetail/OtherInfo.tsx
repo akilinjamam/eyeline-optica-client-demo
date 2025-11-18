@@ -1,26 +1,27 @@
 "use client"
-import { ISelectOtherOptionsForDoctor } from '@/ts-definition/interfaces';
-import { DraftingCompass, Hospital, Info } from 'lucide-react';
+import { IDoctor, ISelectOtherOptionsForDoctor } from '@/ts-definition/interfaces';
+import {  Hospital, Info } from 'lucide-react';
 import { useState } from 'react';
 import InfoDoctor from './InfoDoctor';
-import ReviewDoctor from './Review';
+// import ReviewDoctor from './Review';
 import ExperienceDoctor from './Experience';
+import Slots, { ISlot } from './Slots';
 
-const OtherInfo = () => {
+const OtherInfo = ({getSingleDoctor, allSlotData}: {getSingleDoctor:IDoctor, allSlotData:ISlot[]}) => {
     const [selectOption, setSelectOption] = useState(0)
     const selectOtherOptionsForDoctor: ISelectOtherOptionsForDoctor[] = [
         {
             title: 'Info',
-            icon: <Info/>
+            icon: <Info />
         },
         {
             title: 'Experience',
             icon: <Hospital/>
         },
-        {
-            title: 'Reviews',
-            icon: <DraftingCompass/>
-        },
+        // {
+        //     title: 'Reviews',
+        //     icon: <DraftingCompass/>
+        // },
     ]
     return (
         <div className='w-[80%] mx-auto '>
@@ -41,19 +42,20 @@ const OtherInfo = () => {
             <br />
             <div className='grid grid-cols-1 lg:grid-cols-2'>
                 <div>
-                    {selectOption === 0 && <InfoDoctor/> }
-                    {selectOption === 1 && <ReviewDoctor/> }
-                    {selectOption === 2 && <ExperienceDoctor/> }
+                    {selectOption === 0 && <InfoDoctor getSingleDoctor={getSingleDoctor}/> }
+                    {selectOption === 1 && <ExperienceDoctor  getSingleDoctor={getSingleDoctor}/> }
+                    {/* {selectOption === 2 && <ReviewDoctor/> } */}
                 </div>
                 <div className='px-6'>
                     <div className='w-full'>
-                        <p className='text-xl text-blue-400 font-bold'>At a glance</p>
+                        <p className='text-xl text-blue-400 font-bold'>Book Your Slot</p>
                         <br />
-                        <div className='w-[70%] h-[200px] bg-blue-100 rounded-md'>
-
+                        <div className='w-[100%] h-auto bg-blue-100 rounded-md'>
+                            <Slots doctorId={getSingleDoctor?._id as string} allSlotData={allSlotData}/>
                         </div>
                     </div>
                 </div>
+                <br />
             </div>
         </div>
     );

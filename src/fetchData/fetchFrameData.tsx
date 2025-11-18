@@ -91,3 +91,23 @@ export async function getBanners() {
 
   return res.json();
 }
+
+
+export async function getDoctors() {
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}doctors/`, {
+      next: {revalidate: 120},
+    });
+  if (!res.ok) throw new Error("Failed to fetch doctors data");
+
+  return res.json();
+}
+export async function getSlots(id:string) {
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}schedule/get-slot/${id}`,{
+    cache: "no-store"
+  });
+  if (!res.ok) throw new Error("Failed to fetch slot data");
+
+  return res.json();
+}

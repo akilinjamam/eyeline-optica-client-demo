@@ -6,8 +6,13 @@ import TelemidiceGallery from "@/component/TelemidiceGallery";
 import TelemedicineServices from "@/component/TelemedicineServices";
 import TelemedicineEyeTest from "@/component/TelemedicineEyeTest";
 import Footer from "@/component/Footer";
+import { getDoctors } from "@/fetchData/fetchFrameData";
 
-const Telemedicine = () => {
+const Telemedicine = async () => {
+
+     const getAllDcotors = await getDoctors();
+     const data = getAllDcotors?.data?.data;
+
     return (
         <div className="w-full bg-blue-50">
            <div className="w-full flex items-center justify-center ">
@@ -18,7 +23,7 @@ const Telemedicine = () => {
                 <Title value='Our Specialists'/>
            </div>
            <div className="mt-10 lg:w-[80%] md:w-[90%] w-[100%] mx-auto">
-                <TelemidiceGallery/>
+                <TelemidiceGallery data={data}/>
                 <br />
            </div>
            <TelemedicineServices/>

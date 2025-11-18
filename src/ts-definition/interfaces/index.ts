@@ -109,3 +109,18 @@ export interface IBanner {
   category: string;
   images: string[];
 }
+
+export interface IDoctor {
+  _id?: string;
+  name?: string;
+  email?: string;
+  specialities?: string[];
+  studies?: string[];
+  totalExperience?: number;
+  bmdcNumber?: string;
+  currentlyWorking?: string;
+  description?: string;
+  experienceDetail?: string;
+  images?: string[];
+  appointmentFee?: number;
+}
