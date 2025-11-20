@@ -2,7 +2,7 @@
 'use client';
 
 import { FC, useEffect, useState, useRef } from 'react';
-import { Search, ShoppingBag, LogIn, X, User } from 'lucide-react';
+import { Search, ShoppingBag, LogIn, X, User, Video } from 'lucide-react';
 import Image from 'next/image';
 import logo_title from '../../public/icons/brand_title.png';
 import { useRouter } from 'next/navigation';
@@ -213,6 +213,7 @@ const Header: FC = () => {
           </Link>
 
           <Link href={"/profile"}><User className='text-blue-500'/></Link>
+          <Link href={"/patientProfile"}><Video className='text-blue-500'/></Link>
 
           <div className="relative">
             <ShoppingBag
