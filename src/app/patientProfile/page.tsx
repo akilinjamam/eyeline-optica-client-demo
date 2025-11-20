@@ -19,7 +19,7 @@ export default function PatientProfile() {
 
         const parsedData = JSON.parse(raw);
         const slotId = parsedData?.slotId;
-        if (!slotId) return;
+        // if (!slotId) return;
 
         // Step 2: Fetch slot data from backend
         const res = await fetch(
