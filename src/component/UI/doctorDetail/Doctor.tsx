@@ -3,7 +3,6 @@ import { IDoctor } from "@/ts-definition/interfaces";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
 import defaultImg from "../../../../public/images/telemedicine/user.jpg";
-import Link from "next/link";
 
 const Doctor = ({getSingleDoctor}: {getSingleDoctor: IDoctor}) => {
   
@@ -68,12 +67,12 @@ const Doctor = ({getSingleDoctor}: {getSingleDoctor: IDoctor}) => {
                         <p className="font-semibold text-2xl">Consultation Fee</p>
                         <p className="text-5xl font-semibold text-blue-500 ">{getSingleDoctor?.appointmentFee} BDT</p>
                         <br />
-                        <Link href="/videoConsult">
+                       
                             <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-3 rounded-md transition">
                             <Calendar size={18} className="text-white" />
                             Book Online Appointment
                         </button>
-                        </Link>
+                       
                    </div>
                 </div>
             </div>

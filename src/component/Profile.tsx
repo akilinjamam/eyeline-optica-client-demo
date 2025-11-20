@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
-import { User, Mail, Phone } from 'lucide-react';
+import { User, Mail, Phone, Video, FileText } from 'lucide-react';
+import { toast, ToastContainer } from 'react-toastify';
 
 interface DecodedUser {
   name?: string;
@@ -28,7 +29,7 @@ const ProfilePage = () => {
     try {
       const decoded: DecodedUser = jwtDecode(token);
 
-      // Optional: check if expired
+      // Token expiration check
       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
         localStorage.removeItem('token');
         router.push('/login');
@@ -44,6 +45,21 @@ const ProfilePage = () => {
     }
   }, [router]);
 
+  
+  const handleVideo = () => {
+    
+    const getSlotData = localStorage.getItem('appointmentData');
+    if(!getSlotData) return;
+    const parsedData = JSON.parse(getSlotData);
+    
+    if(parsedData?.patientId){
+      router.push('/videoConsult')
+    }else{
+      toast.error("please book a slot first")
+    }
+
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-50">
@@ -56,7 +72,9 @@ const ProfilePage = () => {
 
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-4 py-10">
+      <ToastContainer/>
       <div className="w-full max-w-md bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all hover:shadow-2xl">
+        
         {/* Profile Header */}
         <div className="relative bg-blue-500 h-36 flex items-center justify-center">
           <div className="absolute -bottom-12 w-28 h-28 bg-white rounded-full border-4 border-blue-500 flex items-center justify-center shadow-md">
@@ -83,22 +101,38 @@ const ProfilePage = () => {
                 {user.email || 'No Email Provided'}
               </span>
             </div>
-
-            {/* <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-              <MapPin className="text-blue-600 w-5 h-5" />
-              <span className="text-gray-700 text-sm font-medium">
-                {user.address || 'No Address Available'}
-              </span>
-            </div> */}
           </div>
 
-          {/* Button */}
+          {/* Action Buttons */}
+          <div className="mt-8 space-y-4">
+
+            {/* Video Call Button */}
+            <button
+              onClick={handleVideo}
+              className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition-all cursor-pointer"
+            >
+              <Video className="w-5 h-5" />
+              Video Call with Doctor
+            </button>
+
+            {/* Prescription Button */}
+            <button
+              onClick={() => router.push('/prescription')}
+              className="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-lg transition-all cursor-pointer"
+            >
+              <FileText className="w-5 h-5" />
+              View Prescription
+            </button>
+
+          </div>
+
+          {/* Log Out Button */}
           <button
             onClick={() => {
               localStorage.removeItem('token');
               router.push('/login');
             }}
-            className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all"
+            className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all cursor-pointer"
           >
             Log Out
           </button>

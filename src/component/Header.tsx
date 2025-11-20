@@ -87,6 +87,31 @@ const Header: FC = () => {
   return () => document.removeEventListener('click', handleClickOutside, true);
 }, []);
 
+  useEffect(() => {
+      const getSlotIdAndPatient = async () => {
+         const appointmentData = localStorage.getItem('appointmentData');
+          if (!appointmentData) return;
+
+          const parsedData = JSON.parse(appointmentData);
+          const slotId = parsedData?.slotId;
+
+          try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/schedule/get-single-slot/${slotId}`);
+            const slotData = await res.json();
+            console.log(slotData?.data)
+            if(slotData?.data?.patient !== null){
+              const newData = {...parsedData, patientId:slotData?.data?.patient?._id};
+              localStorage.setItem('appointmentData', JSON.stringify(newData))
+            }
+
+          } catch (error) {
+            console.log(error)
+          }
+
+      }
+      getSlotIdAndPatient()
+  })
+
   return (
     <header className="w-full px-4 sm:px-6 py-5 border-b border-gray-200 bg-white relative">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
