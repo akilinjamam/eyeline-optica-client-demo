@@ -12,7 +12,6 @@ const formatTime = (seconds: number) => {
 
 export default function PatientCall({roomId, patientId}: {roomId:string, patientId:string}) {
 
-
   // --- Refs ---
   const localVideoRef = useRef<HTMLDivElement | null>(null);
   const remoteVideoRef = useRef<HTMLDivElement | null>(null);
@@ -22,7 +21,7 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
   const pendingRemoteUser = useRef<any>(null);
 
   // --- States ---
-  const [isReady, setIsReady] = useState(false); // <--- NEW: Forces 1st interaction
+  const [isReady, setIsReady] = useState(false);
   const [AgoraRTC, setAgoraRTC] = useState<any>(null);
   const [isIncomingCall, setIsIncomingCall] = useState(false);
   const [callAccepted, setCallAccepted] = useState(false);
@@ -90,13 +89,19 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
         clientRef.current = agoraClient; // Save to Ref
 
         // --- Listeners ---
+        // FIX 1: Prevent race condition and save the remote user object
         agoraClient.on("user-published", async (user: any, mediaType: any) => {
-          console.log("Incoming call detected");
-          pendingRemoteUser.current = { user, mediaType };
-          setIsIncomingCall(true); // <--- This triggers the Ringtone Effect
-          setStatusMessage("Doctor is calling...");
+            // Only set the incoming call state ONCE for a new user.
+            if (!isIncomingCall && !callAccepted) {
+                console.log("Incoming call detected (First Track Published)");
+                pendingRemoteUser.current = { user }; // Only need the 'user' object
+                setIsIncomingCall(true); 
+                setStatusMessage("Doctor is calling...");
+            } else if (isIncomingCall) {
+                console.log(`Remote user also published ${mediaType} track.`);
+            }
         });
-
+        
         agoraClient.on("user-left", () => {
           setStatusMessage("Doctor ended the call.");
           handleEndCall();
@@ -135,8 +140,8 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
         localTracksRef.current.forEach((t:any) => t.close());
       }
     };
- 
-  }, [isReady, roomId, patientId]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReady, roomId, patientId]); // Added dependencies for linting
 
   // --- 6. Call Handlers ---
 
@@ -146,6 +151,7 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
     setIsIncomingCall(false);
     setCallAccepted(true);
     if(audioRef.current) audioRef.current.loop = false
+    
     try {
       // Cleanup previous tracks if any
       if (localTracksRef.current.length > 0) {
@@ -153,12 +159,26 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
          localTracksRef.current = [];
       }
 
-      // 1. Subscribe to Remote
+      // 1. Subscribe to Remote (FIX 2: Explicitly subscribe to both audio and video)
       if (pendingRemoteUser.current) {
-        const { user, mediaType } = pendingRemoteUser.current;
-        await clientRef.current.subscribe(user, mediaType);
-        if (mediaType === "video" && remoteVideoRef.current) user.videoTrack.play(remoteVideoRef.current);
-        if (mediaType === "audio") user.audioTrack.play();
+        const { user } = pendingRemoteUser.current;
+        
+        // 🔑 FIX A: Explicitly subscribe to both audio and video tracks
+        await clientRef.current.subscribe(user, "audio");
+        await clientRef.current.subscribe(user, "video");
+        
+        // Play Tracks
+        
+        // Video Track Playback
+        if (user.videoTrack && remoteVideoRef.current) {
+            user.videoTrack.play(remoteVideoRef.current);
+        }
+        
+        // 🔑 FIX B: Audio Track Playback
+        if (user.audioTrack) {
+            console.log("SUCCESS! Playing remote audio track.");
+            user.audioTrack.play();
+        }
       }
 
       // 2. Publish Local
@@ -196,7 +216,7 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
     // Clear DOM
     if (localVideoRef.current) localVideoRef.current.innerHTML = "";
     if (remoteVideoRef.current) remoteVideoRef.current.innerHTML = "";
-     if(audioRef.current) audioRef.current.loop = false
+    if(audioRef.current) audioRef.current.loop = false
   };
 
   const handleRejectCall = () => {
