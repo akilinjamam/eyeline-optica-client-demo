@@ -2,13 +2,14 @@
 'use client';
 
 import { FC, useEffect, useState, useRef } from 'react';
-import { Search, ShoppingBag, LogIn, X, User, Video } from 'lucide-react';
+import { Search, ShoppingBag, X, User, Video, LogIn } from 'lucide-react';
 import Image from 'next/image';
 import logo_title from '../../public/icons/brand_title.png';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 import { JwtPayload } from '@/app/cart/page';
 import Link from 'next/link';
+import { elements } from './Tab';
 
 const Header: FC = () => {
   const router = useRouter();
@@ -18,6 +19,8 @@ const Header: FC = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [animateDrawer, setAnimateDrawer] = useState<'in' | 'out'>('in');
 
   // 🛒 Fetch cart
   useEffect(() => {
@@ -112,6 +115,21 @@ const Header: FC = () => {
       getSlotIdAndPatient()
   })
 
+
+  // Open Drawer
+const openDrawer = () => {
+  setShowMobileMenu(true);
+  setAnimateDrawer('in');
+};
+
+// Close Drawer With Animation
+const closeDrawer = () => {
+  setAnimateDrawer('out');
+  setTimeout(() => {
+    setShowMobileMenu(false);
+  }, 300); // match slide-out animation duration
+};
+
   return (
     <header className="w-full px-4 sm:px-6 py-5 border-b border-gray-200 bg-white relative">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -119,12 +137,38 @@ const Header: FC = () => {
         {/* Logo */}
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={() => router.push('/')}
         >
-          <div className="w-[140px] sm:w-[180px]">
-            <Image src={logo_title} alt="Eyeline Optica" layout="responsive" />
+          <div className="flex items-center">
+            {/* 🍔 Mobile Hamburger Menu */}
+            <div className="sm:hidden flex items-center mr-2">
+              <button
+               onClick={openDrawer}
+                className="text-blue-500 w-7 h-7 cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-menu-2"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M4 6l16 0" />
+                  <path d="M4 12l16 0" />
+                  <path d="M4 18l16 0" />
+                </svg>
+              </button>
+            </div>
+           <div className='lg:w-[140px] md:w-[140px] w-[110px]'> <Image onClick={() => router.push('/')} src={logo_title} alt="Eyeline Optica" layout="responsive" /></div>
           </div>
         </div>
+        
+
 
         {/* 🔍 Search Field (Desktop Only) */}
         <div
@@ -228,7 +272,7 @@ const Header: FC = () => {
           </div>
           <LogIn
             onClick={() => router.push('/login')}
-            className="text-blue-500 cursor-pointer"
+            className="text-blue-500 cursor-pointer hidden md:block lg:block"
           />
         </div>
       </div>
@@ -274,6 +318,80 @@ const Header: FC = () => {
           </div>
         </div>
       )}
+      {showMobileMenu && (
+      <div
+        className="fixed inset-0 bg-transparent z-[999] sm:hidden"
+        onClick={closeDrawer}  // clicking outside closes drawer
+      >
+        <div
+          className={` absolute left-0 top-0 w-64 h-full bg-white shadow-lg p-5 
+            ${animateDrawer === 'in' ? 'animate-slideIn' : 'animate-slideOut'}
+          `}
+          onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+        >
+          {/* Close Button */}
+          <div className="flex justify-end">
+            <X onClick={closeDrawer} className="text-blue-500 w-6 h-6 cursor-pointer" />
+          </div>
+
+          {/* Menu Items */}
+          <div className="mt-5 flex flex-col gap-4 h-[90%] overflow-y-scroll hide-scrollbar">
+
+            <Link
+              href="/profile"
+              className="flex items-center gap-3 p-2 rounded hover:bg-blue-50"
+              onClick={closeDrawer}
+            >
+              <User className="text-blue-600" />
+              <span className="font-medium">User</span>
+            </Link>
+
+            <Link
+              href="/patientProfile"
+              className="flex items-center gap-3 p-2 rounded hover:bg-blue-50"
+              onClick={closeDrawer}
+            >
+              <Video className="text-blue-600" />
+              <span className="font-medium">Video Consultation</span>
+            </Link>
+
+            <Link
+              href="/cart"
+              className="flex items-center gap-3 p-2 rounded hover:bg-blue-50"
+              onClick={closeDrawer}
+            >
+              <ShoppingBag className="text-blue-600" />
+              <span className="font-medium">Cart</span>
+            </Link>
+
+            <Link
+              href="/login"
+              className="flex items-center gap-3 p-2 rounded hover:bg-blue-50"
+              onClick={closeDrawer}
+            >
+              <User className="text-blue-600" />
+              <span className="font-medium">Login</span>
+            </Link>
+            <hr />
+             {/* 🔹 ELEMENT LIST SECTION */}
+            <div className="mt-4 flex flex-col gap-3">
+              {elements.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.link}
+                  className="text-gray-800 font-medium p-2 rounded hover:bg-blue-50"
+                  onClick={closeDrawer}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      )}
+
     </header>
   );
 };

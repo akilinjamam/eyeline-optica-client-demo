@@ -111,3 +111,12 @@ export async function getSlots(id:string) {
 
   return res.json();
 }
+export async function getPrescription() {
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}prescription`,{
+    cache: "no-store"
+  });
+  if (!res.ok) throw new Error("Failed to fetch prescriptions data");
+
+  return res.json();
+}

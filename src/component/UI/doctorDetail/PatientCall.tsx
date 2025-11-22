@@ -3,6 +3,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 const formatTime = (seconds: number) => {
   const mins = Math.floor(seconds / 60);
@@ -10,8 +12,9 @@ const formatTime = (seconds: number) => {
   return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 };
 
-export default function PatientCall({roomId, patientId}: {roomId:string, patientId:string}) {
+export default function PatientCall({roomId, patientId, doctorName}: {roomId:string, patientId:string, doctorName:string}) {
 
+  const navigate = useRouter();
   // --- Refs ---
   const localVideoRef = useRef<HTMLDivElement | null>(null);
   const remoteVideoRef = useRef<HTMLDivElement | null>(null);
@@ -258,7 +261,7 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
                👨‍⚕️
             </div>
             <h3 className="text-2xl font-bold mb-2">Incoming Call...</h3>
-            <p className="text-gray-400 mb-8">Dr. Consultant is calling</p>
+            <p className="text-gray-400 mb-8">{doctorName} is calling</p>
             <div className="flex gap-8">
               <button onClick={handleRejectCall} className="flex flex-col items-center gap-2">
                  <div className="w-16 h-16 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center shadow-lg">
@@ -301,7 +304,19 @@ export default function PatientCall({roomId, patientId}: {roomId:string, patient
         {callAccepted && (
           <div ref={localVideoRef} className="w-40 h-28 bg-gray-800 absolute bottom-4 right-4 border-2 border-gray-600 rounded-lg shadow-xl overflow-hidden" />
         )}
-      </div>
+        </div>
+        <br />
+        { statusMessage
+          ?
+          <button
+            onClick={() => navigate.push("/patientProfile")}
+            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-xl font-bold shadow-lg transition-all transform hover:scale-105"
+          >
+            Back
+        </button>
+        :
+        <Loader2 className="animate-spin text-blue-500 w-8 h-8 "/>
+        }
 
       {callAccepted && (
         <div className="mt-8">

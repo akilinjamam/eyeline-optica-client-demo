@@ -4,11 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FC, useRef } from 'react';
 
-const Tab: FC = () => {
-    const pathName = usePathname()
-    const swipeRef = useRef(null);
-    const { handleMouseDown, handleMouseLeave, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchStart, swipeRef: swippedRef } = useSwipe(swipeRef);
-    const elements = [
+export const elements = [
         { id: 1, name: 'EYEGLASSES', link: '/allglasses' },
         { id: 2, name: 'SUNGLASSES', link: '/allglasses/sunglasses' },
         { id: 3, name: 'LENSES', link: '/allLens' },
@@ -18,7 +14,13 @@ const Tab: FC = () => {
         { id: 7, name: 'PATIENT CARE', link: '/blog' },
         { id: 8, name: 'ACCESSORIES', link:'/allAccessories' },
         { id: 9, name: 'ABOUT US', link:"/about" }
-    ]
+]
+
+const Tab: FC = () => {
+    const pathName = usePathname()
+    const swipeRef = useRef(null);
+    const { handleMouseDown, handleMouseLeave, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchStart, swipeRef: swippedRef } = useSwipe(swipeRef);
+    
 
     return (
         <div className="bg-blue-50">

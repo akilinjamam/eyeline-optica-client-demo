@@ -36,6 +36,7 @@ export default function PatientProfile() {
         if (patientId) {
           const updated = { ...parsedData, patientId };
           localStorage.setItem("appointmentData", JSON.stringify(updated));
+          localStorage.setItem("patientId", patientId)
         }
 
       } catch (error) {
@@ -109,10 +110,10 @@ export default function PatientProfile() {
           </button>
 
           <button
-            onClick={() => {}}
-            className="w-full py-3 text-lg font-semibold bg-gray-600 opacity-50 rounded-xl cursor-not-allowed"
+            onClick={() => router.push("/myPrescription")}
+            className="w-full py-3 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-xl shadow-lg transition-all duration-300"
           >
-            Prescription (Coming Soon)
+            Prescription
           </button>
         </div>
       </div>

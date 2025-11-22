@@ -5,15 +5,18 @@ import React, { useEffect, useState } from "react";
 const Page = () => {
   const [roomId, setRoomId] = useState<string | null>(null);
   const [patientId, setPatientId] = useState<string | null>(null);
+  const [doctorName, setDoctorName] = useState<string>("");
 
   useEffect(() => {
     const data = localStorage.getItem("appointmentData");
+    const patientId = localStorage.getItem("patientId")
     if (!data) return;
 
     const parsed = JSON.parse(data);
 
     setRoomId(parsed?.slotId || null);
-    setPatientId(parsed?.patientId || null);
+    setPatientId(patientId || null);
+    setDoctorName(parsed?.doctorName);
   }, []);
 
   if (!roomId || !patientId) {
@@ -24,7 +27,9 @@ const Page = () => {
     );
   }
 
-  return <PatientCall roomId={roomId} patientId={patientId} />;
+  
+
+  return <PatientCall roomId={roomId} patientId={patientId} doctorName={doctorName}/>;
 };
 
 export default Page;
