@@ -63,44 +63,48 @@ const FilteredAccessories = ({goForward, current, allAccessory, setSelectAccesso
                             })
                             goForward({ type: 'details', title: current.title })
                         }}
-                        className="flex items-start justify-between p-2 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
+                        className="flex items-start justify-between p-2 bg-white hover:bg-gray-100 m-2 rounded-md cursor-pointer"
                     >
-                    <div className='w-[95%]'>
-                        <div className='flex '>
-                            <Image width={60} height={60} src={item?.image ?? defaultImg} alt='lens-img' className='rounded-md'/>
+                        <div className='w-[100%]'>
+                            <div className='flex w-full'>
+                                <div className='w-[20%]'><Image width={100} height={100} src={item?.image ?? defaultImg} alt='lens-img' className='rounded-md w-full'/></div>
+                                <div className=' w-[80%] ml-1'>
+                                    <div className='flex items-center justify-between'>
+                                        <p  className="px-1 font-bold ">{item.name}</p>
+                                        <ChevronRight />
+                                    </div>
+                                    <p  className="text-sm px-1 mb-2 text-gray-600">{item?.description}</p>
+                                    <div className='flex items-center justify-between mt-5'>
+                                    <div onClick={(event) => {
+                                        event.stopPropagation();
+                                        setSelectAccessory({
+                                            id:item?.id,
+                                            name: item?.name,
+                                            price: item?.price,
+                                            total:item?.total,
+                                            brand: item?.brand,
+                                            images: item?.images,
+                                            description: item?.description,
+                                            category: item?.category
+                                        })
+                                        setOpen(true)
+                                    
+                                    }}  className='text-sm text-green-400 flex items-center hover:bg-gray-300 rounded-md p-1'> 
+                                    <p>Details</p> 
+                                    <ChevronRight size={13}/>
+                                    </div>
                             <div>
-                                <p  className="px-1 font-bold ml-4">{item.title}</p>
-                                <p  className="text-sm px-1 mb-2 ml-4 text-gray-600">{item?.description}</p>
+                                <span className='text-sm font-bold text-red-600 line-through '> ৳{item?.weeklyDeals && item?.price }</span>
+                                <span className='text-sm font-bold text-orange-600'> ৳{item?.weeklyDeals ? (item?.total - (Number(item?.total * dealsData?.discountPercent) / 100)) : item.total}</span>
                             </div>
-                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
                             
-                        <div className='flex items-center justify-between mt-5'>
-                            <div onClick={(event) => {
-                                event.stopPropagation();
-                                setSelectAccessory({
-                                    id:item?.id,
-                                    name: item?.name,
-                                    price: item?.price,
-                                    total:item?.total,
-                                    brand: item?.brand,
-                                    images: item?.images,
-                                    description: item?.description,
-                                    category: item?.category
-                                })
-                                setOpen(true)
-                               
-                            }}  className='text-sm text-green-400 flex items-center hover:bg-gray-300 rounded-md p-1'> 
-                            <p>Details</p> 
-                            <ChevronRight size={13}/>
                         </div>
-                        <div>
-                            <span className='text-sm font-bold text-red-600 line-through '> ৳{item?.weeklyDeals && item?.price }</span>
-                            <span className='text-sm font-bold text-orange-600'> ৳{item?.weeklyDeals ? (item?.total - (Number(item?.total * dealsData?.discountPercent) / 100)) : item.total}</span>
-                        </div>
-                        </div>
+                    
                     </div>
-                        <ChevronRight />
-                </div>
             ))}
         </div>
     );

@@ -3,7 +3,7 @@ import React from 'react';
 const Title: React.FC<{ value: string }> = ({ value }) => {
   return (
     <div>
-        <div className="w-[90%] lg:flex md:flex hidden items-center gap-4 mx-auto px-2">
+        <div className="w-[1200px] lg:flex md:flex hidden items-center gap-4 mx-auto px-2">
           <hr className="flex-grow border-t border-gray-300" />
           <p className="whitespace-nowrap text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-center text-black">
             {value}

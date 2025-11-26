@@ -4,6 +4,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { TAccessory } from '@/ts-definition/types';
 import Pagination from '../Pagination';
 import AccessoryCardAuto from './AccessoryCardAuto';
+import Image from 'next/image';
+import filterIcon from "../../../public/icons/filter-icon.png";
+import { useSidebar } from '@/context/SidebarContext';
+
 
 const AccessoryGallery = ({data, currentPage, totalPage}: {data:TAccessory[], currentPage:number, totalPage:number}) => {
     
@@ -22,16 +26,12 @@ const AccessoryGallery = ({data, currentPage, totalPage}: {data:TAccessory[], cu
             brand
         }
     })
+
+    const {setIsSidebarOpen} = useSidebar()
     
     const router = useRouter();
     const searchParams = useSearchParams();
         
-        //   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        //     const sortValue = event.target.value;
-        //     const params = new URLSearchParams(searchParams);
-        //     params.set("sort", sortValue);
-        //     router.push(`?${params.toString()}`); // 🔁 updates URL → triggers new server render
-        //   };
         
           const handleNextPage = (value:any) => {
             const params = new URLSearchParams(searchParams);
@@ -41,7 +41,7 @@ const AccessoryGallery = ({data, currentPage, totalPage}: {data:TAccessory[], cu
             }
           };
     
-    
+  
 
 
     return (
@@ -61,8 +61,8 @@ const AccessoryGallery = ({data, currentPage, totalPage}: {data:TAccessory[], cu
                     grid-cols-1
                     sm:grid-cols-2
                     md:grid-cols-3
-                    lg:grid-cols-4
-                    xl:grid-cols-5
+                    lg:grid-cols-3
+                    xl:grid-cols-3
                     gap-4
                     w-full
                     max-w-7xl'>
@@ -70,6 +70,15 @@ const AccessoryGallery = ({data, currentPage, totalPage}: {data:TAccessory[], cu
                         managedData?.map(({name, brand, salesPrice, images, _id }: any, index: number) => <AccessoryCardAuto  images={images}  salesPrice={salesPrice} name={name} brand={brand} _id={_id} key={index}/> )
                     }
                 </div>
+                <div className="w-full bg-white h-[60px] fixed md:hidden lg:hidden bottom-0 z-20 rounded-lg border-t-2 border-blue-500 flex items-center">
+                                        <div onClick={() => setIsSidebarOpen(true)} className="w-full flex items-center justify-center cursor-pointer h-full">
+                                            <div className="flex items-center">
+                                                <div className="mr-2"><Image src={filterIcon} alt="all-products-icon" /></div>
+                                                <p className="text-black">FILTER</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
             </section>
          {/* Pagination Component */}
                 <Pagination

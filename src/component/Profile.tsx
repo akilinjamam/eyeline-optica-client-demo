@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
-import { User, Mail, Phone, Video, FileText } from 'lucide-react';
-import { toast, ToastContainer } from 'react-toastify';
+import { User, Mail, Phone } from 'lucide-react';
+import {ToastContainer } from 'react-toastify';
 
 interface DecodedUser {
   name?: string;
@@ -46,20 +46,6 @@ const ProfilePage = () => {
   }, [router]);
 
   
-  const handleVideo = () => {
-    
-    const getSlotData = localStorage.getItem('appointmentData');
-    if(!getSlotData) return;
-    const parsedData = JSON.parse(getSlotData);
-    
-    if(parsedData?.patientId){
-      router.push('/videoConsult')
-    }else{
-      toast.error("please book a slot first")
-    }
-
-  }
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-50">
@@ -71,7 +57,7 @@ const ProfilePage = () => {
   if (!user) return null;
 
   return (
-    <div className="bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-4 py-10">
+    <div className=" flex items-center justify-center px-4 py-10">
       <ToastContainer/>
       <div className="w-full max-w-md bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all hover:shadow-2xl">
         
@@ -106,24 +92,9 @@ const ProfilePage = () => {
           {/* Action Buttons */}
           <div className="mt-8 space-y-4">
 
-            {/* Video Call Button */}
-            <button
-              onClick={handleVideo}
-              className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition-all cursor-pointer"
-            >
-              <Video className="w-5 h-5" />
-              Video Call with Doctor
-            </button>
+            
 
-            {/* Prescription Button */}
-            <button
-              onClick={() => router.push('/prescription')}
-              className="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-lg transition-all cursor-pointer"
-            >
-              <FileText className="w-5 h-5" />
-              View Prescription
-            </button>
-
+           
           </div>
 
           {/* Log Out Button */}

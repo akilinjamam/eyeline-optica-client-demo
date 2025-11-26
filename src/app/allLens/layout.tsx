@@ -1,7 +1,7 @@
 import Footer from '@/component/Footer';
 import TopFooter from '@/component/TopFooter';
 import SidebarSkeleton from '@/component/UI/sceleton/SidebarScheleton';
-import SidebarLens from '@/component/UI/SidebarLens';
+import SidebarWrapperForLens from '@/context/SideBarWrapperForLens';
 
 import { getLens } from '@/fetchData/fetchFrameData';
 import { TData, TLens } from '@/ts-definition/types';
@@ -16,9 +16,10 @@ const LensLayout = async ({ children }: { children: ReactNode }) => {
       <div className="w-full mx-auto flex items-start">
        
         <Suspense fallback={<SidebarSkeleton/>}>
-          <SidebarLens data={data} />
+         <SidebarWrapperForLens data={data}>
+          {children}
+        </SidebarWrapperForLens>
         </Suspense>
-        {children}
       </div>
       <TopFooter />
       <Footer />

@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {CameraIcon} from 'lucide-react'
 import Image from 'next/image';
-import { TFrame } from '@/ts-definition/types';
 import defaultImage from '../../public/images/glass-1.png';
 import Link from 'next/link';
 
 
-const GlassCard:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id}) => {
+const GlassCard:React.FC<any> = ({images, name, brand, salesPrice, badge, color,_id}) => {
 
     return (
     <div className="relative bg-white shadow-md p-4 rounded-md w-[240px]">

@@ -8,7 +8,7 @@ const TelemedicineEyeTest = () => {
         
         {/* Left Content */}
         <div className="text-center lg:text-left">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-snug">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-snug text-black">
             Consult with an <br />
             <span className="text-blue-600">OPTOMETRIST</span>
           </h2>

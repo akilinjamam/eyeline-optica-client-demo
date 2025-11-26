@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { ILense, ILenseFeatures } from '@/ts-definition/interfaces';
+import { ILense } from '@/ts-definition/interfaces';
 import { ChevronRight, Dot } from 'lucide-react';
 import React, { useMemo, useRef, useState } from 'react';
 // import { lenses } from './productCategoryData';
@@ -43,7 +43,7 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                                     return
                                 }
                                 setSubType(item)
-                            }} key={index} className='w-auto bg-blue-800 text-white px-3 py-1 rounded-full mr-4 cursor-pointer'>{item?.split(' ')?.join("_")}</div>
+                            }} key={index} className='w-auto bg-blue-800 text-white px-3 py-1 rounded-full mr-1 cursor-pointer'>{item?.split(' ')?.join("_")}</div>
                         ))
                     }
                 </div>
@@ -70,35 +70,33 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                     weeklyDeals: item?.weeklyDeals
                 })
                 }}
-                className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
+                className="flex items-start justify-between p-1 bg-white hover:bg-gray-100 m-2 rounded-md cursor-pointer w-[97%] "
                                 >
-                <div className='w-[95%]'>
-                   <div className='flex '>
-                     <div>
-                        <Image width={60} height={60} src={item?.images?.[0] ?? defaultImg} alt='lens-img' className='rounded-md'/>
+                <div className='w-full'>
+                   <div className='flex w-full'>
+                     <div className='w-[30%]'>
+                        <Image width={100} height={100} src={item?.images?.[0] ?? defaultImg} alt='lens-img' className='rounded-md w-full'/>
                      </div>
-                     <div>
+                     <div className='w-[70%] ml-2 relative'>
+                        <div className='w-full flex items-center justify-between'>
                         <p  className="px-1 font-bold">{item.title}</p>
-                        {
-                            item?.features?.slice(0,2)?.map((feature:any, index:number) => <div key={index}>
-                                <div className="text-xs flex items-center justify-start   text-gray-600"><Dot/> <p>{feature}</p></div>
-                            </div> )
-                        }
-                     </div>
-                   </div>
-                    {
-                        item.features.map((feature: ILenseFeatures, index:number) => <p className='ml-3 text-sm' key={index}>{feature.feature}</p> )
-                    }
-                    <br />
-                    <div className='flex items-center justify-between'>
+                            <ChevronRight />
+                        </div>
+                        <div >
+                            {
+                                item?.features?.slice(0,2)?.map((feature:any, index:number) => <div key={index}>
+                                    <div className="text-xs flex items-center justify-start   text-gray-600"><Dot/> <p>{feature}</p></div>
+                                </div> )
+                            }
+                        </div>
+                         <div className='flex items-center justify-between'>
                         <div onClick={(event) => {
                         event.stopPropagation();
                         setSelectedLense(item)
-                        }}  className='text-sm text-green-400 ml-3 flex items-center hover:bg-gray-300 rounded-md p-1'> 
+                        }}  className='text-sm text-green-400  flex items-center hover:bg-gray-300 rounded-md p-1'> 
                         <p>Details</p> 
                         <ChevronRight size={13}/>
-                        </div>
-                            
+                        </div>        
                             <div>
                                 {   item?.weeklyDeals &&
                                     <span className='line-through text-red-600'>{item?.price}</span>
@@ -108,8 +106,15 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                                 
                             </div>           
                     </div>
-                </div>
-                    <ChevronRight />
+                     </div>
+                   </div>
+                    {/* {
+                        item.features.map((feature: ILenseFeatures, index:number) => <p className='ml-3 text-sm' key={index}>{feature.feature}</p> )
+                    } */}
+                    {/* <br /> */}
+                    {/* details and price */}
+                   
+                </div >
                 </div>
                 ))}
         </div>

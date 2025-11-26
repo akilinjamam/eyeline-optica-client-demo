@@ -38,7 +38,7 @@ const MobileBanner = ({bannerData}:{bannerData: IBanner[]}) => {
             id: 3,
             name: 'Special Glasses',
             image: bannerAccordingToCategory("Mobile Tab Banner Special Glasses",bannerData),
-            link: "/allglasses/not-added"
+            link: "/allglasses/brand?type=special glasses"
         },
         {
             id: 4,
@@ -50,7 +50,7 @@ const MobileBanner = ({bannerData}:{bannerData: IBanner[]}) => {
             id: 5,
             name: 'Power Sunglasses', 
             image: bannerAccordingToCategory("Mobile Tab Banner Power Sunglasses", bannerData),
-            link: "/allglasses/not-added"
+            link: "/allglasses/brand?type=power sunglasses"
         },
         {
             id: 6,
@@ -81,7 +81,7 @@ const MobileBanner = ({bannerData}:{bannerData: IBanner[]}) => {
             onClick={() => router.push(element.link)}
             key={element.id}
             style={{borderRadius: '50px'}}
-            className="shrink-0 mb-4 bg-blue-800 w-[200px] h-[300px] shadow-sm"
+            className="shrink-0 mb-4 bg-gradient-to-l from-[#2770FF] to-[#1A46BB] w-[200px] h-[300px] shadow-sm"
           >
             <div className="  flex items-center justify-center">
               <Image

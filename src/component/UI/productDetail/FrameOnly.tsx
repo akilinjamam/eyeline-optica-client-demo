@@ -47,7 +47,7 @@ const FrameOnly = ({cartInfo}: {cartInfo:any}) => {
        }
     }
     return (
-        <form onSubmit={handleSubmit} action="">
+        <form onSubmit={handleSubmit} action="" className="absolute top-12 w-full ">
             <div className="px-2">
             <div>
                     <br /><br />

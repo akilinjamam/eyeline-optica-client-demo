@@ -179,7 +179,7 @@ const closeDrawer = () => {
             <input
               type="text"
               placeholder="search by name, brand, gender, frame shape size category"
-              className="w-full pl-10 pr-4 py-2 border border-blue-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border border-blue-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => query && setShowSuggestions(true)}
@@ -287,7 +287,7 @@ const closeDrawer = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full pl-10 pr-4 py-2 border border-blue-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border border-blue-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => query && setShowSuggestions(true)}
@@ -335,7 +335,7 @@ const closeDrawer = () => {
           </div>
 
           {/* Menu Items */}
-          <div className="mt-5 flex flex-col gap-4 h-[90%] overflow-y-scroll hide-scrollbar">
+          <div className="mt-5 flex flex-col gap-4 h-[90%] overflow-y-scroll hide-scrollbar text-black">
 
             <Link
               href="/profile"

@@ -19,7 +19,7 @@ const TelemedicineServices = () => {
                             <Image src={service.img} width={90} alt="telemdicine-services"/>
                         </div>
                     
-                        <p className="text-sm text-gray-600 mt-2 font-bold">{service.title}</p>
+                        <p className="text-sm text-black mt-2 font-bold ">{service.title}</p>
                     </div>
                     ))}
                 </div>

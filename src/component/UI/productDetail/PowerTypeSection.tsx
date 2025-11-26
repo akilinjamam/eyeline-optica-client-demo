@@ -38,7 +38,7 @@ const PowerTypeSection = ({powerTypes, goForward, productType, genderType}: {pow
                 <div
                 key={index}
                 onClick={() => goForward({ type: 'lens', title: item.title })}
-                className="flex items-start justify-between p-1 bg-gray-100 hover:bg-gray-200 m-2 rounded-md cursor-pointer"
+                className="flex items-start justify-between p-1 bg-white hover:bg-gray-100 m-2 rounded-md cursor-pointer"
                 >
                     <div>
                         <p className="px-1 font-bold mb-4">{modifyName(item.title)}</p>

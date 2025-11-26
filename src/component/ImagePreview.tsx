@@ -36,7 +36,7 @@ const ImagePreview = ({bannerData}: {bannerData:IBanner[]}) => {
             id: 3,
             name: 'Special Glasses',
             image: bannerAccordingToCategory("Desktop Tab Banner Special Glasses",bannerData),
-            link: "/allglasses/not-added"
+            link: "/allglasses/brand?type=special glasses"
         },
         {
             id: 4,
@@ -48,7 +48,7 @@ const ImagePreview = ({bannerData}: {bannerData:IBanner[]}) => {
             id: 5,
             name: 'Power Sunglasses', 
             image: bannerAccordingToCategory("Desktop Tab Banner Power Sunglasses",bannerData),
-            link: "/allglasses/not-added"
+            link: "/allglasses/brand?type=power sunglasses"
         },
         {
             id: 6,

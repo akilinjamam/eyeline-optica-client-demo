@@ -26,42 +26,42 @@ const MobileLensSection = ({bannerData}: {bannerData:IBanner[]}) => {
             name: 'Eyeglasses',
             image: imageOne,
             image2:bannerAccordingToCategory("Lenses One", bannerData) as string,
-            link: "/allglasses"
+            link: "/allContactLens"
         },
         {
             id: 2,
             name: 'Sunglasses',
             image: imageOne,
-             image2:bannerAccordingToCategory("Lenses Two", bannerData) as string,
-            link: "/allglasses/sunglasses"
+            image2:bannerAccordingToCategory("Lenses Two", bannerData) as string,
+            link: "/allContactLens"
         },
         {
             id: 3,
             name: 'Special Glasses',
             image: imageOne,
             image2:bannerAccordingToCategory("Lenses Three", bannerData) as string,
-            link: "/"
+            link: "/allContactLens"
         },
         {
             id: 4,
             name: 'Contact Lenses',
             image: imageOne,
             image2:bannerAccordingToCategory("Lenses Four", bannerData) as string,
-            link: "/"
+            link: "/allContactLens"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
             image: imageOne,
             image2:bannerAccordingToCategory("Lenses Five", bannerData) as string,
-            link: "/"
+            link: "/allContactLens"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
             image: imageOne,
             image2:bannerAccordingToCategory("Lenses Six", bannerData) as string,
-            link: "/"
+            link: "/allContactLens"
         },
     ]
 
@@ -72,7 +72,7 @@ const MobileLensSection = ({bannerData}: {bannerData:IBanner[]}) => {
     return (
         <div className='md:hidden lg:hidden block'>
             <br />
-            <Title value='LENSES' />
+            <Title value='CONTACT LENSES' />
             <div className="w-full px-4 py-4 overflow-x-hidden relative">
                   <div
                     ref={swippedRef}
@@ -96,16 +96,11 @@ const MobileLensSection = ({bannerData}: {bannerData:IBanner[]}) => {
                         key={element.id}
                         className=""
                       >
-                        <div className="w-[180px] flex items-center justify-between rounded-md bg-white px-1">
+                        <div className="w-[250px] h-[150px]  flex items-center justify-center rounded-md bg-white px-1">
+                          
                           <Image 
-                            width={50}
-                            src={element.image}
-                            alt={element.name}
-                            className="rounded-md cursor-pointer "
-                          />
-                          <Image 
-                            width={50}
-                            height={50}
+                            width={150}
+                            height={150}
                             src={element.image2}
                             alt={element.name}
                             className="rounded-md cursor-pointer "

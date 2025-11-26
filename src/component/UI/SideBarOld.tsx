@@ -16,6 +16,7 @@ import women from '../../../public/frameGenderImg/women.png'
 import kids from '../../../public/frameGenderImg/kids.png'
 import all from '../../../public/frameShapeImg/all.png'
 import Image from "next/image";
+import { useSidebar } from "@/context/SidebarContext";
 
 const SidebarOld = ({ data }: { data: TFrame[] }) => {
   
@@ -154,7 +155,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
     { title: "MATERIALS-CATEGORY", children: material },
   ];
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   const accordionItem = items;
   const { selectedData, setSelectData, setSelectedData } = useManageAccordionData({
     accordionItem,
@@ -197,8 +198,11 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
     Object.entries(localSelected).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
+    console.log(Array.from(searchParams.keys())?.join(''))
     
     if(Array.from(searchParams.keys())?.join('') === "shapeCategory") return
+    if(Array.from(searchParams.keys())?.join('') === "biologyCategorytype") return
+    if(Array.from(searchParams.keys())?.join('') === "type") return
 
     // push new query string
     router.push(`?${params.toString()}`);
@@ -268,8 +272,8 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
     <>
       {/* Mobile hamburger button */}
       <button
-        className="md:hidden p-0 m-2 text-blue-400 font-bold absolute top-0 left-0 z-50 cursor-pointer"
-        onClick={() => setIsOpen(true)}
+        className="md:hidden p-0 m-1 text-blue-600 font-bold absolute top-0 left-3 z-50 cursor-pointer text-2xl"
+        onClick={() => setIsSidebarOpen(true)}
         aria-label="Open sidebar"
       >
         ☰
@@ -277,10 +281,10 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
 
       {/* Overlay (mobile only) */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity ${
-          isOpen ? "opacity-50 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity ${
+          isSidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"
         } md:hidden`}
-        onClick={() => setIsOpen(false)}
+        onClick={() => setIsSidebarOpen(false)}
       ></div>
 
       {/* Sidebar */}
@@ -288,14 +292,14 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
         className={`
           fixed top-0 left-0 h-[100vh] sm:w-[80%] md:w-[60%] lg:w-[25%]   p-2 bg-blue-50 shadow-lg z-50
           transform transition-transform duration-300 ease-in-out border-r-2 border-gray-200
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 md:static md:shadow-none overflow-y-scroll hide-scrollbar
         `}
       >
         <div className="flex justify-between items-center p-4 border-b md:hidden">
           <h2 className="text-xl font-bold">Menu</h2>
           <button
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsSidebarOpen(false)}
             aria-label="Close sidebar"
             className="text-gray-600 hover:text-gray-900 cursor-pointer"
           >
@@ -304,12 +308,12 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
         </div>
 
         {/* Sidebar content */}
-        <p className="font-bold">GENDER</p>
+        <p className="font-bold text-black">GENDER</p>
         <div className="w-full grid grid-cols-3 gap-2">
         {genderItems?.map((shape: any, index: number) => (
           <div
             key={index}
-            className={`bg-white border h-[80px] border-gray-400 p-2 flex justify-center items-center text-center ${
+            className={`bg-white border h-[80px] border-gray-400 p-2 flex justify-center items-center text-center text-black ${
               shape.isAvailable === 'none' ? 'opacity-0' : ''
             }`}
           >
@@ -330,8 +334,8 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
         ))}
         <br />
         </div>
-        <p className="font-bold">FRAME SHAPE</p>
-        <div className="w-full grid grid-cols-3 gap-2">
+        <p className="font-bold text-black">FRAME SHAPE</p>
+        <div className="w-full grid grid-cols-3 gap-2 text-black">
         {frameShapeItems?.map((shape: any, index: number) => (
           <div
             key={index}
@@ -449,7 +453,7 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
 
         <Accordion item={items} selectData={setSelectData} />
         {/* Selected Filters */}
-        <div className="mt-1">
+        <div className="mt-1 text-black">
           <div className="flex flex-wrap mr-2 mt-2">
           {/* <p className="font-bold">Active Filters:</p> */}
             {/* Frame Color */}

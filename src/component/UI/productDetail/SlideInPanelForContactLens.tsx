@@ -23,7 +23,7 @@ export default function SlideInPanelForContactLens({ onClose, singleLens, allAcc
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <div className="p-4 flex justify-between items-center border-b">
-        <h2 className="text-xl font-semibold">Select Your Lens</h2>
+        <h2 className="text-xl font-semibold">Select Accessory</h2>
         <button onClick={onClose} className="text-xl cursor-pointer">✕</button>
       </div>
       <br />

@@ -7,7 +7,7 @@ import WeeklyDealsSkeleton from "@/component/UI/sceleton/WeeklyDealsScheleton";
 
 const loading = () => {
     return (
-        <div>
+        <div className="bg-blue-50 h-[100vh] ">
             <MobileBannerSkeleton/>
             <ImagePreviewScheleton/>
             <TitleSkeleton/>

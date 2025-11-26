@@ -7,7 +7,7 @@ import defaultImg from "../../../../public/images/telemedicine/user.jpg";
 const Doctor = ({getSingleDoctor}: {getSingleDoctor: IDoctor}) => {
   
     return (
-        <div className="w-full">
+        <div className="w-full text-black">
             <section className="w-full h-auto bg-gradient-to-r from-blue-100 to-blue-200 py-3">
                 <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-[65%_35%] h-full">
                 

@@ -1,6 +1,6 @@
 const ProductSkeleton = () => {
   return (
-    <div className="relative bg-white shadow-md p-4 rounded-md w-[97%] animate-pulse mx-1">
+    <div className="relative bg-white shadow-md p-4 rounded-md w-[97%] h-[300px] animate-pulse mx-1 flex items-center justify-center ">
       {/* Badge placeholder */}
       {/* <span className="absolute top-2 left-2 w-10 h-4 bg-gray-300 rounded-sm"></span> */}
 
@@ -37,9 +37,9 @@ const ProductSkeletonGallery = () => {
         grid 
         grid-cols-1 
         sm:grid-cols-3 
-        md:grid-cols-4 
-        lg:grid-cols-5 
-        xl:grid-cols-6 
+        md:grid-cols-3 
+        lg:grid-cols-3 
+        xl:grid-cols-3 
         gap-4 w-full
       "
     >

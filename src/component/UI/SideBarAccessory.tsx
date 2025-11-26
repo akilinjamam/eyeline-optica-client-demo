@@ -5,6 +5,7 @@ import Accordion from "./Accordion";
 import {  useRouter, usePathname } from "next/navigation";
 import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
 import { AccordionItemType, TAccessory} from "@/ts-definition/types";
+import { useSidebar } from "@/context/SidebarContext";
 
 const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
  
@@ -28,7 +29,7 @@ const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
     { title: "TYPE", children: AccessoryType },
   ];
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+ const {isSidebarOpen,setIsSidebarOpen} = useSidebar()
   const accordionItem = items;
   const { selectedData, setSelectData, setSelectedData } = useManageAccordionData({
     accordionItem,
@@ -96,8 +97,8 @@ const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
     <>
       {/* Mobile hamburger button */}
       <button
-        className="md:hidden p-0 m-2 text-blue-400 font-bold absolute top-0 left-0 z-50 cursor-pointer"
-        onClick={() => setIsOpen(true)}
+        className="md:hidden p-0 m-1 text-blue-600 font-bold absolute top-0 left-3 z-50 cursor-pointer text-2xl"
+        onClick={() => setIsSidebarOpen(true)}
         aria-label="Open sidebar"
       >
         ☰
@@ -105,10 +106,10 @@ const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
 
       {/* Overlay (mobile only) */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity ${
-          isOpen ? "opacity-50 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity ${
+          isSidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"
         } md:hidden`}
-        onClick={() => setIsOpen(false)}
+        onClick={() => setIsSidebarOpen(false)}
       ></div>
 
       {/* Sidebar */}
@@ -116,14 +117,14 @@ const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
         className={`
           fixed top-0 left-0 h-[100vh] w-60 p-2 bg-blue-50 shadow-lg z-50
           transform transition-transform duration-300 ease-in-out border-r-2 border-gray-200
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 md:static md:shadow-none overflow-y-scroll hide-scrollbar
         `}
       >
         <div className="flex justify-between items-center p-4 border-b md:hidden">
-          <h2 className="text-xl font-bold">Menu</h2>
+          <h2 className="text-xl font-bold text-black">Menu</h2>
           <button
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsSidebarOpen(false)}
             aria-label="Close sidebar"
             className="text-gray-600 hover:text-gray-900 cursor-pointer"
           >
@@ -136,14 +137,14 @@ const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
         <Accordion item={items} selectData={setSelectData} />
 
         {/* Selected Filters */}
-        <div className="mt-4">
+        <div className="mt-4 ">
           <div className="flex flex-wrap gap-2 mt-2">
-          <p className="font-bold">Active Filters:</p>
+          <p className="font-bold text-black">Active Filters:</p>
             {/* Frame Color */}
             <br />
             {getColor && (
               <span className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2">
-                <span>{getColor}</span>
+                <span className="text-black">{getColor}</span>
                 <button
                   onClick={() => handleDelete("color")}
                   className="text-red-500 font-bold"
@@ -161,7 +162,7 @@ const SidebarAccessory = ({ data }: { data: TAccessory[] }) => {
                   key={key}
                   className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2"
                 >
-                  <span>
+                  <span className="text-black">
                     {value}
                   </span>
                   <button

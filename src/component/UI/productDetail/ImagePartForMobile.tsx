@@ -89,41 +89,46 @@ const ImagePartForMobile: React.FC<any> = ({ product }) => {
         <hr className="text-gray-300" />
 
         {/* Color name section */}
-        <div className="mt-5">
-          <span className="text-black ml-2 font-bold">Color: </span>
-          <span className="text-gray-400 font-light">
-            {product?.otherImages[selectImg]?.colorName}
-          </span>
+        <div className="mt-2 mb-3 flex items-center justify-between">
+          <div className=''>
+             <span className="text-black ml-2 font-bold">Color: </span>
+            <span className="text-gray-400 font-light">
+              {product?.otherImages[selectImg]?.colorName}
+            </span>
+          </div>
+          <div className='mr-2'>
+            {/* Color variants */}
+            {product?.otherImages && product?.otherImages?.length > 0 && (
+              <div className="w-full">
+                <div className="w-[100%] h-[40px] flex items-center justify-start">
+                  {product?.otherImages?.slice(0, 6).map(
+                    (variant: TOtherImages, index: number) => (
+                      <div key={index} className="mx-2">
+                        <div
+                          onClick={() => setSelectImg(index)}
+                          className={`cursor-pointer mx-auto rounded-full w-[22px] h-[22px] flex items-center justify-center ${
+                            index === selectImg
+                              ? 'border border-gray-400 p-[3px]'
+                              : ''
+                          }`}
+                        >
+                          <div
+                            className="w-full h-full rounded-full"
+                            style={{
+                              background: `linear-gradient(to right, ${variant?.fromColor}, ${variant?.toColor})`,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Color variants */}
-        {product?.otherImages && product?.otherImages?.length > 0 && (
-          <div className="w-full mt-3">
-            <div className="w-[100%] h-[40px] flex items-center justify-start">
-              {product?.otherImages?.slice(0, 6).map(
-                (variant: TOtherImages, index: number) => (
-                  <div key={index} className="mx-2">
-                    <div
-                      onClick={() => setSelectImg(index)}
-                      className={`cursor-pointer mx-auto rounded-full w-[22px] h-[22px] flex items-center justify-center ${
-                        index === selectImg
-                          ? 'border border-gray-400 p-[3px]'
-                          : ''
-                      }`}
-                    >
-                      <div
-                        className="w-full h-full rounded-full"
-                        style={{
-                          background: `linear-gradient(to right, ${variant?.fromColor}, ${variant?.toColor})`,
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-        )}
+        
       </div>
 
       {/* Swiper pagination custom styles */}

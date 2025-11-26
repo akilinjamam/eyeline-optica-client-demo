@@ -90,7 +90,7 @@ export default function Accordion({item, selectData}: TAccordion) {
 
 
   return (
-    <div className="max-w-xl mx-auto mt-2 divide-y">
+    <div className="max-w-xl mx-auto mt-2 divide-y text-black">
       {item.map((item, idx) => (
         <AccordionItem key={idx} item={item} selectData={selectData} parentTitle={item.title}/>
       ))}

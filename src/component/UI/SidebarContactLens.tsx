@@ -5,8 +5,11 @@ import Accordion from "./Accordion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import useManageAccordionData from "@/custom-hooks/useManageAccordionData";
 import { AccordionItemType, TContactLens} from "@/ts-definition/types";
+import { useSidebar } from "@/context/SidebarContext";
 
 const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
+
+    const {isSidebarOpen ,setIsSidebarOpen } = useSidebar();
  
   const location = usePathname();
   const defaultType = location?.split('/')?.[location?.split('/')?.length - 1];
@@ -36,7 +39,7 @@ const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
     { title: "MATERIAL", children: material },
   ];
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  
   const accordionItem = items;
   const { selectedData, setSelectData, setSelectedData } = useManageAccordionData({
     accordionItem,
@@ -123,117 +126,132 @@ const SidebarContactLens = ({ data }: { data: TContactLens[] }) => {
 
   return (
     <>
-      {/* Mobile hamburger button */}
+  {/* Mobile hamburger button */}
+  <button
+    className="md:hidden p-0 m-1 text-blue-600 font-bold absolute top-0 left-3 z-50 cursor-pointer text-2xl"
+    onClick={() => setIsSidebarOpen(true)}
+    aria-label="Open sidebar"
+  >
+    ☰
+  </button>
+
+  {/* Overlay (mobile only) */}
+  <div
+    className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity ${
+      isSidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"
+    } md:hidden`}
+    onClick={() => setIsSidebarOpen(false)}
+  ></div>
+
+  {/* Sidebar */}
+  <aside
+    className={`
+      fixed top-0 left-0 h-full w-64 
+      bg-blue-50  shadow-2xl border-r border-gray-200
+      z-50 p-4 overflow-y-auto hide-scrollbar
+
+      transform transition-all duration-300 ease-in-out
+      ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      md:translate-x-0 md:static md:shadow-none
+    `}
+  >
+
+    {/* Sticky Header (Mobile Only) */}
+    <div className="sticky top-0 bg-[#f0f7ff] pb-3 z-20 border-b mb-4 flex justify-between items-center md:hidden">
+      <h2 className="text-xl font-bold text-black">Menu</h2>
       <button
-        className="md:hidden p-0 m-2 text-blue-400 font-bold absolute top-0 left-0 z-50 cursor-pointer"
-        onClick={() => setIsOpen(true)}
-        aria-label="Open sidebar"
+        onClick={() => setIsSidebarOpen(false)}
+        aria-label="Close sidebar"
+        className="text-gray-500 text-xl hover:text-gray-800"
       >
-        ☰
+        ✕
       </button>
+    </div>
 
-      {/* Overlay (mobile only) */}
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity ${
-          isOpen ? "opacity-50 visible" : "opacity-0 invisible"
-        } md:hidden`}
-        onClick={() => setIsOpen(false)}
-      ></div>
+    {/* Contact Lens Color */}
+    <p className="font-bold text-gray-700 text-sm tracking-wide">CONTACT LENS COLOR</p>
 
-      {/* Sidebar */}
-      <aside
-        className={`
-          fixed top-0 left-0 h-[100vh] w-60 p-2 bg-blue-50 shadow-lg z-50
-          transform transition-transform duration-300 ease-in-out border-r-2 border-gray-200
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
-          md:translate-x-0 md:static md:shadow-none overflow-y-scroll hide-scrollbar
-        `}
-      >
-        <div className="flex justify-between items-center p-4 border-b md:hidden">
-          <h2 className="text-xl font-bold">Menu</h2>
-          <button
-            onClick={() => setIsOpen(false)}
-            aria-label="Close sidebar"
-            className="text-gray-600 hover:text-gray-900 cursor-pointer"
+    <div className="mt-3 space-y-2">
+      {data
+        .map((p) => p.color)
+        .filter((c, i, arr) => arr.indexOf(c) === i)
+        .map((color, idx) => (
+          <label
+            key={idx}
+            className="flex items-center gap-3 p-2 bg-white rounded-md border border-gray-200 
+            hover:bg-blue-100 cursor-pointer transition"
           >
-            ✕
-          </button>
-        </div>
+            <input
+              type="radio"
+              name="frameColor"
+              value={color}
+              checked={getColor === color}
+              onChange={() => setGetColor(color as string)}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-300 cursor-pointer"
+            />
+            <span className="text-gray-700 text-sm">{color}</span>
+          </label>
+        ))}
+    </div>
 
-        {/* Sidebar content */}
-        <p className="font-bold">CONTACT LENS COLOR</p>
-        <br />
-        {data
-          .map((p) => p.color)
-          .filter((c, i, arr) => arr.indexOf(c) === i)
-          .map((color, idx) => (
-            <div key={idx} className="flex items-center">
-              <input
-                type="radio"
-                name="frameColor"
-                value={color}
-                checked={getColor === color}
-                onChange={() => setGetColor(color as string)}
-              />
-              <label className="ml-2">{color}</label>
-            </div>
-          ))}
-        <br />
+    <div className="my-4 border-t"></div>
 
-        <Accordion item={items} selectData={setSelectData} />
+    {/* Accordion Filter Section */}
+    <Accordion item={items} selectData={setSelectData} />
 
-        {/* Selected Filters */}
-        <div className="mt-4">
-          <div className="flex flex-wrap gap-2 mt-2">
-          <p className="font-bold">Active Filters:</p>
-            {/* Frame Color */}
-            <br />
-            {getColor && (
-              <span className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2">
-                <span>{getColor}</span>
-                <button
-                  onClick={() => handleDelete("color")}
-                  className="text-red-500 font-bold"
-                >
-                  ✕
-                </button>
-              </span>
-            )}
+    {/* Active Filters */}
+    <div className="mt-6">
+      <p className="font-bold text-gray-700 text-sm tracking-wide mb-2">
+        ACTIVE FILTERS
+      </p>
 
-            {/* Other filters (from localSelected) */}
-            {Object.entries(localSelected).map(([key, value]) => {
-              if (!value) return null;
-              return (
-                <span
-                  key={key}
-                  className="bg-blue-200 px-2 py-1 rounded flex items-center gap-2"
-                >
-                  <span>
-                    {value}
-                  </span>
-                  <button
-                    onClick={() => handleDelete(key)}
-                    className="text-red-500 font-bold"
-                  >
-                    ✕
-                  </button>
-                </span>
-              );
-            })}
-          </div>
+      <div className="flex flex-wrap gap-2">
 
-          {/* Clear All Button */}
-          {(getColor || Object.keys(localSelected).some((k) => !!localSelected[k])) && (
+        {/* Color Tag */}
+        {getColor && (
+          <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-lg text-xs flex items-center gap-2 shadow-sm">
+            <span>{getColor}</span>
             <button
-              onClick={clearAllFilters}
-              className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
+              onClick={() => handleDelete("color")}
+              className="text-red-500 text-sm font-bold"
             >
-              Clear All
+              ✕
             </button>
-          )}
-        </div>
-      </aside>
-    </>
+          </span>
+        )}
+
+        {/* Other Tags */}
+        {Object.entries(localSelected).map(([key, value]) =>
+          value ? (
+            <span
+              key={key}
+              className="bg-blue-100 text-blue-700 px-2 py-1 rounded-lg text-xs flex items-center gap-2 shadow-sm"
+            >
+              <span>{value}</span>
+              <button
+                onClick={() => handleDelete(key)}
+                className="text-red-500 font-bold text-sm"
+              >
+                ✕
+              </button>
+            </span>
+          ) : null
+        )}
+      </div>
+
+      {/* Clear All */}
+      {(getColor || Object.keys(localSelected).some((k) => localSelected[k])) && (
+        <button
+          onClick={clearAllFilters}
+          className="mt-4 px-4 py-2 bg-red-500 text-white text-sm font-semibold rounded-lg shadow hover:bg-red-600 transition"
+        >
+          Clear All Filters
+        </button>
+      )}
+    </div>
+  </aside>
+</>
+
   );
 };
 

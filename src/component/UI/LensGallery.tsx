@@ -4,8 +4,15 @@ import {TLens } from '@/ts-definition/types';
 import LensCardAuto from './LensCardAuto';
 import { useRouter, useSearchParams } from "next/navigation";
 import Pagination from '../Pagination';
+import Image from 'next/image';
+import filterIcon from "../../../public/icons/filter-icon.png";
+import sortBy from "../../../public/icons/sort-by-icon.png";
+import { useSidebar } from '@/context/SidebarContext';
+import { useState } from 'react';
 
 const LensGallery = ({data, currentPage, totalPage}: {data:TLens[], currentPage:number, totalPage:number}) => {
+
+     const { setIsSidebarOpen } = useSidebar();
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -25,13 +32,35 @@ const LensGallery = ({data, currentPage, totalPage}: {data:TLens[], currentPage:
         }
       };
 
+      const [count, setCount] = useState(0)
+        const handleMobileSort = () => {
+        let value = ""
+        
+        if(count === 2){
+          setCount(0);
+        }else{
+          setCount(count + 1)
+        }
+      
+        if(count === 0) value = "salesPrice"
+        if(count === 1) value = "-salesPrice"
+        if(count === 2) value = ""
+       
+        const params = new URLSearchParams(searchParams);
+      
+        if (value) params.set("sort", value);
+        else params.delete("sort");     // remove sort for default
+      
+        router.push(`?${params.toString()}`);
+      };
+
     return (
         <div className=' w-full'>
             <div className='w-full bg-gray-200 py-2 px-3 flex items-center justify-end' >
                 <div className='flex items-center justify-between w-auto '>
                     <label htmlFor="" className='text-blue-500 mx-2'>SORT BY:</label>
-                    <select onChange={handleSortChange} name="" id="" className='border border-black'>
-                        <option value="">Price</option>
+                    <select onChange={handleSortChange} name="" id="" className='border border-black text-black'>
+                        <option value="">Price </option>
                         <option value="salesPrice">Price (Low → High)</option>
                         <option value="-salesPrice">Price (High → Low)</option>
                     </select>
@@ -42,14 +71,14 @@ const LensGallery = ({data, currentPage, totalPage}: {data:TLens[], currentPage:
                     grid-cols-1
                     sm:grid-cols-2
                     md:grid-cols-3
-                    lg:grid-cols-4
-                    xl:grid-cols-5
+                    lg:grid-cols-3
+                    xl:grid-cols-3
                     gap-4
                     w-full
                     max-w-7xl'
                     >
                     {
-                        data?.map(({color, name, brand, salesPrice, images, _id, purchasePrice, stock, category, lensType, material }: TLens, index: number) => (
+                        data?.map(({color, name, brand, salesPrice, images, _id, purchasePrice, stock, category, lensType, material, badge, rating }: TLens, index: number) => (
                             <LensCardAuto
                                 color={color}
                                 images={images}
@@ -62,11 +91,27 @@ const LensGallery = ({data, currentPage, totalPage}: {data:TLens[], currentPage:
                                 category={category}
                                 lensType={lensType}
                                 material={material}
+                                badge={badge}
                                 key={index}
+                                rating={rating}
                             />
                         ))
                     }
                 </div>
+                 <div className="w-full bg-white h-[60px] fixed md:hidden lg:hidden bottom-0 z-20 rounded-lg border-t-2 border-blue-500 flex items-center">
+                        <div onClick={() => setIsSidebarOpen(true)} className="w-[50%] flex items-center justify-center cursor-pointer border-r-2 border-blue-500 h-full">
+                            <div className="flex items-center">
+                                <div className="mr-2"><Image src={filterIcon} alt="all-products-icon" /></div>
+                                <p className="text-black">FILTER</p>
+                            </div>
+                        </div>
+                        <div className="w-[50%] flex items-center justify-center cursor-pointer">
+                          <div onClick={handleMobileSort}  className="flex items-center">
+                                <div className="mr-2"><Image src={sortBy} alt="all-products-icon" /></div>
+                                <p className="text-black">SORT BY PRICE</p>
+                            </div>
+                        </div>
+                    </div>
             </section>
              {/* Pagination Component */}
                 <Pagination

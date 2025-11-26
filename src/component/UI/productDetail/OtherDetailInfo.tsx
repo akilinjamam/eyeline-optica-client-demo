@@ -1,10 +1,10 @@
 import { TFrame } from "@/ts-definition/types";
 import Image from "next/image";
-import frameWidth from "../../../../public/frameDetailPic/frameWidth.png"
-import bridge from "../../../../public/frameDetailPic/bridge.png"
-import lensWidth from "../../../../public/frameDetailPic/lenswidth.png"
-import lensHeight from "../../../../public/frameDetailPic/lensHeight.png"
-import templeLength from "../../../../public/frameDetailPic/templeLength.png"
+import frameWidth from "../../../../public/frameDetailPic/frame-detail-img-1.png"
+import bridge from "../../../../public/frameDetailPic/frame-detail-img-2.png"
+import lensWidth from "../../../../public/frameDetailPic/frame-detail-img-3.png"
+import lensHeight from "../../../../public/frameDetailPic/frame-detail-img-4.png"
+import templeLength from "../../../../public/frameDetailPic/frame-detail-img-5.png"
 
 const OtherDetailInfo = ({detail}: {detail:TFrame}) => {
     const frameMeasurements = [
@@ -16,10 +16,10 @@ const OtherDetailInfo = ({detail}: {detail:TFrame}) => {
 ];
 
 const frameDetails = [
-  { label: "Size", value: detail?.size },
+  { label: "Size", value: detail?.sizeCategory },
   { label: "Material", value: detail?.materialsCategory },
   { label: "Weight", value: detail?.weight },
-  { label: "Rim", value: detail?.sizeCategory },
+  { label: "Rim", value: detail?.frameCategory },
   { label: "Shape", value: detail?.shapeCategory },
   {
     label: "Feature",
@@ -38,13 +38,13 @@ const prescriptionDetails = [
 
 
   return (
-    <div className=" lg:px-0 md:px-0 px-2 py-6 ">
+    <div className=" lg:px-0 md:px-0 px-4 py-6 ">
       <div className="max-w-[1250px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-gray-800 ">
         
         {/* Frame Measurements */}
         <div>
           <h3 className="font-semibold text-lg mb-3">Frame Measurements</h3>
-          <ul className="space-y-2">
+          <ul className="space-y-2 text-[16px] ">
             {frameMeasurements.map((item, idx) => (
               <li key={idx} className="flex items-center ">
                 <Image src={item?.icon} height={40} width={40} alt={`frame-detail-${idx}`} />
@@ -58,8 +58,8 @@ const prescriptionDetails = [
 
         {/* Frame Details */}
         <div>
-          <h3 className="font-semibold text-lg mb-3">Frame Details</h3>
-          <ul className="space-y-2">
+          <h3 id="middleSection" className="font-semibold text-lg mb-3">Frame Details</h3>
+          <ul className="space-y-2 text-[16px]">
             {frameDetails.map((item, idx) => (
               <li key={idx}>
                 <strong>{item.label}:</strong>{" "}
@@ -72,7 +72,7 @@ const prescriptionDetails = [
         {/* Prescription Details */}
         <div>
           <h3 className="font-semibold text-lg mb-3">Prescription Details</h3>
-          <ul className="space-y-2">
+          <ul className="space-y-2 text-[16px]">
             {prescriptionDetails.map((item, idx) => (
               <li key={idx}>
                 <strong>{item.label}</strong>: {item.value}

@@ -122,6 +122,7 @@ export type TFrame = {
   prescriptionRange?: string;
   availableAsProBi?: boolean;
   availableAsReader?: boolean;
+  rating: number;
 };
 
 // src/types/lens.type.ts

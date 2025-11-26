@@ -20,7 +20,7 @@ const SingleDoctorProfile = async ({params}: any) => {
     if(!getSingleDoctor) return;
 
     return (
-        <div>
+        <div className="bg-white h-[100vh]">
             <Doctor getSingleDoctor={getSingleDoctor} />
             <OtherInfo getSingleDoctor={getSingleDoctor} allSlotData={allSlotData}/>
         </div>

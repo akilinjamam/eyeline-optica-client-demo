@@ -25,16 +25,16 @@ const AccessoryCardAuto:React.FC<any> = ({images, name, brand, salesPrice,  colo
           <Image
           src={images?.length && images?.length > 0 ? images?.[0] : defaultImage}
           alt={name as string}
-          width={120}
-          height={60}
+          width={200}
+          height={100}
           className="object-contain block"
         />
         </Link>
       </div>
 
       <p className="text-[10px] text-gray-500">{brand}</p>
-      <p className="text-[11px] font-semibold">{name}</p>
-      <p className="text-md font-bold text-red-600 mt-1">৳ {salesPrice}</p>
+      <p className="text-[11px] font-semibold text-black">{name}</p>
+      <p className="text-md font-bold text-black mt-1">৳ {salesPrice}</p>
 
       {/* <div className='absolute bottom-2 right-2'>
         <div className="text-xs text-gray-600 mt-2 ">

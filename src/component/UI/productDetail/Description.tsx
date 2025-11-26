@@ -3,7 +3,7 @@ import React from 'react';
 
 const Description = ({description}:{description:any}) => {
     return (
-        <div>
+        <div className='text-black'>
             <br />
             <p>{description}</p>
         </div>

@@ -1,7 +1,7 @@
 import Footer from '@/component/Footer';
 import TopFooter from '@/component/TopFooter';
 import SidebarSkeleton from '@/component/UI/sceleton/SidebarScheleton';
-import SidebarAccessory from '@/component/UI/SideBarAccessory';
+import SidebarWrapperForAccessory from '@/context/SidebarWrapperForAccessory';
 import { getAccessory,  } from '@/fetchData/fetchFrameData';
 import { TAccessory, TData, } from '@/ts-definition/types';
 import React, { ReactNode, Suspense } from 'react';
@@ -14,9 +14,10 @@ const AccessoryLensLayout = async ({ children }: { children: ReactNode }) => {
       <div className="w-full mx-auto flex items-start">
        
         <Suspense fallback={<SidebarSkeleton/>}>
-          <SidebarAccessory data={data} />
+         <SidebarWrapperForAccessory data={data}>
+          {children}
+        </SidebarWrapperForAccessory>
         </Suspense>
-        {children}
       </div>
       <TopFooter />
       <Footer />

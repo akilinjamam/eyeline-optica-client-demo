@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/component/Footer";
+import RelatedService from "@/component/RelatedFrame";
+
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPart from "@/component/UI/productDetail/DetailPart";
 import ImagePart from "@/component/UI/productDetail/ImagePart";
 import ImagePartForMobile from "@/component/UI/productDetail/ImagePartForMobile";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
+import { getFrame } from "@/fetchData/fetchFrameData";
 import { TData, TDataWithoutMeta, TFrame, TLens, TWeeklyDeals } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
+import { ToastContainer } from "react-toastify";
 
 
 async function getSingleProduct(id: string) {
@@ -41,7 +45,7 @@ export default async function SingleProduct({
   
   if (!product?.data) return notFound();
   
-  const frame = product?.data;
+  const frame = product?.data as any;
 
   const lensData = await getAllLensData() as TData<TLens[]>;
 
@@ -73,10 +77,15 @@ export default async function SingleProduct({
 
   const weeklyDealsData = await getWeeklyDealsData() as TDataWithoutMeta<TWeeklyDeals>;
   const weeklyDeals = weeklyDealsData?.data;
+
+  const getAllFrame = await getFrame({type: frame?.type});
+
+  const relatedProduct = getAllFrame?.data?.data?.filter((f:TFrame) => f?._id !== id);
   
 
   return (
     <div className="w-full bg-blue-50 px-1">
+      <ToastContainer/>
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
           <ImagePart product={frame} />
@@ -90,6 +99,7 @@ export default async function SingleProduct({
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <RegardingInfo data={frame as any} />
       </div>
+      <RelatedService data={relatedProduct} serviceType="FRAME" filterType={`/allglasses/brand?type=${frame?.type}`}/>
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />
       </div>

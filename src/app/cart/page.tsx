@@ -92,5 +92,5 @@ export default function Page() {
 
   }, [router]);
 
-  return <CartList cart={cart}/>;
+  return <div className="w-full bg-white min-h-[100vh] "><CartList cart={cart}/></div>;
 }

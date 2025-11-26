@@ -80,7 +80,7 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
   }
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <div className="p-6 max-w-5xl mx-auto bg-white text-black ">
        <ToastContainer/>
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold mb-4">{name || ""}</h2>

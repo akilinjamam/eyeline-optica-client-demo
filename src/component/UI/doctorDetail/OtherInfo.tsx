@@ -24,7 +24,7 @@ const OtherInfo = ({getSingleDoctor, allSlotData}: {getSingleDoctor:IDoctor, all
         // },
     ]
     return (
-        <div className='w-[80%] mx-auto '>
+        <div className='w-[80%] mx-auto bg-white text-black'>
             <br />
             <div className='flex gap-3 mb-2'>
                 {

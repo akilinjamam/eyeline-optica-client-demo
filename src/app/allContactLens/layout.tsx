@@ -1,7 +1,7 @@
 import Footer from '@/component/Footer';
 import TopFooter from '@/component/TopFooter';
 import SidebarSkeleton from '@/component/UI/sceleton/SidebarScheleton';
-import SidebarContactLens from '@/component/UI/SidebarContactLens';
+import SidebarWrapperForContactLens from '@/context/SideBarWrapperForContactLens';
 import { getcontactLens } from '@/fetchData/fetchFrameData';
 import { TContactLens, TData, } from '@/ts-definition/types';
 import React, { ReactNode, Suspense } from 'react';
@@ -15,9 +15,10 @@ const ContactLensLayout = async ({ children }: { children: ReactNode }) => {
       <div className="w-full mx-auto flex items-start">
        
         <Suspense fallback={<SidebarSkeleton/>}>
-          <SidebarContactLens data={data} />
+         <SidebarWrapperForContactLens data={data}>
+          {children}
+        </SidebarWrapperForContactLens>
         </Suspense>
-        {children}
       </div>
       <TopFooter />
       <Footer />

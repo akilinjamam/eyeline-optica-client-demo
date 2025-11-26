@@ -3,10 +3,11 @@ import Footer from "@/component/Footer";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPartForContactLens from "@/component/UI/productDetail/DetailPartForContactLens";
-import ImagePart from "@/component/UI/productDetail/ImagePart";
+import ImagePartForLens from "@/component/UI/productDetail/ImagePartForLens";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TAccessory, TContactLens, TData, TLens } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
+import { ToastContainer } from "react-toastify";
 
 async function getSingleLens(id: string) {
 
@@ -49,11 +50,12 @@ export default async function page({
 
   return (
     <div className="w-full bg-blue-50 px-1">
+      <ToastContainer/>
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
-          <ImagePart product={addingNewFieldWithSingleLens} />
+          <ImagePartForLens product={addingNewFieldWithSingleLens} />
         </div>
-        <div className="sm:w-full md:w-[45%] lg:w-[45%]">
+        <div className="sm:w-full md:w-[45%] lg:w-[45%]  ">
           <DetailPartForContactLens singleLens={addingNewFieldWithSingleLens as any} allAccessory={allAccessoryData as any} />
         </div>
       </div>

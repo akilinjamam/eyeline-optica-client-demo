@@ -100,7 +100,7 @@ const ImagePart: React.FC<any> = ({ product }) => {
                 }}
               >
                 </div>
-                <p className='text-xs mt-2'>{vairant?.colorName}</p>
+                <p className='text-xs mt-2 text-black'>{vairant?.colorName}</p>
               </div>
             )
           )}

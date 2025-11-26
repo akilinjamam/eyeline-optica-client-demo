@@ -25,7 +25,7 @@ const DesignedSunglasses = ({bannerData}: {bannerData:IBanner[]}) => {
             id: 1,
             name: 'Eyeglasses',
             image: bannerAccordingToCategory("Mobile Designed Sunglasses One", bannerData) as string,
-            link: "/allglasses"
+            link: "/allglasses/sunglasses"
         },
         {
             id: 2,
@@ -37,25 +37,25 @@ const DesignedSunglasses = ({bannerData}: {bannerData:IBanner[]}) => {
             id: 3,
             name: 'Special Glasses',
             image: bannerAccordingToCategory("Mobile Designed Sunglasses Three", bannerData) as string,
-            link: "/allglasses/not-added"
+            link: "/allglasses/sunglasses"
         },
         {
             id: 4,
             name: 'Contact Lenses',
             image: bannerAccordingToCategory("Mobile Designed Sunglasses Four", bannerData) as string,
-            link: "/allContactLens"
+            link: "/allglasses/sunglasses"
         },
         {
             id: 5,
             name: 'Power Sunglasses', 
-           image: bannerAccordingToCategory("Mobile Designed Sunglasses Five", bannerData) as string,
-            link: "/allglasses/not-added"
+            image: bannerAccordingToCategory("Mobile Designed Sunglasses Five", bannerData) as string,
+            link: "/allglasses/sunglasses"
         },
         {
             id: 6,
             name: 'Progressive Lenses',
-           image: bannerAccordingToCategory("Mobile Designed Sunglasses Six", bannerData) as string,
-            link: "/allLens/progressiveLens"
+            image: bannerAccordingToCategory("Mobile Designed Sunglasses Six", bannerData) as string,
+            link: "/allglasses/sunglasses"
         },
     ]
 

@@ -16,8 +16,8 @@ const TelemedicineCart= ({name, post, degree, exp, img, id}: {name:string, post:
                     <Image width={200} height={200} className='w-[125px]'  src={img || defaultImg} alt='telemidicne-dr-image'/>
                 </div>
                 <div className='lg:w-[55%] w-[100%] lg:text-left text-center '>
-                    <p className='text-sm font-bold'>{name}</p>
-                    <p className='text-xs'>{degree}</p>
+                    <p className='text-sm font-bold text-black'>{name}</p>
+                    <p className='text-xs text-black'>{degree}</p>
                     
                     <div title={post} className='mt-4 w-[100%] flex items-center justify-end'>
                         <DoctorTag text={post} charWidth={13} />
@@ -36,7 +36,7 @@ const TelemedicineCart= ({name, post, degree, exp, img, id}: {name:string, post:
             </div>
             </Link>
             <hr className='mt-3 text-gray-200' />
-            <p className='font-semibold'>{exp}+ years</p>
+            <p className='font-semibold text-black'>{exp}+ years</p>
             <div className='flex items-center justify-between text-sm'>
                 <p className='text-blue-300'>Experience</p>
                 <div className='w-[93px] flex items-center justify-between text-blue-500 font-semibold '><p>See Doctors</p> <ChevronRight width={15}/></div>

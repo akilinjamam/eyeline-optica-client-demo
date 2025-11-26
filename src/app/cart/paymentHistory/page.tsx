@@ -95,7 +95,8 @@ const CustomerHistory = () => {
  
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6">
+    <div className='w-full bg-white min-h-[100vh]'>
+      <div className="max-w-5xl mx-auto p-4 sm:p-6">
       <h2 className="text-xl font-bold text-gray-800 mb-4">
         🧾 Your Order History
       </h2>
@@ -248,6 +249,7 @@ const CustomerHistory = () => {
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );

@@ -23,12 +23,21 @@ const BestSelling = ({data}:{data:TFrame[]}) => {
 
     return (
         <div className='w-full mt-8 '>
-            <Title value='BEST SELLING'/>
-            <br />
-            <div className='w-[90%] sm:w-[75%] md:w-[85%] lg:w-[1200px] mx-auto flex items-center justify-end'>
-                <div className=' w-[130px] mt-2 px-2 py-2 text-white  font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer flex  items-center justify-between'>
-                     <button onClick={() => router.push('/allglasses/bestSelling')} >Shop Now </button>
-                    <ArrowRight/>
+            <div className="w-full sm:w-[75%] md:w-[85%] lg:w-[1200px] mx-auto 
+                flex items-center justify-between px-4 md:block">
+
+                    {/* Title */}
+                    <Title value="BEST SELLING" />
+
+                    {/* Button */}
+                    <div className="w-[130px] mt-2 px-2 py-2 text-white font-semibold rounded 
+                    bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer 
+                    flex items-center justify-between md:ml-auto md:mr-0">
+
+                    <button onClick={() => router.push("/allglasses/bestSelling")}>
+                        Shop Now
+                    </button>
+                    <ArrowRight />
                 </div>
             </div>
 

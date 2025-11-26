@@ -1,8 +1,8 @@
 // app/products/[id]/loading.tsx
 export default function Loading() {
   return (
-    <div className="w-full bg-blue-50 px-1 animate-pulse">
-      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap h-full">
+    <div className="w-full bg-blue-50 px-1 animate-pulse h-[100vh] ">
+      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-baseline border-y border-gray-400 flex-wrap h-full">
         {/* Image Skeleton */}
         <div className="sm:w-full md:w-[55%] lg:w-[55%] p-2">
           <div className="w-full h-[400px] bg-gray-300 rounded-lg"></div>

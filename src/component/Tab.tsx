@@ -49,9 +49,17 @@ const Tab: FC = () => {
                             return (
                                 <Link href={`${element.link}`} key={index}>
                                     <button
-
-                                        className={`px-4 py-2 lg:text-black md:text-black text-white bg-blue-800 md:bg-blue-50 lg:bg-blue-50  text-sm font-semibold lg:hover:bg-blue-200 md:hover:bg-blue-200 lg:rounded-lg md:rounded-lg rounded-full hover:bg-blue-900 transition cursor-pointer ${isActive ? 'lg:bg-blue-200 md:bg-blue-200' : ''}`}
-                                    >
+                                    className={`
+                                        px-4 py-2 
+                                        text-white text-sm font-semibold 
+                                        bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  
+                                        md:bg-none md:text-black                  
+                                        lg:bg-none lg:text-black                
+                                        md:rounded-lg lg:rounded-lg rounded-full 
+                                        md:hover:bg-blue-200 lg:hover:bg-blue-200 
+                                        hover:bg-blue-900 transition cursor-pointer
+                                        ${isActive ? 'md:bg-blue-200 lg:bg-blue-200' : ''}
+                                    `}>
                                         {element.name}
                                     </button>
                                 </Link>

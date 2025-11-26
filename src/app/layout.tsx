@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import Header from "@/component/Header";
-// import Tab from "@/component/Tab";
+import Header from "@/component/Header";
+import Tab from "@/component/Tab";
 
 const inter = Inter({
   variable: "--font-inter-sans",
@@ -26,8 +26,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased`}
       >
-        {/* <Header/>
-        <Tab/> */}
+        <Header/>
+        <Tab/>
         {children}
       </body>
     </html>

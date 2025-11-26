@@ -6,7 +6,8 @@ import defaultImage from '../../public/images/glass-1.png';
 import Link from 'next/link';
 
 
-const GlassCardForDeals:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id, dealsOffer, weeklyDeals, category}) => {
+const GlassCardForDeals:React.FC<TFrame> = ({images, name, brand, salesPrice, badge, color,_id, dealsOffer, weeklyDeals, category, rating}) => {
+  console.log(rating)
 
   const handleRoute = (value:string) => {
     if(value === 'Frame'){

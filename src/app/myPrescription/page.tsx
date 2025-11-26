@@ -113,7 +113,7 @@ const PrescriptionList = () => {
         console.log(res?.data)
 
         const filtered = allData.filter(
-          (p: IPrescription) => p.patientId === patientId
+          (p: IPrescription) => p.patientId?._id === patientId
         );
 
         setPrescriptions(filtered);

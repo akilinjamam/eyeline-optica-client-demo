@@ -3,7 +3,7 @@ import Footer from "@/component/Footer";
 import ShopByFrameShape from "@/component/ShopByFrameShape";
 import TopFooter from "@/component/TopFooter";
 import DetailPartForAccessory from "@/component/UI/productDetail/DetalPartForAccessory";
-import ImagePart from "@/component/UI/productDetail/ImagePart";
+import ImagePartForLens from "@/component/UI/productDetail/ImagePartForLens";
 import RegardingInfo from "@/component/UI/productDetail/RegardingInfo";
 import { TAccessory,  TData } from "@/ts-definition/types";
 import { notFound } from "next/navigation";
@@ -36,7 +36,7 @@ export default async function page({
     <div className="w-full bg-blue-50 px-1">
       <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
-          <ImagePart product={singleAccessory} />
+          <ImagePartForLens product={singleAccessory} />
         </div>
         <div className="sm:w-full md:w-[45%] lg:w-[45%]">
           <DetailPartForAccessory singAccessory={singleAccessory as any} />

@@ -11,7 +11,7 @@ const LenseDetailSection = ({goForward}: {goForward: (payload: GoForwardPayload)
             {
                 powerOptions.map((power:IPowerOptions, index:number) => {
                         return (
-                            <div onClick={() => goForward({type: power.subTitle, title: power.title})} key={index} className='bg-gray-100 hover:bg-gray-200 my-2 rounded-md cursor-pointer flex items-center justify-between'>
+                            <div onClick={() => goForward({type: power.subTitle, title: power.title})} key={index} className='bg-white hover:bg-gray-100 my-2 rounded-md cursor-pointer flex items-center justify-between'>
                                 <div>
                                     <p className='px-2 pb-3 font-bold'>{power.subTitle}</p>
                                 

@@ -86,3 +86,7 @@ body {
   animation: slideOut 0.3s ease-in forwards;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
