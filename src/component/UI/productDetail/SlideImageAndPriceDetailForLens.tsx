@@ -23,9 +23,9 @@ const SlideImageAndPriceDetailForLens = ({ singleLens }: { singleLens: any }) =>
         
       <SlideOptionsForLens singleLens={singleLens}/>
       {/* bottom section */}
-      <div className="w-full absolute bottom-0 h-15 flex items-center justify-center bg-white">
+      <div className="w-full absolute bottom-0 h-25 flex items-center justify-center bg-white">
         <div className="w-[100%] h-auto  flex items-center justify-center">
-          <div className="flex items-center justify-end font-bold text-sm w-[90%]">
+          <div className="flex items-center justify-end font-bold text-sm w-[80%]">
             <p className='bg-blue-800 rounded-md text-white px-2 py-1 w-full text-center'>৳{Number(price) }</p>
           </div>
         </div>

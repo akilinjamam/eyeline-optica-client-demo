@@ -98,7 +98,9 @@ const [showLensPanel, setShowLensPanel] = useState(false);
       <button 
         disabled={!singleLens.stock} 
         onClick={() => setShowLensPanel(true)} 
-        className={`text-white py-2 rounded-full font-semibold w-[98%] fixed bottom-4 z-30 inline lg:hidden md:hidden  
+        className={` text-white py-2 rounded-full font-semibold
+          fixed bottom-4 z-30 lg:hidden md:hidden
+          w-[85%] left-1/2 transform -translate-x-1/2 
         ${singleLens?.stock ? 'bg-gradient-to-r from-blue-500 to-blue-700 cursor-pointer' : 'bg-gradient-to-r from-gray-500 to-gray-700 cursor-not-allowed'}`}
       >
         Select Lens

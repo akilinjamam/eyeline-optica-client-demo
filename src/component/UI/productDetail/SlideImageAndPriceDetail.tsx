@@ -33,11 +33,11 @@ const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals }: { product: TFr
       {/* Sliding container */}
       <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame} lensInfo={lensInfo} />
       {/* bottom section */}
-      <div className="w-full absolute bottom-0 h-15 flex items-center justify-center bg-white">
+      <div className="w-full absolute bottom-0 h-25 flex items-center justify-center bg-white">
         <div className="w-[100%] h-auto  flex items-center justify-center">
-          <div className="flex items-center justify-end font-bold text-sm w-[90%]">
+          <div className="flex items-center justify-end font-bold text-sm w-[80%]">
             
-            <p className='bg-blue-800 rounded-md text-white px-2 py-1 w-full text-center'>৳{Number(price) + (lensPrice ?? 0) }</p>
+            <p className='bg-blue-800 rounded-md text-white px-2 py-4 w-full text-center'>৳{Number(price) + (lensPrice ?? 0) }</p>
             
           </div>
         </div>

@@ -23,8 +23,8 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
             const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
 
     return (
-        <div className='h-[80vh] overflow-y-scroll hide-scrollbar'>
-            <div className='w-[90%] absolute top-3 right-0'>
+        <div className='h-[75vh] overflow-y-scroll hide-scrollbar'>
+            <div className='w-[90%]  absolute top-3 right-0'>
                 <div className='flex item-center justify-start overflow-x-hidden cursor-grab '
                 ref={swippedRef}
                 onMouseDown={handleMouseDown}
@@ -107,13 +107,7 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                             </div>           
                     </div>
                      </div>
-                   </div>
-                    {/* {
-                        item.features.map((feature: ILenseFeatures, index:number) => <p className='ml-3 text-sm' key={index}>{feature.feature}</p> )
-                    } */}
-                    {/* <br /> */}
-                    {/* details and price */}
-                   
+                   </div>        
                 </div >
                 </div>
                 ))}
