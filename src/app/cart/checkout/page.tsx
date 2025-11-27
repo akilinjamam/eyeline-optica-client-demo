@@ -9,12 +9,23 @@ import { TAccessoryItem } from "@/ts-definition/types";
 import useFetchWeeklyDealsData from "@/custom-hooks/useFetchWeeklyDealsData";
 import { handleDealsPrice } from "@/utilities/priceAfterDealsDiscount";
 
+type TOtherImages = {
+  colorName:string;
+  fromColor:string;
+  toColor:string;
+  images:string[]
+}
+
 export default function CheckoutPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { cart, loading:loadingCartInfo } = useCart();
   console.log(cart?.items?.[0]?.accessoryId?.weeklyDeals)
   const getNewQtyRef = useRef<string>("");
+
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [index, setIndex] = useState<number>(0);
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -84,6 +95,10 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(cart?.items[0]?.productId?.otherImages?.length > 0 && !selectedColor){
+      toast.error("please select frame color")
+      return
+    }
     setLoading(true);
     const quantity = Number(getNewQtyRef.current) || 1;
    
@@ -121,6 +136,7 @@ export default function CheckoutPage() {
       customer_email: billing.email,
       customer_address: shipping.address,
       totalCost:subTotalWithoutQty,
+      frameColorName:selectedColor ? selectedColor : "not-added",
       payableAmount,
       dueAmount,
       cart_id: cart._id
@@ -176,7 +192,7 @@ export default function CheckoutPage() {
               <div className="flex items-center gap-4 border border-gray-100 rounded-xl p-3">
                 <div className="relative w-20 h-16">
                   <Image
-                    src={cart.items[0].productId?.images[0]}
+                    src={cart.items[0].productId?.images[0] || cart.items[0].productId?.otherImages[index]?.images[0] }
                     alt="item"
                     fill
                     className="object-contain"
@@ -186,9 +202,9 @@ export default function CheckoutPage() {
                   <h4 className="text-sm font-medium text-gray-800">
                     {cart.items[0].productId?.name}
                   </h4>
-                  <p className="text-xs text-gray-500">
+                  {/* <p className="text-xs text-gray-500">
                     {cart.items[0].productId?.color}
-                  </p>
+                  </p> */}
                   <div>
                     <span className="text-sm font-semibold text-blue-700">
                     ৳{handleDealsPrice(dealsData?.active,cart.items[0]?.productId?.weeklyDeals, cart.items[0]?.productId?.salesPrice, dealsData?.discountPercent )}
@@ -197,6 +213,34 @@ export default function CheckoutPage() {
                       <span className="text-sm font-semibold text-red-600 line-through ">
                     ৳{cart.items[0]?.productId?.salesPrice}
                   </span>}
+                  {
+                    cart.items[0]?.productId?.otherImages?.length > 0
+                    &&
+                    <div>
+                    <p className="font-bold bg-red-500 text-white px-2 rounded mb-2">Select Frame Color:</p>
+                    <div className="flex">
+                      {cart.items[0].productId?.otherImages?.map(
+                        (color: TOtherImages, index: number) => {
+                          return (
+                            <label key={index} className="flex items-center cursor-pointer mr-4">
+                              <input
+                                type="radio"
+                                name="productColor"           // SAME NAME for all
+                                value={color.colorName}
+                                checked={selectedColor === color.colorName}
+                                onChange={() => {
+                                  setSelectedColor(color.colorName)
+                                  setIndex(index)
+                                }}
+                              />
+                              <span className="ml-2 text-xs">{color.colorName}</span>
+                            </label>
+                          );
+                        }
+                      )}
+                    </div>
+                    </div>
+                  }
                   </div>
                 </div>
               </div>

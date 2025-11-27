@@ -92,7 +92,7 @@ export default function CartList({ cart }: { cart: TCart<Cart[]> }) {
           <CartItem
             key={item?._id}
             id={item?._id}
-            image={item?.items[0]?.productId?.images[0] || item?.items[0]?.lensId?.images[0] || item?.items[0]?.contactLensId?.images[0] || item?.items[0]?.accessoryId?.images[0]  as any}
+            image={item?.items[0]?.productId?.images[0] || item?.items[0]?.productId?.otherImages[0]?.images[0] || item?.items[0]?.lensId?.images[0] || item?.items[0]?.contactLensId?.images[0] || item?.items[0]?.accessoryId?.images[0]  as any}
             type={item?.items[0]?.submitType ? item?.items[0]?.submitType : ''}
             name={item?.items[0]?.productId?.name || item?.items[0]?.lensId?.name || item?.items[0]?.contactLensId?.name || item?.items[0]?.accessoryId?.items?.map((value:any) => value.name)?.join('+')}
             color={item?.items[0]?.productId?.color || item?.items[0]?.lensId?.color || item?.items[0]?.contactLensId?.color}

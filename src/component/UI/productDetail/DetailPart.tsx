@@ -15,10 +15,7 @@ import { handleWishList } from '@/fetchData/fetchHandleWishlist';
 const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals}) => {
 
   const [showLensPanel, setShowLensPanel] = useState(false);
-
-  
-     
-
+  console.log(showLensPanel)
   return (
     <div className="w-full mx-auto h-[100%] lg:px-3 md:px-3 px-0 text-gray-800 space-y-4">
       <div>
