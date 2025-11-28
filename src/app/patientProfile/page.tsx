@@ -93,19 +93,25 @@ export default function PatientProfile() {
 
         {/* Actions */}
         <div className="mt-8 space-y-4">
-          <button
+          { patient &&
+            <button
             onClick={() => router.push("/videoConsult")}
             className="w-full py-3 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-xl shadow-lg transition-all duration-300"
           >
             Start Video Consultation
           </button>
+          }
 
-          <button
-            onClick={() => router.push("/myPrescription")}
-            className="w-full py-3 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-xl shadow-lg transition-all duration-300"
-          >
-            Prescription
-          </button>
+          {
+            patient
+            &&
+              <button
+              onClick={() => router.push("/myPrescription")}
+              className="w-full py-3 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-xl shadow-lg transition-all duration-300"
+            >
+              Prescription
+            </button>
+          }
         </div>
       </div>
     </div>
