@@ -306,17 +306,7 @@ export default function PatientCall({roomId, patientId, doctorName}: {roomId:str
         )}
         </div>
         <br />
-        { statusMessage
-          ?
-          <button
-            onClick={() => navigate.push("/patientProfile")}
-            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-xl font-bold shadow-lg transition-all transform hover:scale-105"
-          >
-            Back
-        </button>
-        :
-        <Loader2 className="animate-spin text-blue-500 w-8 h-8 "/>
-        }
+        
 
       {callAccepted && (
         <div className="mt-8">
@@ -328,6 +318,18 @@ export default function PatientCall({roomId, patientId, doctorName}: {roomId:str
           </button>
         </div>
       )}
+       <br />
+      { statusMessage
+          ?
+          <button
+            onClick={() => navigate.push("/patientProfile")}
+            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-xl font-bold shadow-lg transition-all transform hover:scale-105"
+          >
+            Back
+        </button>
+        :
+        <Loader2 className="animate-spin text-blue-500 w-8 h-8 "/>
+        }
     </div>
   );
 }

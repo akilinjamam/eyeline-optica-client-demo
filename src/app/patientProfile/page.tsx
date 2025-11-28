@@ -48,13 +48,13 @@ export default function PatientProfile() {
     );
   }
 
-  if (!slotData) {
-    return (
-      <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center text-white">
-        <p className="text-xl">No patient data found.</p>
-      </div>
-    );
-  }
+  // if (!slotData) {
+  //   return (
+  //     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center text-white">
+  //       <p className="text-xl">No patient data found.</p>
+  //     </div>
+  //   );
+  // }
 
   const patient = slotData?.patient;
 

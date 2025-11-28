@@ -103,13 +103,11 @@ const Header: FC = () => {
             const slotData = await res.json();
             console.log(slotData?.data)
             if(slotData?.data?.patient !== null){
-              localStorage.setItem('patientId', slotData?.data?.patient?._id)
+              localStorage.setItem('patientId', JSON.stringify(slotData?.data?.patient?._id))
             }
-
           } catch (error) {
             console.log(error)
           }
-
       }
       getSlotIdAndPatient()
   })
