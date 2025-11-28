@@ -7,6 +7,8 @@ import { Loader, FileDown } from "lucide-react";
 import { getPrescription } from "@/fetchData/fetchFrameData";
 import usePrescriptionPdfDownloader from "@/custom-hooks/usePrescriptionPdfDownloader";
 import { IDoctor } from "@/ts-definition/interfaces";
+import { jwtDecode } from "jwt-decode";
+import { JwtPayloadForAppointment } from "../cart/page";
 
 // Matching your backend model
 export interface IMedicine {
@@ -99,7 +101,12 @@ const PrescriptionList = () => {
   const [patientId, setPatientId] = useState<string | null>(null);
 
   useEffect(() => {
-    setPatientId(localStorage.getItem("patientId"));
+    const token = localStorage.getItem("token-appointment");
+    if(token){
+      const decode = jwtDecode(token) as JwtPayloadForAppointment;
+      console.log(decode)
+      setPatientId(decode?.patientId as string);
+    }
   }, []);
 
   useEffect(() => {
