@@ -19,7 +19,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
 const {dealsData} = useFetchWeeklyDealsData()
 
     return (
-    <div className="w-full mx-auto h-[100%] text-gray-800 space-y-4">
+    <div className="w-full mx-auto h-[100%] text-gray-800 space-y-4 px-3">
       <div className='px-3'>
         <h2 className="text-xl font-bold">{singleLens?.name}</h2>
         {/* <p className="text-sm text-gray-500">BT-{singleLens?.barcode}</p> */}

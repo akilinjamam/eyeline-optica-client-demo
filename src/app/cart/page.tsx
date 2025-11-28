@@ -14,6 +14,14 @@ export type JwtPayload = {
   phoneNumber?:string;
   exp?: number;
 };
+export type JwtPayloadForAppointment = {
+  patientId?:string;
+  slotId?: string;
+  name?:string;
+  phone?: number;
+  age?:string;
+  address?:string;
+};
 
 // 👁️ Prescription for each eye
 export type Prescription = {

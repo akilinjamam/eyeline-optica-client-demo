@@ -1,6 +1,8 @@
 "use client";
 import PatientCall from "@/component/UI/doctorDetail/PatientCall";
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
+import { JwtPayloadForAppointment } from "../cart/page";
 
 const Page = () => {
   const [roomId, setRoomId] = useState<string | null>(null);
@@ -8,15 +10,14 @@ const Page = () => {
   const [doctorName, setDoctorName] = useState<string>("");
 
   useEffect(() => {
-    const data = localStorage.getItem("appointmentData");
-    const patientId = localStorage.getItem("patientId")
-    if (!data) return;
-
-    const parsed = JSON.parse(data);
-
-    setRoomId(parsed?.slotId || null);
-    setPatientId(patientId || null);
-    setDoctorName(parsed?.doctorName);
+    const token = localStorage.getItem("token-appointment");
+    if(token){
+      const decodeToken = jwtDecode(token) as JwtPayloadForAppointment;
+      setRoomId(decodeToken.slotId as string)
+      setPatientId(decodeToken.patientId as string)
+      setDoctorName("Doctor");
+    }
+    
   }, []);
 
   if (!roomId || !patientId) {

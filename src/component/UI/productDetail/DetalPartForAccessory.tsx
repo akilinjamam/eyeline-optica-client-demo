@@ -47,7 +47,7 @@ const handleStock = () => {
   const {dealsData} = useFetchWeeklyDealsData()
 
     return (
-    <div className="w-full mx-auto h-[100%]  text-gray-800 space-y-4">
+    <div className="w-full mx-auto h-[100%]  text-gray-800 space-y-4 px-3">
       <div className='px-3'>
         <h2 className="text-xl font-bold">{name}</h2>
   

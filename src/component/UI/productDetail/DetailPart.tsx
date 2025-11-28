@@ -17,7 +17,7 @@ const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[]
   const [showLensPanel, setShowLensPanel] = useState(false);
   console.log(showLensPanel)
   return (
-    <div className="w-full mx-auto h-[100%] lg:px-3 md:px-3 px-0 text-gray-800 space-y-4">
+    <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
       <div>
         <h2 className="text-xl font-bold">{product?.name}</h2>
         <p className="text-sm text-gray-500">BT-{product?.barcode}</p>

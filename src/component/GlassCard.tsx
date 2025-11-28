@@ -6,7 +6,7 @@ import defaultImage from '../../public/images/glass-1.png';
 import Link from 'next/link';
 
 
-const GlassCard:React.FC<any> = ({images, name, brand, salesPrice, badge, color,_id}) => {
+const GlassCard:React.FC<any> = ({images, otherImages, name, brand, salesPrice, badge, color,_id}) => {
 
     return (
     <div className="relative bg-white shadow-md p-4 rounded-md w-[240px]">
@@ -24,7 +24,7 @@ const GlassCard:React.FC<any> = ({images, name, brand, salesPrice, badge, color,
       <div className=" mb-3 w-[200px] flex items-center justify-center">
         <Link href={`/productDetail/${_id}`}>
           <Image
-            src={images && images?.length ? images?.[0] : defaultImage}
+            src={images && images?.length ? images?.[0] : (otherImages ? otherImages[0]?.images[0] : defaultImage)}
             alt={name || "Glass product image"}
             width={120}
             height={60}
