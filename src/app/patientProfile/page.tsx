@@ -30,15 +30,6 @@ export default function PatientProfile() {
         const data = await res.json();
         setSlotData(data?.data);
 
-        // Step 3: Save patientId back into localStorage if found
-        const patientId = data?.data?.patient?._id || null;
-
-        if (patientId) {
-          const updated = { ...parsedData, patientId };
-          localStorage.setItem("appointmentData", JSON.stringify(updated));
-          localStorage.setItem("patientId", patientId)
-        }
-
       } catch (error) {
         console.log("Error loading profile:", error);
       } finally {
