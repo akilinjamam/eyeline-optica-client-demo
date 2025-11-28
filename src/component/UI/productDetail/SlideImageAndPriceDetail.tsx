@@ -12,6 +12,7 @@ export type TLensInfo = {
   color:string;
   id:string;
   weeklyDeals?:boolean;
+  lensType:string;
 }
 
 const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals }: { product: TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals }) => {
@@ -20,7 +21,8 @@ const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals }: { product: TFr
     price:0,
     brand: "",
     color: "",
-    id:""
+    id:"",
+    lensType: "",
 
   });
 

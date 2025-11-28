@@ -11,6 +11,8 @@ import useSwipe from '@/custom-hooks/useSwipe';
 
 const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo, badgeCategory, dealsData}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any, badgeCategory?:any , dealsData:TWeeklyDeals}) => {
 
+    
+
     const sorteLensWithWeeklyDeals = useMemo(() => {
         const sortedData = lens?.sort((a:any,b:any) => {
             return (b.weeklyDeals ? 1 : 0) - (a.weeklyDeals ? 1 : 0)
@@ -67,7 +69,9 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                     brand: item?.brand,
                     color: item?.color,
                     id:item?.id,
-                    weeklyDeals: item?.weeklyDeals
+                    weeklyDeals: item?.weeklyDeals,
+                    lensType: item?.subType
+
                 })
                 }}
                 className="flex items-start justify-between p-1 bg-white hover:bg-gray-100 m-2 rounded-md cursor-pointer w-[97%] "

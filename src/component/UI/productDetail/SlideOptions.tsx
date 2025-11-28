@@ -18,6 +18,7 @@ import SubmitPowerLater from '@/component/SubmitPowerLater';
 import useFetchWeeklyDealsData from '@/custom-hooks/useFetchWeeklyDealsData';
 
 const SlideOptions = ({lens, setLensInfo, product, lensInfo,}: {lens:ILense[], setLensInfo:any, product: TFrame, lensInfo:TLensInfo}) => {
+  console.log(lensInfo)
 
    const {dealsData} = useFetchWeeklyDealsData()
    
@@ -123,7 +124,7 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo,}: {lens:ILense[], s
             )}
             {current.type === "Enter Power Manually" && (
               <>
-                <EnterPowerSection cartInfo={frameWithLensItems}/>
+                <EnterPowerSection cartInfo={frameWithLensItems} lensType={lensInfo?.lensType} />
               </>
             )}
             {current.type === "Upload Prescription" && (

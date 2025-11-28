@@ -10,6 +10,7 @@ interface Prescription {
   sphere: string;
   cylinder: string;
   axis: string;
+  near:string;
 }
 
 interface CartItemProps {
@@ -243,6 +244,7 @@ export default function CartItem({
                   <th className="border p-2">Sphere (SPH)</th>
                   <th className="border p-2">Cylinder (CYL)</th>
                   <th className="border p-2">Axis</th>
+                  {(rightEye.near && leftEye.near) && <th className="border p-2">Near</th>}
                 </tr>
               </thead>
               <tbody>
@@ -251,12 +253,14 @@ export default function CartItem({
                   <td className="border p-2">{rightEye.sphere}</td>
                   <td className="border p-2">{rightEye.cylinder}</td>
                   <td className="border p-2">{rightEye.axis}</td>
+                  { rightEye?.near && <td className="border p-2">{rightEye.near}</td>}
                 </tr>
                 <tr>
                   <td className="border font-medium bg-gray-50 p-2">LEFT</td>
                   <td className="border p-2">{leftEye.sphere}</td>
                   <td className="border p-2">{leftEye.cylinder}</td>
                   <td className="border p-2">{leftEye.axis}</td>
+                   { leftEye?.near && <td className="border p-2">{leftEye.near}</td>}
                 </tr>
               </tbody>
             </table>

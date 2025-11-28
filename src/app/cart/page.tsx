@@ -20,6 +20,7 @@ export type Prescription = {
   sphere?: string;   // e.g., "-1.25"
   cylinder?: string; // e.g., "-1.00"
   axis?: string;     // e.g., "140"
+  near?:string;
 };
 
 // 🛒 Each item in the cart

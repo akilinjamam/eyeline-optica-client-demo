@@ -7,6 +7,7 @@ type TEyePowerValue = {
   sphere?: string;
   cylinder?: string;
   axis?: string;
+  near?:string;
 };
 
 type TEyePower = {
@@ -14,8 +15,11 @@ type TEyePower = {
   rightEye?: TEyePowerValue;
 };
 
-const EnterPowerSection = ({ cartInfo }: { cartInfo: any }) => {
+const EnterPowerSection = ({ cartInfo, lensType }: { cartInfo: any, lensType:string }) => {
   const router = useRouter();
+
+  console.log(lensType)
+  
 
   const [loading, setLoading] = useState("");
   const [eyePower, setEyePower] = useState<TEyePower>({
@@ -23,11 +27,13 @@ const EnterPowerSection = ({ cartInfo }: { cartInfo: any }) => {
       sphere: "0",
       cylinder: "0",
       axis: "0",
+      near: "0"
     },
     rightEye: {
       sphere: "0",
       cylinder: "0",
       axis: "0",
+      near: "0"
     },
   });
 
@@ -56,9 +62,20 @@ const EnterPowerSection = ({ cartInfo }: { cartInfo: any }) => {
     return axisArr;
   };
 
+  const nearValue = (start:number, end:number) => {
+    const arr = [];
+
+    for(let i = start; i <= end; i++){
+      arr.push({label:String(i), value:String(i)})
+    };
+    return arr
+  };
+
   const sphArr = createSphAndCyl(-30, 15.25);
   const cylArr = createSphAndCyl(-6, 6.25);
   const axisArr = createAxis(1, 181);
+  const near = nearValue(25,400)
+  
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -210,6 +227,27 @@ const EnterPowerSection = ({ cartInfo }: { cartInfo: any }) => {
                 ))}
               </select>
             </div>
+             {(lensType === "progressive" || lensType === "bifocal") && (
+              <div className="mt-3">
+                <p className="font-medium mb-1 text-center">NEAR</p>
+                <select
+                  value={eyePower.leftEye?.near || "0"}
+                  onChange={(e) =>
+                    setEyePower((prev) => ({
+                      ...prev,
+                      leftEye: { ...(prev.leftEye || {}), near: e.target.value },
+                    }))
+                  }
+                  className="w-full border border-gray-400 rounded-md p-2"
+                >
+                  {near.map((item: any, idx: number) => (
+                    <option key={idx} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         </div>
 
@@ -312,6 +350,27 @@ const EnterPowerSection = ({ cartInfo }: { cartInfo: any }) => {
                 ))}
               </select>
             </div>
+            {(lensType === "progressive" || lensType === "bifocal") && (
+            <div className="mt-3">
+              <p className="font-medium mb-1 text-center">NEAR</p>
+              <select
+                value={eyePower.rightEye?.near || "0"}
+                onChange={(e) =>
+                  setEyePower((prev) => ({
+                    ...prev,
+                    rightEye: { ...(prev.rightEye || {}), near: e.target.value },
+                  }))
+                }
+                className="w-full border border-gray-400 rounded-md p-2"
+              >
+                {near.map((item: any, idx: number) => (
+                  <option key={idx} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           </div>
         </div>
       </div>
