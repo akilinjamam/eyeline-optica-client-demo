@@ -56,7 +56,7 @@ const MensSunglass = ({data, bannerData} : {data:TFrame[], bannerData:IBanner[]}
                         <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                         <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
                             {
-                                data?.slice(0,13)?.map(({color, name, brand, salesPrice, badge, images, _id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                                data?.slice(0,13)?.map(({color, name, brand, salesPrice, badge, images, _id, otherImages }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} otherImages={otherImages} /> )
                             }
                                 </div>
                                 <Image className='cursor-pointer inline-block mx-3' src={arrowRight} alt='right-arrow' onClick={() => handleNavigation('left')}/>
@@ -82,7 +82,7 @@ const MensSunglass = ({data, bannerData} : {data:TFrame[], bannerData:IBanner[]}
                         onTouchMove={handleTouchMove}
                       >
                         {
-                            data?.map(({color, name, brand, salesPrice, badge, images,_id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                            data?.map(({color, name, brand, salesPrice, badge, images,_id, otherImages }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} otherImages={otherImages}/> )
                         }
                          
                       </div>

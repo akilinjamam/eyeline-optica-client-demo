@@ -71,7 +71,7 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
                         onTouchMove={handleTouchMove}
                       >
                         {
-                            data?.map(({color, name, brand, salesPrice, badge, images,_id }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
+                            data?.map(({color, name, brand, salesPrice, badge, images,_id, otherImages }: TFrame, index: number) => <GlassCard color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} otherImages={otherImages} /> )
                         }
                          
                       </div>

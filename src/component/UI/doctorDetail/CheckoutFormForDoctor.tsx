@@ -45,6 +45,7 @@ export default function CheckoutFormForDoctor({ info }: CheckoutProps) {
     const data = await res.json();
 
     if (data?.success) {
+      localStorage.removeItem("token-appointment")
       window.location.href = data.data;
     }
     if (!data?.success) {
