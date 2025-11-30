@@ -9,7 +9,7 @@ import Link from 'next/link';
 const GlassCard:React.FC<any> = ({images, otherImages, name, brand, salesPrice, badge, color,_id}) => {
 
     return (
-    <div className="relative bg-white shadow-md p-4 rounded-md w-[240px]">
+    <div className="relative bg-white shadow-md p-4 rounded-2xl w-[240px]">
       {badge && (
         <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-[2px] rounded-sm font-semibold">
           {badge}

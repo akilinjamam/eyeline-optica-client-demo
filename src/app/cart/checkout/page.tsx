@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { CreditCard, Loader2 } from "lucide-react";
+import { CreditCard, Loader2, } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import sslLogo from "../../../../public/images/ssl-photo.png";
 import { toast, ToastContainer } from "react-toastify";
@@ -19,7 +19,7 @@ type TOtherImages = {
 export default function CheckoutPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { cart, loading:loadingCartInfo } = useCart();
+  const { cart,  } = useCart();
   console.log(cart?.items?.[0]?.accessoryId?.weeklyDeals)
   const getNewQtyRef = useRef<string>("");
 
@@ -171,7 +171,7 @@ export default function CheckoutPage() {
     }
   };
 
-  if (loadingCartInfo)
+  if (!cart)
       return (
         <div className="flex justify-center items-center py-20">
           <Loader2 className="animate-spin text-blue-500 w-8 h-8" />

@@ -165,8 +165,6 @@ const closeDrawer = () => {
           </div>
         </div>
         
-
-
         {/* 🔍 Search Field (Desktop Only) */}
         <div
           ref={searchRef}
