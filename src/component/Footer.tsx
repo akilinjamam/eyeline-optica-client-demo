@@ -104,8 +104,11 @@ const Footer: FC = () => {
       </div>
 
       <br />
-      <p className="text-white text-center text-xs">
+      <p className="text-white text-center text-xs mb-2">
         COPYRIGHT 2025 EYELINE OPTICA ®, INC. ALL RIGHTS RESERVED.
+      </p>
+      <p className="text-yellow-200 text-center text-xs">
+        DEVELOPED BY BYTE DYNAMO.
       </p>
       <br />
     </div>

@@ -1,0 +1,14 @@
+/* TEAM - BYTE DYNAMO */
+  Developer: INJAMAM ISLAM CHOWDHURY
+  Company: Byte Dynamo
+  Phone: +880 1516-708479 
+  Location: Chittagong, Bangladesh
+  
+/* SITE - EYELINE OPTICA */
+  Standards: HTML5, CSS3, ES6+
+  Components: React, Redux Toolkit (RTK) used in Dashboard/CMS
+  Frameworks: Next.js 15, Node.js (Express)
+  Styling: Tailwind CSS
+  Database: MongoDB
+  Language: TypeScript
+  Last Update: 2025/11/28
