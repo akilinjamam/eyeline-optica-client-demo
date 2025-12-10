@@ -112,7 +112,7 @@ export default function PatientCall({roomId, patientId, doctorName}: {roomId:str
 
         // --- Get Token & Join ---
         const res = await axios.post(
-          "https://server.eyelineoptica.com/api/v1/agora/create-token",
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}agora/create-token`,
           { channelName: roomId, uid: patientId, role: "subscriber" }
         );
         const { token, appId } = res.data.data;

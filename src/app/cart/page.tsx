@@ -78,7 +78,7 @@ export default function Page() {
       // Fetch the cart
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart/get-cart-by-id/${userId}`,);
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}cart/get-cart-by-id/${userId}`,);
 
         if (!res.ok) throw new Error("Failed to fetch cart");
 
