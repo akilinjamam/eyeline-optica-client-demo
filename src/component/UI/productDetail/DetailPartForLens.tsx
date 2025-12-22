@@ -61,9 +61,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
             :
             <p>No Features Added here yet...</p>
           }
-          <p className="text-xs mt-1 text-gray-500">
-            *multifocal or readers lenses start at additional cost
-          </p>
+          
         </div>
          {singleLens.stock && singleLens?.stock ? <p className='text-green-500'>Available {singleLens?.quantity}</p> : <p className='text-red-400'>Stock Out</p> }
       </div>

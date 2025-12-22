@@ -52,6 +52,7 @@ export interface IPowerTypes {
   type: string;
   title: string;
   description: string;
+  img: StaticImageData;
 }
 
 export interface ILenseFeatures {

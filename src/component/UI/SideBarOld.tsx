@@ -308,19 +308,19 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
         </div>
 
         {/* Sidebar content */}
-        <p className="font-bold text-black">GENDER</p>
+        <p className="font-bold text-black mb-2">GENDER</p>
         <div className="w-full grid grid-cols-3 gap-2">
         {genderItems?.map((shape: any, index: number) => (
           <div
             key={index}
-            className={`bg-white border h-[80px] border-gray-400 p-2 flex justify-center items-center text-center text-black ${
+            className={`h-[100px] w-full  p-2 flex justify-center items-center text-center text-black ${
               shape.isAvailable === 'none' ? 'opacity-0' : ''
             }`}
           >
           {shape.isAvailable !== 'none' 
           ? 
           <div onClick={() =>handleGender(shape?.name)} className="cursor-pointer">
-            <Image width={50} src={shape?.img} alt={`frame-shape-${index}`} /> 
+            <Image width={70} height={70} src={shape?.img} alt={`frame-shape-${index}`} className={`${shape?.name === "all" ? "w-[70px]" : "w-[100px]"}`}/> 
             <p className="text-xs">{shape?.name}</p>           
           </div> : 'N/A'}
         </div>
@@ -346,8 +346,8 @@ const SidebarOld = ({ data }: { data: TFrame[] }) => {
           {shape.isAvailable !== 'none' 
           ? 
           <div onClick={() =>handleShape(shape?.name)} className="cursor-pointer">
-            <Image width={50} src={shape?.img} alt={`frame-shape-${index}`} /> 
-            <p className="text-xs">{shape?.name}</p>           
+            <Image width={50} src={shape?.img} alt={`frame-shape-${index}`} className={`${shape?.name === "all" ? "w-[50px]" : "w-[60px]"}`}/> 
+            <p className={`text-xs`}>{shape?.name}</p>           
           </div> : 'N/A'}
         </div>
       ))}

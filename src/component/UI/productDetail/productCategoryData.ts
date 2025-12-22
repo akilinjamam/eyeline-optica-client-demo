@@ -1,41 +1,54 @@
 import { ILense, IPowerOptions, IPowerTypes } from "@/ts-definition/interfaces";
+import singleVision from "../../../../public/powertype-imgs/power-type-single-vision.png";
+import zeroPower from "../../../../public/powertype-imgs/power-type-zero-power.png";
+import progressive from "../../../../public/powertype-imgs/power-type-progressive.png";
+import bifocal from "../../../../public/powertype-imgs/power-type-bifocal.png";
+import frameOnly from "../../../../public/powertype-imgs/power-type-only-frame.png";
+import myopia from "../../../../public/powertype-imgs/power-type-myopia.jpg";
 
 export const powerTypes: IPowerTypes[] = [
   {
+    img: singleVision,
     frameType: "sun + eye",
     type: "Power Type",
     title: "single vision",
     description: "Positive, Negative or Cylindrical",
   },
   {
-    frameType: "sun + eye",
+    img: zeroPower,
+    frameType: "eye glasses",
     type: "Power Type",
     title: "zero power",
     description: "Blue light block for screen protector",
   },
   {
+    img: progressive,
     frameType: "eye glasses",
     type: "Power Type",
     title: "progressive",
     description: "Two Power in One eye",
   },
   {
+    img: bifocal,
     frameType: "eye glasses",
     type: "Power Type",
     title: "bifocal",
     description: "Two Power in One eye",
   },
   {
+    img: frameOnly,
     frameType: "sun + eye",
     type: "Power Type",
     title: "Frame Only",
     description: "With no lenses",
   },
   {
+    img: myopia,
     frameType: "kids",
     type: "Power Type",
     title: "Myopia control lens",
-    description: "not added",
+    description:
+      "Advanced Myopia Control Lenses for Clear Vision & Healthy Eye Growth",
   },
 ];
 

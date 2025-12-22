@@ -89,9 +89,7 @@ const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[]
             :
             <p>No Features Added here yet...</p>
           }
-          <p className="text-xs mt-1 text-gray-500">
-            *multifocal or readers lenses start at additional cost
-          </p>
+          
         </div>
 
         {product.stock && product?.stock ? 

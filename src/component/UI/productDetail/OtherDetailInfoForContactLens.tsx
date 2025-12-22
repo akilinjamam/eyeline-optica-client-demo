@@ -42,7 +42,7 @@ const prescriptionDetails = [
         {/* Prescription Details */}
         <div>
           <h3 className="font-semibold text-lg mb-3">Prescription Details</h3>
-          <ul className="space-y-2 text-[16px]">
+          <ul className="space-y-2 text-[18px]">
             {prescriptionDetails.map((item, idx) => (
               <li key={idx}>
                 <strong>{item.label}</strong>: {item.value}

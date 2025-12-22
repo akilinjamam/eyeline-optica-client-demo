@@ -43,8 +43,8 @@ const prescriptionDetails = [
         
         {/* Frame Measurements */}
         <div>
-          <h3 className="font-semibold text-lg mb-3">Frame Measurements</h3>
-          <ul className="space-y-2 text-[16px] ">
+          <h3 id="middleSection" className="font-semibold text-lg mb-3">Frame Measurements</h3>
+          <ul className="space-y-2 text-[18px] ">
             {frameMeasurements.map((item, idx) => (
               <li key={idx} className="flex items-center ">
                 <Image src={item?.icon} height={40} width={40} alt={`frame-detail-${idx}`} />
@@ -58,8 +58,8 @@ const prescriptionDetails = [
 
         {/* Frame Details */}
         <div>
-          <h3 id="middleSection" className="font-semibold text-lg mb-3">Frame Details</h3>
-          <ul className="space-y-2 text-[16px]">
+          <h3 className="font-semibold text-lg mb-3">Frame Details</h3>
+          <ul className="space-y-2 text-[18px]">
             {frameDetails.map((item, idx) => (
               <li key={idx}>
                 <strong>{item.label}:</strong>{" "}
@@ -72,7 +72,7 @@ const prescriptionDetails = [
         {/* Prescription Details */}
         <div>
           <h3 className="font-semibold text-lg mb-3">Prescription Details</h3>
-          <ul className="space-y-2 text-[16px]">
+          <ul className="space-y-2 text-[18px]">
             {prescriptionDetails.map((item, idx) => (
               <li key={idx}>
                 <strong>{item.label}</strong>: {item.value}

@@ -18,7 +18,7 @@ const OtherDetailInfoForAccessory = ({detail}: {detail:any}) => {
         {/* Lens Measurements */}
         <div>
           <h3 className="font-semibold text-lg mb-3">Accessory Info</h3>
-          <ul className="space-y-2 text-[16px]">
+          <ul className="space-y-2 text-[18px]">
             {frameMeasurements.map((item, idx) => (
               <li key={idx} className="flex items-center ">
                 <span>{item?.icon}</span>
