@@ -43,7 +43,7 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
             <div className='hidden md:block lg:block'>
                 <div className='flex items-center justify-around lg:w-[1200px] md:w-[90%] sm:w-[85%] mx-auto gap-5 relative'>
                 <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
-                <div ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
+                <div ref={parentRef} className='w-[2600px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
                 {
                     data?.slice(0,13)?.map(({color, name, brand, salesPrice, badge, images, _id, otherImages }: TFrame, index: number) => <GlassCard color={color} images={images} otherImages={otherImages} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id}/> )
                 }
