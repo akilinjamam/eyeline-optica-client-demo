@@ -40,7 +40,7 @@ const GlassCardsGallary = ({data, dealsData}: {data:TFrame[], dealsData:TWeeklyD
                         onTouchMove={handleTouchMove}
                       >
                         {
-                            data?.map(({color, name, brand, salesPrice, badge, images,_id, weeklyDeals, category, rating }: TFrame, index: number) => <GlassCardForDeals color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} dealsOffer={dealsData?.discountPercent} weeklyDeals={weeklyDeals} category={category} rating={rating}/> )
+                            data?.map(({color, name, brand, salesPrice, badge, images,_id, weeklyDeals, category, rating, otherImages }: TFrame, index: number) => <GlassCardForDeals color={color} images={images} otherImages={otherImages} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} dealsOffer={dealsData?.discountPercent} weeklyDeals={weeklyDeals} category={category} rating={rating}/> )
                         }
                          
                       </div>
@@ -52,7 +52,7 @@ const GlassCardsGallary = ({data, dealsData}: {data:TFrame[], dealsData:TWeeklyD
                     <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                     <div style={{userSelect:'none'}}  ref={parentRef} className='w-[2600px] h-[300px] mx-auto flex items-center  gap-6 mt-10 overflow-x-hidden scroll-smooth  px-2 '>
                         {
-                            data?.map(({color, name, brand, salesPrice, badge, images,_id, weeklyDeals, category, rating }: TFrame, index: number) => <GlassCardForDeals color={color} images={images} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} dealsOffer={dealsData?.discountPercent} weeklyDeals={weeklyDeals} category={category} rating={rating}/> )
+                            data?.map(({color, name, brand, salesPrice, badge, images, otherImages, _id, weeklyDeals, category, rating }: TFrame, index: number) => <GlassCardForDeals color={color} images={images} otherImages={otherImages} badge={badge} salesPrice={salesPrice} name={name} brand={brand} key={index} _id={_id} dealsOffer={dealsData?.discountPercent} weeklyDeals={weeklyDeals} category={category} rating={rating}/> )
                         }
                        
                         </div>

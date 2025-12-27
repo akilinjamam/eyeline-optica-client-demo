@@ -45,7 +45,7 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                                     return
                                 }
                                 setSubType(item)
-                            }} key={index} className='w-auto bg-blue-800 text-white px-3 py-1 rounded-full mr-1 cursor-pointer'>{item?.split(' ')?.join("_")}</div>
+                            }} key={index} className='w-auto bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  text-white px-3 py-1 rounded-full mr-1 cursor-pointer'>{item?.split(' ')?.join("_")}</div>
                         ))
                     }
                 </div>

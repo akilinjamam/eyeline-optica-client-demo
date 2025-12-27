@@ -22,7 +22,7 @@ const ImagePartForMobile: React.FC<any> = ({ product }) => {
   return (
     <div className="lg:hidden md:hidden block">
       {/* Main Image Section */}
-      <div className="w-full bg-white flex items-center justify-center p-1">
+      <div className="w-full  flex items-center justify-center p-1">
         {product?.otherImages && product.otherImages.length > 0 ? (
           <Swiper
             modules={[Navigation, Pagination]}
@@ -43,7 +43,7 @@ const ImagePartForMobile: React.FC<any> = ({ product }) => {
                       height={600}
                       width={600}
                       alt="glass-image"
-                      className="object-contain h-[400px]"
+                      className="object-contain"
                     />
                   </div>
                 </SwiperSlide>
@@ -65,7 +65,7 @@ const ImagePartForMobile: React.FC<any> = ({ product }) => {
       </div>
 
       {/* Horizontal Preview Thumbnails */}
-      <div className="w-full bg-white">
+      <div className="w-full">
         {product?.images && product?.images?.length > 0 && (
           <div className="lg:w-[80%] mx-auto flex items-center overflow-x-auto p-2">
             {product?.images?.slice(0, 6).map(

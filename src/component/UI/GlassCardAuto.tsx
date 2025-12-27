@@ -152,10 +152,10 @@ if (selectedImage > 0 && selectedVariantImages[selectedImage]) {
     <div className="flex items-start justify-between w-full pt-6">
 
       {/* ▶️ Brand + Name + Price */}
-      <div className="w-[70px]">
-        <p className="text-[10px] text-gray-500">{brand}</p>
-        <p className="text-[11px] font-semibold text-black">{name}</p>
-        <p className="text-md font-bold text-black mt-1">
+      <div className="w-[100px]">
+        <p className="text-[11px] text-gray-500">{brand}</p>
+        <p className="text-[18px] font-semibold text-black">{name}</p>
+        <p className="text-[24px] font-bold text-black mt-1">
           ৳ {salesPrice}
         </p>
       </div>
@@ -170,7 +170,7 @@ if (selectedImage > 0 && selectedVariantImages[selectedImage]) {
             style={{
               background: `linear-gradient(to right, ${item.fromColor}, ${item.toColor})`,
             }}
-            className={`w-[12px] h-[12px] rounded-full mx-1 cursor-pointer ${
+            className={`w-[19px] h-[19px] rounded-full mx-1 cursor-pointer ${
               selectColor === index ? "ring-[2px] ring-gray-600" : ""
             }`}
           />
@@ -187,10 +187,10 @@ if (selectedImage > 0 && selectedVariantImages[selectedImage]) {
       >
         <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.168L12 18.896l-7.336 3.87 1.402-8.168L.132 9.21l8.2-1.192z" />
       </svg>
-      <span className="ml-1 text-black">{rating ? rating : 4}</span>
+      <span className="ml-1 text-[13px] text-black">{rating ? rating : 4}</span>
       </div>
 
-      <span className="text-[13px] font-semibold mt-1 text-black">Size: {sizeCategory?.toUpperCase().slice(0,1)}</span>
+      <span className="text-[11px] font-semibold mt-1 text-black">Size: {sizeCategory?.toUpperCase().slice(0,1)}</span>
       </div>
 
     </div>

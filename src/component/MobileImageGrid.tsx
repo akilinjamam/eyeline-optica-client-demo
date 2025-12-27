@@ -10,7 +10,11 @@ import { bannerAccordingToCategory } from "@/fetchData/bannerAccordingToCategory
 
 const MobileImageGrid = ({bannerData}: {bannerData:IBanner[]}) => {
   return (
-    <div className=" md:hidden lg:hidden w-full py-6 px-4 flex items-center justify-between">
+    <div className="md:hidden lg:hidden">
+      <p className="text-center font-bold text-blue-700">Exclusive at Eyeline Optica</p>
+      <div className="w-full py-2 px-4 flex items-center justify-between">
+      
+      {/* div 1 */}
       <div
         className="
           grid grid-cols-1 grid-rows-1 gap-3 
@@ -18,6 +22,7 @@ const MobileImageGrid = ({bannerData}: {bannerData:IBanner[]}) => {
         "
       >
         {/* 1️⃣ Big Image */}
+        
         <div className="col-span-1 row-span-1">
           <Image
             width={400}
@@ -39,10 +44,11 @@ const MobileImageGrid = ({bannerData}: {bannerData:IBanner[]}) => {
           />
         </div>
       </div>
+      {/* div 2 */}
       <div
         className="
           grid grid-cols-1 grid-rows-1 gap-3 
-          w-[49%] 
+          w-[49%]
         "
       >
         {/* 2️⃣ Small Image */}
@@ -65,6 +71,7 @@ const MobileImageGrid = ({bannerData}: {bannerData:IBanner[]}) => {
             className="w-full h-full object-cover rounded-lg"
           />
         </div>        
+      </div>
       </div>
     </div>
   );

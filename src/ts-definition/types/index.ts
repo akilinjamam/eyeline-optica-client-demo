@@ -97,6 +97,7 @@ export type TFrame = {
   features?: string[]; // array is empty but probably string[] in future
   brand?: string;
   barcode?: string;
+  sizeCode?: string;
   badge?: string;
   description?: string;
   weeklyDeals?: boolean;

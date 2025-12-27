@@ -68,10 +68,19 @@ export async function getBlog(query:Record<string,string>) {
       next: {revalidate: 120},
     });
 
-  if (!res.ok) throw new Error("Failed to fetch accessory");
+  if (!res.ok) throw new Error("Failed to fetch blog");
 
   
   return res.json();
+}
+
+export async function getAllBlog(){
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}blog`, {
+      next: {revalidate: 120},
+  });
+   if (!res.ok) throw new Error("Failed to fetch blog");
+  return res.json();
+  
 }
 export async function getWeeklyDeals() {
   

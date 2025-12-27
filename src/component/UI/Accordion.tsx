@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { AccordionItemType, TAccordion } from '@/ts-definition/types';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 type AccordionItemProps = {
@@ -13,6 +14,17 @@ type AccordionItemProps = {
 const AccordionItem = ({ item, selectData, parentTitle }: AccordionItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const normalizeKey = (key: string) =>
+  key
+    .toLowerCase()
+    .split(/[-_]+/) // split by dash or underscore
+    .map((word, index) =>
+      index === 0 ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join("");
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const rootTitle = parentTitle || item.title; 
 
   const handleClick = () => {
@@ -21,8 +33,10 @@ const AccordionItem = ({ item, selectData, parentTitle }: AccordionItemProps) =>
      
       if (selectData) {
         selectData({ [String(rootTitle)]: item.title });
+         const params = new URLSearchParams(searchParams?.toString() ?? "");
+         params.set(normalizeKey(`${[String(rootTitle)]}`), item?.title as string );
+          router.push(`?${params.toString()}`);
       }
-      
       
     } else {
       setIsOpen(!isOpen);

@@ -128,129 +128,6 @@ const EnterPowerSection = ({ cartInfo, lensType }: { cartInfo: any, lensType:str
   <form onSubmit={handleSubmit}>
     <div className="w-full bg-gray-50 rounded-md p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Left Eye */}
-        <div className="border rounded-md p-3 bg-white shadow-sm">
-          <h3 className="text-lg font-semibold text-blue-700 mb-3 text-center">
-            LEFT EYE
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-            {/* SPH */}
-            <div>
-              <p className="font-medium mb-1">SPH</p>
-              <select
-                onClick={(e) => {
-                  const select = e.currentTarget;
-                  const zeroOption = Array.from(select.options).find(
-                    (opt) => opt.value === "0"
-                  );
-                  if (zeroOption) {
-                    setTimeout(() => {
-                      zeroOption.scrollIntoView({ block: "nearest" });
-                    }, 0);
-                  }
-                }}
-                value={eyePower.leftEye?.sphere || "0"}
-                onChange={(e) =>
-                  setEyePower((prev) => ({
-                    ...prev,
-                    leftEye: {
-                      ...(prev.leftEye || {}),
-                      sphere: e.target.value,
-                    },
-                  }))
-                }
-                className="w-full border border-gray-400 rounded-md p-2"
-              >
-                {sphArr.map((sph: any, index: number) => (
-                  <option key={index} value={sph.value}>
-                    {sph.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* CYL */}
-            <div>
-              <p className="font-medium mb-1">CYL</p>
-              <select
-                onClick={(e) => {
-                  const select = e.currentTarget;
-                  const zeroOption = Array.from(select.options).find(
-                    (opt) => opt.value === "0"
-                  );
-                  if (zeroOption) {
-                    setTimeout(() => {
-                      zeroOption.scrollIntoView({ block: "nearest" });
-                    }, 0);
-                  }
-                }}
-                value={eyePower.leftEye?.cylinder || "0"}
-                onChange={(e) =>
-                  setEyePower((prev) => ({
-                    ...prev,
-                    leftEye: {
-                      ...(prev.leftEye || {}),
-                      cylinder: e.target.value,
-                    },
-                  }))
-                }
-                className="w-full border border-gray-400 rounded-md p-2"
-              >
-                {cylArr.map((cyl: any, index: number) => (
-                  <option key={index} value={cyl.value}>
-                    {cyl.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* AXIS */}
-            <div>
-              <p className="font-medium mb-1">AXIS</p>
-              <select
-                value={eyePower.leftEye?.axis || "0"}
-                onChange={(e) =>
-                  setEyePower((prev) => ({
-                    ...prev,
-                    leftEye: {
-                      ...(prev.leftEye || {}),
-                      axis: e.target.value,
-                    },
-                  }))
-                }
-                className="w-full border border-gray-400 rounded-md p-2"
-              >
-                {axisArr.map((axis, index) => (
-                  <option key={index} value={axis.value}>
-                    {axis.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-             {(lensType === "progressive" || lensType === "bifocal") && (
-              <div className="mt-3">
-                <p className="font-medium mb-1 text-center">NEAR</p>
-                <select
-                  value={eyePower.leftEye?.near || "0"}
-                  onChange={(e) =>
-                    setEyePower((prev) => ({
-                      ...prev,
-                      leftEye: { ...(prev.leftEye || {}), near: e.target.value },
-                    }))
-                  }
-                  className="w-full border border-gray-400 rounded-md p-2"
-                >
-                  {near.map((item: any, idx: number) => (
-                    <option key={idx} value={item.value}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Right Eye */}
         <div className="border rounded-md p-3 bg-white shadow-sm">
           <h3 className="text-lg font-semibold text-blue-700 mb-3 text-center">
@@ -371,6 +248,128 @@ const EnterPowerSection = ({ cartInfo, lensType }: { cartInfo: any, lensType:str
               </select>
             </div>
           )}
+          </div>
+        </div>
+        {/* Left Eye */}
+        <div className="border rounded-md p-3 bg-white shadow-sm">
+          <h3 className="text-lg font-semibold text-blue-700 mb-3 text-center">
+            LEFT EYE
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+            {/* SPH */}
+            <div>
+              <p className="font-medium mb-1">SPH</p>
+              <select
+                onClick={(e) => {
+                  const select = e.currentTarget;
+                  const zeroOption = Array.from(select.options).find(
+                    (opt) => opt.value === "0"
+                  );
+                  if (zeroOption) {
+                    setTimeout(() => {
+                      zeroOption.scrollIntoView({ block: "nearest" });
+                    }, 0);
+                  }
+                }}
+                value={eyePower.leftEye?.sphere || "0"}
+                onChange={(e) =>
+                  setEyePower((prev) => ({
+                    ...prev,
+                    leftEye: {
+                      ...(prev.leftEye || {}),
+                      sphere: e.target.value,
+                    },
+                  }))
+                }
+                className="w-full border border-gray-400 rounded-md p-2"
+              >
+                {sphArr.map((sph: any, index: number) => (
+                  <option key={index} value={sph.value}>
+                    {sph.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* CYL */}
+            <div>
+              <p className="font-medium mb-1">CYL</p>
+              <select
+                onClick={(e) => {
+                  const select = e.currentTarget;
+                  const zeroOption = Array.from(select.options).find(
+                    (opt) => opt.value === "0"
+                  );
+                  if (zeroOption) {
+                    setTimeout(() => {
+                      zeroOption.scrollIntoView({ block: "nearest" });
+                    }, 0);
+                  }
+                }}
+                value={eyePower.leftEye?.cylinder || "0"}
+                onChange={(e) =>
+                  setEyePower((prev) => ({
+                    ...prev,
+                    leftEye: {
+                      ...(prev.leftEye || {}),
+                      cylinder: e.target.value,
+                    },
+                  }))
+                }
+                className="w-full border border-gray-400 rounded-md p-2"
+              >
+                {cylArr.map((cyl: any, index: number) => (
+                  <option key={index} value={cyl.value}>
+                    {cyl.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* AXIS */}
+            <div>
+              <p className="font-medium mb-1">AXIS</p>
+              <select
+                value={eyePower.leftEye?.axis || "0"}
+                onChange={(e) =>
+                  setEyePower((prev) => ({
+                    ...prev,
+                    leftEye: {
+                      ...(prev.leftEye || {}),
+                      axis: e.target.value,
+                    },
+                  }))
+                }
+                className="w-full border border-gray-400 rounded-md p-2"
+              >
+                {axisArr.map((axis, index) => (
+                  <option key={index} value={axis.value}>
+                    {axis.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+             {(lensType === "progressive" || lensType === "bifocal") && (
+              <div className="mt-3">
+                <p className="font-medium mb-1 text-center">NEAR</p>
+                <select
+                  value={eyePower.leftEye?.near || "0"}
+                  onChange={(e) =>
+                    setEyePower((prev) => ({
+                      ...prev,
+                      leftEye: { ...(prev.leftEye || {}), near: e.target.value },
+                    }))
+                  }
+                  className="w-full border border-gray-400 rounded-md p-2"
+                >
+                  {near.map((item: any, idx: number) => (
+                    <option key={idx} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         </div>
       </div>

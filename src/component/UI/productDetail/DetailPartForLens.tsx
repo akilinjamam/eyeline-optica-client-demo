@@ -47,7 +47,7 @@ const [showLensPanel, setShowLensPanel] = useState(false);
                   
                 </div>
         <div>
-          <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
+          <p className="font-semibold mb-2">FEATURES:</p>
           {
             singleLens?.features && singleLens?.features?.length > 0 ? singleLens?.features?.map((item:any, index:number) => (
               <ul key={index+1} className="space-y-1">

@@ -24,7 +24,8 @@ import MobileLensSection from "@/component/MobileLensSection";
 import HomeBlogSection from "@/component/HomeBlogSection";
 import { getBanners, getcontactLens, getWeeklyDeals } from "@/fetchData/fetchFrameData";
 import { IBanner } from "@/ts-definition/interfaces";
-import ShopLocation from "@/component/ShopLocation";
+import ShopLocationList from "@/component/ShopLocation";
+
 
 
 async function getProduct(value:string) {
@@ -147,7 +148,7 @@ export default async function Home() {
         <ShopByFrameShape/>
         <HomeBlogSection/>
         <TopFooter/>
-        <ShopLocation/>
+        <ShopLocationList/>
         <Footer/> 
         {/* <GlassTryOn/> */}
     </div>

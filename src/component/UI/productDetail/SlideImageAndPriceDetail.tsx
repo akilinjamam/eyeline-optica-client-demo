@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import SlideOptions from './SlideOptions';
 import { TFrame, TWeeklyDeals } from '@/ts-definition/types';
@@ -15,7 +16,7 @@ export type TLensInfo = {
   lensType:string;
 }
 
-const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals }: { product: TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals }) => {
+const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals, setSelectTitle }: { product: TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals, setSelectTitle:any }) => {
   const [lensInfo, setLensInfo] = useState<TLensInfo>({
     title:"",
     price:0,
@@ -33,7 +34,7 @@ const SlideImageAndPriceDetail = ({ product, lens, weeklyDeals }: { product: TFr
   return (
     <div className="p-2">
       {/* Sliding container */}
-      <SlideOptions lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame} lensInfo={lensInfo} />
+      <SlideOptions setSelectTitle={setSelectTitle} lens={lens} setLensInfo={setLensInfo as () => void} product={product as TFrame} lensInfo={lensInfo} />
       {/* bottom section */}
       <div className="w-full absolute bottom-0 h-25 flex items-center justify-center bg-white">
         <div className="w-[100%] h-auto  flex items-center justify-center">

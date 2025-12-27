@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { powerTypes } from './productCategoryData';
 import { ArrowLeft } from 'lucide-react';
 import { ILense } from '@/ts-definition/interfaces';
@@ -17,7 +17,7 @@ import ZeroPowerDetailSection from './ZeroPowerDetailSection';
 import SubmitPowerLater from '@/component/SubmitPowerLater';
 import useFetchWeeklyDealsData from '@/custom-hooks/useFetchWeeklyDealsData';
 
-const SlideOptions = ({lens, setLensInfo, product, lensInfo,}: {lens:ILense[], setLensInfo:any, product: TFrame, lensInfo:TLensInfo}) => {
+const SlideOptions = ({lens, setLensInfo, product, lensInfo, setSelectTitle}: {lens:ILense[], setLensInfo:any, product: TFrame, lensInfo:TLensInfo, setSelectTitle:any}) => {
   console.log(lensInfo)
 
    const {dealsData} = useFetchWeeklyDealsData()
@@ -60,6 +60,15 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo,}: {lens:ILense[], s
     }
     
   };
+
+
+  useEffect(() => {
+    if(current.type === "powerTypes"){
+      setSelectTitle("Select Power Type")
+    }else{
+      setSelectTitle("Select Lens")
+    }
+  },[current,setSelectTitle])
 
   const totalPrice = lensInfo.price + Number(product.salesPrice);
   const onlyFramePrice = Number(product.salesPrice);

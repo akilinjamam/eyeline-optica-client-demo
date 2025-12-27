@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Pagination from "./Pagination";
 
 
-export default function BlogPage({allBlog, page, totalPage}: {allBlog:TBlog[], page:number, totalPage:number}) {
+export default function BlogPage({allBlog, page, totalPage, allCategories}: {allBlog:TBlog[], page:number, totalPage:number, allCategories:TBlog[]}) {
   
   const [search, setSearch] = useState("");
   console.log(page, totalPage)
@@ -30,15 +30,28 @@ export default function BlogPage({allBlog, page, totalPage}: {allBlog:TBlog[], p
         router.push(`?${params.toString()}`);
     }
   };
+  
+  const handleCategory = (value:string) => {
+    const params = new URLSearchParams(searchParams);
+    if(value === "All"){
+      params.delete("category")
+    }else{
+      params.set("category", value);
+    }
+    router.push(`?${params.toString()}`);
+  }
+
+  const blogCategory = [...new Set(allCategories.map((item:TBlog) => item.category))];
+  const allBlogCategory = ["All", ...blogCategory] 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#020617] via-[#0f172a] to-[#1e293b] px-6 py-12 text-white">
+    <div className="min-h-screen  px-6 py-12 text-black bg-slate-50">
       <motion.h1
         className="text-center text-4xl md:text-5xl font-extrabold mb-8 text-cyan-300 drop-shadow-lg"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        Eyeline Optica Blog
+        Patient Care
       </motion.h1>
 
       <div className="max-w-3xl mx-auto mb-12">
@@ -47,9 +60,16 @@ export default function BlogPage({allBlog, page, totalPage}: {allBlog:TBlog[], p
           placeholder="Search blogs by title, category or description..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-white/10 border border-white/20 text-white placeholder-gray-400 px-5 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+          className="w-full bg-white/10 border border-gray-500 text-black placeholder-gray-400 px-5 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
         />
       </div>
+      {/* search from category */}
+      <div className="flex items-center max-w-3xl mx-auto">
+        {
+          allBlogCategory?.map((item:string, index:number) => <p className="bg-gray-500 rounded-full px-3 py-1 ml-3 cursor-pointer text-white" key={index} onClick={() => handleCategory(item)}>{item}</p> )
+        }
+      </div>
+      <br />
 
       <motion.div
         layout

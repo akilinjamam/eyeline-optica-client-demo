@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SlideImageAndPriceDetail from "./SlideImageAndPriceDetail";
 import { TFrame, TWeeklyDeals } from "@/ts-definition/types";
 import { ILense } from "@/ts-definition/interfaces";
+import { useState } from "react";
 
 const slideInVariants = {
   hidden: { x: "100%" },
@@ -12,6 +13,8 @@ const slideInVariants = {
 };
 
 export default function SlideInPanel({ onClose, product, lens, weeklyDeals }: { onClose: () => void, product: TFrame, lens:ILense[], weeklyDeals:TWeeklyDeals }) {
+
+  const [selectTitle, setSelectTitle] = useState<string>("");
  
   return (
     <motion.div
@@ -23,10 +26,10 @@ export default function SlideInPanel({ onClose, product, lens, weeklyDeals }: { 
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <div className="p-4 flex justify-between items-center border-b">
-        <h2 className="text-xl font-semibold">Select Your Lens</h2>
+        <h2 className="text-xl font-semibold">{selectTitle}</h2>
         <button onClick={onClose} className="text-xl cursor-pointer">✕</button>
       </div>
-      <SlideImageAndPriceDetail product={product} lens={lens} weeklyDeals={weeklyDeals}/>
+      <SlideImageAndPriceDetail setSelectTitle={setSelectTitle} product={product} lens={lens} weeklyDeals={weeklyDeals}/>
     </motion.div>
   );
 }

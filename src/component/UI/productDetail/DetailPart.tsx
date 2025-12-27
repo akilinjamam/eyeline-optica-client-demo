@@ -20,7 +20,7 @@ const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[]
     <div className="w-full mx-auto h-[100%] px-3 text-gray-800 space-y-4">
       <div>
         <h2 className="text-xl font-bold">{product?.name}</h2>
-        <p className="text-sm text-gray-500">BT-{product?.barcode}</p>
+        <p className="text-sm text-gray-500">{product?.sizeCode}</p>
 
         <div className="flex items-center mt-1">
           <div className="flex ">
@@ -77,7 +77,7 @@ const DetailPart = ({product, lens, weeklyDeals}: {product:TFrame, lens:ILense[]
         </div>
 
         <div>
-          <p className="font-semibold mb-2">THIS PRICE INCLUDES:</p>
+          <p className="font-semibold mb-2">FEATURES:</p>
           {
             product?.features && product?.features?.length > 0 ? product?.features?.map((item:any, index:number) => (
               <ul key={index+1} className="space-y-1">
