@@ -28,8 +28,8 @@ const RegardingInfo = ({data}:{data:TFrame | TLens | TAccessoryItem |any}) => {
     ]
 
     return (
-        <div className='min-h-[300px]'>
-            <div className='flex items-center w-full mt-3 ml-3 md:ml-0 lg:ml-0 select-none text-black'>
+        <div className='min-h-[300px] px-2 md:px-0 lg:px-0'>
+            <div className='flex items-center w-full mt-3 select-none text-black'>
                 {
                     info.map((tab:TRegardingInfoTab, index:number) => <p onClick={() => setSelectTab(index)} className={`mr-4 font-semibold ${selectTab === index ? 'border-b-2 border-gray-400' : ''} cursor-pointer`} key={index}>{tab.info}</p> )
                 }
