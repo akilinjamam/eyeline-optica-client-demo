@@ -86,7 +86,7 @@ function ShopLocationList() {
   const info = [
     {
       id: 1,
-      shopName: "Eyeline Optica",
+      shopName: "HALISAHAR OUTLET",
       storeLocation: { lat: 22.33219, lng: 91.78891 },
       address:
         "Shop no-3, Nusrat Complex, Plot-14/A, Block-G, P.C. Road, Halishahar, Chattogram",
@@ -94,7 +94,7 @@ function ShopLocationList() {
     },
     {
       id: 2,
-      shopName: "Al Arafat Optical",
+      shopName: "JAMAL KHAN OUTLET",
       storeLocation: { lat: 22.345986670735794, lng: 91.83429320033994 },
       address: "Minhaz Complex (Ground Floor), 12-Jamal Khan Road, Chittagong",
       img:storeImg
