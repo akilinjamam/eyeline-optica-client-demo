@@ -31,7 +31,7 @@ function ShopLocation({
   return (
     <div className="w-full flex flex-col items-center gap-8 py-1  rounded-2xl my-6 ">
       <h2 className="text-3xl font-extrabold text-gray-900">
-        Visit {shopName}
+        {shopName}
       </h2>
 
       <div className="w-full max-w-3xl">
