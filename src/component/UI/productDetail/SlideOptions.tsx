@@ -89,7 +89,16 @@ const SlideOptions = ({lens, setLensInfo, product, lensInfo, setSelectTitle}: {l
       subtotal: onlyFramePrice,
   }
   
-  const badgeCategory = [...new Set(lens?.map((item:ILense) => item.badge))]?.map((value) => value);
+  // const badgeCategory = [...new Set(lens?.map((item:ILense) => item.badge))]?.map((value) => value);
+  const badgeCategory = [
+  ...new Map(
+    lens?.map((item: ILense) => [
+      `${item.subType}-${item.badge}`, // unique key
+      { type: item.subType, badge: item.badge }
+    ])
+  ).values()
+];
+ 
     return (
         <div className="relative w-full overflow-hidden h-[100vh] border border-gray-200 rounded-md ">
         <AnimatePresence custom={direction} mode="popLayout">

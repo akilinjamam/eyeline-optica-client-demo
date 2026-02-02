@@ -12,18 +12,18 @@ import useSwipe from '@/custom-hooks/useSwipe';
 const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensInfo, badgeCategory, dealsData}: {current: {type:string, title?:string}, goForward: (payload: GoForwardPayload) => void, setSelectedLense: (payload: ILense) => void, lens:ILense[], setLensInfo:any, badgeCategory?:any , dealsData:TWeeklyDeals}) => {
 
     
-
     const sorteLensWithWeeklyDeals = useMemo(() => {
         const sortedData = lens?.sort((a:any,b:any) => {
             return (b.weeklyDeals ? 1 : 0) - (a.weeklyDeals ? 1 : 0)
         });
         return sortedData
     }, [lens])
-
+    
     const swipeRef = useRef(null);
-            const [subType , setSubType] = useState("Lense");
-            const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
-
+    const [subType , setSubType] = useState("Lense");
+    const {swipeRef:swippedRef, handleMouseDown, handleMouseMove, handleMouseLeave, handleMouseUp, handleTouchMove, handleTouchStart} = useSwipe(swipeRef)
+    
+    
     return (
         <div className='h-[75vh] overflow-y-scroll hide-scrollbar'>
             <div className='w-[90%]  absolute top-3 right-0'>
@@ -38,16 +38,15 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                 >
                 <div className='flex items-center justify-between'>
                     { current.title !== "Frame Only" &&
-                        ["All",...badgeCategory]?.map((item:any, index:number) => (
+                        badgeCategory?.filter((f:any) => f.type === current.title)?.map((item:any, index:number) => (
                             <div onClick={() => {
-                                if(item === "All"){
-                                    setSubType("Lense")
-                                    return
-                                }
-                                setSubType(item)
-                            }} key={index} className='w-auto bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  text-white px-3 py-1 rounded-full mr-1 cursor-pointer'>{item?.split(' ')?.join("_")}</div>
+                                setSubType(item.badge)
+                            }} key={index} className='w-auto bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  text-white text-[12px] px-3 py-1 rounded-full mr-1 cursor-pointer'>
+                                {item?.badge?.split(' ')?.join("_")}
+                            </div>
                         ))
                     }
+                    <p onClick={() => setSubType("Lense")} className='w-auto bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  text-white text-[12px] px-3 py-1 rounded-full mr-1 cursor-pointer'>All</p>
                 </div>
                 </div>
             </div>

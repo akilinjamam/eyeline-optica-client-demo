@@ -9,7 +9,21 @@ import myopia from "../../../../public/powertype-imgs/power-type-myopia.jpg";
 export const powerTypes: IPowerTypes[] = [
   {
     img: singleVision,
-    frameType: "sun + eye",
+    frameType: "sunglasses",
+    type: "Power Type",
+    title: "single vision sunglass",
+    description: "Positive, Negative or Cylindrical",
+  },
+  {
+    img: singleVision,
+    frameType: "kids",
+    type: "Power Type",
+    title: "single vision kids",
+    description: "Positive, Negative or Cylindrical",
+  },
+  {
+    img: singleVision,
+    frameType: "eye glasses",
     type: "Power Type",
     title: "single vision",
     description: "Positive, Negative or Cylindrical",
@@ -37,7 +51,14 @@ export const powerTypes: IPowerTypes[] = [
   },
   {
     img: frameOnly,
-    frameType: "sun + eye",
+    frameType: "eye glasses",
+    type: "Power Type",
+    title: "Frame Only",
+    description: "With no lenses",
+  },
+  {
+    img: frameOnly,
+    frameType: "sunglasses",
     type: "Power Type",
     title: "Frame Only",
     description: "With no lenses",
@@ -49,6 +70,13 @@ export const powerTypes: IPowerTypes[] = [
     title: "Myopia control lens",
     description:
       "Advanced Myopia Control Lenses for Clear Vision & Healthy Eye Growth",
+  },
+  {
+    img: frameOnly,
+    frameType: "kids",
+    type: "Power Type",
+    title: "Frame Only",
+    description: "With no lenses",
   },
 ];
 

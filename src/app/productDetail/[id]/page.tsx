@@ -23,7 +23,7 @@ async function getSingleProduct(id: string) {
 }
 
 async function getAllLensData(){
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}lens?sort=salesPrice`);
   return response.json();
 };
 

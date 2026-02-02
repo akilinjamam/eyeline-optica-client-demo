@@ -15,9 +15,10 @@ const PowerTypeSection = ({powerTypes, goForward, productType, genderType}: {pow
     }else{
         customType = productType
     }
+    console.log(productType)
 
     const modifyName = (value:string) => {
-        if(value === 'single vision'){
+        if(value === 'single vision' || value === 'single vision sunglass' || value === 'single vision kids'){
             return 'Single Vision/UniFocal'
         }
         if(value === 'progressive'){
@@ -34,7 +35,7 @@ const PowerTypeSection = ({powerTypes, goForward, productType, genderType}: {pow
 
     return (
         <div className='bg-blue-100 h-full'>
-            {powerTypes?.filter((f: IPowerTypes) => f.frameType === customType || f.frameType === 'sun + eye')?.map((item: IPowerTypes, index: number) => (
+            {powerTypes?.filter((f: IPowerTypes) => f.frameType === customType)?.map((item: IPowerTypes, index: number) => (
                 <div
                 key={index}
                 onClick={() => goForward({ type: 'lens', title: item.title })}
