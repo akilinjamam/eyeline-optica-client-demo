@@ -5,6 +5,7 @@ import LenseCartGallary from './LenseCartGallary';
 import Title from './Title';
 import { IBanner } from '@/ts-definition/interfaces';
 import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
+import EmptyState from './EmptyState';
 
 const ContactLense = ({contactLens, bannerData}: {contactLens:TContactLens[], bannerData:IBanner[]}) => {
 
@@ -20,7 +21,9 @@ const ContactLense = ({contactLens, bannerData}: {contactLens:TContactLens[], ba
                 <Image width={1400} height={1400} className='mx-auto' src={bannerAccordingToCategory("Desktop Contact Lens", bannerData) as string} alt='contact-lense'/>
             </div>
             <div className='w-full mt-8'>
-                <LenseCartGallary contactLens={contactLens} />
+                {
+                    contactLens?.length > 0 ? <LenseCartGallary contactLens={contactLens} /> : <EmptyState/>
+                }
             </div>
         </div>
     );

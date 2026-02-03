@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
 import { IBanner } from '@/ts-definition/interfaces';
 import { bannerAccordingToCategory } from '@/fetchData/bannerAccordingToCategory';
+import EmptyState from './EmptyState';
 
 const MensSunglass = ({data, bannerData} : {data:TFrame[], bannerData:IBanner[]}) => {
 
@@ -43,7 +44,10 @@ const MensSunglass = ({data, bannerData} : {data:TFrame[], bannerData:IBanner[]}
                 />
             </div>
             </div>
-            <div className='w-full'>
+            {
+                data?.length > 0
+                ?
+                <div className='w-full'>
                 <br />
                 <div className='w-[90%] sm:w-[75%] md:w-[85%] lg:w-[1200px] mx-auto flex items-center justify-end'>
                     <div className=' w-[130px] mt-2 px-2 py-2 text-white  font-semibold rounded bg-gradient-to-r from-[#259AFF] to-[#1D4DFF] hover:opacity-90 transition cursor-pointer flex  items-center justify-between'>
@@ -90,6 +94,9 @@ const MensSunglass = ({data, bannerData} : {data:TFrame[], bannerData:IBanner[]}
                 </div>
                 </div>
             </div>
+            :
+            <EmptyState/>
+            }
         </div>
     );
 };

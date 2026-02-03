@@ -11,6 +11,7 @@ import Title from './Title';
 import { TFrame } from '@/ts-definition/types';
 import { useRouter } from 'next/navigation';
 import useSwipe from '@/custom-hooks/useSwipe';
+import EmptyState from './EmptyState';
 
 const NewArrivals = ({data} : {data:TFrame[]}) => {
     const router = useRouter();
@@ -41,6 +42,10 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
             </div>
 
             <div className='hidden md:block lg:block'>
+                {
+                data?.length > 0
+                ?
+                <div className='hidden md:block lg:block'>
                 <div className='flex items-center justify-around lg:w-[1200px] md:w-[90%] sm:w-[85%] mx-auto gap-5 relative'>
                 <Image className='cursor-pointer inline-block mx-3' src={arrowLeft} alt='left-arrow' onClick={() => handleNavigation('right')}/>
                 <div ref={parentRef} className='w-[2600px] mx-auto flex items-center  gap-6 mt-2 overflow-x-hidden scroll-smooth  px-2'>
@@ -51,8 +56,16 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
                 <Image className='cursor-pointer inline-block mx-3' src={arrowRights} alt='right-arrow' onClick={() => handleNavigation('left')}/>
                 
                 </div>
+                </div>
+                :
+                <div className='mt-10'><EmptyState/></div>
+            }
             </div>
             <div className='lg:hidden md:hidden block'>
+                {
+                data?.length > 0
+                ?
+                <div className='lg:hidden md:hidden block'>
                 <div className="w-full px-4 py-4 overflow-x-hidden relative">
                       <div
                         ref={swippedRef}
@@ -77,6 +90,10 @@ const NewArrivals = ({data} : {data:TFrame[]}) => {
                       </div>
                      
                 </div>
+                </div>
+                :
+                <div className='mt-10'><EmptyState/></div>
+            }
             </div>
         </div>
     );
