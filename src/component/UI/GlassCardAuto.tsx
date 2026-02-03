@@ -150,9 +150,9 @@ if (selectedImage > 0 && selectedVariantImages[selectedImage]) {
 
     {/* 🏷️ Product Name & Details */}
     <div className="flex items-start justify-between w-full pt-6">
-
+  
       {/* ▶️ Brand + Name + Price */}
-      <div className="w-[100px]">
+      <div className=" mt-[30px]">
         <p className="text-[11px] text-gray-500">{brand}</p>
         <p className="text-[18px] font-semibold text-black">{name}</p>
         <p className="text-[24px] font-bold text-black mt-1">

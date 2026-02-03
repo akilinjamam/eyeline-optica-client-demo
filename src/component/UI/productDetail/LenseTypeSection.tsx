@@ -46,7 +46,9 @@ const LenseTypeSection = ({current, goForward, setSelectedLense, lens, setLensIn
                             </div>
                         ))
                     }
-                    <p onClick={() => setSubType("Lense")} className='w-auto bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  text-white text-[12px] px-3 py-1 rounded-full mr-1 cursor-pointer'>All</p>
+                    {
+                        current.title !== "Frame Only" && <p onClick={() => setSubType("Lense")} className='w-auto bg-gradient-to-b from-[#2770FF] to-[#1A46BB]  text-white text-[12px] px-3 py-1 rounded-full mr-1 cursor-pointer'>All</p>
+                    }
                 </div>
                 </div>
             </div>
