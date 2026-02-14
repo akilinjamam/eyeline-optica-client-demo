@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import EmptyState from "@/component/EmptyState";
 import Footer from "@/component/Footer";
 import RelatedService from "@/component/RelatedFrame";
 
@@ -99,7 +100,9 @@ export default async function SingleProduct({
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <RegardingInfo data={frame as any} />
       </div>
-      <RelatedService data={relatedProduct} serviceType="FRAME" filterType={`/allglasses/brand?type=${frame?.type}`}/>
+      {
+        relatedProduct?.length > 0 ? <RelatedService data={relatedProduct} serviceType="FRAME" filterType={`/allglasses/brand?type=${frame?.type}`}/> : <EmptyState/>
+      }
       <div className="bg-blue-50 w-full md:w-[90%] lg:w-[1250px] mx-auto">
         <ShopByFrameShape />
       </div>
