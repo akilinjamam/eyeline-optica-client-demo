@@ -87,7 +87,7 @@ export default async function SingleProduct({
   return (
     <div className="w-full bg-blue-50 px-1">
       <ToastContainer/>
-      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-center border-y border-gray-400 flex-wrap">
+      <div className="w-full md:w-[90%] lg:w-[1250px] mx-auto md:flex lg:flex items-start border-y border-gray-400 flex-wrap">
         <div className="sm:w-full md:w-[55%] lg:w-[55%]">
           <ImagePart product={frame} />
           <ImagePartForMobile product={frame} />
