@@ -1,6 +1,6 @@
 ## License
 
-Copyright (c) 2026 Injamam Islam Chowdhury  
+Copyright (c) 2025 Injamam Islam Chowdhury  
 All Rights Reserved.
 
 This project is made publicly visible for portfolio and demonstration purposes only.
