@@ -2,7 +2,7 @@
 
 import { MapPin } from "lucide-react";
 import storeImg from "../../public/images/store-image/storeImg.png";
-import eyeline from "../../public/images/store-image/EYELINE-OPTICA-IMG.jpeg"
+import eyeline from "../../public/images/store-image/eyeline-optica-img.jpeg"
 import Image, { StaticImageData } from "next/image";
 
 type IStoreLocation = {
